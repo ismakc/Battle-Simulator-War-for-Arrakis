@@ -38,8 +38,8 @@ class BattleSimulator {
     required DefendingLegion defender,
     required bool isAttacker,
   }) {
-    final int attackerDice = _diceCount(attacker);
-    final int defenderDice = _diceCount(defender);
+    final int attackerDice = attacker.diceCount();
+    final int defenderDice = defender.diceCount();
 
     final double attackerExpectedStars = _calculateAttackerExpectedStars(attacker, attackerDice);
     final double defenderExpectedStars = _calculateDefenderExpectedStars(defender, defenderDice);
@@ -69,14 +69,6 @@ class BattleSimulator {
 
   double _calculateDefenderExpectedStars(DefendingLegion legion, int diceCount) {
     return min(diceCount, legion.genericLeaders + legion.namedLeaders.length) * (stars / totalFaces);
-  }
-
-  int _diceCount(dynamic legion) {
-    int count = legion.regularUnits + legion.eliteUnits + legion.specialEliteUnits + legion.usedCards;
-    if (legion is DefendingLegion) {
-      count += legion.settlementLevel;
-    }
-    return min(6, count);
   }
 
   (double starHits, double starShields) _calculateStarHitsAndShields(

@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:bswfa/domain/named_leader.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -18,4 +20,16 @@ class DefendingLegion with _$DefendingLegion {
   }) = _DefendingLegion;
 
   factory DefendingLegion.defaultValues() => const DefendingLegion();
+
+  int diceCount() {
+    return min(6, regularUnits + eliteUnits + specialEliteUnits + usedCards + settlementLevel);
+  }
+
+  int maxStarsCount() {
+    return min(diceCount(), genericLeaders + namedLeaders.length);
+  }
+
+  int unlimitedMaxStarsCount() {
+    return genericLeaders + namedLeaders.length;
+  }
 }

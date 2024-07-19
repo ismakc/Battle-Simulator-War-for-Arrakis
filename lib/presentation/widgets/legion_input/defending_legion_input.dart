@@ -11,14 +11,15 @@ class DefendingLegionInput extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return LabeledBorderFieldset(
-      label: 'Defending Legion',
-      borderColor: Colors.black87,
-      textColor: Colors.black87,
-      child: BlocSelector<BattleScenarioBloc, BattleScenarioState, DefendingLegion>(
-        selector: (state) => state.battleScenario.defendingLegion,
-        builder: (context, state) {
-          return Wrap(
+    return BlocSelector<BattleScenarioBloc, BattleScenarioState, DefendingLegion>(
+      selector: (state) => state.battleScenario.defendingLegion,
+      builder: (context, state) {
+        return LabeledBorderFieldset(
+          label:
+              'Defending Legion (${state.diceCount()}\u{1F3B2}/${state.maxStarsCount()}\u{2B50} of ${state.unlimitedMaxStarsCount()})',
+          borderColor: Colors.black87,
+          textColor: Colors.black87,
+          child: Wrap(
             runSpacing: 5.0,
             children: [
               UnitInput(
@@ -85,9 +86,9 @@ class DefendingLegionInput extends StatelessWidget {
                 },
               ),
             ],
-          );
-        },
-      ),
+          ),
+        );
+      },
     );
   }
 }

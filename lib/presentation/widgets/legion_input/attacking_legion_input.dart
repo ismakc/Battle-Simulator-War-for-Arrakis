@@ -12,14 +12,15 @@ class AttackingLegionInput extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return LabeledBorderFieldset(
-      label: 'Attacking Legion',
-      borderColor: Colors.amber,
-      textColor: Colors.black87,
-      child: BlocSelector<BattleScenarioBloc, BattleScenarioState, AttackingLegion>(
-        selector: (state) => state.battleScenario.attackingLegion,
-        builder: (context, state) {
-          return Wrap(
+    return BlocSelector<BattleScenarioBloc, BattleScenarioState, AttackingLegion>(
+      selector: (state) => state.battleScenario.attackingLegion,
+      builder: (context, state) {
+        return LabeledBorderFieldset(
+          label:
+              'Attacking Legion (${state.diceCount()}\u{1F3B2}/${state.maxStarsCount()}\u{2B50} of ${state.unlimitedMaxStarsCount()})',
+          borderColor: Colors.amber,
+          textColor: Colors.black87,
+          child: Wrap(
             runSpacing: 8.0,
             children: [
               UnitInput(
@@ -86,9 +87,9 @@ class AttackingLegionInput extends StatelessWidget {
                 },
               ),
             ],
-          );
-        },
-      ),
+          ),
+        );
+      },
     );
   }
 }

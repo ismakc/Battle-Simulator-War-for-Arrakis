@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:bswfa/domain/named_leader.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -18,4 +20,16 @@ class AttackingLegion with _$AttackingLegion {
   }) = _AttackingLegion;
 
   factory AttackingLegion.defaultValues() => const AttackingLegion();
+
+  int diceCount() {
+    return min(6, regularUnits + eliteUnits + specialEliteUnits + usedCards);
+  }
+
+  int maxStarsCount() {
+    return min(diceCount(), genericLeaders + namedLeaders.length) + (surpriseAttack ? 1 : 0);
+  }
+
+  int unlimitedMaxStarsCount() {
+    return genericLeaders + namedLeaders.length + (surpriseAttack ? 1 : 0);
+  }
 }
