@@ -1,5 +1,8 @@
+import 'package:bswfa/bloc/full_battle_simulation_bloc.dart';
 import 'package:bswfa/domain/battle_result.dart';
+import 'package:bswfa/presentation/widgets/legion_input/full_battle_simulation_dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class BattleHistoryItem extends StatelessWidget {
   const BattleHistoryItem({
@@ -13,52 +16,60 @@ class BattleHistoryItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(vertical: 3.0, horizontal: 5.0),
-      decoration: BoxDecoration(
-        border: Border.all(
-          color: displayIndex % 2 == 0 ? Colors.amber : Colors.black87,
-          width: 1.6,
+    return GestureDetector(
+      onTap: () {
+        context
+            .read<FullBattleSimulationBloc>()
+            .add(FullBattleSimulationEvent.simulateFullBattle(battleResult.battleScenario));
+        _showPopup(context);
+      },
+      child: Container(
+        padding: const EdgeInsets.symmetric(vertical: 3.0, horizontal: 5.0),
+        decoration: BoxDecoration(
+          border: Border.all(
+            color: displayIndex % 2 == 0 ? Colors.amber : Colors.black87,
+            width: 1.6,
+          ),
         ),
-      ),
-      child: Stack(
-        children: [
-          Positioned(
-            top: -5.0,
-            right: -5.0,
-            child: Container(
-              color: Theme.of(context).scaffoldBackgroundColor,
-              padding: const EdgeInsets.only(left: 5.0, right: 5.0),
-              child: Text(
-                '#$displayIndex',
-                style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+        child: Stack(
+          children: [
+            Positioned(
+              top: -5.0,
+              right: -5.0,
+              child: Container(
+                color: Theme.of(context).scaffoldBackgroundColor,
+                padding: const EdgeInsets.only(left: 5.0, right: 5.0),
+                child: Text(
+                  '#$displayIndex',
+                  style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+                ),
               ),
             ),
-          ),
-          Container(
-            margin: const EdgeInsets.only(right: 16.0),
-            child: FittedBox(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  _buildRow(
-                    label: 'Att.Hits:',
-                    hits: battleResult.attackerExpectedHits,
-                    legion: battleResult.attackingLegion,
-                    isAttacker: true,
-                  ),
-                  const SizedBox(height: 3.0),
-                  _buildRow(
-                    label: 'Def.Hits:',
-                    hits: battleResult.defenderExpectedHits,
-                    legion: battleResult.defendingLegion,
-                    isAttacker: false,
-                  ),
-                ],
+            Container(
+              margin: const EdgeInsets.only(right: 16.0),
+              child: FittedBox(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    _buildRow(
+                      label: 'Att.Hits:',
+                      hits: battleResult.attackerExpectedHits,
+                      legion: battleResult.attackingLegion,
+                      isAttacker: true,
+                    ),
+                    const SizedBox(height: 3.0),
+                    _buildRow(
+                      label: 'Def.Hits:',
+                      hits: battleResult.defenderExpectedHits,
+                      legion: battleResult.defendingLegion,
+                      isAttacker: false,
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -128,6 +139,15 @@ class BattleHistoryItem extends StatelessWidget {
         Text(t1, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
         Text(t2, style: const TextStyle(fontSize: 16)),
       ],
+    );
+  }
+
+  void _showPopup(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return FullBattleSimulationPopupDialog(battleResult: battleResult);
+      },
     );
   }
 }
