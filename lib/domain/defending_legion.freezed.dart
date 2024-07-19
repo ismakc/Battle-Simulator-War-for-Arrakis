@@ -16,13 +16,13 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$DefendingLegion {
+  int get genericLeaders => throw _privateConstructorUsedError;
   int get regularUnits => throw _privateConstructorUsedError;
   int get eliteUnits => throw _privateConstructorUsedError;
   int get specialEliteUnits => throw _privateConstructorUsedError;
-  int get genericLeaders => throw _privateConstructorUsedError;
   int get usedCards => throw _privateConstructorUsedError;
-  int get settlementLevel => throw _privateConstructorUsedError;
   List<NamedLeader> get namedLeaders => throw _privateConstructorUsedError;
+  int get settlementLevel => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $DefendingLegionCopyWith<DefendingLegion> get copyWith =>
@@ -36,13 +36,13 @@ abstract class $DefendingLegionCopyWith<$Res> {
       _$DefendingLegionCopyWithImpl<$Res, DefendingLegion>;
   @useResult
   $Res call(
-      {int regularUnits,
+      {int genericLeaders,
+      int regularUnits,
       int eliteUnits,
       int specialEliteUnits,
-      int genericLeaders,
       int usedCards,
-      int settlementLevel,
-      List<NamedLeader> namedLeaders});
+      List<NamedLeader> namedLeaders,
+      int settlementLevel});
 }
 
 /// @nodoc
@@ -58,15 +58,19 @@ class _$DefendingLegionCopyWithImpl<$Res, $Val extends DefendingLegion>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? genericLeaders = null,
     Object? regularUnits = null,
     Object? eliteUnits = null,
     Object? specialEliteUnits = null,
-    Object? genericLeaders = null,
     Object? usedCards = null,
-    Object? settlementLevel = null,
     Object? namedLeaders = null,
+    Object? settlementLevel = null,
   }) {
     return _then(_value.copyWith(
+      genericLeaders: null == genericLeaders
+          ? _value.genericLeaders
+          : genericLeaders // ignore: cast_nullable_to_non_nullable
+              as int,
       regularUnits: null == regularUnits
           ? _value.regularUnits
           : regularUnits // ignore: cast_nullable_to_non_nullable
@@ -79,22 +83,18 @@ class _$DefendingLegionCopyWithImpl<$Res, $Val extends DefendingLegion>
           ? _value.specialEliteUnits
           : specialEliteUnits // ignore: cast_nullable_to_non_nullable
               as int,
-      genericLeaders: null == genericLeaders
-          ? _value.genericLeaders
-          : genericLeaders // ignore: cast_nullable_to_non_nullable
-              as int,
       usedCards: null == usedCards
           ? _value.usedCards
           : usedCards // ignore: cast_nullable_to_non_nullable
-              as int,
-      settlementLevel: null == settlementLevel
-          ? _value.settlementLevel
-          : settlementLevel // ignore: cast_nullable_to_non_nullable
               as int,
       namedLeaders: null == namedLeaders
           ? _value.namedLeaders
           : namedLeaders // ignore: cast_nullable_to_non_nullable
               as List<NamedLeader>,
+      settlementLevel: null == settlementLevel
+          ? _value.settlementLevel
+          : settlementLevel // ignore: cast_nullable_to_non_nullable
+              as int,
     ) as $Val);
   }
 }
@@ -108,13 +108,13 @@ abstract class _$$DefendingLegionImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {int regularUnits,
+      {int genericLeaders,
+      int regularUnits,
       int eliteUnits,
       int specialEliteUnits,
-      int genericLeaders,
       int usedCards,
-      int settlementLevel,
-      List<NamedLeader> namedLeaders});
+      List<NamedLeader> namedLeaders,
+      int settlementLevel});
 }
 
 /// @nodoc
@@ -128,15 +128,19 @@ class __$$DefendingLegionImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? genericLeaders = null,
     Object? regularUnits = null,
     Object? eliteUnits = null,
     Object? specialEliteUnits = null,
-    Object? genericLeaders = null,
     Object? usedCards = null,
-    Object? settlementLevel = null,
     Object? namedLeaders = null,
+    Object? settlementLevel = null,
   }) {
     return _then(_$DefendingLegionImpl(
+      genericLeaders: null == genericLeaders
+          ? _value.genericLeaders
+          : genericLeaders // ignore: cast_nullable_to_non_nullable
+              as int,
       regularUnits: null == regularUnits
           ? _value.regularUnits
           : regularUnits // ignore: cast_nullable_to_non_nullable
@@ -149,22 +153,18 @@ class __$$DefendingLegionImplCopyWithImpl<$Res>
           ? _value.specialEliteUnits
           : specialEliteUnits // ignore: cast_nullable_to_non_nullable
               as int,
-      genericLeaders: null == genericLeaders
-          ? _value.genericLeaders
-          : genericLeaders // ignore: cast_nullable_to_non_nullable
-              as int,
       usedCards: null == usedCards
           ? _value.usedCards
           : usedCards // ignore: cast_nullable_to_non_nullable
-              as int,
-      settlementLevel: null == settlementLevel
-          ? _value.settlementLevel
-          : settlementLevel // ignore: cast_nullable_to_non_nullable
               as int,
       namedLeaders: null == namedLeaders
           ? _value._namedLeaders
           : namedLeaders // ignore: cast_nullable_to_non_nullable
               as List<NamedLeader>,
+      settlementLevel: null == settlementLevel
+          ? _value.settlementLevel
+          : settlementLevel // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -173,16 +173,19 @@ class __$$DefendingLegionImplCopyWithImpl<$Res>
 
 class _$DefendingLegionImpl extends _DefendingLegion {
   const _$DefendingLegionImpl(
-      {this.regularUnits = 0,
+      {this.genericLeaders = 0,
+      this.regularUnits = 0,
       this.eliteUnits = 0,
       this.specialEliteUnits = 0,
-      this.genericLeaders = 0,
       this.usedCards = 0,
-      this.settlementLevel = 0,
-      final List<NamedLeader> namedLeaders = const []})
+      final List<NamedLeader> namedLeaders = const [],
+      this.settlementLevel = 0})
       : _namedLeaders = namedLeaders,
         super._();
 
+  @override
+  @JsonKey()
+  final int genericLeaders;
   @override
   @JsonKey()
   final int regularUnits;
@@ -194,13 +197,7 @@ class _$DefendingLegionImpl extends _DefendingLegion {
   final int specialEliteUnits;
   @override
   @JsonKey()
-  final int genericLeaders;
-  @override
-  @JsonKey()
   final int usedCards;
-  @override
-  @JsonKey()
-  final int settlementLevel;
   final List<NamedLeader> _namedLeaders;
   @override
   @JsonKey()
@@ -211,8 +208,12 @@ class _$DefendingLegionImpl extends _DefendingLegion {
   }
 
   @override
+  @JsonKey()
+  final int settlementLevel;
+
+  @override
   String toString() {
-    return 'DefendingLegion(regularUnits: $regularUnits, eliteUnits: $eliteUnits, specialEliteUnits: $specialEliteUnits, genericLeaders: $genericLeaders, usedCards: $usedCards, settlementLevel: $settlementLevel, namedLeaders: $namedLeaders)';
+    return 'DefendingLegion(genericLeaders: $genericLeaders, regularUnits: $regularUnits, eliteUnits: $eliteUnits, specialEliteUnits: $specialEliteUnits, usedCards: $usedCards, namedLeaders: $namedLeaders, settlementLevel: $settlementLevel)';
   }
 
   @override
@@ -220,32 +221,32 @@ class _$DefendingLegionImpl extends _DefendingLegion {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$DefendingLegionImpl &&
+            (identical(other.genericLeaders, genericLeaders) ||
+                other.genericLeaders == genericLeaders) &&
             (identical(other.regularUnits, regularUnits) ||
                 other.regularUnits == regularUnits) &&
             (identical(other.eliteUnits, eliteUnits) ||
                 other.eliteUnits == eliteUnits) &&
             (identical(other.specialEliteUnits, specialEliteUnits) ||
                 other.specialEliteUnits == specialEliteUnits) &&
-            (identical(other.genericLeaders, genericLeaders) ||
-                other.genericLeaders == genericLeaders) &&
             (identical(other.usedCards, usedCards) ||
                 other.usedCards == usedCards) &&
-            (identical(other.settlementLevel, settlementLevel) ||
-                other.settlementLevel == settlementLevel) &&
             const DeepCollectionEquality()
-                .equals(other._namedLeaders, _namedLeaders));
+                .equals(other._namedLeaders, _namedLeaders) &&
+            (identical(other.settlementLevel, settlementLevel) ||
+                other.settlementLevel == settlementLevel));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
+      genericLeaders,
       regularUnits,
       eliteUnits,
       specialEliteUnits,
-      genericLeaders,
       usedCards,
-      settlementLevel,
-      const DeepCollectionEquality().hash(_namedLeaders));
+      const DeepCollectionEquality().hash(_namedLeaders),
+      settlementLevel);
 
   @JsonKey(ignore: true)
   @override
@@ -257,15 +258,17 @@ class _$DefendingLegionImpl extends _DefendingLegion {
 
 abstract class _DefendingLegion extends DefendingLegion {
   const factory _DefendingLegion(
-      {final int regularUnits,
+      {final int genericLeaders,
+      final int regularUnits,
       final int eliteUnits,
       final int specialEliteUnits,
-      final int genericLeaders,
       final int usedCards,
-      final int settlementLevel,
-      final List<NamedLeader> namedLeaders}) = _$DefendingLegionImpl;
+      final List<NamedLeader> namedLeaders,
+      final int settlementLevel}) = _$DefendingLegionImpl;
   const _DefendingLegion._() : super._();
 
+  @override
+  int get genericLeaders;
   @override
   int get regularUnits;
   @override
@@ -273,13 +276,11 @@ abstract class _DefendingLegion extends DefendingLegion {
   @override
   int get specialEliteUnits;
   @override
-  int get genericLeaders;
-  @override
   int get usedCards;
   @override
-  int get settlementLevel;
-  @override
   List<NamedLeader> get namedLeaders;
+  @override
+  int get settlementLevel;
   @override
   @JsonKey(ignore: true)
   _$$DefendingLegionImplCopyWith<_$DefendingLegionImpl> get copyWith =>

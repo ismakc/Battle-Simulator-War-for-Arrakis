@@ -10,13 +10,13 @@ class DefendingLegion with _$DefendingLegion {
   const DefendingLegion._();
 
   const factory DefendingLegion({
+    @Default(0) int genericLeaders,
     @Default(0) int regularUnits,
     @Default(0) int eliteUnits,
     @Default(0) int specialEliteUnits,
-    @Default(0) int genericLeaders,
     @Default(0) int usedCards,
-    @Default(0) int settlementLevel,
     @Default([]) List<NamedLeader> namedLeaders,
+    @Default(0) int settlementLevel,
   }) = _DefendingLegion;
 
   factory DefendingLegion.defaultValues() => const DefendingLegion();
@@ -30,6 +30,18 @@ class DefendingLegion with _$DefendingLegion {
   }
 
   int unlimitedMaxStarsCount() {
+    return genericLeaders + namedLeaders.length;
+  }
+
+  int lifeCount() {
+    return regularUnits + eliteUnits * 2 + specialEliteUnits * 2 + genericLeaders + namedLeaders.length;
+  }
+
+  int totalUnits() {
+    return regularUnits + eliteUnits + specialEliteUnits;
+  }
+
+  int totalLeaders() {
     return genericLeaders + namedLeaders.length;
   }
 }

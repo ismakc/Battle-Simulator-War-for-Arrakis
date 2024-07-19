@@ -10,13 +10,13 @@ class AttackingLegion with _$AttackingLegion {
   const AttackingLegion._();
 
   const factory AttackingLegion({
+    @Default(0) int genericLeaders,
     @Default(0) int regularUnits,
     @Default(0) int eliteUnits,
     @Default(0) int specialEliteUnits,
-    @Default(0) int genericLeaders,
     @Default(0) int usedCards,
-    @Default(false) bool surpriseAttack,
     @Default([]) List<NamedLeader> namedLeaders,
+    @Default(false) bool surpriseAttack,
   }) = _AttackingLegion;
 
   factory AttackingLegion.defaultValues() => const AttackingLegion();
@@ -26,10 +26,22 @@ class AttackingLegion with _$AttackingLegion {
   }
 
   int maxStarsCount() {
-    return min(diceCount(), genericLeaders + namedLeaders.length) + (surpriseAttack ? 1 : 0);
+    return min(diceCount(), genericLeaders + namedLeaders.length + (surpriseAttack ? 1 : 0));
   }
 
   int unlimitedMaxStarsCount() {
     return genericLeaders + namedLeaders.length + (surpriseAttack ? 1 : 0);
+  }
+
+  int lifeCount() {
+    return regularUnits + eliteUnits * 2 + specialEliteUnits * 2 + genericLeaders + namedLeaders.length;
+  }
+
+  int totalUnits() {
+    return regularUnits + eliteUnits + specialEliteUnits;
+  }
+
+  int totalLeaders() {
+    return genericLeaders + namedLeaders.length;
   }
 }

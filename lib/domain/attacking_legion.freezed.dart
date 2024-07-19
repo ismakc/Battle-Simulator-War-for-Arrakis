@@ -16,13 +16,13 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$AttackingLegion {
+  int get genericLeaders => throw _privateConstructorUsedError;
   int get regularUnits => throw _privateConstructorUsedError;
   int get eliteUnits => throw _privateConstructorUsedError;
   int get specialEliteUnits => throw _privateConstructorUsedError;
-  int get genericLeaders => throw _privateConstructorUsedError;
   int get usedCards => throw _privateConstructorUsedError;
-  bool get surpriseAttack => throw _privateConstructorUsedError;
   List<NamedLeader> get namedLeaders => throw _privateConstructorUsedError;
+  bool get surpriseAttack => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $AttackingLegionCopyWith<AttackingLegion> get copyWith =>
@@ -36,13 +36,13 @@ abstract class $AttackingLegionCopyWith<$Res> {
       _$AttackingLegionCopyWithImpl<$Res, AttackingLegion>;
   @useResult
   $Res call(
-      {int regularUnits,
+      {int genericLeaders,
+      int regularUnits,
       int eliteUnits,
       int specialEliteUnits,
-      int genericLeaders,
       int usedCards,
-      bool surpriseAttack,
-      List<NamedLeader> namedLeaders});
+      List<NamedLeader> namedLeaders,
+      bool surpriseAttack});
 }
 
 /// @nodoc
@@ -58,15 +58,19 @@ class _$AttackingLegionCopyWithImpl<$Res, $Val extends AttackingLegion>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? genericLeaders = null,
     Object? regularUnits = null,
     Object? eliteUnits = null,
     Object? specialEliteUnits = null,
-    Object? genericLeaders = null,
     Object? usedCards = null,
-    Object? surpriseAttack = null,
     Object? namedLeaders = null,
+    Object? surpriseAttack = null,
   }) {
     return _then(_value.copyWith(
+      genericLeaders: null == genericLeaders
+          ? _value.genericLeaders
+          : genericLeaders // ignore: cast_nullable_to_non_nullable
+              as int,
       regularUnits: null == regularUnits
           ? _value.regularUnits
           : regularUnits // ignore: cast_nullable_to_non_nullable
@@ -79,22 +83,18 @@ class _$AttackingLegionCopyWithImpl<$Res, $Val extends AttackingLegion>
           ? _value.specialEliteUnits
           : specialEliteUnits // ignore: cast_nullable_to_non_nullable
               as int,
-      genericLeaders: null == genericLeaders
-          ? _value.genericLeaders
-          : genericLeaders // ignore: cast_nullable_to_non_nullable
-              as int,
       usedCards: null == usedCards
           ? _value.usedCards
           : usedCards // ignore: cast_nullable_to_non_nullable
               as int,
-      surpriseAttack: null == surpriseAttack
-          ? _value.surpriseAttack
-          : surpriseAttack // ignore: cast_nullable_to_non_nullable
-              as bool,
       namedLeaders: null == namedLeaders
           ? _value.namedLeaders
           : namedLeaders // ignore: cast_nullable_to_non_nullable
               as List<NamedLeader>,
+      surpriseAttack: null == surpriseAttack
+          ? _value.surpriseAttack
+          : surpriseAttack // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -108,13 +108,13 @@ abstract class _$$AttackingLegionImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {int regularUnits,
+      {int genericLeaders,
+      int regularUnits,
       int eliteUnits,
       int specialEliteUnits,
-      int genericLeaders,
       int usedCards,
-      bool surpriseAttack,
-      List<NamedLeader> namedLeaders});
+      List<NamedLeader> namedLeaders,
+      bool surpriseAttack});
 }
 
 /// @nodoc
@@ -128,15 +128,19 @@ class __$$AttackingLegionImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? genericLeaders = null,
     Object? regularUnits = null,
     Object? eliteUnits = null,
     Object? specialEliteUnits = null,
-    Object? genericLeaders = null,
     Object? usedCards = null,
-    Object? surpriseAttack = null,
     Object? namedLeaders = null,
+    Object? surpriseAttack = null,
   }) {
     return _then(_$AttackingLegionImpl(
+      genericLeaders: null == genericLeaders
+          ? _value.genericLeaders
+          : genericLeaders // ignore: cast_nullable_to_non_nullable
+              as int,
       regularUnits: null == regularUnits
           ? _value.regularUnits
           : regularUnits // ignore: cast_nullable_to_non_nullable
@@ -149,22 +153,18 @@ class __$$AttackingLegionImplCopyWithImpl<$Res>
           ? _value.specialEliteUnits
           : specialEliteUnits // ignore: cast_nullable_to_non_nullable
               as int,
-      genericLeaders: null == genericLeaders
-          ? _value.genericLeaders
-          : genericLeaders // ignore: cast_nullable_to_non_nullable
-              as int,
       usedCards: null == usedCards
           ? _value.usedCards
           : usedCards // ignore: cast_nullable_to_non_nullable
               as int,
-      surpriseAttack: null == surpriseAttack
-          ? _value.surpriseAttack
-          : surpriseAttack // ignore: cast_nullable_to_non_nullable
-              as bool,
       namedLeaders: null == namedLeaders
           ? _value._namedLeaders
           : namedLeaders // ignore: cast_nullable_to_non_nullable
               as List<NamedLeader>,
+      surpriseAttack: null == surpriseAttack
+          ? _value.surpriseAttack
+          : surpriseAttack // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -173,16 +173,19 @@ class __$$AttackingLegionImplCopyWithImpl<$Res>
 
 class _$AttackingLegionImpl extends _AttackingLegion {
   const _$AttackingLegionImpl(
-      {this.regularUnits = 0,
+      {this.genericLeaders = 0,
+      this.regularUnits = 0,
       this.eliteUnits = 0,
       this.specialEliteUnits = 0,
-      this.genericLeaders = 0,
       this.usedCards = 0,
-      this.surpriseAttack = false,
-      final List<NamedLeader> namedLeaders = const []})
+      final List<NamedLeader> namedLeaders = const [],
+      this.surpriseAttack = false})
       : _namedLeaders = namedLeaders,
         super._();
 
+  @override
+  @JsonKey()
+  final int genericLeaders;
   @override
   @JsonKey()
   final int regularUnits;
@@ -194,13 +197,7 @@ class _$AttackingLegionImpl extends _AttackingLegion {
   final int specialEliteUnits;
   @override
   @JsonKey()
-  final int genericLeaders;
-  @override
-  @JsonKey()
   final int usedCards;
-  @override
-  @JsonKey()
-  final bool surpriseAttack;
   final List<NamedLeader> _namedLeaders;
   @override
   @JsonKey()
@@ -211,8 +208,12 @@ class _$AttackingLegionImpl extends _AttackingLegion {
   }
 
   @override
+  @JsonKey()
+  final bool surpriseAttack;
+
+  @override
   String toString() {
-    return 'AttackingLegion(regularUnits: $regularUnits, eliteUnits: $eliteUnits, specialEliteUnits: $specialEliteUnits, genericLeaders: $genericLeaders, usedCards: $usedCards, surpriseAttack: $surpriseAttack, namedLeaders: $namedLeaders)';
+    return 'AttackingLegion(genericLeaders: $genericLeaders, regularUnits: $regularUnits, eliteUnits: $eliteUnits, specialEliteUnits: $specialEliteUnits, usedCards: $usedCards, namedLeaders: $namedLeaders, surpriseAttack: $surpriseAttack)';
   }
 
   @override
@@ -220,32 +221,32 @@ class _$AttackingLegionImpl extends _AttackingLegion {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$AttackingLegionImpl &&
+            (identical(other.genericLeaders, genericLeaders) ||
+                other.genericLeaders == genericLeaders) &&
             (identical(other.regularUnits, regularUnits) ||
                 other.regularUnits == regularUnits) &&
             (identical(other.eliteUnits, eliteUnits) ||
                 other.eliteUnits == eliteUnits) &&
             (identical(other.specialEliteUnits, specialEliteUnits) ||
                 other.specialEliteUnits == specialEliteUnits) &&
-            (identical(other.genericLeaders, genericLeaders) ||
-                other.genericLeaders == genericLeaders) &&
             (identical(other.usedCards, usedCards) ||
                 other.usedCards == usedCards) &&
-            (identical(other.surpriseAttack, surpriseAttack) ||
-                other.surpriseAttack == surpriseAttack) &&
             const DeepCollectionEquality()
-                .equals(other._namedLeaders, _namedLeaders));
+                .equals(other._namedLeaders, _namedLeaders) &&
+            (identical(other.surpriseAttack, surpriseAttack) ||
+                other.surpriseAttack == surpriseAttack));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
+      genericLeaders,
       regularUnits,
       eliteUnits,
       specialEliteUnits,
-      genericLeaders,
       usedCards,
-      surpriseAttack,
-      const DeepCollectionEquality().hash(_namedLeaders));
+      const DeepCollectionEquality().hash(_namedLeaders),
+      surpriseAttack);
 
   @JsonKey(ignore: true)
   @override
@@ -257,15 +258,17 @@ class _$AttackingLegionImpl extends _AttackingLegion {
 
 abstract class _AttackingLegion extends AttackingLegion {
   const factory _AttackingLegion(
-      {final int regularUnits,
+      {final int genericLeaders,
+      final int regularUnits,
       final int eliteUnits,
       final int specialEliteUnits,
-      final int genericLeaders,
       final int usedCards,
-      final bool surpriseAttack,
-      final List<NamedLeader> namedLeaders}) = _$AttackingLegionImpl;
+      final List<NamedLeader> namedLeaders,
+      final bool surpriseAttack}) = _$AttackingLegionImpl;
   const _AttackingLegion._() : super._();
 
+  @override
+  int get genericLeaders;
   @override
   int get regularUnits;
   @override
@@ -273,13 +276,11 @@ abstract class _AttackingLegion extends AttackingLegion {
   @override
   int get specialEliteUnits;
   @override
-  int get genericLeaders;
-  @override
   int get usedCards;
   @override
-  bool get surpriseAttack;
-  @override
   List<NamedLeader> get namedLeaders;
+  @override
+  bool get surpriseAttack;
   @override
   @JsonKey(ignore: true)
   _$$AttackingLegionImplCopyWith<_$AttackingLegionImpl> get copyWith =>
