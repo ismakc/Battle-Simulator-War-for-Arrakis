@@ -4,6 +4,7 @@ import 'package:bswfa/domain/attacking_legion.dart';
 import 'package:bswfa/domain/battle_result.dart';
 import 'package:bswfa/domain/battle_scenario.dart';
 import 'package:bswfa/domain/defending_legion.dart';
+import 'package:bswfa/domain/legion.dart';
 import 'package:bswfa/domain/named_leader.dart';
 
 class BattleSimulator {
@@ -120,5 +121,83 @@ class BattleSimulator {
 
   double _roundDouble(double value) {
     return double.parse(value.toStringAsFixed(2));
+  }
+
+  BattleResult simulateMultipleRounds(BattleScenario battleScenario) {
+    bool combatEnds = false;
+    int rounds = 0;
+    double totalAttackerExpectedHits = 0;
+    double totalDefenderExpectedHits = 0;
+    BattleScenario battleScenarioForSeveralRounds = battleScenario;
+    while (!combatEnds) {
+      rounds++;
+      final BattleResult result = simulate(battleScenarioForSeveralRounds);
+
+      totalAttackerExpectedHits += result.attackerExpectedHits;
+      totalDefenderExpectedHits += result.defenderExpectedHits;
+      if (rounds == 2) {
+        battleScenarioForSeveralRounds = battleScenarioForSeveralRounds.copyWith(
+          attackingLegion: battleScenarioForSeveralRounds.attackingLegion.copyWith(usedCards: 0, surpriseAttack: false),
+          defendingLegion: battleScenarioForSeveralRounds.defendingLegion.copyWith(
+            usedCards: 0,
+          ),
+        );
+      }
+      final AttackingLegion damagedAttackingLegion = _updateLegionAfterAttack(
+        Legion.fromAttackingLegion(battleScenarioForSeveralRounds.attackingLegion),
+        result.defenderExpectedHits,
+        false,
+      ).overwriteAttackingLegionWithLegion(battleScenarioForSeveralRounds.attackingLegion);
+
+      final DefendingLegion damagedDefendingLegion = _updateLegionAfterAttack(
+        Legion.fromDefendingLegion(battleScenarioForSeveralRounds.defendingLegion),
+        result.attackerExpectedHits,
+        battleScenarioForSeveralRounds.defendingLegion.settlementLevel > 0,
+      ).overwriteDefendingLegionWithLegion(battleScenarioForSeveralRounds.defendingLegion);
+
+      battleScenarioForSeveralRounds = battleScenarioForSeveralRounds.copyWith(
+        attackingLegion: damagedAttackingLegion,
+        defendingLegion: damagedDefendingLegion,
+      );
+
+      if (battleScenarioForSeveralRounds.attackingLegion.totalUnits() == 0 ||
+          battleScenarioForSeveralRounds.defendingLegion.totalUnits() == 0 ||
+          totalAttackerExpectedHits >
+              battleScenarioForSeveralRounds.attackingLegion.totalUnits() +
+                  battleScenarioForSeveralRounds.attackingLegion.totalLeaders() ||
+          totalDefenderExpectedHits >
+              battleScenarioForSeveralRounds.defendingLegion.totalUnits() +
+                  battleScenarioForSeveralRounds.defendingLegion.totalLeaders()) {
+        combatEnds = true;
+      }
+    }
+
+    return BattleResult(
+      rounds: rounds,
+      attackerExpectedHits: totalAttackerExpectedHits,
+      defenderExpectedHits: totalDefenderExpectedHits,
+      battleScenario: BattleScenario(
+        attackingLegion: battleScenarioForSeveralRounds.attackingLegion,
+        defendingLegion: battleScenarioForSeveralRounds.defendingLegion,
+      ),
+    );
+  }
+
+  Legion _updateLegionAfterAttack(
+    Legion legion,
+    double expectedHits,
+    bool additionalHitToContinue,
+  ) {
+    int i = 1;
+    Legion damagedLegion = legion;
+    while (i <= expectedHits.round() && damagedLegion.totalUnits() > 0) {
+      damagedLegion = damagedLegion.calculateOptimalLoss();
+      i++;
+    }
+
+    if (damagedLegion.totalUnits() > 0 && additionalHitToContinue) {
+      damagedLegion = damagedLegion.calculateOptimalLoss();
+    }
+    return damagedLegion;
   }
 }
