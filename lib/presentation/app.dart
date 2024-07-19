@@ -1,6 +1,7 @@
 import 'package:bswfa/bloc/battle_history_bloc.dart';
 import 'package:bswfa/bloc/battle_scenario_bloc.dart';
 import 'package:bswfa/bloc/collapse_cubit.dart';
+import 'package:bswfa/bloc/full_battle_simulation_bloc.dart';
 import 'package:bswfa/presentation/widgets/main/main_screen.dart';
 import 'package:bswfa/presentation/widgets/main/main_top_bar.dart';
 import 'package:flutter/material.dart';
@@ -21,6 +22,9 @@ class App extends StatelessWidget {
         ),
         BlocProvider(
           create: (BuildContext context) => BattleHistoryBloc(),
+        ),
+        BlocProvider(
+          create: (BuildContext context) => FullBattleSimulationBloc(),
         ),
       ],
       child: MaterialApp(
