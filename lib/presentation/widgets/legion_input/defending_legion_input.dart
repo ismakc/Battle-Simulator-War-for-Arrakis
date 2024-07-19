@@ -16,7 +16,7 @@ class DefendingLegionInput extends StatelessWidget {
       builder: (context, state) {
         return LabeledBorderFieldset(
           label:
-              'Defending Legion (${state.diceCount()}\u{1F3B2}/${state.maxStarsCount()}\u{2B50} of ${state.unlimitedMaxStarsCount()})',
+              'Defending Legion ( ${state.diceCount()}\u{1F3B2}  /  ${state.maxStarsCount()}\u{2B50}of ${state.unlimitedMaxStarsCount()}  /  -${state.specialEliteUnits}\u{1F6E1}  /  ${state.lifeCount()}\u{2764}\u{FE0F} )',
           borderColor: Colors.black87,
           textColor: Colors.black87,
           child: Wrap(
@@ -67,15 +67,6 @@ class DefendingLegionInput extends StatelessWidget {
                       .add(BattleScenarioEvent.updateDefendingLegion(state.copyWith(usedCards: value)));
                 },
               ),
-              UnitInput(
-                label: 'Settl.',
-                startPosition: state.settlementLevel,
-                onValueChanged: (value) {
-                  context
-                      .read<BattleScenarioBloc>()
-                      .add(BattleScenarioEvent.updateDefendingLegion(state.copyWith(settlementLevel: value)));
-                },
-              ),
               NamedLeaderInput(
                 label: 'Named',
                 values: state.namedLeaders,
@@ -83,6 +74,15 @@ class DefendingLegionInput extends StatelessWidget {
                   context
                       .read<BattleScenarioBloc>()
                       .add(BattleScenarioEvent.updateDefendingLegion(state.copyWith(namedLeaders: value)));
+                },
+              ),
+              UnitInput(
+                label: 'Settl.',
+                startPosition: state.settlementLevel,
+                onValueChanged: (value) {
+                  context
+                      .read<BattleScenarioBloc>()
+                      .add(BattleScenarioEvent.updateDefendingLegion(state.copyWith(settlementLevel: value)));
                 },
               ),
             ],
