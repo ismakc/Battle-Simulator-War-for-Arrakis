@@ -1,6 +1,6 @@
 enum NamedLeader {
   leader0_1(0, 1),
-  // leader0_1_duplicate(0, 1),
+  leader0_1_duplicate(0, 1),
   leader0_2(0, 2),
   leader0_3(0, 3),
   leader1_0(1, 0),
