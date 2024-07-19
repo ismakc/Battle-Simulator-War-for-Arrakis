@@ -14,7 +14,7 @@ class BattleHistoryBloc extends Bloc<BattleHistoryEvent, BattleHistoryState> {
     on<_Reset>(_onReset);
   }
 
-  final simulator = BattleSimulator();
+  final simulator = BattleSimulator.getInstance();
 
   FutureOr<void> _onSimulateBattle(_SimulateBattle event, Emitter<BattleHistoryState> emit) {
     emit(

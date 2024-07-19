@@ -7,10 +7,19 @@ import 'package:bswfa/domain/defending_legion.dart';
 import 'package:bswfa/domain/named_leader.dart';
 
 class BattleSimulator {
+  BattleSimulator._();
+
   static const double swords = 3;
   static const double shields = 2;
   static const double stars = 1;
   static const double totalFaces = swords + shields + stars;
+
+  static BattleSimulator? _instance;
+
+  static BattleSimulator getInstance() {
+    _instance ??= BattleSimulator._();
+    return _instance!;
+  }
 
   BattleResult simulate(BattleScenario battleScenario) {
     final double attackerDamage = _calculateExpectedHits(
