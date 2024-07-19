@@ -35,10 +35,13 @@ class BattleSimulator {
     );
 
     return BattleResult(
+      rounds: 1,
       attackerExpectedHits: _roundDouble(attackerDamage),
       defenderExpectedHits: _roundDouble(defenderDamage),
-      attackingLegion: battleScenario.attackingLegion,
-      defendingLegion: battleScenario.defendingLegion,
+      battleScenario: BattleScenario(
+        attackingLegion: battleScenario.attackingLegion,
+        defendingLegion: battleScenario.defendingLegion,
+      ),
     );
   }
 
@@ -72,8 +75,11 @@ class BattleSimulator {
   }
 
   double _calculateAttackerExpectedStars(AttackingLegion legion, int diceCount) {
-    return min(diceCount, legion.genericLeaders + legion.namedLeaders.length) * (stars / totalFaces) +
-        (legion.surpriseAttack ? 1 : 0);
+    return min(
+      (legion.genericLeaders + legion.namedLeaders.length).toDouble(),
+      min(diceCount, legion.genericLeaders + legion.namedLeaders.length) * (stars / totalFaces) +
+          (legion.surpriseAttack ? 1 : 0),
+    );
   }
 
   double _calculateDefenderExpectedStars(DefendingLegion legion, int diceCount) {

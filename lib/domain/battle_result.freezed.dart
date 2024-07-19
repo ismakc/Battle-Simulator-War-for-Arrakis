@@ -16,10 +16,10 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$BattleResult {
+  int get rounds => throw _privateConstructorUsedError;
   double get attackerExpectedHits => throw _privateConstructorUsedError;
   double get defenderExpectedHits => throw _privateConstructorUsedError;
-  AttackingLegion get attackingLegion => throw _privateConstructorUsedError;
-  DefendingLegion get defendingLegion => throw _privateConstructorUsedError;
+  BattleScenario get battleScenario => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $BattleResultCopyWith<BattleResult> get copyWith =>
@@ -33,13 +33,12 @@ abstract class $BattleResultCopyWith<$Res> {
       _$BattleResultCopyWithImpl<$Res, BattleResult>;
   @useResult
   $Res call(
-      {double attackerExpectedHits,
+      {int rounds,
+      double attackerExpectedHits,
       double defenderExpectedHits,
-      AttackingLegion attackingLegion,
-      DefendingLegion defendingLegion});
+      BattleScenario battleScenario});
 
-  $AttackingLegionCopyWith<$Res> get attackingLegion;
-  $DefendingLegionCopyWith<$Res> get defendingLegion;
+  $BattleScenarioCopyWith<$Res> get battleScenario;
 }
 
 /// @nodoc
@@ -55,12 +54,16 @@ class _$BattleResultCopyWithImpl<$Res, $Val extends BattleResult>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? rounds = null,
     Object? attackerExpectedHits = null,
     Object? defenderExpectedHits = null,
-    Object? attackingLegion = null,
-    Object? defendingLegion = null,
+    Object? battleScenario = null,
   }) {
     return _then(_value.copyWith(
+      rounds: null == rounds
+          ? _value.rounds
+          : rounds // ignore: cast_nullable_to_non_nullable
+              as int,
       attackerExpectedHits: null == attackerExpectedHits
           ? _value.attackerExpectedHits
           : attackerExpectedHits // ignore: cast_nullable_to_non_nullable
@@ -69,30 +72,18 @@ class _$BattleResultCopyWithImpl<$Res, $Val extends BattleResult>
           ? _value.defenderExpectedHits
           : defenderExpectedHits // ignore: cast_nullable_to_non_nullable
               as double,
-      attackingLegion: null == attackingLegion
-          ? _value.attackingLegion
-          : attackingLegion // ignore: cast_nullable_to_non_nullable
-              as AttackingLegion,
-      defendingLegion: null == defendingLegion
-          ? _value.defendingLegion
-          : defendingLegion // ignore: cast_nullable_to_non_nullable
-              as DefendingLegion,
+      battleScenario: null == battleScenario
+          ? _value.battleScenario
+          : battleScenario // ignore: cast_nullable_to_non_nullable
+              as BattleScenario,
     ) as $Val);
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $AttackingLegionCopyWith<$Res> get attackingLegion {
-    return $AttackingLegionCopyWith<$Res>(_value.attackingLegion, (value) {
-      return _then(_value.copyWith(attackingLegion: value) as $Val);
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $DefendingLegionCopyWith<$Res> get defendingLegion {
-    return $DefendingLegionCopyWith<$Res>(_value.defendingLegion, (value) {
-      return _then(_value.copyWith(defendingLegion: value) as $Val);
+  $BattleScenarioCopyWith<$Res> get battleScenario {
+    return $BattleScenarioCopyWith<$Res>(_value.battleScenario, (value) {
+      return _then(_value.copyWith(battleScenario: value) as $Val);
     });
   }
 }
@@ -106,15 +97,13 @@ abstract class _$$BattleStatisticImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {double attackerExpectedHits,
+      {int rounds,
+      double attackerExpectedHits,
       double defenderExpectedHits,
-      AttackingLegion attackingLegion,
-      DefendingLegion defendingLegion});
+      BattleScenario battleScenario});
 
   @override
-  $AttackingLegionCopyWith<$Res> get attackingLegion;
-  @override
-  $DefendingLegionCopyWith<$Res> get defendingLegion;
+  $BattleScenarioCopyWith<$Res> get battleScenario;
 }
 
 /// @nodoc
@@ -128,12 +117,16 @@ class __$$BattleStatisticImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? rounds = null,
     Object? attackerExpectedHits = null,
     Object? defenderExpectedHits = null,
-    Object? attackingLegion = null,
-    Object? defendingLegion = null,
+    Object? battleScenario = null,
   }) {
     return _then(_$BattleStatisticImpl(
+      rounds: null == rounds
+          ? _value.rounds
+          : rounds // ignore: cast_nullable_to_non_nullable
+              as int,
       attackerExpectedHits: null == attackerExpectedHits
           ? _value.attackerExpectedHits
           : attackerExpectedHits // ignore: cast_nullable_to_non_nullable
@@ -142,39 +135,36 @@ class __$$BattleStatisticImplCopyWithImpl<$Res>
           ? _value.defenderExpectedHits
           : defenderExpectedHits // ignore: cast_nullable_to_non_nullable
               as double,
-      attackingLegion: null == attackingLegion
-          ? _value.attackingLegion
-          : attackingLegion // ignore: cast_nullable_to_non_nullable
-              as AttackingLegion,
-      defendingLegion: null == defendingLegion
-          ? _value.defendingLegion
-          : defendingLegion // ignore: cast_nullable_to_non_nullable
-              as DefendingLegion,
+      battleScenario: null == battleScenario
+          ? _value.battleScenario
+          : battleScenario // ignore: cast_nullable_to_non_nullable
+              as BattleScenario,
     ));
   }
 }
 
 /// @nodoc
 
-class _$BattleStatisticImpl implements _BattleStatistic {
+class _$BattleStatisticImpl extends _BattleStatistic {
   const _$BattleStatisticImpl(
-      {required this.attackerExpectedHits,
+      {required this.rounds,
+      required this.attackerExpectedHits,
       required this.defenderExpectedHits,
-      required this.attackingLegion,
-      required this.defendingLegion});
+      required this.battleScenario})
+      : super._();
 
+  @override
+  final int rounds;
   @override
   final double attackerExpectedHits;
   @override
   final double defenderExpectedHits;
   @override
-  final AttackingLegion attackingLegion;
-  @override
-  final DefendingLegion defendingLegion;
+  final BattleScenario battleScenario;
 
   @override
   String toString() {
-    return 'BattleResult(attackerExpectedHits: $attackerExpectedHits, defenderExpectedHits: $defenderExpectedHits, attackingLegion: $attackingLegion, defendingLegion: $defendingLegion)';
+    return 'BattleResult(rounds: $rounds, attackerExpectedHits: $attackerExpectedHits, defenderExpectedHits: $defenderExpectedHits, battleScenario: $battleScenario)';
   }
 
   @override
@@ -182,19 +172,18 @@ class _$BattleStatisticImpl implements _BattleStatistic {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$BattleStatisticImpl &&
+            (identical(other.rounds, rounds) || other.rounds == rounds) &&
             (identical(other.attackerExpectedHits, attackerExpectedHits) ||
                 other.attackerExpectedHits == attackerExpectedHits) &&
             (identical(other.defenderExpectedHits, defenderExpectedHits) ||
                 other.defenderExpectedHits == defenderExpectedHits) &&
-            (identical(other.attackingLegion, attackingLegion) ||
-                other.attackingLegion == attackingLegion) &&
-            (identical(other.defendingLegion, defendingLegion) ||
-                other.defendingLegion == defendingLegion));
+            (identical(other.battleScenario, battleScenario) ||
+                other.battleScenario == battleScenario));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, attackerExpectedHits,
-      defenderExpectedHits, attackingLegion, defendingLegion);
+  int get hashCode => Object.hash(runtimeType, rounds, attackerExpectedHits,
+      defenderExpectedHits, battleScenario);
 
   @JsonKey(ignore: true)
   @override
@@ -204,21 +193,22 @@ class _$BattleStatisticImpl implements _BattleStatistic {
           this, _$identity);
 }
 
-abstract class _BattleStatistic implements BattleResult {
+abstract class _BattleStatistic extends BattleResult {
   const factory _BattleStatistic(
-      {required final double attackerExpectedHits,
+      {required final int rounds,
+      required final double attackerExpectedHits,
       required final double defenderExpectedHits,
-      required final AttackingLegion attackingLegion,
-      required final DefendingLegion defendingLegion}) = _$BattleStatisticImpl;
+      required final BattleScenario battleScenario}) = _$BattleStatisticImpl;
+  const _BattleStatistic._() : super._();
 
+  @override
+  int get rounds;
   @override
   double get attackerExpectedHits;
   @override
   double get defenderExpectedHits;
   @override
-  AttackingLegion get attackingLegion;
-  @override
-  DefendingLegion get defendingLegion;
+  BattleScenario get battleScenario;
   @override
   @JsonKey(ignore: true)
   _$$BattleStatisticImplCopyWith<_$BattleStatisticImpl> get copyWith =>

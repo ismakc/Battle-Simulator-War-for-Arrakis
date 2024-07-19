@@ -94,9 +94,9 @@ class BattleHistoryItem extends StatelessWidget {
                   width: 20,
                 ),
                 SizedBox(
-                  width: 50,
+                  width: 60,
                   child: Text(
-                    '$hits',
+                    '${hits.toStringAsFixed(2)}\u{2694}',
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
@@ -107,10 +107,10 @@ class BattleHistoryItem extends StatelessWidget {
               ],
             ),
           ),
+          _buildRichText('L', '${legion.genericLeaders}'),
           _buildRichText('R', '${legion.regularUnits}'),
           _buildRichText('E', '${legion.eliteUnits}'),
           _buildRichText('S', '${legion.specialEliteUnits}'),
-          _buildRichText('L', '${legion.genericLeaders}'),
           _buildRichText('C', '${legion.usedCards}'),
           _buildRichText('N', '${legion.namedLeaders.length}'),
           _buildRichText(
