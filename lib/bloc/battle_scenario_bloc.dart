@@ -26,7 +26,7 @@ class BattleScenarioBloc extends Bloc<BattleScenarioEvent, BattleScenarioState> 
   }
 
   FutureOr<void> _onReset(event, Emitter<BattleScenarioState> emit) {
-    emit(BattleScenarioState(battleScenario: BattleScenario.defaultValues()));
+    emit(const BattleScenarioState(battleScenario: BattleScenario.defaultValues));
   }
 }
 
@@ -43,5 +43,5 @@ class BattleScenarioEvent with _$BattleScenarioEvent {
 class BattleScenarioState with _$BattleScenarioState {
   const factory BattleScenarioState({required BattleScenario battleScenario}) = _BattleScenarioState;
 
-  factory BattleScenarioState.initial() => BattleScenarioState(battleScenario: BattleScenario.defaultValues());
+  factory BattleScenarioState.initial() => const BattleScenarioState(battleScenario: BattleScenario.defaultValues);
 }

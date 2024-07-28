@@ -19,29 +19,29 @@ class DefendingLegion with _$DefendingLegion {
     @Default(0) int settlementLevel,
   }) = _DefendingLegion;
 
-  factory DefendingLegion.defaultValues() => const DefendingLegion();
+  static const DefendingLegion defaultValues = DefendingLegion();
 
-  int diceCount() {
+  int get diceCount {
     return min(6, regularUnits + eliteUnits + specialEliteUnits + usedCards + settlementLevel);
   }
 
-  int maxStarsCount() {
-    return min(diceCount(), genericLeaders + namedLeaders.length);
+  int get maxStarsCount {
+    return min(diceCount, genericLeaders + namedLeaders.length);
   }
 
-  int unlimitedMaxStarsCount() {
+  int get unlimitedMaxStarsCount {
     return genericLeaders + namedLeaders.length;
   }
 
-  int lifeCount() {
+  int get lifeCount {
     return regularUnits + eliteUnits * 2 + specialEliteUnits * 2 + genericLeaders + namedLeaders.length;
   }
 
-  int totalUnits() {
+  int get totalUnits {
     return regularUnits + eliteUnits + specialEliteUnits;
   }
 
-  int totalLeaders() {
+  int get totalLeaders {
     return genericLeaders + namedLeaders.length;
   }
 }

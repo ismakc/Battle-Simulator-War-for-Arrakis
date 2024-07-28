@@ -19,29 +19,29 @@ class AttackingLegion with _$AttackingLegion {
     @Default(false) bool surpriseAttack,
   }) = _AttackingLegion;
 
-  factory AttackingLegion.defaultValues() => const AttackingLegion();
+  static const AttackingLegion defaultValues = AttackingLegion();
 
-  int diceCount() {
+  int get diceCount {
     return min(6, regularUnits + eliteUnits + specialEliteUnits + usedCards);
   }
 
-  int maxStarsCount() {
-    return min(diceCount(), genericLeaders + namedLeaders.length + (surpriseAttack ? 1 : 0));
+  int get maxStarsCount {
+    return min(diceCount, genericLeaders + namedLeaders.length + (surpriseAttack ? 1 : 0));
   }
 
-  int unlimitedMaxStarsCount() {
+  int get unlimitedMaxStarsCount {
     return genericLeaders + namedLeaders.length + (surpriseAttack ? 1 : 0);
   }
 
-  int lifeCount() {
+  int get lifeCount {
     return regularUnits + eliteUnits * 2 + specialEliteUnits * 2 + genericLeaders + namedLeaders.length;
   }
 
-  int totalUnits() {
+  int get totalUnits {
     return regularUnits + eliteUnits + specialEliteUnits;
   }
 
-  int totalLeaders() {
+  int get totalLeaders {
     return genericLeaders + namedLeaders.length;
   }
 }

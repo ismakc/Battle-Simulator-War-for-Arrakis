@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'battle_result.dart';
+part of 'battle_statistic.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,40 +15,38 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
-mixin _$BattleResult {
-  int get rounds => throw _privateConstructorUsedError;
-  double get attackerExpectedHits => throw _privateConstructorUsedError;
-  double get defenderExpectedHits => throw _privateConstructorUsedError;
-  double? get squaredAttackerHits => throw _privateConstructorUsedError;
-  double? get squaredDefenderHits => throw _privateConstructorUsedError;
+mixin _$BattleStatistic {
+  double get attackerHits => throw _privateConstructorUsedError;
+  double get defenderHits => throw _privateConstructorUsedError;
+  double get squaredAttackerHits => throw _privateConstructorUsedError;
+  double get squaredDefenderHits => throw _privateConstructorUsedError;
   BattleScenario get battleScenario => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $BattleResultCopyWith<BattleResult> get copyWith =>
+  $BattleStatisticCopyWith<BattleStatistic> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $BattleResultCopyWith<$Res> {
-  factory $BattleResultCopyWith(
-          BattleResult value, $Res Function(BattleResult) then) =
-      _$BattleResultCopyWithImpl<$Res, BattleResult>;
+abstract class $BattleStatisticCopyWith<$Res> {
+  factory $BattleStatisticCopyWith(
+          BattleStatistic value, $Res Function(BattleStatistic) then) =
+      _$BattleStatisticCopyWithImpl<$Res, BattleStatistic>;
   @useResult
   $Res call(
-      {int rounds,
-      double attackerExpectedHits,
-      double defenderExpectedHits,
-      double? squaredAttackerHits,
-      double? squaredDefenderHits,
+      {double attackerHits,
+      double defenderHits,
+      double squaredAttackerHits,
+      double squaredDefenderHits,
       BattleScenario battleScenario});
 
   $BattleScenarioCopyWith<$Res> get battleScenario;
 }
 
 /// @nodoc
-class _$BattleResultCopyWithImpl<$Res, $Val extends BattleResult>
-    implements $BattleResultCopyWith<$Res> {
-  _$BattleResultCopyWithImpl(this._value, this._then);
+class _$BattleStatisticCopyWithImpl<$Res, $Val extends BattleStatistic>
+    implements $BattleStatisticCopyWith<$Res> {
+  _$BattleStatisticCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -58,34 +56,29 @@ class _$BattleResultCopyWithImpl<$Res, $Val extends BattleResult>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? rounds = null,
-    Object? attackerExpectedHits = null,
-    Object? defenderExpectedHits = null,
-    Object? squaredAttackerHits = freezed,
-    Object? squaredDefenderHits = freezed,
+    Object? attackerHits = null,
+    Object? defenderHits = null,
+    Object? squaredAttackerHits = null,
+    Object? squaredDefenderHits = null,
     Object? battleScenario = null,
   }) {
     return _then(_value.copyWith(
-      rounds: null == rounds
-          ? _value.rounds
-          : rounds // ignore: cast_nullable_to_non_nullable
-              as int,
-      attackerExpectedHits: null == attackerExpectedHits
-          ? _value.attackerExpectedHits
-          : attackerExpectedHits // ignore: cast_nullable_to_non_nullable
+      attackerHits: null == attackerHits
+          ? _value.attackerHits
+          : attackerHits // ignore: cast_nullable_to_non_nullable
               as double,
-      defenderExpectedHits: null == defenderExpectedHits
-          ? _value.defenderExpectedHits
-          : defenderExpectedHits // ignore: cast_nullable_to_non_nullable
+      defenderHits: null == defenderHits
+          ? _value.defenderHits
+          : defenderHits // ignore: cast_nullable_to_non_nullable
               as double,
-      squaredAttackerHits: freezed == squaredAttackerHits
+      squaredAttackerHits: null == squaredAttackerHits
           ? _value.squaredAttackerHits
           : squaredAttackerHits // ignore: cast_nullable_to_non_nullable
-              as double?,
-      squaredDefenderHits: freezed == squaredDefenderHits
+              as double,
+      squaredDefenderHits: null == squaredDefenderHits
           ? _value.squaredDefenderHits
           : squaredDefenderHits // ignore: cast_nullable_to_non_nullable
-              as double?,
+              as double,
       battleScenario: null == battleScenario
           ? _value.battleScenario
           : battleScenario // ignore: cast_nullable_to_non_nullable
@@ -104,18 +97,17 @@ class _$BattleResultCopyWithImpl<$Res, $Val extends BattleResult>
 
 /// @nodoc
 abstract class _$$BattleStatisticImplCopyWith<$Res>
-    implements $BattleResultCopyWith<$Res> {
+    implements $BattleStatisticCopyWith<$Res> {
   factory _$$BattleStatisticImplCopyWith(_$BattleStatisticImpl value,
           $Res Function(_$BattleStatisticImpl) then) =
       __$$BattleStatisticImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
-      {int rounds,
-      double attackerExpectedHits,
-      double defenderExpectedHits,
-      double? squaredAttackerHits,
-      double? squaredDefenderHits,
+      {double attackerHits,
+      double defenderHits,
+      double squaredAttackerHits,
+      double squaredDefenderHits,
       BattleScenario battleScenario});
 
   @override
@@ -124,7 +116,7 @@ abstract class _$$BattleStatisticImplCopyWith<$Res>
 
 /// @nodoc
 class __$$BattleStatisticImplCopyWithImpl<$Res>
-    extends _$BattleResultCopyWithImpl<$Res, _$BattleStatisticImpl>
+    extends _$BattleStatisticCopyWithImpl<$Res, _$BattleStatisticImpl>
     implements _$$BattleStatisticImplCopyWith<$Res> {
   __$$BattleStatisticImplCopyWithImpl(
       _$BattleStatisticImpl _value, $Res Function(_$BattleStatisticImpl) _then)
@@ -133,34 +125,29 @@ class __$$BattleStatisticImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? rounds = null,
-    Object? attackerExpectedHits = null,
-    Object? defenderExpectedHits = null,
-    Object? squaredAttackerHits = freezed,
-    Object? squaredDefenderHits = freezed,
+    Object? attackerHits = null,
+    Object? defenderHits = null,
+    Object? squaredAttackerHits = null,
+    Object? squaredDefenderHits = null,
     Object? battleScenario = null,
   }) {
     return _then(_$BattleStatisticImpl(
-      rounds: null == rounds
-          ? _value.rounds
-          : rounds // ignore: cast_nullable_to_non_nullable
-              as int,
-      attackerExpectedHits: null == attackerExpectedHits
-          ? _value.attackerExpectedHits
-          : attackerExpectedHits // ignore: cast_nullable_to_non_nullable
+      attackerHits: null == attackerHits
+          ? _value.attackerHits
+          : attackerHits // ignore: cast_nullable_to_non_nullable
               as double,
-      defenderExpectedHits: null == defenderExpectedHits
-          ? _value.defenderExpectedHits
-          : defenderExpectedHits // ignore: cast_nullable_to_non_nullable
+      defenderHits: null == defenderHits
+          ? _value.defenderHits
+          : defenderHits // ignore: cast_nullable_to_non_nullable
               as double,
-      squaredAttackerHits: freezed == squaredAttackerHits
+      squaredAttackerHits: null == squaredAttackerHits
           ? _value.squaredAttackerHits
           : squaredAttackerHits // ignore: cast_nullable_to_non_nullable
-              as double?,
-      squaredDefenderHits: freezed == squaredDefenderHits
+              as double,
+      squaredDefenderHits: null == squaredDefenderHits
           ? _value.squaredDefenderHits
           : squaredDefenderHits // ignore: cast_nullable_to_non_nullable
-              as double?,
+              as double,
       battleScenario: null == battleScenario
           ? _value.battleScenario
           : battleScenario // ignore: cast_nullable_to_non_nullable
@@ -173,42 +160,34 @@ class __$$BattleStatisticImplCopyWithImpl<$Res>
 
 class _$BattleStatisticImpl extends _BattleStatistic {
   const _$BattleStatisticImpl(
-      {required this.rounds,
-      required this.attackerExpectedHits,
-      required this.defenderExpectedHits,
-      this.squaredAttackerHits,
-      this.squaredDefenderHits,
-      required this.battleScenario})
+      {required this.attackerHits,
+      required this.defenderHits,
+      required this.squaredAttackerHits,
+      required this.squaredDefenderHits,
+      this.battleScenario = BattleScenario.defaultValues})
       : super._();
 
   @override
-  final int rounds;
+  final double attackerHits;
   @override
-  final double attackerExpectedHits;
+  final double defenderHits;
   @override
-  final double defenderExpectedHits;
+  final double squaredAttackerHits;
   @override
-  final double? squaredAttackerHits;
+  final double squaredDefenderHits;
   @override
-  final double? squaredDefenderHits;
-  @override
+  @JsonKey()
   final BattleScenario battleScenario;
-
-  @override
-  String toString() {
-    return 'BattleResult(rounds: $rounds, attackerExpectedHits: $attackerExpectedHits, defenderExpectedHits: $defenderExpectedHits, squaredAttackerHits: $squaredAttackerHits, squaredDefenderHits: $squaredDefenderHits, battleScenario: $battleScenario)';
-  }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$BattleStatisticImpl &&
-            (identical(other.rounds, rounds) || other.rounds == rounds) &&
-            (identical(other.attackerExpectedHits, attackerExpectedHits) ||
-                other.attackerExpectedHits == attackerExpectedHits) &&
-            (identical(other.defenderExpectedHits, defenderExpectedHits) ||
-                other.defenderExpectedHits == defenderExpectedHits) &&
+            (identical(other.attackerHits, attackerHits) ||
+                other.attackerHits == attackerHits) &&
+            (identical(other.defenderHits, defenderHits) ||
+                other.defenderHits == defenderHits) &&
             (identical(other.squaredAttackerHits, squaredAttackerHits) ||
                 other.squaredAttackerHits == squaredAttackerHits) &&
             (identical(other.squaredDefenderHits, squaredDefenderHits) ||
@@ -218,14 +197,8 @@ class _$BattleStatisticImpl extends _BattleStatistic {
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      rounds,
-      attackerExpectedHits,
-      defenderExpectedHits,
-      squaredAttackerHits,
-      squaredDefenderHits,
-      battleScenario);
+  int get hashCode => Object.hash(runtimeType, attackerHits, defenderHits,
+      squaredAttackerHits, squaredDefenderHits, battleScenario);
 
   @JsonKey(ignore: true)
   @override
@@ -235,26 +208,23 @@ class _$BattleStatisticImpl extends _BattleStatistic {
           this, _$identity);
 }
 
-abstract class _BattleStatistic extends BattleResult {
+abstract class _BattleStatistic extends BattleStatistic {
   const factory _BattleStatistic(
-      {required final int rounds,
-      required final double attackerExpectedHits,
-      required final double defenderExpectedHits,
-      final double? squaredAttackerHits,
-      final double? squaredDefenderHits,
-      required final BattleScenario battleScenario}) = _$BattleStatisticImpl;
+      {required final double attackerHits,
+      required final double defenderHits,
+      required final double squaredAttackerHits,
+      required final double squaredDefenderHits,
+      final BattleScenario battleScenario}) = _$BattleStatisticImpl;
   const _BattleStatistic._() : super._();
 
   @override
-  int get rounds;
+  double get attackerHits;
   @override
-  double get attackerExpectedHits;
+  double get defenderHits;
   @override
-  double get defenderExpectedHits;
+  double get squaredAttackerHits;
   @override
-  double? get squaredAttackerHits;
-  @override
-  double? get squaredDefenderHits;
+  double get squaredDefenderHits;
   @override
   BattleScenario get battleScenario;
   @override

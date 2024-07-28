@@ -3,9 +3,11 @@ import 'dart:math';
 import 'package:bswfa/domain/attacking_legion.dart';
 import 'package:bswfa/domain/battle_result.dart';
 import 'package:bswfa/domain/battle_scenario.dart';
+import 'package:bswfa/domain/battle_statistic.dart';
 import 'package:bswfa/domain/defending_legion.dart';
 import 'package:bswfa/domain/legion.dart';
 import 'package:bswfa/domain/named_leader.dart';
+import 'package:bswfa/service/battle_statistic_calculator.dart';
 
 class BattleSimulator {
   BattleSimulator._();
@@ -23,27 +25,29 @@ class BattleSimulator {
   }
 
   BattleResult simulate(BattleScenario battleScenario) {
-    final double attackerDamage = _calculateExpectedHits(
-      attacker: battleScenario.attackingLegion,
-      defender: battleScenario.defendingLegion,
-      isAttacker: true,
-    );
-
-    final double defenderDamage = _calculateExpectedHits(
-      attacker: battleScenario.attackingLegion,
-      defender: battleScenario.defendingLegion,
-      isAttacker: false,
-    );
-
-    return BattleResult(
-      rounds: 1,
-      attackerExpectedHits: _roundDouble(attackerDamage),
-      defenderExpectedHits: _roundDouble(defenderDamage),
-      battleScenario: BattleScenario(
-        attackingLegion: battleScenario.attackingLegion,
-        defendingLegion: battleScenario.defendingLegion,
-      ),
-    );
+    final BattleStatistic battleStatistic = BattleStatisticCalculator.createBattleStatistic(battleScenario);
+    return BattleResult.from(battleStatistic);
+    // final double attackerDamage = _calculateExpectedHits(
+    //   attacker: battleScenario.attackingLegion,
+    //   defender: battleScenario.defendingLegion,
+    //   isAttacker: true,
+    // );
+    //
+    // final double defenderDamage = _calculateExpectedHits(
+    //   attacker: battleScenario.attackingLegion,
+    //   defender: battleScenario.defendingLegion,
+    //   isAttacker: false,
+    // );
+    //
+    // return BattleResult(
+    //   rounds: 1,
+    //   attackerExpectedHits: _roundDouble(attackerDamage),
+    //   defenderExpectedHits: _roundDouble(defenderDamage),
+    //   battleScenario: BattleScenario(
+    //     attackingLegion: battleScenario.attackingLegion,
+    //     defendingLegion: battleScenario.defendingLegion,
+    //   ),
+    // );
   }
 
   double _calculateExpectedHits({
@@ -51,8 +55,8 @@ class BattleSimulator {
     required DefendingLegion defender,
     required bool isAttacker,
   }) {
-    final int attackerDice = attacker.diceCount();
-    final int defenderDice = defender.diceCount();
+    final int attackerDice = attacker.diceCount;
+    final int defenderDice = defender.diceCount;
 
     final double attackerExpectedStars = _calculateAttackerExpectedStars(attacker, attackerDice);
     final double defenderExpectedStars = _calculateDefenderExpectedStars(defender, defenderDice);
@@ -160,14 +164,14 @@ class BattleSimulator {
         defendingLegion: damagedDefendingLegion,
       );
 
-      if (battleScenarioForSeveralRounds.attackingLegion.totalUnits() == 0 ||
-          battleScenarioForSeveralRounds.defendingLegion.totalUnits() == 0 ||
+      if (battleScenarioForSeveralRounds.attackingLegion.totalUnits == 0 ||
+          battleScenarioForSeveralRounds.defendingLegion.totalUnits == 0 ||
           totalAttackerExpectedHits >
-              battleScenarioForSeveralRounds.attackingLegion.totalUnits() +
-                  battleScenarioForSeveralRounds.attackingLegion.totalLeaders() ||
+              battleScenarioForSeveralRounds.attackingLegion.totalUnits +
+                  battleScenarioForSeveralRounds.attackingLegion.totalLeaders ||
           totalDefenderExpectedHits >
-              battleScenarioForSeveralRounds.defendingLegion.totalUnits() +
-                  battleScenarioForSeveralRounds.defendingLegion.totalLeaders()) {
+              battleScenarioForSeveralRounds.defendingLegion.totalUnits +
+                  battleScenarioForSeveralRounds.defendingLegion.totalLeaders) {
         combatEnds = true;
       }
     }

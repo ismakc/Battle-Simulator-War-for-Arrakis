@@ -33,5 +33,6 @@ class FullBattleSimulationEvent with _$FullBattleSimulationEvent {
 class FullBattleSimulationState with _$FullBattleSimulationState {
   const factory FullBattleSimulationState({required BattleResult battleResult}) = _FullBattleSimulationState;
 
-  factory FullBattleSimulationState.initial() => FullBattleSimulationState(battleResult: BattleResult.defaultValues());
+  factory FullBattleSimulationState.initial() =>
+      const FullBattleSimulationState(battleResult: BattleResult.defaultValues);
 }
