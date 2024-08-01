@@ -6,6 +6,7 @@ import 'package:bswfa/presentation/widgets/main/main_screen.dart';
 import 'package:bswfa/presentation/widgets/main/main_top_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:nested/nested.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -13,17 +14,17 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-      providers: [
+      providers: <SingleChildWidget>[
         BlocProvider<CollapseCubit>(
           create: (BuildContext context) => CollapseCubit(),
         ),
         BlocProvider<BattleScenarioBloc>(
           create: (BuildContext context) => BattleScenarioBloc(),
         ),
-        BlocProvider(
+        BlocProvider<BattleHistoryBloc>(
           create: (BuildContext context) => BattleHistoryBloc(),
         ),
-        BlocProvider(
+        BlocProvider<FullBattleSimulationBloc>(
           create: (BuildContext context) => FullBattleSimulationBloc(),
         ),
       ],
@@ -47,14 +48,14 @@ class App extends StatelessWidget {
 }
 
 class ContentFrame extends StatelessWidget {
-  const ContentFrame({super.key, required this.child});
+  const ContentFrame({required this.child, super.key});
 
   final Widget child;
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Container(
+      child: ColoredBox(
         color: Colors.white,
         child: Center(
           child: ConstrainedBox(

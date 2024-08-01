@@ -13,7 +13,7 @@ class BattleSimulatorButton extends StatelessWidget {
         backgroundColor: Colors.black87,
       ),
       onPressed: () {
-        final battleScenario = context.read<BattleScenarioBloc>().state;
+        final BattleScenarioState battleScenario = context.read<BattleScenarioBloc>().state;
         context.read<BattleHistoryBloc>().add(BattleHistoryEvent.simulateBattle(battleScenario.battleScenario));
       },
       child: const Align(

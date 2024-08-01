@@ -178,7 +178,7 @@ class _$DefendingLegionImpl extends _DefendingLegion {
       this.eliteUnits = 0,
       this.specialEliteUnits = 0,
       this.usedCards = 0,
-      final List<NamedLeader> namedLeaders = const [],
+      final List<NamedLeader> namedLeaders = const <NamedLeader>[],
       this.settlementLevel = 0})
       : _namedLeaders = namedLeaders,
         super._();

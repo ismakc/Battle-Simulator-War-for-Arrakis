@@ -1,3 +1,5 @@
+// ignore_for_file: constant_identifier_names
+
 enum NamedLeader {
   leader0_1(0, 1),
   leader0_1_duplicate(0, 1),

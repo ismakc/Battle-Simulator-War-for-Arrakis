@@ -1,4 +1,4 @@
-import 'package:bswfa/domain/die.dart';
+import 'package:bswfa/domain/roll/die.dart';
 import 'package:bswfa/service/tree/battle_node_state.dart';
 import 'package:bswfa/service/tree/battle_tree_processor.dart';
 import 'package:bswfa/service/tree/node.dart';
@@ -9,18 +9,32 @@ class BattleTreeDicePermutator {
   final BattleTreeProcessor battleTreeProcessor;
 
   Node<BattleNodeState> createBattleTree() {
-    final Node<BattleNodeState> rootNode = Node(BattleNodeState.initialState());
-    buildBattleTree(rootNode, battleTreeProcessor.getAttackerDiceCount(), battleTreeProcessor.getDefenderDiceCount());
+    final Node<BattleNodeState> rootNode = Node<BattleNodeState>(BattleNodeState.initialState());
+    buildBattleTree(
+      rootNode,
+      battleTreeProcessor.scenario.attackingLegion.diceCount,
+      battleTreeProcessor.scenario.defendingLegion.diceCount,
+    );
     return rootNode;
   }
 
   void buildBattleTree(Node<BattleNodeState> node, int attackerDiceCount, int defenderDiceCount) {
     if (attackerDiceCount > 0) {
-      buildChildNodes(node, attackerDiceCount - 1, defenderDiceCount, (state, die) => state.withAttackerDie(die));
-      processParentNode(node);
+      buildChildNodes(
+        node,
+        attackerDiceCount - 1,
+        defenderDiceCount,
+        (BattleNodeState state, Die die) => state.withAttackerDie(die),
+      );
+      postProcessParentNode(node);
     } else if (defenderDiceCount > 0) {
-      buildChildNodes(node, attackerDiceCount, defenderDiceCount - 1, (state, die) => state.withDefenderDie(die));
-      processParentNode(node);
+      buildChildNodes(
+        node,
+        attackerDiceCount,
+        defenderDiceCount - 1,
+        (BattleNodeState state, Die die) => state.withDefenderDie(die),
+      );
+      postProcessParentNode(node);
     } else {
       processLeafNode(node);
     }
@@ -50,8 +64,9 @@ class BattleTreeDicePermutator {
     node.updateNodeValue(updatedState);
   }
 
-  void processParentNode(Node<BattleNodeState> node) {
-    final List<BattleNodeState> childrenStates = node.children.map((child) => child.value).toList();
+  void postProcessParentNode(Node<BattleNodeState> node) {
+    final List<BattleNodeState> childrenStates =
+        node.children.map((Node<BattleNodeState> child) => child.value).toList();
     final BattleNodeState updatedState = battleTreeProcessor.updateNodeState(node.value, childrenStates);
     node.updateNodeValue(updatedState);
   }

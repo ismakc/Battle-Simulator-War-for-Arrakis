@@ -16,7 +16,6 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$BattleScenario {
-  int? get id => throw _privateConstructorUsedError;
   AttackingLegion get attackingLegion => throw _privateConstructorUsedError;
   DefendingLegion get defendingLegion => throw _privateConstructorUsedError;
 
@@ -31,10 +30,7 @@ abstract class $BattleScenarioCopyWith<$Res> {
           BattleScenario value, $Res Function(BattleScenario) then) =
       _$BattleScenarioCopyWithImpl<$Res, BattleScenario>;
   @useResult
-  $Res call(
-      {int? id,
-      AttackingLegion attackingLegion,
-      DefendingLegion defendingLegion});
+  $Res call({AttackingLegion attackingLegion, DefendingLegion defendingLegion});
 
   $AttackingLegionCopyWith<$Res> get attackingLegion;
   $DefendingLegionCopyWith<$Res> get defendingLegion;
@@ -53,15 +49,10 @@ class _$BattleScenarioCopyWithImpl<$Res, $Val extends BattleScenario>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
     Object? attackingLegion = null,
     Object? defendingLegion = null,
   }) {
     return _then(_value.copyWith(
-      id: freezed == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as int?,
       attackingLegion: null == attackingLegion
           ? _value.attackingLegion
           : attackingLegion // ignore: cast_nullable_to_non_nullable
@@ -98,10 +89,7 @@ abstract class _$$BattleScenarioImplCopyWith<$Res>
       __$$BattleScenarioImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {int? id,
-      AttackingLegion attackingLegion,
-      DefendingLegion defendingLegion});
+  $Res call({AttackingLegion attackingLegion, DefendingLegion defendingLegion});
 
   @override
   $AttackingLegionCopyWith<$Res> get attackingLegion;
@@ -120,15 +108,10 @@ class __$$BattleScenarioImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
     Object? attackingLegion = null,
     Object? defendingLegion = null,
   }) {
     return _then(_$BattleScenarioImpl(
-      id: freezed == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as int?,
       attackingLegion: null == attackingLegion
           ? _value.attackingLegion
           : attackingLegion // ignore: cast_nullable_to_non_nullable
@@ -145,10 +128,8 @@ class __$$BattleScenarioImplCopyWithImpl<$Res>
 
 class _$BattleScenarioImpl implements _BattleScenario {
   const _$BattleScenarioImpl(
-      {this.id, required this.attackingLegion, required this.defendingLegion});
+      {required this.attackingLegion, required this.defendingLegion});
 
-  @override
-  final int? id;
   @override
   final AttackingLegion attackingLegion;
   @override
@@ -156,7 +137,7 @@ class _$BattleScenarioImpl implements _BattleScenario {
 
   @override
   String toString() {
-    return 'BattleScenario(id: $id, attackingLegion: $attackingLegion, defendingLegion: $defendingLegion)';
+    return 'BattleScenario(attackingLegion: $attackingLegion, defendingLegion: $defendingLegion)';
   }
 
   @override
@@ -164,7 +145,6 @@ class _$BattleScenarioImpl implements _BattleScenario {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$BattleScenarioImpl &&
-            (identical(other.id, id) || other.id == id) &&
             (identical(other.attackingLegion, attackingLegion) ||
                 other.attackingLegion == attackingLegion) &&
             (identical(other.defendingLegion, defendingLegion) ||
@@ -173,7 +153,7 @@ class _$BattleScenarioImpl implements _BattleScenario {
 
   @override
   int get hashCode =>
-      Object.hash(runtimeType, id, attackingLegion, defendingLegion);
+      Object.hash(runtimeType, attackingLegion, defendingLegion);
 
   @JsonKey(ignore: true)
   @override
@@ -185,12 +165,9 @@ class _$BattleScenarioImpl implements _BattleScenario {
 
 abstract class _BattleScenario implements BattleScenario {
   const factory _BattleScenario(
-      {final int? id,
-      required final AttackingLegion attackingLegion,
+      {required final AttackingLegion attackingLegion,
       required final DefendingLegion defendingLegion}) = _$BattleScenarioImpl;
 
-  @override
-  int? get id;
   @override
   AttackingLegion get attackingLegion;
   @override

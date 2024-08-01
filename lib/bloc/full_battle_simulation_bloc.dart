@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:bswfa/domain/battle_result.dart';
-import 'package:bswfa/domain/battle_scenario.dart';
+import 'package:bswfa/domain/battle/battle_result.dart';
+import 'package:bswfa/domain/battle/battle_scenario.dart';
 import 'package:bswfa/service/battle_simulator.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -13,7 +13,7 @@ class FullBattleSimulationBloc extends Bloc<FullBattleSimulationEvent, FullBattl
     on<_SimulateFullBattle>(_onSimulateFullBattle);
   }
 
-  final simulator = BattleSimulator.getInstance();
+  final BattleSimulator simulator = BattleSimulator.instance;
 
   FutureOr<void> _onSimulateFullBattle(_SimulateFullBattle event, Emitter<FullBattleSimulationState> emit) {
     emit(

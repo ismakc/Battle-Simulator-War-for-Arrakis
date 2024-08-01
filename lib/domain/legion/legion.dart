@@ -1,8 +1,8 @@
 import 'dart:math';
 
-import 'package:bswfa/domain/attacking_legion.dart';
-import 'package:bswfa/domain/defending_legion.dart';
-import 'package:bswfa/domain/named_leader.dart';
+import 'package:bswfa/domain/legion/attacking_legion.dart';
+import 'package:bswfa/domain/legion/defending_legion.dart';
+import 'package:bswfa/domain/legion/named_leader.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'legion.freezed.dart';
@@ -17,10 +17,8 @@ class Legion with _$Legion {
     @Default(0) int eliteUnits,
     @Default(0) int specialEliteUnits,
     @Default(0) int usedCards,
-    @Default([]) List<NamedLeader> namedLeaders,
+    @Default(<NamedLeader>[]) List<NamedLeader> namedLeaders,
   }) = _Legion;
-
-  factory Legion.defaultValues() => const Legion();
 
   factory Legion.fromAttackingLegion(AttackingLegion attackingLegion) {
     return Legion(
@@ -43,6 +41,8 @@ class Legion with _$Legion {
       namedLeaders: List<NamedLeader>.from(defendingLegion.namedLeaders),
     );
   }
+
+  static const Legion defaultValues = Legion();
 
   AttackingLegion overwriteAttackingLegionWithLegion(
     AttackingLegion attackingLegion,
@@ -68,24 +68,24 @@ class Legion with _$Legion {
     );
   }
 
-  int diceCount() {
+  int get diceCount {
     return min(6, regularUnits + eliteUnits + specialEliteUnits + usedCards);
   }
 
-  int lifeCount() {
+  int get lifeCount {
     return regularUnits + eliteUnits * 2 + specialEliteUnits * 2 + genericLeaders + namedLeaders.length;
   }
 
-  int totalUnits() {
+  int get totalUnits {
     return regularUnits + eliteUnits + specialEliteUnits;
   }
 
-  int totalLeaders() {
+  int get totalLeaders {
     return genericLeaders + namedLeaders.length;
   }
 
   Legion calculateOptimalLoss() {
-    final Map<String, Legion?> damagedLegions = {
+    final Map<String, Legion?> damagedLegions = <String, Legion?>{
       'minusLeader': genericLeaders == 0 ? null : copyWith(genericLeaders: genericLeaders - 1),
       'minusRegular': regularUnits == 0 ? null : copyWith(regularUnits: regularUnits - 1),
       'minusElite': eliteUnits == 0 ? null : copyWith(regularUnits: regularUnits + 1, eliteUnits: eliteUnits - 1),
@@ -95,8 +95,11 @@ class Legion with _$Legion {
       'minusNamed': namedLeaders.isEmpty
           ? null
           : copyWith(
-              namedLeaders: List.from(namedLeaders)
-                ..sort((a, b) => b.attack != a.attack ? b.attack.compareTo(a.attack) : b.defense.compareTo(a.defense))
+              namedLeaders: List<NamedLeader>.from(namedLeaders)
+                ..sort(
+                  (NamedLeader a, NamedLeader b) =>
+                      b.attack != a.attack ? b.attack.compareTo(a.attack) : b.defense.compareTo(a.defense),
+                )
                 ..removeLast(),
             ),
     };
@@ -104,11 +107,13 @@ class Legion with _$Legion {
     MapEntry<String, Legion?>? selectedEntry;
     int? maxValue;
 
-    for (final entry in damagedLegions.entries) {
+    for (final MapEntry<String, Legion?> entry in damagedLegions.entries) {
       final Legion? legion = entry.value;
-      if (legion == null) continue;
+      if (legion == null) {
+        continue;
+      }
 
-      final int diceCount = legion.diceCount();
+      final int diceCount = legion.diceCount;
       final bool shouldUpdate = maxValue == null ||
           diceCount > maxValue ||
           (diceCount == maxValue && shouldReplaceSelectedEntry(selectedEntry, entry, diceCount));
@@ -119,7 +124,7 @@ class Legion with _$Legion {
       }
     }
 
-    return selectedEntry?.value ?? Legion.defaultValues();
+    return selectedEntry?.value ?? Legion.defaultValues;
   }
 
   bool shouldReplaceSelectedEntry(
@@ -127,7 +132,9 @@ class Legion with _$Legion {
     MapEntry<String, Legion?> entry,
     int diceCount,
   ) {
-    if (selectedEntry == null) return true;
+    if (selectedEntry == null) {
+      return true;
+    }
 
     switch (entry.key) {
       case 'minusLeader':
@@ -137,7 +144,7 @@ class Legion with _$Legion {
       case 'minusSpecial':
         return selectedEntry.key != 'minusElite' && selectedEntry.key != 'minusSpecial';
       case 'minusNamed':
-        return totalUnits() == 1 || selectedEntry.key != 'minusRegular';
+        return totalUnits == 1 || selectedEntry.key != 'minusRegular';
       case 'minusRegular':
         return selectedEntry.key != 'minusRegular';
       default:

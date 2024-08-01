@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 
 class SurpriseAttackInput extends StatelessWidget {
   const SurpriseAttackInput({
-    super.key,
     required this.label,
     required this.value,
-    required this.onValueChanged,
+    this.onValueChanged,
+    super.key,
   });
 
   final String label;
@@ -19,7 +19,7 @@ class SurpriseAttackInput extends StatelessWidget {
       flex: 6,
       maxWidth: 94,
       firstChild: Text(label, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-      children: [
+      children: <Widget>[
         Align(
           alignment: Alignment.centerLeft,
           child: SizedBox(

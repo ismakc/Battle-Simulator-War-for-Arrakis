@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:bswfa/domain/battle_result.dart';
-import 'package:bswfa/domain/battle_scenario.dart';
+import 'package:bswfa/domain/battle/battle_result.dart';
+import 'package:bswfa/domain/battle/battle_scenario.dart';
 import 'package:bswfa/service/battle_simulator.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -14,19 +14,20 @@ class BattleHistoryBloc extends Bloc<BattleHistoryEvent, BattleHistoryState> {
     on<_Reset>(_onReset);
   }
 
-  final simulator = BattleSimulator.getInstance();
+  final BattleSimulator simulator = BattleSimulator.instance;
 
   FutureOr<void> _onSimulateBattle(_SimulateBattle event, Emitter<BattleHistoryState> emit) {
     emit(
       BattleHistoryState(
-        battleHistory: List.of(state.battleHistory)..insert(0, simulator.simulate(event.battleScenario)),
+        battleHistory: List<BattleResult>.of(state.battleHistory)
+          ..insert(0, simulator.simulateSingleRound(event.battleScenario)),
       ),
     );
   }
 
   FutureOr<void> _onReset(_Reset event, Emitter<BattleHistoryState> emit) {
     emit(
-      const BattleHistoryState(battleHistory: []),
+      const BattleHistoryState(battleHistory: <BattleResult>[]),
     );
   }
 }
@@ -42,5 +43,5 @@ class BattleHistoryEvent with _$BattleHistoryEvent {
 class BattleHistoryState with _$BattleHistoryState {
   const factory BattleHistoryState({required List<BattleResult> battleHistory}) = _BattleHistoryState;
 
-  factory BattleHistoryState.initial() => const BattleHistoryState(battleHistory: []);
+  factory BattleHistoryState.initial() => const BattleHistoryState(battleHistory: <BattleResult>[]);
 }

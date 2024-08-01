@@ -22,7 +22,7 @@ class MainTopBar extends StatelessWidget implements PreferredSizeWidget {
         ),
         child: AppBar(
           title: Stack(
-            children: [
+            children: <Widget>[
               Center(
                 child: Container(
                   margin: const EdgeInsets.only(left: 80.0),
@@ -32,7 +32,7 @@ class MainTopBar extends StatelessWidget implements PreferredSizeWidget {
               Positioned(
                 left: 0,
                 top: 0,
-                child: FutureBuilder(
+                child: FutureBuilder<String>(
                   future: _getVersionNumber(),
                   builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
                     final String versionText = snapshot.hasData ? '${snapshot.data} ' : '';
@@ -47,7 +47,7 @@ class MainTopBar extends StatelessWidget implements PreferredSizeWidget {
               ),
             ],
           ),
-          actions: const [
+          actions: const <Widget>[
             ResetButton(),
             CollapseButton(),
           ],
@@ -97,7 +97,7 @@ class CollapseButton extends StatelessWidget {
       child: IconButton(
         color: Colors.amber,
         icon: Builder(
-          builder: (context) {
+          builder: (BuildContext context) {
             return Icon(
               context.watch<CollapseCubit>().state.collapsed ? Icons.expand_more : Icons.expand_less,
             );

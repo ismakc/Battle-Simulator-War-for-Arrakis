@@ -17,7 +17,7 @@ class MainScreen extends StatelessWidget {
       child: MainScrollView(
         child: Wrap(
           runSpacing: 8.0,
-          children: [
+          children: <Widget>[
             Collapsable(
               visible: isCollapsed(context),
               child: FittedBox(
@@ -25,7 +25,7 @@ class MainScreen extends StatelessWidget {
                   constraints: const BoxConstraints(maxWidth: 600),
                   child: const Wrap(
                     runSpacing: 8.0,
-                    children: [
+                    children: <Widget>[
                       BattleScenarioSetup(),
                       BattleSimulatorButton(),
                     ],
@@ -42,7 +42,7 @@ class MainScreen extends StatelessWidget {
 }
 
 class MainScrollView extends StatelessWidget {
-  const MainScrollView({super.key, required this.child});
+  const MainScrollView({required this.child, super.key});
 
   final Widget child;
 
@@ -50,7 +50,7 @@ class MainScrollView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScrollConfiguration(
       behavior: ScrollConfiguration.of(context).copyWith(
-        dragDevices: {
+        dragDevices: <PointerDeviceKind>{
           ...ScrollConfiguration.of(context).dragDevices,
           PointerDeviceKind.mouse,
         },

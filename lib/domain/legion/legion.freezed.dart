@@ -162,7 +162,7 @@ class _$LegionImpl extends _Legion {
       this.eliteUnits = 0,
       this.specialEliteUnits = 0,
       this.usedCards = 0,
-      final List<NamedLeader> namedLeaders = const []})
+      final List<NamedLeader> namedLeaders = const <NamedLeader>[]})
       : _namedLeaders = namedLeaders,
         super._();
 

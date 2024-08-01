@@ -1,130 +1,25 @@
-import 'dart:math';
-
-import 'package:bswfa/domain/attacking_legion.dart';
-import 'package:bswfa/domain/battle_result.dart';
-import 'package:bswfa/domain/battle_scenario.dart';
-import 'package:bswfa/domain/battle_statistic.dart';
-import 'package:bswfa/domain/defending_legion.dart';
-import 'package:bswfa/domain/legion.dart';
-import 'package:bswfa/domain/named_leader.dart';
+import 'package:bswfa/domain/battle/battle_result.dart';
+import 'package:bswfa/domain/battle/battle_scenario.dart';
+import 'package:bswfa/domain/battle/battle_statistic.dart';
+import 'package:bswfa/domain/legion/attacking_legion.dart';
+import 'package:bswfa/domain/legion/defending_legion.dart';
+import 'package:bswfa/domain/legion/legion.dart';
 import 'package:bswfa/service/battle_statistic_calculator.dart';
 
 class BattleSimulator {
   BattleSimulator._();
 
-  static const double swords = 3;
-  static const double shields = 2;
-  static const double stars = 1;
-  static const double totalFaces = swords + shields + stars;
+  static final BattleSimulator _instance = BattleSimulator._();
 
-  static BattleSimulator? _instance;
+  static BattleSimulator get instance => _instance;
 
-  static BattleSimulator getInstance() {
-    _instance ??= BattleSimulator._();
-    return _instance!;
-  }
-
-  BattleResult simulate(BattleScenario battleScenario) {
-    final BattleStatistic battleStatistic = BattleStatisticCalculator.createBattleStatistic(battleScenario);
-    return BattleResult.from(battleStatistic);
-    // final double attackerDamage = _calculateExpectedHits(
-    //   attacker: battleScenario.attackingLegion,
-    //   defender: battleScenario.defendingLegion,
-    //   isAttacker: true,
-    // );
-    //
-    // final double defenderDamage = _calculateExpectedHits(
-    //   attacker: battleScenario.attackingLegion,
-    //   defender: battleScenario.defendingLegion,
-    //   isAttacker: false,
-    // );
-    //
-    // return BattleResult(
-    //   rounds: 1,
-    //   attackerExpectedHits: _roundDouble(attackerDamage),
-    //   defenderExpectedHits: _roundDouble(defenderDamage),
-    //   battleScenario: BattleScenario(
-    //     attackingLegion: battleScenario.attackingLegion,
-    //     defendingLegion: battleScenario.defendingLegion,
-    //   ),
-    // );
-  }
-
-  double _calculateExpectedHits({
-    required AttackingLegion attacker,
-    required DefendingLegion defender,
-    required bool isAttacker,
-  }) {
-    final int attackerDice = attacker.diceCount;
-    final int defenderDice = defender.diceCount;
-
-    final double attackerExpectedStars = _calculateAttackerExpectedStars(attacker, attackerDice);
-    final double defenderExpectedStars = _calculateDefenderExpectedStars(defender, defenderDice);
-
-    final (double attackerStarHits, double attackerStarShields) =
-        _calculateStarHitsAndShields(attacker.namedLeaders, attackerExpectedStars);
-    final (double defenderStarHits, double defenderStarShields) =
-        _calculateStarHitsAndShields(defender.namedLeaders, defenderExpectedStars);
-
-    final double initialDamage = (isAttacker ? attackerDice : defenderDice) * (swords / totalFaces) +
-        (isAttacker ? attackerStarHits : defenderStarHits);
-
-    final double effectiveShields = max(
-      0,
-      (isAttacker ? defenderDice : attackerDice) * (shields / totalFaces) +
-          (isAttacker ? defenderStarShields : attackerStarShields) -
-          (isAttacker ? attacker.specialEliteUnits : defender.specialEliteUnits),
+  BattleResult simulateSingleRound(BattleScenario battleScenario) {
+    final BattleStatistic battleStatistic = BattleStatisticCalculator.calc(battleScenario);
+    return BattleResult(
+      playedCombatRounds: 1,
+      statistic: battleStatistic,
+      scenario: battleScenario,
     );
-
-    return max(0, initialDamage - effectiveShields);
-  }
-
-  double _calculateAttackerExpectedStars(AttackingLegion legion, int diceCount) {
-    return min(
-      (legion.genericLeaders + legion.namedLeaders.length).toDouble(),
-      min(diceCount, legion.genericLeaders + legion.namedLeaders.length) * (stars / totalFaces) +
-          (legion.surpriseAttack ? 1 : 0),
-    );
-  }
-
-  double _calculateDefenderExpectedStars(DefendingLegion legion, int diceCount) {
-    return min(diceCount, legion.genericLeaders + legion.namedLeaders.length) * (stars / totalFaces);
-  }
-
-  (double starHits, double starShields) _calculateStarHitsAndShields(
-    List<NamedLeader> namedLeaders,
-    double expectedStars,
-  ) {
-    double starHits = 0.0;
-    double starShields = 0.0;
-    final int wholePart = expectedStars.floor();
-    final double fractionalPart = expectedStars - wholePart;
-
-    final List<NamedLeader> orderedNamedLeaders = List.from(namedLeaders)
-      ..sort((a, b) => b.attack != a.attack ? b.attack.compareTo(a.attack) : b.defense.compareTo(a.defense));
-
-    for (int i = 0; i < wholePart; i++) {
-      if (i < orderedNamedLeaders.length) {
-        starHits += orderedNamedLeaders[i].attack;
-        starShields += orderedNamedLeaders[i].defense;
-      } else {
-        starHits += 1;
-      }
-    }
-
-    if (fractionalPart > 0.0 && wholePart < orderedNamedLeaders.length) {
-      final NamedLeader leader = orderedNamedLeaders[wholePart];
-      starHits += leader.attack * fractionalPart;
-      starShields += leader.defense * fractionalPart;
-    } else if (fractionalPart > 0.0) {
-      starHits += fractionalPart;
-    }
-
-    return (starHits, starShields);
-  }
-
-  double _roundDouble(double value) {
-    return double.parse(value.toStringAsFixed(2));
   }
 
   BattleResult simulateMultipleRounds(BattleScenario battleScenario) {
@@ -135,10 +30,10 @@ class BattleSimulator {
     BattleScenario battleScenarioForSeveralRounds = battleScenario;
     while (!combatEnds) {
       rounds++;
-      final BattleResult result = simulate(battleScenarioForSeveralRounds);
+      final BattleResult result = simulateSingleRound(battleScenarioForSeveralRounds);
 
-      totalAttackerExpectedHits += result.attackerExpectedHits;
-      totalDefenderExpectedHits += result.defenderExpectedHits;
+      totalAttackerExpectedHits += result.statistic.attackerExpectedHits;
+      totalDefenderExpectedHits += result.statistic.defenderExpectedHits;
       if (rounds == 2) {
         battleScenarioForSeveralRounds = battleScenarioForSeveralRounds.copyWith(
           attackingLegion: battleScenarioForSeveralRounds.attackingLegion.copyWith(usedCards: 0, surpriseAttack: false),
@@ -149,14 +44,14 @@ class BattleSimulator {
       }
       final AttackingLegion damagedAttackingLegion = _updateLegionAfterAttack(
         Legion.fromAttackingLegion(battleScenarioForSeveralRounds.attackingLegion),
-        result.defenderExpectedHits,
-        false,
+        result.statistic.defenderExpectedHits,
+        battleScenarioForSeveralRounds.defendingLegion.settlementLevel > 0,
       ).overwriteAttackingLegionWithLegion(battleScenarioForSeveralRounds.attackingLegion);
 
       final DefendingLegion damagedDefendingLegion = _updateLegionAfterAttack(
         Legion.fromDefendingLegion(battleScenarioForSeveralRounds.defendingLegion),
-        result.attackerExpectedHits,
-        battleScenarioForSeveralRounds.defendingLegion.settlementLevel > 0,
+        result.statistic.attackerExpectedHits,
+        false,
       ).overwriteDefendingLegionWithLegion(battleScenarioForSeveralRounds.defendingLegion);
 
       battleScenarioForSeveralRounds = battleScenarioForSeveralRounds.copyWith(
@@ -177,10 +72,14 @@ class BattleSimulator {
     }
 
     return BattleResult(
-      rounds: rounds,
-      attackerExpectedHits: totalAttackerExpectedHits,
-      defenderExpectedHits: totalDefenderExpectedHits,
-      battleScenario: BattleScenario(
+      playedCombatRounds: rounds,
+      statistic: BattleStatistic(
+        attackerExpectedHits: totalAttackerExpectedHits,
+        attackerStdDeviationHits: 0.0,
+        defenderExpectedHits: totalDefenderExpectedHits,
+        defenderStdDeviationHits: 0.0,
+      ),
+      scenario: BattleScenario(
         attackingLegion: battleScenarioForSeveralRounds.attackingLegion,
         defendingLegion: battleScenarioForSeveralRounds.defendingLegion,
       ),
@@ -194,12 +93,12 @@ class BattleSimulator {
   ) {
     int i = 1;
     Legion damagedLegion = legion;
-    while (i <= expectedHits.round() && damagedLegion.totalUnits() > 0) {
+    while (i <= expectedHits.round() && damagedLegion.totalUnits > 0) {
       damagedLegion = damagedLegion.calculateOptimalLoss();
       i++;
     }
 
-    if (damagedLegion.totalUnits() > 0 && additionalHitToContinue) {
+    if (damagedLegion.totalUnits > 0 && additionalHitToContinue) {
       damagedLegion = damagedLegion.calculateOptimalLoss();
     }
     return damagedLegion;

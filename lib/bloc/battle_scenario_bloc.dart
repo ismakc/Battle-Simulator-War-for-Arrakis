@@ -1,8 +1,8 @@
 import 'dart:async';
 
-import 'package:bswfa/domain/attacking_legion.dart';
-import 'package:bswfa/domain/battle_scenario.dart';
-import 'package:bswfa/domain/defending_legion.dart';
+import 'package:bswfa/domain/battle/battle_scenario.dart';
+import 'package:bswfa/domain/legion/attacking_legion.dart';
+import 'package:bswfa/domain/legion/defending_legion.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -25,7 +25,7 @@ class BattleScenarioBloc extends Bloc<BattleScenarioEvent, BattleScenarioState> 
     emit(BattleScenarioState(battleScenario: updatedBattleScenario));
   }
 
-  FutureOr<void> _onReset(event, Emitter<BattleScenarioState> emit) {
+  FutureOr<void> _onReset(_Reset event, Emitter<BattleScenarioState> emit) {
     emit(const BattleScenarioState(battleScenario: BattleScenario.defaultValues));
   }
 }

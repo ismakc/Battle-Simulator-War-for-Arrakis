@@ -1,13 +1,10 @@
-import 'package:bswfa/domain/named_leader.dart';
+import 'package:bswfa/domain/legion/named_leader.dart';
 import 'package:bswfa/presentation/widgets/common/clamp_first_row.dart';
 import 'package:flutter/material.dart';
 
 class NamedLeaderInput extends StatefulWidget {
   const NamedLeaderInput({
-    super.key,
-    required this.label,
-    required this.values,
-    required this.onValueChanged,
+    required this.label, required this.values, required this.onValueChanged, super.key,
   });
 
   final String label;
@@ -53,8 +50,8 @@ class _NamedLeaderInputState extends State<NamedLeaderInput> {
 
   @override
   Widget build(BuildContext context) {
-    final leadersWidgets = NamedLeader.values.map((leader) {
-      final isSelected = _values.contains(leader);
+    final List<GestureDetector> leadersWidgets = NamedLeader.values.map((NamedLeader leader) {
+      final bool isSelected = _values.contains(leader);
       return GestureDetector(
         onTap: () => _toggleLeaderSelection(leader),
         child: Container(
@@ -85,7 +82,7 @@ class _NamedLeaderInputState extends State<NamedLeaderInput> {
       minWidth: 100.0,
       maxWidth: 100.0,
       firstChild: const Text('Named', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-      children: [
+      children: <Widget>[
         Container(
           margin: const EdgeInsets.only(right: 8.0),
           child: _buildFlexibleRows(context, leadersWidgets),
@@ -101,7 +98,7 @@ class _NamedLeaderInputState extends State<NamedLeaderInput> {
 
     return Wrap(
       runSpacing: 3.0,
-      children: [
+      children: <Widget>[
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: firstRowChildren,

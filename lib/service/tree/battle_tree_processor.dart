@@ -1,21 +1,20 @@
-import 'package:bswfa/domain/battle_scenario.dart';
-import 'package:bswfa/domain/battle_statistic.dart';
+import 'package:bswfa/domain/battle/battle_scenario.dart';
 import 'package:bswfa/service/battle_hits_calculator.dart';
+import 'package:bswfa/service/tree/battle_accumulated_hits.dart';
 import 'package:bswfa/service/tree/battle_node_state.dart';
+import 'package:bswfa/service/tree/cache.dart';
 
 class BattleTreeProcessor {
-  BattleTreeProcessor(this.battleScenario);
+  BattleTreeProcessor(this.scenario, this.hitsCalculator, this.memo);
 
-  final MemoizationCache<int, BattleNodeState> memo = MemoizationCache<int, BattleNodeState>();
-  final BattleScenario battleScenario;
+  final BattleScenario scenario;
+  final BattleHitsCalculator hitsCalculator;
+  final Cache<int, BattleNodeState> memo;
 
   BattleNodeState processLeafState(BattleNodeState state) {
-    final double attackerHits =
-        BattleHitsCalculator.calculateAttackerHits(battleScenario.attackingLegion, state.battleDiceRoll);
-    final double defenderHits =
-        BattleHitsCalculator.calculateDefenderHits(battleScenario.defendingLegion, state.battleDiceRoll);
-    final BattleNodeState updatedState = state.withBattleStatistic(
-      BattleStatistic(
+    final (int attackerHits, int defenderHits) = hitsCalculator.calculateHits(scenario, state.battleDiceRoll);
+    final BattleNodeState updatedState = state.withAccumulatedHits(
+      BattleAccumulatedHits(
         attackerHits: attackerHits,
         defenderHits: defenderHits,
         squaredAttackerHits: attackerHits * attackerHits,
@@ -26,8 +25,8 @@ class BattleTreeProcessor {
   }
 
   BattleNodeState updateNodeState(BattleNodeState state, List<BattleNodeState> childStates) {
-    final BattleStatistic newBattleStatistic = childStates.map((e) => e.battleStatistic).reduce((a, b) => a.add(b));
-    final BattleNodeState updatedState = state.withBattleStatistic(newBattleStatistic);
+    final BattleAccumulatedHits newAccumulatedHits = childStates.map((BattleNodeState e) => e.accumulator).reduce((BattleAccumulatedHits a, BattleAccumulatedHits b) => a.add(b));
+    final BattleNodeState updatedState = state.withAccumulatedHits(newAccumulatedHits);
     return memo.put(state.battleDiceRoll.fullDiceRollBitMask(), updatedState);
   }
 
@@ -37,30 +36,5 @@ class BattleTreeProcessor {
     } else {
       return null;
     }
-  }
-
-  int getAttackerDiceCount() {
-    return battleScenario.attackingLegion.diceCount;
-  }
-
-  int getDefenderDiceCount() {
-    return battleScenario.defendingLegion.diceCount;
-  }
-}
-
-class MemoizationCache<K, V> {
-  final Map<K, V> _cache = {};
-
-  V? get(K key) {
-    return _cache[key];
-  }
-
-  V put(K key, V value) {
-    _cache[key] = value;
-    return value;
-  }
-
-  bool containsKey(K key) {
-    return _cache.containsKey(key);
   }
 }

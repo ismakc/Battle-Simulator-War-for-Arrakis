@@ -14,7 +14,7 @@ Future<void> main() async {
     Bloc.observer = const AppBlocObserver();
   }
 
-  await SystemChrome.setPreferredOrientations([
+  await SystemChrome.setPreferredOrientations(<DeviceOrientation>[
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]).then((_) {

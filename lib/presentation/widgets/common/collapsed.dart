@@ -2,8 +2,7 @@ import 'package:flutter/cupertino.dart';
 
 class Collapsable extends StatelessWidget {
   const Collapsable({
-    super.key,
-    required this.child,
+    required this.child, super.key,
     this.visible = true,
   });
 

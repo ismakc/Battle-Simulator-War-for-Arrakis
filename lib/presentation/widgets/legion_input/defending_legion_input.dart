@@ -1,5 +1,6 @@
 import 'package:bswfa/bloc/battle_scenario_bloc.dart';
-import 'package:bswfa/domain/defending_legion.dart';
+import 'package:bswfa/domain/legion/defending_legion.dart';
+import 'package:bswfa/domain/legion/named_leader.dart';
 import 'package:bswfa/presentation/widgets/common/label_border_field_set.dart';
 import 'package:bswfa/presentation/widgets/legion_input/named_leader_input.dart';
 import 'package:bswfa/presentation/widgets/legion_input/unit_input.dart';
@@ -12,20 +13,20 @@ class DefendingLegionInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocSelector<BattleScenarioBloc, BattleScenarioState, DefendingLegion>(
-      selector: (state) => state.battleScenario.defendingLegion,
-      builder: (context, state) {
+      selector: (BattleScenarioState state) => state.battleScenario.defendingLegion,
+      builder: (BuildContext context, DefendingLegion state) {
         return LabeledBorderFieldset(
           label:
-              'Defending Legion ( ${state.diceCount}\u{1F3B2}  /  ${state.maxStarsCount}\u{2B50}of ${state.unlimitedMaxStarsCount}  /  -${state.specialEliteUnits}\u{1F6E1}  /  ${state.lifeCount}\u{2764}\u{FE0F} )',
+              'Defending Legion ( ${state.diceCount}\u{1F3B2}of ${state.unlimitedMaxDiceCount}/  ${state.maxStarsCount}\u{2B50}of ${state.unlimitedMaxStarsCount}  /  -${state.specialEliteUnits}\u{1F6E1}  /  ${state.lifeCount}\u{2764}\u{FE0F} )',
           borderColor: Colors.black87,
           textColor: Colors.black87,
           child: Wrap(
             runSpacing: 5.0,
-            children: [
+            children: <Widget>[
               UnitInput(
                 label: 'Leader',
                 startPosition: state.genericLeaders,
-                onValueChanged: (value) {
+                onValueChanged: (int value) {
                   context
                       .read<BattleScenarioBloc>()
                       .add(BattleScenarioEvent.updateDefendingLegion(state.copyWith(genericLeaders: value)));
@@ -34,7 +35,7 @@ class DefendingLegionInput extends StatelessWidget {
               UnitInput(
                 label: 'Regular',
                 startPosition: state.regularUnits,
-                onValueChanged: (value) {
+                onValueChanged: (int value) {
                   context
                       .read<BattleScenarioBloc>()
                       .add(BattleScenarioEvent.updateDefendingLegion(state.copyWith(regularUnits: value)));
@@ -43,7 +44,7 @@ class DefendingLegionInput extends StatelessWidget {
               UnitInput(
                 label: 'Elite',
                 startPosition: state.eliteUnits,
-                onValueChanged: (value) {
+                onValueChanged: (int value) {
                   context
                       .read<BattleScenarioBloc>()
                       .add(BattleScenarioEvent.updateDefendingLegion(state.copyWith(eliteUnits: value)));
@@ -52,7 +53,7 @@ class DefendingLegionInput extends StatelessWidget {
               UnitInput(
                 label: 'Special',
                 startPosition: state.specialEliteUnits,
-                onValueChanged: (value) {
+                onValueChanged: (int value) {
                   context.read<BattleScenarioBloc>().add(
                         BattleScenarioEvent.updateDefendingLegion(state.copyWith(specialEliteUnits: value)),
                       );
@@ -61,7 +62,7 @@ class DefendingLegionInput extends StatelessWidget {
               UnitInput(
                 label: 'Cards',
                 startPosition: state.usedCards,
-                onValueChanged: (value) {
+                onValueChanged: (int value) {
                   context
                       .read<BattleScenarioBloc>()
                       .add(BattleScenarioEvent.updateDefendingLegion(state.copyWith(usedCards: value)));
@@ -70,7 +71,7 @@ class DefendingLegionInput extends StatelessWidget {
               NamedLeaderInput(
                 label: 'Named',
                 values: state.namedLeaders,
-                onValueChanged: (value) {
+                onValueChanged: (List<NamedLeader> value) {
                   context
                       .read<BattleScenarioBloc>()
                       .add(BattleScenarioEvent.updateDefendingLegion(state.copyWith(namedLeaders: value)));
@@ -79,7 +80,7 @@ class DefendingLegionInput extends StatelessWidget {
               UnitInput(
                 label: 'Settl.',
                 startPosition: state.settlementLevel,
-                onValueChanged: (value) {
+                onValueChanged: (int value) {
                   context
                       .read<BattleScenarioBloc>()
                       .add(BattleScenarioEvent.updateDefendingLegion(state.copyWith(settlementLevel: value)));

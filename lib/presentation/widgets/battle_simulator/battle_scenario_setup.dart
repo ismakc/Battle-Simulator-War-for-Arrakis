@@ -9,7 +9,7 @@ class BattleScenarioSetup extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Wrap(
       runSpacing: 8.0,
-      children: [
+      children: <Widget>[
         AttackingLegionInput(),
         DefendingLegionInput(),
       ],

@@ -1,10 +1,10 @@
 import 'package:bswfa/bloc/full_battle_simulation_bloc.dart';
-import 'package:bswfa/domain/battle_result.dart';
+import 'package:bswfa/domain/battle/battle_result.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class FullBattleSimulationPopupDialog extends StatelessWidget {
-  const FullBattleSimulationPopupDialog({super.key, required this.battleResult});
+  const FullBattleSimulationPopupDialog({required this.battleResult, super.key});
 
   final BattleResult battleResult;
 
@@ -15,14 +15,14 @@ class FullBattleSimulationPopupDialog extends StatelessWidget {
       elevation: 10,
       child: Stack(
         clipBehavior: Clip.none,
-        children: [
+        children: <Widget>[
           Container(
             padding: const EdgeInsets.fromLTRB(20, 45, 20, 20),
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(12),
               border: Border.all(color: Colors.amber, width: 2),
-              boxShadow: [
+              boxShadow: <BoxShadow>[
                 BoxShadow(
                   color: Colors.black.withOpacity(0.1),
                   spreadRadius: 5,
@@ -32,21 +32,21 @@ class FullBattleSimulationPopupDialog extends StatelessWidget {
               ],
             ),
             child: BlocBuilder<FullBattleSimulationBloc, FullBattleSimulationState>(
-              builder: (context, state) {
+              builder: (BuildContext context, FullBattleSimulationState state) {
                 return Column(
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    _buildAlignedText(context, 'Rounds: ', '${battleResult.rounds} \u{23F3}'),
+                  children: <Widget>[
+                    _buildAlignedText(context, 'Rounds: ', '${battleResult.playedCombatRounds} \u{23F3}'),
                     _buildAlignedText(
                       context,
                       'Att.Hits: ',
-                      '${battleResult.attackerExpectedHits.toStringAsFixed(2)} \u{2694}',
+                      '${battleResult.statistic.attackerExpectedHits.toStringAsFixed(2)} \u{2694}',
                     ),
                     _buildAlignedText(
                       context,
                       'Def.Hits: ',
-                      '${battleResult.defenderExpectedHits.toStringAsFixed(2)} \u{2694}',
+                      '${battleResult.statistic.defenderExpectedHits.toStringAsFixed(2)} \u{2694}',
                     ),
                     _buildAlignedText(context, 'Probable Winner: ', '${battleResult.winner()}\u{1F3C6}'),
                   ],
@@ -84,7 +84,7 @@ class FullBattleSimulationPopupDialog extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 4.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
+        children: <Widget>[
           Text(label, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.black54)),
           Text(value, style: const TextStyle(fontSize: 16)),
         ],

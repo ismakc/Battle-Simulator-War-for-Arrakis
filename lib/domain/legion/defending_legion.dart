@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import 'package:bswfa/domain/named_leader.dart';
+import 'package:bswfa/domain/legion/named_leader.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'defending_legion.freezed.dart';
@@ -15,7 +15,7 @@ class DefendingLegion with _$DefendingLegion {
     @Default(0) int eliteUnits,
     @Default(0) int specialEliteUnits,
     @Default(0) int usedCards,
-    @Default([]) List<NamedLeader> namedLeaders,
+    @Default(<NamedLeader>[]) List<NamedLeader> namedLeaders,
     @Default(0) int settlementLevel,
   }) = _DefendingLegion;
 
@@ -43,5 +43,9 @@ class DefendingLegion with _$DefendingLegion {
 
   int get totalLeaders {
     return genericLeaders + namedLeaders.length;
+  }
+
+  int get unlimitedMaxDiceCount {
+    return regularUnits + eliteUnits + specialEliteUnits + usedCards + settlementLevel;
   }
 }

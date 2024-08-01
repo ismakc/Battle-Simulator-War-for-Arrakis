@@ -1,14 +1,14 @@
 import 'package:bswfa/bloc/full_battle_simulation_bloc.dart';
-import 'package:bswfa/domain/battle_result.dart';
+import 'package:bswfa/domain/battle/battle_result.dart';
 import 'package:bswfa/presentation/widgets/legion_input/full_battle_simulation_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class BattleHistoryItem extends StatelessWidget {
   const BattleHistoryItem({
-    super.key,
     required this.battleResult,
     required this.displayIndex,
+    super.key,
   });
 
   final BattleResult battleResult;
@@ -20,7 +20,7 @@ class BattleHistoryItem extends StatelessWidget {
       onTap: () {
         context
             .read<FullBattleSimulationBloc>()
-            .add(FullBattleSimulationEvent.simulateFullBattle(battleResult.battleScenario));
+            .add(FullBattleSimulationEvent.simulateFullBattle(battleResult.scenario));
         _showPopup(context);
       },
       child: Container(
@@ -32,7 +32,7 @@ class BattleHistoryItem extends StatelessWidget {
           ),
         ),
         child: Stack(
-          children: [
+          children: <Widget>[
             Positioned(
               top: -5.0,
               right: -5.0,
@@ -50,17 +50,17 @@ class BattleHistoryItem extends StatelessWidget {
               child: FittedBox(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
+                  children: <Widget>[
                     _buildRow(
                       label: 'Att.Hits:',
-                      hits: battleResult.attackerExpectedHits,
+                      hits: battleResult.statistic.attackerExpectedHits,
                       legion: battleResult.attackingLegion,
                       isAttacker: true,
                     ),
                     const SizedBox(height: 3.0),
                     _buildRow(
                       label: 'Def.Hits:',
-                      hits: battleResult.defenderExpectedHits,
+                      hits: battleResult.statistic.defenderExpectedHits,
                       legion: battleResult.defendingLegion,
                       isAttacker: false,
                     ),
@@ -83,13 +83,13 @@ class BattleHistoryItem extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 2.0),
       child: Row(
-        children: [
+        children: <RenderObjectWidget>[
           DecoratedBox(
             decoration: BoxDecoration(
               color: isAttacker ? Colors.black87 : Colors.amber,
             ),
             child: Row(
-              children: [
+              children: <Widget>[
                 SizedBox(
                   width: 67,
                   child: Text(
@@ -128,14 +128,18 @@ class BattleHistoryItem extends StatelessWidget {
             isAttacker ? 'A' : 'S:',
             isAttacker ? ' ${legion.surpriseAttack ? 'yes' : 'no'}' : ' ${legion.settlementLevel}',
           ),
-        ].map((child) => Padding(padding: const EdgeInsets.symmetric(horizontal: 5.0), child: child)).toList(),
+        ]
+            .map(
+              (RenderObjectWidget child) => Padding(padding: const EdgeInsets.symmetric(horizontal: 5.0), child: child),
+            )
+            .toList(),
       ),
     );
   }
 
   Row _buildRichText(String t1, String t2) {
     return Row(
-      children: [
+      children: <Widget>[
         Text(t1, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
         Text(t2, style: const TextStyle(fontSize: 16)),
       ],
@@ -146,7 +150,8 @@ class BattleHistoryItem extends StatelessWidget {
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        return FullBattleSimulationPopupDialog(battleResult: battleResult);
+        return FullBattleSimulationPopupDialog(
+            battleResult: context.watch<FullBattleSimulationBloc>().state.battleResult);
       },
     );
   }

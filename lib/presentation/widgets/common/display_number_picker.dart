@@ -2,10 +2,7 @@ import 'package:flutter/material.dart';
 
 class DisplayNumberPicker extends StatefulWidget {
   const DisplayNumberPicker({
-    super.key,
-    required this.datas,
-    required this.startPosition,
-    required this.onValueChanged,
+    required this.datas, required this.startPosition, required this.onValueChanged, super.key,
   });
 
   final List<int> datas;
@@ -39,7 +36,7 @@ class _DisplayNumberPickerState extends State<DisplayNumberPicker> {
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: widget.datas.asMap().entries.map((entry) {
+      children: widget.datas.asMap().entries.map((MapEntry<int, int> entry) {
         final int index = entry.key;
         final int number = entry.value;
         return GestureDetector(

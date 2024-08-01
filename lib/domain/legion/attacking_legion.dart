@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import 'package:bswfa/domain/named_leader.dart';
+import 'package:bswfa/domain/legion/named_leader.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'attacking_legion.freezed.dart';
@@ -15,7 +15,7 @@ class AttackingLegion with _$AttackingLegion {
     @Default(0) int eliteUnits,
     @Default(0) int specialEliteUnits,
     @Default(0) int usedCards,
-    @Default([]) List<NamedLeader> namedLeaders,
+    @Default(<NamedLeader>[]) List<NamedLeader> namedLeaders,
     @Default(false) bool surpriseAttack,
   }) = _AttackingLegion;
 
@@ -43,5 +43,9 @@ class AttackingLegion with _$AttackingLegion {
 
   int get totalLeaders {
     return genericLeaders + namedLeaders.length;
+  }
+
+  int get unlimitedMaxDiceCount {
+    return regularUnits + eliteUnits + specialEliteUnits + usedCards;
   }
 }

@@ -1,5 +1,6 @@
 import 'package:bswfa/bloc/battle_scenario_bloc.dart';
-import 'package:bswfa/domain/attacking_legion.dart';
+import 'package:bswfa/domain/legion/attacking_legion.dart';
+import 'package:bswfa/domain/legion/named_leader.dart';
 import 'package:bswfa/presentation/widgets/common/label_border_field_set.dart';
 import 'package:bswfa/presentation/widgets/legion_input/named_leader_input.dart';
 import 'package:bswfa/presentation/widgets/legion_input/surprise_attack_input.dart';
@@ -13,20 +14,20 @@ class AttackingLegionInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocSelector<BattleScenarioBloc, BattleScenarioState, AttackingLegion>(
-      selector: (state) => state.battleScenario.attackingLegion,
-      builder: (context, state) {
+      selector: (BattleScenarioState state) => state.battleScenario.attackingLegion,
+      builder: (BuildContext context, AttackingLegion state) {
         return LabeledBorderFieldset(
           label:
-              'Attacking Legion ( ${state.diceCount}\u{1F3B2}  /  ${state.maxStarsCount}\u{2B50}of ${state.unlimitedMaxStarsCount}  /  -${state.specialEliteUnits}\u{1F6E1}  /  ${state.lifeCount}\u{2764}\u{FE0F} )',
+              'Attacking Legion ( ${state.diceCount}\u{1F3B2}of ${state.unlimitedMaxDiceCount}  /  ${state.maxStarsCount}\u{2B50}of ${state.unlimitedMaxStarsCount}  /  -${state.specialEliteUnits}\u{1F6E1}  /  ${state.lifeCount}\u{2764}\u{FE0F} )',
           borderColor: Colors.amber,
           textColor: Colors.black87,
           child: Wrap(
             runSpacing: 8.0,
-            children: [
+            children: <Widget>[
               UnitInput(
                 label: 'Leader',
                 startPosition: state.genericLeaders,
-                onValueChanged: (value) {
+                onValueChanged: (int value) {
                   context
                       .read<BattleScenarioBloc>()
                       .add(BattleScenarioEvent.updateAttackingLegion(state.copyWith(genericLeaders: value)));
@@ -35,7 +36,7 @@ class AttackingLegionInput extends StatelessWidget {
               UnitInput(
                 label: 'Regular',
                 startPosition: state.regularUnits,
-                onValueChanged: (value) {
+                onValueChanged: (int value) {
                   context
                       .read<BattleScenarioBloc>()
                       .add(BattleScenarioEvent.updateAttackingLegion(state.copyWith(regularUnits: value)));
@@ -44,7 +45,7 @@ class AttackingLegionInput extends StatelessWidget {
               UnitInput(
                 label: 'Elite',
                 startPosition: state.eliteUnits,
-                onValueChanged: (value) {
+                onValueChanged: (int value) {
                   context
                       .read<BattleScenarioBloc>()
                       .add(BattleScenarioEvent.updateAttackingLegion(state.copyWith(eliteUnits: value)));
@@ -53,7 +54,7 @@ class AttackingLegionInput extends StatelessWidget {
               UnitInput(
                 label: 'Special',
                 startPosition: state.specialEliteUnits,
-                onValueChanged: (value) {
+                onValueChanged: (int value) {
                   context.read<BattleScenarioBloc>().add(
                         BattleScenarioEvent.updateAttackingLegion(state.copyWith(specialEliteUnits: value)),
                       );
@@ -62,7 +63,7 @@ class AttackingLegionInput extends StatelessWidget {
               UnitInput(
                 label: 'Cards',
                 startPosition: state.usedCards,
-                onValueChanged: (value) {
+                onValueChanged: (int value) {
                   context
                       .read<BattleScenarioBloc>()
                       .add(BattleScenarioEvent.updateAttackingLegion(state.copyWith(usedCards: value)));
@@ -71,7 +72,7 @@ class AttackingLegionInput extends StatelessWidget {
               NamedLeaderInput(
                 label: 'Named',
                 values: state.namedLeaders,
-                onValueChanged: (value) {
+                onValueChanged: (List<NamedLeader> value) {
                   context
                       .read<BattleScenarioBloc>()
                       .add(BattleScenarioEvent.updateAttackingLegion(state.copyWith(namedLeaders: value)));
@@ -80,7 +81,7 @@ class AttackingLegionInput extends StatelessWidget {
               SurpriseAttackInput(
                 label: 'Surprise',
                 value: state.surpriseAttack,
-                onValueChanged: (value) {
+                onValueChanged: (bool value) {
                   context
                       .read<BattleScenarioBloc>()
                       .add(BattleScenarioEvent.updateAttackingLegion(state.copyWith(surpriseAttack: value)));

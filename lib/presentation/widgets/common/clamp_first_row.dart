@@ -2,9 +2,7 @@ import 'package:flutter/widgets.dart';
 
 class ClampFirstRow extends StatelessWidget {
   const ClampFirstRow({
-    super.key,
-    required this.firstChild,
-    required this.children,
+    required this.firstChild, required this.children, super.key,
     this.flex = 1,
     this.minWidth = 0.0,
     this.maxWidth = double.infinity,
@@ -19,16 +17,16 @@ class ClampFirstRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
-      builder: (context, constraints) {
+      builder: (BuildContext context, BoxConstraints constraints) {
         return Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
+          children: <Widget>[
             SizedBox(
               width: (constraints.maxWidth / flex).clamp(minWidth, maxWidth),
               child: firstChild,
             ),
             ...children.map(
-              (child) => Flexible(
+              (Widget child) => Flexible(
                 flex: flex,
                 child: child,
               ),

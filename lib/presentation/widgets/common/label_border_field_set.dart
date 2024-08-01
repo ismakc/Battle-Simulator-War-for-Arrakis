@@ -2,11 +2,7 @@ import 'package:flutter/material.dart';
 
 class LabeledBorderFieldset extends StatelessWidget {
   const LabeledBorderFieldset({
-    super.key,
-    required this.label,
-    required this.borderColor,
-    required this.textColor,
-    required this.child,
+    required this.label, required this.borderColor, required this.textColor, required this.child, super.key,
   });
 
   final String label;
@@ -17,7 +13,7 @@ class LabeledBorderFieldset extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Stack(
-      children: [
+      children: <Widget>[
         Container(
           margin: const EdgeInsets.only(top: 6.0),
           padding: const EdgeInsets.only(top: 15.0, bottom: 5.0, left: 8.0, right: 8.0),

@@ -1,49 +1,56 @@
 import 'dart:math' as math;
 
-import 'package:bswfa/domain/battle_scenario.dart';
-import 'package:bswfa/domain/battle_statistic.dart';
-import 'package:bswfa/domain/die.dart';
+import 'package:bswfa/domain/battle/battle_scenario.dart';
+import 'package:bswfa/domain/battle/battle_statistic.dart';
+import 'package:bswfa/domain/roll/die.dart';
+import 'package:bswfa/service/battle_hits_calculator.dart';
 import 'package:bswfa/service/tree/battle_node_state.dart';
 import 'package:bswfa/service/tree/battle_tree_dice_permutator.dart';
 import 'package:bswfa/service/tree/battle_tree_processor.dart';
+import 'package:bswfa/service/tree/cache.dart';
 import 'package:bswfa/service/tree/node.dart';
 
 class BattleStatisticCalculator {
-  BattleStatisticCalculator._(); // Private constructor to prevent instantiation
+  BattleStatisticCalculator._();
 
-  static BattleStatistic createBattleStatistic(BattleScenario battleScenario) {
-    final BattleTreeDicePermutator permutator = BattleTreeDicePermutator(BattleTreeProcessor(battleScenario));
+  static BattleStatistic calc(BattleScenario scenario) {
+    final BattleHitsCalculator hitsCalculator = BattleHitsCalculator.instance;
+    final Cache<int, BattleNodeState> cache = Cache<int, BattleNodeState>.create();
+    final BattleTreeProcessor battleTreeProcessor = BattleTreeProcessor(scenario, hitsCalculator, cache);
+    final BattleTreeDicePermutator permutator = BattleTreeDicePermutator(battleTreeProcessor);
+
     final Node<BattleNodeState> battleTree = permutator.createBattleTree();
     final BattleNodeState finalState = battleTree.value;
 
-    final double occurrences = totalOccurrences(battleScenario);
-    final attackerExpectedHits = calculateAttackerExpectedHits(finalState, occurrences);
-    final double attackerStdDeviationHits = calculateAttackerStdDevHits(finalState, attackerExpectedHits, occurrences);
-    final double defenderExpectedHits = calculateDefenderExpectedHits(finalState, occurrences);
-    final double defenderStdDeviationHits = calculateDefenderStdDevHits(finalState, defenderExpectedHits, occurrences);
+    final int occurrences = totalOccurrences(scenario);
 
-    return BattleStatistic.empty.copyWith(
-      battleScenario: battleScenario,
-      attackerHits: attackerExpectedHits,
-      squaredAttackerHits: attackerStdDeviationHits,
-      defenderHits: defenderExpectedHits,
-      squaredDefenderHits: defenderStdDeviationHits,
+    final double attackerExpectedHits = calcAttackerExpectedHits(finalState, occurrences);
+    final double attackerStdDeviationHits = calcAttackerStdDevHits(finalState, attackerExpectedHits, occurrences);
+
+    final double defenderExpectedHits = calcDefenderExpectedHits(finalState, occurrences);
+    final double defenderStdDeviationHits = calcDefenderStdDevHits(finalState, defenderExpectedHits, occurrences);
+
+    return BattleStatistic(
+      attackerExpectedHits: attackerExpectedHits,
+      attackerStdDeviationHits: attackerStdDeviationHits,
+      defenderExpectedHits: defenderExpectedHits,
+      defenderStdDeviationHits: defenderStdDeviationHits,
     );
   }
 
-  static double calculateAttackerExpectedHits(BattleNodeState finalState, double occurrences) {
-    final double attackerHits = finalState.battleStatistic.attackerHits;
+  static double calcAttackerExpectedHits(BattleNodeState finalState, int occurrences) {
+    final int attackerHits = finalState.accumulator.attackerHits;
     final double result = attackerHits / occurrences;
     return double.parse(result.toStringAsFixed(2));
   }
 
-  static double calculateAttackerStdDevHits(
+  static double calcAttackerStdDevHits(
     BattleNodeState finalState,
     double attackerExpectedHits,
-    double occurrences,
+    int occurrences,
   ) {
-    final double attackerHits = finalState.battleStatistic.attackerHits;
-    final double squaredAttackerHits = finalState.battleStatistic.squaredAttackerHits;
+    final int attackerHits = finalState.accumulator.attackerHits;
+    final int squaredAttackerHits = finalState.accumulator.squaredAttackerHits;
     final double result = (squaredAttackerHits +
             occurrences * (attackerExpectedHits * attackerExpectedHits) -
             2 * attackerExpectedHits * attackerHits) /
@@ -51,19 +58,19 @@ class BattleStatisticCalculator {
     return double.parse(result.toStringAsFixed(2));
   }
 
-  static double calculateDefenderExpectedHits(BattleNodeState finalState, double occurrences) {
-    final double defenderHits = finalState.battleStatistic.defenderHits;
+  static double calcDefenderExpectedHits(BattleNodeState finalState, int occurrences) {
+    final int defenderHits = finalState.accumulator.defenderHits;
     final double result = defenderHits / occurrences;
     return double.parse(result.toStringAsFixed(2));
   }
 
-  static double calculateDefenderStdDevHits(
+  static double calcDefenderStdDevHits(
     BattleNodeState finalState,
     double defenderExpectedHits,
-    double occurrences,
+    int occurrences,
   ) {
-    final double defenderHits = finalState.battleStatistic.defenderHits;
-    final double squaredDefenderHits = finalState.battleStatistic.squaredDefenderHits;
+    final int defenderHits = finalState.accumulator.defenderHits;
+    final int squaredDefenderHits = finalState.accumulator.squaredDefenderHits;
     final double result = (squaredDefenderHits +
             occurrences * (defenderExpectedHits * defenderExpectedHits) -
             2 * defenderExpectedHits * defenderHits) /
@@ -71,12 +78,12 @@ class BattleStatisticCalculator {
     return double.parse(result.toStringAsFixed(2));
   }
 
-  static double totalOccurrences(BattleScenario battleScenario) {
+  static int totalOccurrences(BattleScenario battleScenario) {
     return math
         .pow(
           Die.faces.length,
           battleScenario.attackingLegion.diceCount + battleScenario.defendingLegion.diceCount,
         )
-        .toDouble();
+        .toInt();
   }
 }

@@ -1,18 +1,30 @@
 include: package:flutter_lints/flutter.yaml
-
 analyzer:
   errors:
     invalid_annotation_target: ignore
   exclude:
-    - '**/*.config.dart'
     - '**/*.freezed.dart'
-    - '**/*.g.dart'
-    - '**/*.gen.dart'
-    - '**/*.gr.dart'
 
 linter:
   rules:
+    - always_put_control_body_on_new_line
+    - always_put_required_named_parameters_first
+    - always_specify_types
+    - always_use_package_imports
+
+    - avoid_escaping_inner_quotes
+    - avoid_final_parameters
+    - avoid_multiple_declarations_per_line
+    - avoid_type_to_string
+
+    - join_return_with_assignment
+    - no_self_assignments
+    - prefer_void_to_null
     - require_trailing_commas
+
+    - unnecessary_lambdas
+    - unnecessary_statements
+    - use_enums
 
     - prefer_collection_literals
     - prefer_final_fields
@@ -21,6 +33,7 @@ linter:
 
     - sized_box_for_whitespace
     - use_decorated_box
+    - use_colored_box
 
     - unnecessary_parenthesis
     - unnecessary_await_in_return
