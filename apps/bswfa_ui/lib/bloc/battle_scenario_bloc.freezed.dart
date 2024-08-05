@@ -92,8 +92,6 @@ abstract class _$$UpdateAttackingLegionImplCopyWith<$Res> {
       __$$UpdateAttackingLegionImplCopyWithImpl<$Res>;
   @useResult
   $Res call({AttackingLegion attackingLegion});
-
-  $AttackingLegionCopyWith<$Res> get attackingLegion;
 }
 
 /// @nodoc
@@ -115,14 +113,6 @@ class __$$UpdateAttackingLegionImplCopyWithImpl<$Res>
           : attackingLegion // ignore: cast_nullable_to_non_nullable
               as AttackingLegion,
     ));
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $AttackingLegionCopyWith<$Res> get attackingLegion {
-    return $AttackingLegionCopyWith<$Res>(_value.attackingLegion, (value) {
-      return _then(_value.copyWith(attackingLegion: value));
-    });
   }
 }
 
@@ -249,8 +239,6 @@ abstract class _$$UpdateDefendingLegionImplCopyWith<$Res> {
       __$$UpdateDefendingLegionImplCopyWithImpl<$Res>;
   @useResult
   $Res call({DefendingLegion defendingLegion});
-
-  $DefendingLegionCopyWith<$Res> get defendingLegion;
 }
 
 /// @nodoc
@@ -272,14 +260,6 @@ class __$$UpdateDefendingLegionImplCopyWithImpl<$Res>
           : defendingLegion // ignore: cast_nullable_to_non_nullable
               as DefendingLegion,
     ));
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $DefendingLegionCopyWith<$Res> get defendingLegion {
-    return $DefendingLegionCopyWith<$Res>(_value.defendingLegion, (value) {
-      return _then(_value.copyWith(defendingLegion: value));
-    });
   }
 }
 
@@ -526,8 +506,6 @@ abstract class $BattleScenarioStateCopyWith<$Res> {
       _$BattleScenarioStateCopyWithImpl<$Res, BattleScenarioState>;
   @useResult
   $Res call({BattleScenario battleScenario});
-
-  $BattleScenarioCopyWith<$Res> get battleScenario;
 }
 
 /// @nodoc
@@ -552,14 +530,6 @@ class _$BattleScenarioStateCopyWithImpl<$Res, $Val extends BattleScenarioState>
               as BattleScenario,
     ) as $Val);
   }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $BattleScenarioCopyWith<$Res> get battleScenario {
-    return $BattleScenarioCopyWith<$Res>(_value.battleScenario, (value) {
-      return _then(_value.copyWith(battleScenario: value) as $Val);
-    });
-  }
 }
 
 /// @nodoc
@@ -571,9 +541,6 @@ abstract class _$$BattleScenarioStateImplCopyWith<$Res>
   @override
   @useResult
   $Res call({BattleScenario battleScenario});
-
-  @override
-  $BattleScenarioCopyWith<$Res> get battleScenario;
 }
 
 /// @nodoc

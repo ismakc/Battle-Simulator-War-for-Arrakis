@@ -1,22 +1,22 @@
 class Node<T> {
-  Node(this.value) : children = <Node<T>>[];
+  Node._(this._value) : _children = <Node<T>>[];
 
-  static const int defaultNodeInitialCapacity = 6;
-  
-  final List<Node<T>> children;
-  T value;
+  Node.newNode(T value) : this._(value);
 
-  static Node<T> newNode<T>(T value) {
-    return Node<T>(value);
-  }
+  final List<Node<T>> _children;
+  T _value;
 
-  Node<T> addNodeChild(T childValue) {
-    final Node<T> childNode = Node.newNode(childValue);
-    children.add(childNode);
+  List<Node<T>> get children => List<Node<T>>.unmodifiable(_children);
+
+  T get value => _value;
+
+  Node<T> addChild(T childValue) {
+    final Node<T> childNode = Node<T>.newNode(childValue);
+    _children.add(childNode);
     return childNode;
   }
 
-  void updateNodeValue(T newValue) {
-    value = newValue;
+  void updateValue(T newValue) {
+    _value = newValue;
   }
 }

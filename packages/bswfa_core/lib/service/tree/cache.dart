@@ -1,19 +1,19 @@
-Cache<K, V> _newCacheInstance<K, V>() {
+Cache<K, V> _createNewCacheInstance<K, V>() {
   return MemoizationCache<K, V>();
 }
 
-abstract class Cache<K, V> {
-  factory Cache.create() => _newCacheInstance<K, V>();
+sealed class Cache<K, V> {
+  factory Cache.create() => _createNewCacheInstance<K, V>();
 
   V? get(K key);
 
-  V put(K key, V value);
+  void put(K key, V? value);
 
-  bool containsKey(K key);
+  bool hasKey(K key);
 }
 
 class MemoizationCache<K, V> implements Cache<K, V> {
-  final Map<K, V> _cache = <K, V>{};
+  final Map<K, V?> _cache = <K, V?>{};
 
   @override
   V? get(K key) {
@@ -21,13 +21,12 @@ class MemoizationCache<K, V> implements Cache<K, V> {
   }
 
   @override
-  V put(K key, V value) {
+  void put(K key, V? value) {
     _cache[key] = value;
-    return value;
   }
 
   @override
-  bool containsKey(K key) {
+  bool hasKey(K key) {
     return _cache.containsKey(key);
   }
 }
@@ -39,12 +38,10 @@ class NopCache<K, V> implements Cache<K, V> {
   }
 
   @override
-  V put(K key, V value) {
-    return value;
-  }
+  void put(K key, V? value) {}
 
   @override
-  bool containsKey(K key) {
+  bool hasKey(K key) {
     return false;
   }
 }

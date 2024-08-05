@@ -1,18 +1,27 @@
-import 'package:bswfa_core/domain/legion/attacking_legion.dart';
-import 'package:bswfa_core/domain/legion/defending_legion.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:bswfa_core/domain/legion/legion.dart';
 
-part 'battle_scenario.freezed.dart';
+class BattleScenario {
+  const BattleScenario({
+    required this.attacker,
+    required this.defender,
+  });
 
-@freezed
-class BattleScenario with _$BattleScenario {
-  const factory BattleScenario({
-    required AttackingLegion attackingLegion,
-    required DefendingLegion defendingLegion,
-  }) = _BattleScenario;
+  const BattleScenario.empty()
+      : this(
+          attacker: const AttackingLegion.empty(),
+          defender: const DefendingLegion.empty(),
+        );
 
-  static const BattleScenario defaultValues = BattleScenario(
-    attackingLegion: AttackingLegion.defaultValues,
-    defendingLegion: DefendingLegion.defaultValues,
-  );
+  final AttackingLegion attacker;
+  final DefendingLegion defender;
+
+  BattleScenario copyWith({
+    AttackingLegion? attacker,
+    DefendingLegion? defender,
+  }) {
+    return BattleScenario(
+      attacker: attacker ?? this.attacker,
+      defender: defender ?? this.defender,
+    );
+  }
 }

@@ -33,7 +33,6 @@ $newVersion = Read-Host "Introduce la nueva versión"
 # Compilar el paquete Dart ubicado en packages/bswfa_core
 cd $corePackagePath
 dart pub get
-dart run build_runner build --delete-conflicting-outputs
 
 # Continuar con el proceso de construcción de la aplicación
 cd (Join-Path $projectRoot "apps\bswfa_ui")

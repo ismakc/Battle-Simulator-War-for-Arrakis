@@ -13,28 +13,30 @@ class BattleTreeProcessor {
 
   BattleNodeState processLeafState(BattleNodeState state) {
     final (int attackerHits, int defenderHits) = hitsCalculator.calculateHits(scenario, state.battleDiceRoll);
-    final BattleNodeState updatedState = state.withAccumulatedHits(
-      BattleAccumulatedHits(
+    final BattleNodeState updatedState = state.copyWith(
+      accumulator: BattleHitsAccumulator(
         attackerHits: attackerHits,
         defenderHits: defenderHits,
         squaredAttackerHits: attackerHits * attackerHits,
         squaredDefenderHits: defenderHits * defenderHits,
       ),
     );
-    return memo.put(state.battleDiceRoll.fullDiceRollBitMask(), updatedState);
+    memo.put(state.battleDiceRoll.combinedBitMask, updatedState);
+    return updatedState;
   }
 
   BattleNodeState updateNodeState(BattleNodeState state, List<BattleNodeState> childStates) {
-    final BattleAccumulatedHits newAccumulatedHits = childStates
+    final BattleHitsAccumulator newAccumulatedHits = childStates
         .map((BattleNodeState e) => e.accumulator)
-        .reduce((BattleAccumulatedHits a, BattleAccumulatedHits b) => a.add(b));
-    final BattleNodeState updatedState = state.withAccumulatedHits(newAccumulatedHits);
-    return memo.put(state.battleDiceRoll.fullDiceRollBitMask(), updatedState);
+        .reduce((BattleHitsAccumulator a, BattleHitsAccumulator b) => a.accumulate(b));
+    final BattleNodeState updatedState = state.copyWith(accumulator: newAccumulatedHits);
+    memo.put(state.battleDiceRoll.combinedBitMask, updatedState);
+    return updatedState;
   }
 
   BattleNodeState? memoization(BattleNodeState state) {
-    if (memo.containsKey(state.battleDiceRoll.fullDiceRollBitMask())) {
-      return memo.get(state.battleDiceRoll.fullDiceRollBitMask());
+    if (memo.hasKey(state.battleDiceRoll.combinedBitMask)) {
+      return memo.get(state.battleDiceRoll.combinedBitMask);
     } else {
       return null;
     }

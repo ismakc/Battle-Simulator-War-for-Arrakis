@@ -1,23 +1,27 @@
 import 'package:bswfa_core/domain/roll/dice_roll.dart';
 
 class BattleDiceRoll {
-  const BattleDiceRoll(this.attackerDiceRoll, this.defenderDiceRoll);
+  const BattleDiceRoll(this.attackerRoll, this.defenderRoll);
 
-  final DiceRoll attackerDiceRoll;
-  final DiceRoll defenderDiceRoll;
+  const BattleDiceRoll.empty()
+      : attackerRoll = const DiceRoll.empty(),
+        defenderRoll = const DiceRoll.empty();
 
-  static const BattleDiceRoll defaultValues = BattleDiceRoll(DiceRoll.defaultValues, DiceRoll.defaultValues);
+  final DiceRoll attackerRoll;
+  final DiceRoll defenderRoll;
 
-  BattleDiceRoll withAttackerDiceRoll(DiceRoll diceRoll) {
-    return BattleDiceRoll(diceRoll, defenderDiceRoll);
+  /// Returns the concatenated bitMask of [attackerRoll] and [defenderRoll].
+  int get combinedBitMask {
+    return (attackerRoll.bitmask << 16) | defenderRoll.bitmask;
   }
 
-  BattleDiceRoll withDefenderDiceRoll(DiceRoll diceRoll) {
-    return BattleDiceRoll(attackerDiceRoll, diceRoll);
-  }
-
-  int fullDiceRollBitMask() {
-    // Returns the concatenated bitMask of attackerDiceRoll and defenderDiceRoll
-    return (attackerDiceRoll.bitmask << 16) | defenderDiceRoll.bitmask;
+  BattleDiceRoll copyWith({
+    DiceRoll? attackerDiceRoll,
+    DiceRoll? defenderDiceRoll,
+  }) {
+    return BattleDiceRoll(
+      attackerDiceRoll ?? attackerRoll,
+      defenderDiceRoll ?? defenderRoll,
+    );
   }
 }

@@ -25,16 +25,16 @@ class BattleStatisticCalculator {
     final int occurrences = totalOccurrences(scenario);
 
     final double attackerExpectedHits = calcAttackerExpectedHits(finalState, occurrences);
-    final double attackerStdDeviationHits = calcAttackerStdDevHits(finalState, attackerExpectedHits, occurrences);
+    final double attackerStdDevHits = calcAttackerStdDevHits(finalState, attackerExpectedHits, occurrences);
 
     final double defenderExpectedHits = calcDefenderExpectedHits(finalState, occurrences);
-    final double defenderStdDeviationHits = calcDefenderStdDevHits(finalState, defenderExpectedHits, occurrences);
+    final double defenderStdDevHits = calcDefenderStdDevHits(finalState, defenderExpectedHits, occurrences);
 
     return BattleStatistic(
       attackerExpectedHits: attackerExpectedHits,
-      attackerStdDeviationHits: attackerStdDeviationHits,
+      attackerStdDevHits: attackerStdDevHits,
       defenderExpectedHits: defenderExpectedHits,
-      defenderStdDeviationHits: defenderStdDeviationHits,
+      defenderStdDevHits: defenderStdDevHits,
     );
   }
 
@@ -82,7 +82,7 @@ class BattleStatisticCalculator {
     return math
         .pow(
           Die.faces.length,
-          battleScenario.attackingLegion.diceCount + battleScenario.defendingLegion.diceCount,
+          battleScenario.attacker.diceCount + battleScenario.defender.diceCount,
         )
         .toInt();
   }

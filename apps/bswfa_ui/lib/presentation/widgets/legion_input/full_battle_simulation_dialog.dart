@@ -37,7 +37,7 @@ class FullBattleSimulationPopupDialog extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    _buildAlignedText(context, 'Rounds: ', '${battleResult.playedCombatRounds} \u{23F3}'),
+                    _buildAlignedText(context, 'Rounds: ', '${battleResult.rounds} \u{23F3}'),
                     _buildAlignedText(
                       context,
                       'Att.Hits: ',

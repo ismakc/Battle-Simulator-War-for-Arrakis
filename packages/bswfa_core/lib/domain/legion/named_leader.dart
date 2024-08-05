@@ -18,5 +18,6 @@ enum NamedLeader {
   final int attack;
   final int defense;
 
+  /// Returns a string representation of the attack and defense
   String get displayAsString => "$attack/$defense";
 }

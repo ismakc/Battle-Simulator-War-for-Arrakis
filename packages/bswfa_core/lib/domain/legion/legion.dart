@@ -1,154 +1,53 @@
 import 'dart:math';
 
-import 'package:bswfa_core/domain/legion/attacking_legion.dart';
-import 'package:bswfa_core/domain/legion/defending_legion.dart';
 import 'package:bswfa_core/domain/legion/named_leader.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'legion.freezed.dart';
+part 'attacking_legion.dart';
+part 'defending_legion.dart';
 
-@freezed
-class Legion with _$Legion {
-  const Legion._();
+sealed class Legion {
+  const Legion({
+    required this.genericLeaders,
+    required this.regularUnits,
+    required this.eliteUnits,
+    required this.specialEliteUnits,
+    required this.usedCards,
+    required this.namedLeaders,
+  });
 
-  const factory Legion({
-    @Default(0) int genericLeaders,
-    @Default(0) int regularUnits,
-    @Default(0) int eliteUnits,
-    @Default(0) int specialEliteUnits,
-    @Default(0) int usedCards,
-    @Default(<NamedLeader>[]) List<NamedLeader> namedLeaders,
-  }) = _Legion;
+  final int genericLeaders;
+  final int regularUnits;
+  final int eliteUnits;
+  final int specialEliteUnits;
+  final int usedCards;
+  final List<NamedLeader> namedLeaders;
 
-  factory Legion.fromAttackingLegion(AttackingLegion attackingLegion) {
-    return Legion(
-      genericLeaders: attackingLegion.genericLeaders,
-      regularUnits: attackingLegion.regularUnits,
-      eliteUnits: attackingLegion.eliteUnits,
-      specialEliteUnits: attackingLegion.specialEliteUnits,
-      usedCards: attackingLegion.usedCards,
-      namedLeaders: List<NamedLeader>.from(attackingLegion.namedLeaders),
-    );
-  }
+  /// Only useful for DefendingLegion. This variable is always zero for AttackingLegion
+  int get _settlementLevel;
 
-  factory Legion.fromDefendingLegion(DefendingLegion defendingLegion) {
-    return Legion(
-      genericLeaders: defendingLegion.genericLeaders,
-      regularUnits: defendingLegion.regularUnits,
-      eliteUnits: defendingLegion.eliteUnits,
-      specialEliteUnits: defendingLegion.specialEliteUnits,
-      usedCards: defendingLegion.usedCards,
-      namedLeaders: List<NamedLeader>.from(defendingLegion.namedLeaders),
-    );
-  }
+  /// Only useful for AttackingLegion. This variable is always false for DefendingLegion
+  bool get _surpriseAttack;
 
-  static const Legion defaultValues = Legion();
+  int get totalUnits => regularUnits + eliteUnits + specialEliteUnits;
 
-  AttackingLegion overwriteAttackingLegionWithLegion(
-    AttackingLegion attackingLegion,
-  ) {
-    return attackingLegion.copyWith(
-      genericLeaders: genericLeaders,
-      regularUnits: regularUnits,
-      eliteUnits: eliteUnits,
-      specialEliteUnits: specialEliteUnits,
-      usedCards: usedCards,
-      namedLeaders: List<NamedLeader>.from(namedLeaders),
-    );
-  }
+  int get totalLeaders => genericLeaders + namedLeaders.length;
 
-  DefendingLegion overwriteDefendingLegionWithLegion(DefendingLegion defendingLegion) {
-    return defendingLegion.copyWith(
-      genericLeaders: genericLeaders,
-      regularUnits: regularUnits,
-      eliteUnits: eliteUnits,
-      specialEliteUnits: specialEliteUnits,
-      usedCards: usedCards,
-      namedLeaders: List<NamedLeader>.from(namedLeaders),
-    );
-  }
+  int get lifeCount => regularUnits + eliteUnits * 2 + specialEliteUnits * 2 + totalLeaders;
 
-  int get diceCount {
-    return min(6, regularUnits + eliteUnits + specialEliteUnits + usedCards);
-  }
+  int get diceCount => min(6, totalUnits + usedCards + _settlementLevel);
 
-  int get lifeCount {
-    return regularUnits + eliteUnits * 2 + specialEliteUnits * 2 + genericLeaders + namedLeaders.length;
-  }
+  int get unlimitedDiceCount => totalUnits + usedCards + _settlementLevel;
 
-  int get totalUnits {
-    return regularUnits + eliteUnits + specialEliteUnits;
-  }
+  int get starsCount => min(diceCount + (_surpriseAttack ? 1 : 0), totalLeaders);
 
-  int get totalLeaders {
-    return genericLeaders + namedLeaders.length;
-  }
+  int get unlimitedStarsCount => totalLeaders;
 
-  Legion calculateOptimalLoss() {
-    final Map<String, Legion?> damagedLegions = <String, Legion?>{
-      'minusLeader': genericLeaders == 0 ? null : copyWith(genericLeaders: genericLeaders - 1),
-      'minusRegular': regularUnits == 0 ? null : copyWith(regularUnits: regularUnits - 1),
-      'minusElite': eliteUnits == 0 ? null : copyWith(regularUnits: regularUnits + 1, eliteUnits: eliteUnits - 1),
-      'minusSpecial': specialEliteUnits == 0
-          ? null
-          : copyWith(regularUnits: regularUnits + 1, specialEliteUnits: specialEliteUnits - 1),
-      'minusNamed': namedLeaders.isEmpty
-          ? null
-          : copyWith(
-              namedLeaders: List<NamedLeader>.from(namedLeaders)
-                ..sort(
-                  (NamedLeader a, NamedLeader b) =>
-                      b.attack != a.attack ? b.attack.compareTo(a.attack) : b.defense.compareTo(a.defense),
-                )
-                ..removeLast(),
-            ),
-    };
-
-    MapEntry<String, Legion?>? selectedEntry;
-    int? maxValue;
-
-    for (final MapEntry<String, Legion?> entry in damagedLegions.entries) {
-      final Legion? legion = entry.value;
-      if (legion == null) {
-        continue;
-      }
-
-      final int diceCount = legion.diceCount;
-      final bool shouldUpdate = maxValue == null ||
-          diceCount > maxValue ||
-          (diceCount == maxValue && shouldReplaceSelectedEntry(selectedEntry, entry, diceCount));
-
-      if (shouldUpdate) {
-        selectedEntry = entry;
-        maxValue = diceCount;
-      }
-    }
-
-    return selectedEntry?.value ?? Legion.defaultValues;
-  }
-
-  bool shouldReplaceSelectedEntry(
-    MapEntry<String, Legion?>? selectedEntry,
-    MapEntry<String, Legion?> entry,
-    int diceCount,
-  ) {
-    if (selectedEntry == null) {
-      return true;
-    }
-
-    switch (entry.key) {
-      case 'minusLeader':
-        return genericLeaders > 0 && (genericLeaders + namedLeaders.length) > diceCount;
-      case 'minusElite':
-        return selectedEntry.key != 'minusElite';
-      case 'minusSpecial':
-        return selectedEntry.key != 'minusElite' && selectedEntry.key != 'minusSpecial';
-      case 'minusNamed':
-        return totalUnits == 1 || selectedEntry.key != 'minusRegular';
-      case 'minusRegular':
-        return selectedEntry.key != 'minusRegular';
-      default:
-        return false;
-    }
-  }
+  Legion copyWith({
+    int? genericLeaders,
+    int? regularUnits,
+    int? eliteUnits,
+    int? specialEliteUnits,
+    int? usedCards,
+    List<NamedLeader>? namedLeaders,
+  });
 }

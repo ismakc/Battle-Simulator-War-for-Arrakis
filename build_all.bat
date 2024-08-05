@@ -6,7 +6,7 @@ if "%1"=="-w" (
     set watch_mode=true
 )
 
-set packages=packages\bswfa_core apps\bswfa_ui
+set packages=apps\bswfa_ui
 
 for %%p in (%packages%) do (
     echo Processing %%p...

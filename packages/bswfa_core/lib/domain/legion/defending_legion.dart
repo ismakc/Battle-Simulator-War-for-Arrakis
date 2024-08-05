@@ -1,51 +1,53 @@
-import 'dart:math';
+part of 'legion.dart';
 
-import 'package:bswfa_core/domain/legion/named_leader.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
+class DefendingLegion extends Legion {
+  const DefendingLegion({
+    required super.genericLeaders,
+    required super.regularUnits,
+    required super.eliteUnits,
+    required super.specialEliteUnits,
+    required super.usedCards,
+    required super.namedLeaders,
+    required this.settlementLevel,
+  });
 
-part 'defending_legion.freezed.dart';
+  const DefendingLegion.empty()
+      : this(
+          genericLeaders: 0,
+          regularUnits: 0,
+          eliteUnits: 0,
+          specialEliteUnits: 0,
+          usedCards: 0,
+          namedLeaders: const <NamedLeader>[],
+          settlementLevel: 0,
+        );
 
-@freezed
-class DefendingLegion with _$DefendingLegion {
-  const DefendingLegion._();
+  final int settlementLevel;
 
-  const factory DefendingLegion({
-    @Default(0) int genericLeaders,
-    @Default(0) int regularUnits,
-    @Default(0) int eliteUnits,
-    @Default(0) int specialEliteUnits,
-    @Default(0) int usedCards,
-    @Default(<NamedLeader>[]) List<NamedLeader> namedLeaders,
-    @Default(0) int settlementLevel,
-  }) = _DefendingLegion;
+  @override
+  bool get _surpriseAttack => false;
 
-  static const DefendingLegion defaultValues = DefendingLegion();
+  @override
+  int get _settlementLevel => settlementLevel;
 
-  int get diceCount {
-    return min(6, regularUnits + eliteUnits + specialEliteUnits + usedCards + settlementLevel);
-  }
-
-  int get maxStarsCount {
-    return min(diceCount, genericLeaders + namedLeaders.length);
-  }
-
-  int get unlimitedMaxStarsCount {
-    return genericLeaders + namedLeaders.length;
-  }
-
-  int get lifeCount {
-    return regularUnits + eliteUnits * 2 + specialEliteUnits * 2 + genericLeaders + namedLeaders.length;
-  }
-
-  int get totalUnits {
-    return regularUnits + eliteUnits + specialEliteUnits;
-  }
-
-  int get totalLeaders {
-    return genericLeaders + namedLeaders.length;
-  }
-
-  int get unlimitedMaxDiceCount {
-    return regularUnits + eliteUnits + specialEliteUnits + usedCards + settlementLevel;
+  @override
+  DefendingLegion copyWith({
+    int? genericLeaders,
+    int? regularUnits,
+    int? eliteUnits,
+    int? specialEliteUnits,
+    int? usedCards,
+    List<NamedLeader>? namedLeaders,
+    int? settlementLevel,
+  }) {
+    return DefendingLegion(
+      genericLeaders: genericLeaders ?? this.genericLeaders,
+      regularUnits: regularUnits ?? this.regularUnits,
+      eliteUnits: eliteUnits ?? this.eliteUnits,
+      specialEliteUnits: specialEliteUnits ?? this.specialEliteUnits,
+      usedCards: usedCards ?? this.usedCards,
+      namedLeaders: namedLeaders ?? List<NamedLeader>.unmodifiable(this.namedLeaders),
+      settlementLevel: settlementLevel ?? this.settlementLevel,
+    );
   }
 }

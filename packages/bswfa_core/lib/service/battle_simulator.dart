@@ -1,10 +1,10 @@
 import 'package:bswfa_core/domain/battle/battle_result.dart';
 import 'package:bswfa_core/domain/battle/battle_scenario.dart';
 import 'package:bswfa_core/domain/battle/battle_statistic.dart';
-import 'package:bswfa_core/domain/legion/attacking_legion.dart';
-import 'package:bswfa_core/domain/legion/defending_legion.dart';
 import 'package:bswfa_core/domain/legion/legion.dart';
+import 'package:bswfa_core/domain/legion/named_leader.dart';
 import 'package:bswfa_core/service/battle_statistic_calculator.dart';
+import 'package:bswfa_core/service/legion_casualty_calculator.dart';
 
 class BattleSimulator {
   BattleSimulator._();
@@ -16,7 +16,7 @@ class BattleSimulator {
   BattleResult simulateSingleRound(BattleScenario battleScenario) {
     final BattleStatistic battleStatistic = BattleStatisticCalculator.calc(battleScenario);
     return BattleResult(
-      playedCombatRounds: 1,
+      rounds: 1,
       statistic: battleStatistic,
       scenario: battleScenario,
     );
@@ -36,52 +36,110 @@ class BattleSimulator {
       totalDefenderExpectedHits += result.statistic.defenderExpectedHits;
       if (rounds == 2) {
         battleScenarioForSeveralRounds = battleScenarioForSeveralRounds.copyWith(
-          attackingLegion: battleScenarioForSeveralRounds.attackingLegion.copyWith(usedCards: 0, surpriseAttack: false),
-          defendingLegion: battleScenarioForSeveralRounds.defendingLegion.copyWith(
+          attacker: battleScenarioForSeveralRounds.attacker.copyWith(usedCards: 0, surpriseAttack: false),
+          defender: battleScenarioForSeveralRounds.defender.copyWith(
             usedCards: 0,
           ),
         );
       }
-      final AttackingLegion damagedAttackingLegion = _updateLegionAfterAttack(
-        Legion.fromAttackingLegion(battleScenarioForSeveralRounds.attackingLegion),
-        result.statistic.defenderExpectedHits,
-        battleScenarioForSeveralRounds.defendingLegion.settlementLevel > 0,
-      ).overwriteAttackingLegionWithLegion(battleScenarioForSeveralRounds.attackingLegion);
-
-      final DefendingLegion damagedDefendingLegion = _updateLegionAfterAttack(
-        Legion.fromDefendingLegion(battleScenarioForSeveralRounds.defendingLegion),
-        result.statistic.attackerExpectedHits,
-        false,
-      ).overwriteDefendingLegionWithLegion(battleScenarioForSeveralRounds.defendingLegion);
-
-      battleScenarioForSeveralRounds = battleScenarioForSeveralRounds.copyWith(
-        attackingLegion: damagedAttackingLegion,
-        defendingLegion: damagedDefendingLegion,
+      final AttackingLegion damagedAttackingLegion = battleScenarioForSeveralRounds.attacker.copyWith(
+        genericLeaders: _updateLegionAfterAttack(
+          battleScenarioForSeveralRounds.attacker,
+          result.statistic.defenderExpectedHits,
+          battleScenarioForSeveralRounds.defender.settlementLevel > 0,
+        ).genericLeaders,
+        regularUnits: _updateLegionAfterAttack(
+          battleScenarioForSeveralRounds.attacker,
+          result.statistic.defenderExpectedHits,
+          battleScenarioForSeveralRounds.defender.settlementLevel > 0,
+        ).regularUnits,
+        eliteUnits: _updateLegionAfterAttack(
+          battleScenarioForSeveralRounds.attacker,
+          result.statistic.defenderExpectedHits,
+          battleScenarioForSeveralRounds.defender.settlementLevel > 0,
+        ).eliteUnits,
+        specialEliteUnits: _updateLegionAfterAttack(
+          battleScenarioForSeveralRounds.attacker,
+          result.statistic.defenderExpectedHits,
+          battleScenarioForSeveralRounds.defender.settlementLevel > 0,
+        ).specialEliteUnits,
+        usedCards: _updateLegionAfterAttack(
+          battleScenarioForSeveralRounds.attacker,
+          result.statistic.defenderExpectedHits,
+          battleScenarioForSeveralRounds.defender.settlementLevel > 0,
+        ).usedCards,
+        namedLeaders: List<NamedLeader>.from(
+          _updateLegionAfterAttack(
+            battleScenarioForSeveralRounds.attacker,
+            result.statistic.defenderExpectedHits,
+            battleScenarioForSeveralRounds.defender.settlementLevel > 0,
+          ).namedLeaders,
+        ),
       );
 
-      if (battleScenarioForSeveralRounds.attackingLegion.totalUnits == 0 ||
-          battleScenarioForSeveralRounds.defendingLegion.totalUnits == 0 ||
+      final DefendingLegion damagedDefendingLegion = battleScenarioForSeveralRounds.defender.copyWith(
+        genericLeaders: _updateLegionAfterAttack(
+          battleScenarioForSeveralRounds.defender,
+          result.statistic.attackerExpectedHits,
+          false,
+        ).genericLeaders,
+        regularUnits: _updateLegionAfterAttack(
+          battleScenarioForSeveralRounds.defender,
+          result.statistic.attackerExpectedHits,
+          false,
+        ).regularUnits,
+        eliteUnits: _updateLegionAfterAttack(
+          battleScenarioForSeveralRounds.defender,
+          result.statistic.attackerExpectedHits,
+          false,
+        ).eliteUnits,
+        specialEliteUnits: _updateLegionAfterAttack(
+          battleScenarioForSeveralRounds.defender,
+          result.statistic.attackerExpectedHits,
+          false,
+        ).specialEliteUnits,
+        usedCards: _updateLegionAfterAttack(
+          battleScenarioForSeveralRounds.defender,
+          result.statistic.attackerExpectedHits,
+          false,
+        ).usedCards,
+        namedLeaders: List<NamedLeader>.from(
+          _updateLegionAfterAttack(
+            battleScenarioForSeveralRounds.defender,
+            result.statistic.attackerExpectedHits,
+            false,
+          ).namedLeaders,
+        ),
+      );
+
+      battleScenarioForSeveralRounds = battleScenarioForSeveralRounds.copyWith(
+        attacker: damagedAttackingLegion,
+        defender: damagedDefendingLegion,
+      );
+
+      if (battleScenarioForSeveralRounds.attacker.totalUnits == 0 ||
+          battleScenarioForSeveralRounds.defender.totalUnits == 0 ||
           totalAttackerExpectedHits >
-              battleScenarioForSeveralRounds.attackingLegion.totalUnits +
-                  battleScenarioForSeveralRounds.attackingLegion.totalLeaders ||
+              battleScenarioForSeveralRounds.attacker.totalUnits +
+                  battleScenarioForSeveralRounds.attacker.totalLeaders ||
           totalDefenderExpectedHits >
-              battleScenarioForSeveralRounds.defendingLegion.totalUnits +
-                  battleScenarioForSeveralRounds.defendingLegion.totalLeaders) {
+              battleScenarioForSeveralRounds.defender.totalUnits +
+                  battleScenarioForSeveralRounds.defender.totalLeaders) {
         combatEnds = true;
       }
     }
 
     return BattleResult(
-      playedCombatRounds: rounds,
+      rounds: rounds,
       statistic: BattleStatistic(
         attackerExpectedHits: totalAttackerExpectedHits,
-        attackerStdDeviationHits: 0.0,
+        attackerStdDevHits: 0.0,
         defenderExpectedHits: totalDefenderExpectedHits,
-        defenderStdDeviationHits: 0.0,
+        defenderStdDevHits: 0.0,
       ),
       scenario: BattleScenario(
-        attackingLegion: battleScenarioForSeveralRounds.attackingLegion,
-        defendingLegion: battleScenarioForSeveralRounds.defendingLegion,
+        attacker: battleScenarioForSeveralRounds.attacker,
+        defender: battleScenarioForSeveralRounds.defender,
       ),
     );
   }
@@ -94,12 +152,12 @@ class BattleSimulator {
     int i = 1;
     Legion damagedLegion = legion;
     while (i <= expectedHits.round() && damagedLegion.totalUnits > 0) {
-      damagedLegion = damagedLegion.calculateOptimalLoss();
+      damagedLegion = OptimalLegionCasualtyCalculator.instance.calculateOptimalCasualty(legion);
       i++;
     }
 
     if (damagedLegion.totalUnits > 0 && additionalHitToContinue) {
-      damagedLegion = damagedLegion.calculateOptimalLoss();
+      damagedLegion = OptimalLegionCasualtyCalculator.instance.calculateOptimalCasualty(legion);
     }
     return damagedLegion;
   }

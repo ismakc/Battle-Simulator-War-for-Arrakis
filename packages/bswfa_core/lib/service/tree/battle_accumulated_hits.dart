@@ -1,31 +1,44 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
+class BattleHitsAccumulator {
+  const BattleHitsAccumulator({
+    required this.attackerHits,
+    required this.squaredAttackerHits,
+    required this.defenderHits,
+    required this.squaredDefenderHits,
+  });
 
-part 'battle_accumulated_hits.freezed.dart';
+  const BattleHitsAccumulator.empty()
+      : this(
+          attackerHits: 0,
+          squaredAttackerHits: 0,
+          defenderHits: 0,
+          squaredDefenderHits: 0,
+        );
 
-@freezed
-class BattleAccumulatedHits with _$BattleAccumulatedHits {
-  const BattleAccumulatedHits._();
+  final int attackerHits;
+  final int squaredAttackerHits;
+  final int defenderHits;
+  final int squaredDefenderHits;
 
-  const factory BattleAccumulatedHits({
-    required int attackerHits,
-    required int squaredAttackerHits,
-    required int defenderHits,
-    required int squaredDefenderHits,
-  }) = _AccumulatedHits;
-
-  static const BattleAccumulatedHits initialValues = BattleAccumulatedHits(
-    attackerHits: 0,
-    defenderHits: 0,
-    squaredAttackerHits: 0,
-    squaredDefenderHits: 0,
-  );
-
-  BattleAccumulatedHits add(BattleAccumulatedHits val) {
+  BattleHitsAccumulator accumulate(BattleHitsAccumulator other) {
     return copyWith(
-      attackerHits: attackerHits + val.attackerHits,
-      defenderHits: defenderHits + val.defenderHits,
-      squaredAttackerHits: squaredAttackerHits + val.squaredAttackerHits,
-      squaredDefenderHits: squaredDefenderHits + val.squaredDefenderHits,
+      attackerHits: attackerHits + other.attackerHits,
+      squaredAttackerHits: squaredAttackerHits + other.squaredAttackerHits,
+      defenderHits: defenderHits + other.defenderHits,
+      squaredDefenderHits: squaredDefenderHits + other.squaredDefenderHits,
+    );
+  }
+
+  BattleHitsAccumulator copyWith({
+    int? attackerHits,
+    int? squaredAttackerHits,
+    int? defenderHits,
+    int? squaredDefenderHits,
+  }) {
+    return BattleHitsAccumulator(
+      attackerHits: attackerHits ?? this.attackerHits,
+      squaredAttackerHits: squaredAttackerHits ?? this.squaredAttackerHits,
+      defenderHits: defenderHits ?? this.defenderHits,
+      squaredDefenderHits: squaredDefenderHits ?? this.squaredDefenderHits,
     );
   }
 }

@@ -54,14 +54,14 @@ class BattleHistoryItem extends StatelessWidget {
                     _buildRow(
                       label: 'Att.Hits:',
                       hits: battleResult.statistic.attackerExpectedHits,
-                      legion: battleResult.attackingLegion,
+                      legion: battleResult.scenario.attacker,
                       isAttacker: true,
                     ),
                     const SizedBox(height: 3.0),
                     _buildRow(
                       label: 'Def.Hits:',
                       hits: battleResult.statistic.defenderExpectedHits,
-                      legion: battleResult.defendingLegion,
+                      legion: battleResult.scenario.defender,
                       isAttacker: false,
                     ),
                   ],

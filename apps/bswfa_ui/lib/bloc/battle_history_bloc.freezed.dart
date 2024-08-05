@@ -81,8 +81,6 @@ abstract class _$$SimulateBattleImplCopyWith<$Res> {
       __$$SimulateBattleImplCopyWithImpl<$Res>;
   @useResult
   $Res call({BattleScenario battleScenario});
-
-  $BattleScenarioCopyWith<$Res> get battleScenario;
 }
 
 /// @nodoc
@@ -104,14 +102,6 @@ class __$$SimulateBattleImplCopyWithImpl<$Res>
           : battleScenario // ignore: cast_nullable_to_non_nullable
               as BattleScenario,
     ));
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $BattleScenarioCopyWith<$Res> get battleScenario {
-    return $BattleScenarioCopyWith<$Res>(_value.battleScenario, (value) {
-      return _then(_value.copyWith(battleScenario: value));
-    });
   }
 }
 

@@ -1,0 +1,49 @@
+include: package:lints/recommended.yaml
+analyzer:
+  errors:
+    invalid_annotation_target: ignore
+  exclude:
+    - '**/*.freezed.dart'
+
+linter:
+  rules:
+    - always_put_control_body_on_new_line
+    - always_put_required_named_parameters_first
+    - always_specify_types
+    - always_use_package_imports
+
+    - avoid_escaping_inner_quotes
+    - avoid_final_parameters
+    - avoid_multiple_declarations_per_line
+    - avoid_type_to_string
+
+    - join_return_with_assignment
+    - no_self_assignments
+    - prefer_void_to_null
+    - require_trailing_commas
+
+    - unnecessary_lambdas
+    - unnecessary_statements
+    - use_enums
+
+    - prefer_collection_literals
+    - prefer_final_fields
+    - prefer_final_in_for_each
+    - prefer_final_locals
+
+    - sized_box_for_whitespace
+    - use_decorated_box
+    - use_colored_box
+
+    - unnecessary_parenthesis
+    - unnecessary_await_in_return
+    - unnecessary_raw_strings
+
+    - avoid_unnecessary_containers
+    - avoid_redundant_argument_values
+    - avoid_unused_constructor_parameters
+
+    - always_declare_return_types
+
+    - sort_constructors_first
+    - unawaited_futures

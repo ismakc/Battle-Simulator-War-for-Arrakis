@@ -1,40 +1,43 @@
 import 'package:bswfa_core/domain/battle/battle_scenario.dart';
 import 'package:bswfa_core/domain/battle/battle_statistic.dart';
-import 'package:bswfa_core/domain/legion/attacking_legion.dart';
-import 'package:bswfa_core/domain/legion/defending_legion.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'battle_result.freezed.dart';
+class BattleResult {
+  const BattleResult({
+    required this.rounds,
+    required this.scenario,
+    required this.statistic,
+  });
 
-@freezed
-class BattleResult with _$BattleResult {
-  const BattleResult._();
+  const BattleResult.empty()
+      : this(
+          rounds: 0,
+          scenario: const BattleScenario.empty(),
+          statistic: const BattleStatistic.empty(),
+        );
 
-  const factory BattleResult({
-    required int playedCombatRounds,
-    required BattleScenario scenario,
-    required BattleStatistic statistic,
-  }) = _BattleStatistic;
-
-  static const BattleResult defaultValues = BattleResult(
-    playedCombatRounds: 0,
-    scenario: BattleScenario.defaultValues,
-    statistic: BattleStatistic.defaultValues,
-  );
-
-  AttackingLegion get attackingLegion => scenario.attackingLegion;
-
-  DefendingLegion get defendingLegion => scenario.defendingLegion;
+  final int rounds;
+  final BattleScenario scenario;
+  final BattleStatistic statistic;
 
   String winner() {
-    final AttackingLegion attackingLegion = scenario.attackingLegion;
-    final DefendingLegion defendingLegion = scenario.defendingLegion;
-    if (attackingLegion.lifeCount > defendingLegion.lifeCount) {
+    if (scenario.attacker.lifeCount > scenario.defender.lifeCount) {
       return 'Attacker';
-    } else if (attackingLegion.lifeCount < defendingLegion.lifeCount) {
+    } else if (scenario.attacker.lifeCount < scenario.defender.lifeCount) {
       return 'Defender';
     } else {
       return 'Draw';
     }
+  }
+
+  BattleResult copyWith({
+    int? rounds,
+    BattleScenario? scenario,
+    BattleStatistic? statistic,
+  }) {
+    return BattleResult(
+      rounds: rounds ?? this.rounds,
+      scenario: scenario ?? this.scenario,
+      statistic: statistic ?? this.statistic,
+    );
   }
 }

@@ -1,5 +1,5 @@
+import 'package:bswfa_core/domain/legion/legion.dart';
 import 'package:bswfa_ui/bloc/battle_scenario_bloc.dart';
-import 'package:bswfa_core/domain/legion/defending_legion.dart';
 import 'package:bswfa_core/domain/legion/named_leader.dart';
 import 'package:bswfa_ui/presentation/widgets/common/label_border_field_set.dart';
 import 'package:bswfa_ui/presentation/widgets/legion_input/named_leader_input.dart';
@@ -13,11 +13,11 @@ class DefendingLegionInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocSelector<BattleScenarioBloc, BattleScenarioState, DefendingLegion>(
-      selector: (BattleScenarioState state) => state.battleScenario.defendingLegion,
+      selector: (BattleScenarioState state) => state.battleScenario.defender,
       builder: (BuildContext context, DefendingLegion state) {
         return LabeledBorderFieldset(
           label:
-              'Defending Legion ( ${state.diceCount}\u{1F3B2}of ${state.unlimitedMaxDiceCount}/  ${state.maxStarsCount}\u{2B50}of ${state.unlimitedMaxStarsCount}  /  -${state.specialEliteUnits}\u{1F6E1}  /  ${state.lifeCount}\u{2764}\u{FE0F} )',
+              'Defending Legion ( ${state.diceCount}\u{1F3B2}of ${state.unlimitedDiceCount}/  ${state.starsCount}\u{2B50}of ${state.unlimitedStarsCount}  /  -${state.specialEliteUnits}\u{1F6E1}  /  ${state.lifeCount}\u{2764}\u{FE0F} )',
           borderColor: Colors.black87,
           textColor: Colors.black87,
           child: Wrap(

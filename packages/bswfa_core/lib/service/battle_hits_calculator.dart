@@ -14,32 +14,32 @@ class BattleHitsCalculator {
     final BattleStats attackerStats = BattleStats();
     final BattleStats defenderStats = BattleStats();
 
-    attackerStats.accumulateSwordHits(battleDiceRoll.attackerDiceRoll.swordCount);
-    defenderStats.accumulateSwordHits(battleDiceRoll.defenderDiceRoll.swordCount);
+    attackerStats.accumulateSwordHits(battleDiceRoll.attackerRoll.swordCount);
+    defenderStats.accumulateSwordHits(battleDiceRoll.defenderRoll.swordCount);
 
-    attackerStats.accumulateShields(battleDiceRoll.attackerDiceRoll.shieldCount);
-    defenderStats.accumulateShields(battleDiceRoll.defenderDiceRoll.shieldCount);
+    attackerStats.accumulateShields(battleDiceRoll.attackerRoll.shieldCount);
+    defenderStats.accumulateShields(battleDiceRoll.defenderRoll.shieldCount);
 
     attackerStats.accumulateStarHitsAndStarShields(
-      namedLeaders: battleScenario.attackingLegion.namedLeaders,
-      genericLeaders: battleScenario.attackingLegion.genericLeaders,
-      starCount: battleDiceRoll.attackerDiceRoll.starCount + (battleScenario.attackingLegion.surpriseAttack ? 1 : 0),
+      namedLeaders: battleScenario.attacker.namedLeaders,
+      genericLeaders: battleScenario.attacker.genericLeaders,
+      starCount: battleDiceRoll.attackerRoll.starCount + (battleScenario.attacker.surpriseAttack ? 1 : 0),
       policyOrderFunction: LeaderSelectorPolicy.orderAttackerLeaders,
     );
     defenderStats.accumulateStarHitsAndStarShields(
-      namedLeaders: battleScenario.defendingLegion.namedLeaders,
-      genericLeaders: battleScenario.defendingLegion.genericLeaders,
-      starCount: battleDiceRoll.defenderDiceRoll.starCount,
+      namedLeaders: battleScenario.defender.namedLeaders,
+      genericLeaders: battleScenario.defender.genericLeaders,
+      starCount: battleDiceRoll.defenderRoll.starCount,
       policyOrderFunction: LeaderSelectorPolicy.orderDefenderLeaders,
     );
 
     final int attackerHits = attackerStats.calculateTotalHits(
-      specialEliteUnits: battleScenario.attackingLegion.specialEliteUnits,
+      specialEliteUnits: battleScenario.attacker.specialEliteUnits,
       opponentShields: defenderStats.totalShields,
     );
 
     final int defenderHits = defenderStats.calculateTotalHits(
-      specialEliteUnits: battleScenario.defendingLegion.specialEliteUnits,
+      specialEliteUnits: battleScenario.defender.specialEliteUnits,
       opponentShields: attackerStats.totalShields,
     );
 

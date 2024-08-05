@@ -62,8 +62,6 @@ abstract class $FullBattleSimulationEventCopyWith<$Res> {
       _$FullBattleSimulationEventCopyWithImpl<$Res, FullBattleSimulationEvent>;
   @useResult
   $Res call({BattleScenario battleScenario});
-
-  $BattleScenarioCopyWith<$Res> get battleScenario;
 }
 
 /// @nodoc
@@ -89,14 +87,6 @@ class _$FullBattleSimulationEventCopyWithImpl<$Res,
               as BattleScenario,
     ) as $Val);
   }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $BattleScenarioCopyWith<$Res> get battleScenario {
-    return $BattleScenarioCopyWith<$Res>(_value.battleScenario, (value) {
-      return _then(_value.copyWith(battleScenario: value) as $Val);
-    });
-  }
 }
 
 /// @nodoc
@@ -108,9 +98,6 @@ abstract class _$$SimulateFullBattleImplCopyWith<$Res>
   @override
   @useResult
   $Res call({BattleScenario battleScenario});
-
-  @override
-  $BattleScenarioCopyWith<$Res> get battleScenario;
 }
 
 /// @nodoc
@@ -253,8 +240,6 @@ abstract class $FullBattleSimulationStateCopyWith<$Res> {
       _$FullBattleSimulationStateCopyWithImpl<$Res, FullBattleSimulationState>;
   @useResult
   $Res call({BattleResult battleResult});
-
-  $BattleResultCopyWith<$Res> get battleResult;
 }
 
 /// @nodoc
@@ -280,14 +265,6 @@ class _$FullBattleSimulationStateCopyWithImpl<$Res,
               as BattleResult,
     ) as $Val);
   }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $BattleResultCopyWith<$Res> get battleResult {
-    return $BattleResultCopyWith<$Res>(_value.battleResult, (value) {
-      return _then(_value.copyWith(battleResult: value) as $Val);
-    });
-  }
 }
 
 /// @nodoc
@@ -300,9 +277,6 @@ abstract class _$$FullBattleSimulationStateImplCopyWith<$Res>
   @override
   @useResult
   $Res call({BattleResult battleResult});
-
-  @override
-  $BattleResultCopyWith<$Res> get battleResult;
 }
 
 /// @nodoc

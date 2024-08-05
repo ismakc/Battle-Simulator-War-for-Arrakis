@@ -1,8 +1,7 @@
 import 'dart:async';
 
 import 'package:bswfa_core/domain/battle/battle_scenario.dart';
-import 'package:bswfa_core/domain/legion/attacking_legion.dart';
-import 'package:bswfa_core/domain/legion/defending_legion.dart';
+import 'package:bswfa_core/domain/legion/legion.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -16,17 +15,17 @@ class BattleScenarioBloc extends Bloc<BattleScenarioEvent, BattleScenarioState> 
   }
 
   FutureOr<void> _onUpdateAttackingLegion(_UpdateAttackingLegion event, Emitter<BattleScenarioState> emit) {
-    final BattleScenario updatedBattleScenario = state.battleScenario.copyWith(attackingLegion: event.attackingLegion);
+    final BattleScenario updatedBattleScenario = state.battleScenario.copyWith(attacker: event.attackingLegion);
     emit(BattleScenarioState(battleScenario: updatedBattleScenario));
   }
 
   FutureOr<void> _onUpdateDefendingLegion(_UpdateDefendingLegion event, Emitter<BattleScenarioState> emit) {
-    final BattleScenario updatedBattleScenario = state.battleScenario.copyWith(defendingLegion: event.defendingLegion);
+    final BattleScenario updatedBattleScenario = state.battleScenario.copyWith(defender: event.defendingLegion);
     emit(BattleScenarioState(battleScenario: updatedBattleScenario));
   }
 
   FutureOr<void> _onReset(_Reset event, Emitter<BattleScenarioState> emit) {
-    emit(const BattleScenarioState(battleScenario: BattleScenario.defaultValues));
+    emit(const BattleScenarioState(battleScenario: BattleScenario.empty()));
   }
 }
 
@@ -43,5 +42,5 @@ class BattleScenarioEvent with _$BattleScenarioEvent {
 class BattleScenarioState with _$BattleScenarioState {
   const factory BattleScenarioState({required BattleScenario battleScenario}) = _BattleScenarioState;
 
-  factory BattleScenarioState.initial() => const BattleScenarioState(battleScenario: BattleScenario.defaultValues);
+  factory BattleScenarioState.initial() => const BattleScenarioState(battleScenario: BattleScenario.empty());
 }

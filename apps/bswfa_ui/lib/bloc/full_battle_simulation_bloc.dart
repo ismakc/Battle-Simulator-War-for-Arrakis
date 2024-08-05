@@ -34,5 +34,5 @@ class FullBattleSimulationState with _$FullBattleSimulationState {
   const factory FullBattleSimulationState({required BattleResult battleResult}) = _FullBattleSimulationState;
 
   factory FullBattleSimulationState.initial() =>
-      const FullBattleSimulationState(battleResult: BattleResult.defaultValues);
+      const FullBattleSimulationState(battleResult: BattleResult.empty());
 }
