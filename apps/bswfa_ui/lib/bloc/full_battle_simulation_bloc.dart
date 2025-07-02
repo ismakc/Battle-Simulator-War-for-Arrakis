@@ -16,21 +16,17 @@ class FullBattleSimulationBloc extends Bloc<FullBattleSimulationEvent, FullBattl
   final BattleSimulator simulator = BattleSimulator.instance;
 
   FutureOr<void> _onSimulateFullBattle(_SimulateFullBattle event, Emitter<FullBattleSimulationState> emit) {
-    emit(
-      FullBattleSimulationState(
-        battleResult: simulator.simulateMultipleRounds(event.battleScenario),
-      ),
-    );
+    emit(FullBattleSimulationState(battleResult: simulator.simulateMultipleRounds(event.battleScenario)));
   }
 }
 
 @freezed
-class FullBattleSimulationEvent with _$FullBattleSimulationEvent {
+abstract class FullBattleSimulationEvent with _$FullBattleSimulationEvent {
   factory FullBattleSimulationEvent.simulateFullBattle(BattleScenario battleScenario) = _SimulateFullBattle;
 }
 
 @freezed
-class FullBattleSimulationState with _$FullBattleSimulationState {
+abstract class FullBattleSimulationState with _$FullBattleSimulationState {
   const factory FullBattleSimulationState({required BattleResult battleResult}) = _FullBattleSimulationState;
 
   factory FullBattleSimulationState.initial() =>

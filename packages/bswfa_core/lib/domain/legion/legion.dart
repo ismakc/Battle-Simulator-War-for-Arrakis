@@ -8,7 +8,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'legion.freezed.dart';
 
 @freezed
-class Legion with _$Legion {
+abstract class Legion with _$Legion {
   const Legion._();
 
   const factory Legion({
@@ -44,9 +44,7 @@ class Legion with _$Legion {
 
   static const Legion defaultValues = Legion();
 
-  AttackingLegion overwriteAttackingLegionWithLegion(
-    AttackingLegion attackingLegion,
-  ) {
+  AttackingLegion overwriteAttackingLegionWithLegion(AttackingLegion attackingLegion) {
     return attackingLegion.copyWith(
       genericLeaders: genericLeaders,
       regularUnits: regularUnits,
@@ -114,7 +112,8 @@ class Legion with _$Legion {
       }
 
       final int diceCount = legion.diceCount;
-      final bool shouldUpdate = maxValue == null ||
+      final bool shouldUpdate =
+          maxValue == null ||
           diceCount > maxValue ||
           (diceCount == maxValue && shouldReplaceSelectedEntry(selectedEntry, entry, diceCount));
 

@@ -3,7 +3,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'battle_accumulated_hits.freezed.dart';
 
 @freezed
-class BattleAccumulatedHits with _$BattleAccumulatedHits {
+abstract class BattleAccumulatedHits with _$BattleAccumulatedHits {
   const BattleAccumulatedHits._();
 
   const factory BattleAccumulatedHits({

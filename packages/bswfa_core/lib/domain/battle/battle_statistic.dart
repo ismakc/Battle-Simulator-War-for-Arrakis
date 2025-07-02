@@ -3,7 +3,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'battle_statistic.freezed.dart';
 
 @freezed
-class BattleStatistic with _$BattleStatistic {
+abstract class BattleStatistic with _$BattleStatistic {
   const BattleStatistic._();
 
   const factory BattleStatistic({

@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,126 +10,133 @@ part of 'collapse_cubit.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
 /// @nodoc
 mixin _$CollapseState {
-  bool get collapsed => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
-  $CollapseStateCopyWith<CollapseState> get copyWith =>
-      throw _privateConstructorUsedError;
+ bool get collapsed;
+/// Create a copy of CollapseState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$CollapseStateCopyWith<CollapseState> get copyWith => _$CollapseStateCopyWithImpl<CollapseState>(this as CollapseState, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is CollapseState&&(identical(other.collapsed, collapsed) || other.collapsed == collapsed));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,collapsed);
+
+@override
+String toString() {
+  return 'CollapseState(collapsed: $collapsed)';
+}
+
+
 }
 
 /// @nodoc
-abstract class $CollapseStateCopyWith<$Res> {
-  factory $CollapseStateCopyWith(
-          CollapseState value, $Res Function(CollapseState) then) =
-      _$CollapseStateCopyWithImpl<$Res, CollapseState>;
-  @useResult
-  $Res call({bool collapsed});
-}
+abstract mixin class $CollapseStateCopyWith<$Res>  {
+  factory $CollapseStateCopyWith(CollapseState value, $Res Function(CollapseState) _then) = _$CollapseStateCopyWithImpl;
+@useResult
+$Res call({
+ bool collapsed
+});
 
+
+
+
+}
 /// @nodoc
-class _$CollapseStateCopyWithImpl<$Res, $Val extends CollapseState>
+class _$CollapseStateCopyWithImpl<$Res>
     implements $CollapseStateCopyWith<$Res> {
-  _$CollapseStateCopyWithImpl(this._value, this._then);
+  _$CollapseStateCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final CollapseState _self;
+  final $Res Function(CollapseState) _then;
 
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? collapsed = null,
-  }) {
-    return _then(_value.copyWith(
-      collapsed: null == collapsed
-          ? _value.collapsed
-          : collapsed // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ) as $Val);
-  }
+/// Create a copy of CollapseState
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? collapsed = null,}) {
+  return _then(_self.copyWith(
+collapsed: null == collapsed ? _self.collapsed : collapsed // ignore: cast_nullable_to_non_nullable
+as bool,
+  ));
 }
 
-/// @nodoc
-abstract class _$$CollapseStateImplCopyWith<$Res>
-    implements $CollapseStateCopyWith<$Res> {
-  factory _$$CollapseStateImplCopyWith(
-          _$CollapseStateImpl value, $Res Function(_$CollapseStateImpl) then) =
-      __$$CollapseStateImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({bool collapsed});
 }
 
-/// @nodoc
-class __$$CollapseStateImplCopyWithImpl<$Res>
-    extends _$CollapseStateCopyWithImpl<$Res, _$CollapseStateImpl>
-    implements _$$CollapseStateImplCopyWith<$Res> {
-  __$$CollapseStateImplCopyWithImpl(
-      _$CollapseStateImpl _value, $Res Function(_$CollapseStateImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? collapsed = null,
-  }) {
-    return _then(_$CollapseStateImpl(
-      collapsed: null == collapsed
-          ? _value.collapsed
-          : collapsed // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ));
-  }
-}
 
 /// @nodoc
 
-class _$CollapseStateImpl implements _CollapseState {
-  const _$CollapseStateImpl({this.collapsed = false});
 
-  @override
-  @JsonKey()
-  final bool collapsed;
+class _CollapseState implements CollapseState {
+  const _CollapseState({this.collapsed = false});
+  
 
-  @override
-  String toString() {
-    return 'CollapseState(collapsed: $collapsed)';
-  }
+@override@JsonKey() final  bool collapsed;
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$CollapseStateImpl &&
-            (identical(other.collapsed, collapsed) ||
-                other.collapsed == collapsed));
-  }
+/// Create a copy of CollapseState
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$CollapseStateCopyWith<_CollapseState> get copyWith => __$CollapseStateCopyWithImpl<_CollapseState>(this, _$identity);
 
-  @override
-  int get hashCode => Object.hash(runtimeType, collapsed);
 
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$CollapseStateImplCopyWith<_$CollapseStateImpl> get copyWith =>
-      __$$CollapseStateImplCopyWithImpl<_$CollapseStateImpl>(this, _$identity);
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CollapseState&&(identical(other.collapsed, collapsed) || other.collapsed == collapsed));
 }
 
-abstract class _CollapseState implements CollapseState {
-  const factory _CollapseState({final bool collapsed}) = _$CollapseStateImpl;
 
-  @override
-  bool get collapsed;
-  @override
-  @JsonKey(ignore: true)
-  _$$CollapseStateImplCopyWith<_$CollapseStateImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+@override
+int get hashCode => Object.hash(runtimeType,collapsed);
+
+@override
+String toString() {
+  return 'CollapseState(collapsed: $collapsed)';
 }
+
+
+}
+
+/// @nodoc
+abstract mixin class _$CollapseStateCopyWith<$Res> implements $CollapseStateCopyWith<$Res> {
+  factory _$CollapseStateCopyWith(_CollapseState value, $Res Function(_CollapseState) _then) = __$CollapseStateCopyWithImpl;
+@override @useResult
+$Res call({
+ bool collapsed
+});
+
+
+
+
+}
+/// @nodoc
+class __$CollapseStateCopyWithImpl<$Res>
+    implements _$CollapseStateCopyWith<$Res> {
+  __$CollapseStateCopyWithImpl(this._self, this._then);
+
+  final _CollapseState _self;
+  final $Res Function(_CollapseState) _then;
+
+/// Create a copy of CollapseState
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? collapsed = null,}) {
+  return _then(_CollapseState(
+collapsed: null == collapsed ? _self.collapsed : collapsed // ignore: cast_nullable_to_non_nullable
+as bool,
+  ));
+}
+
+
+}
+
+// dart format on

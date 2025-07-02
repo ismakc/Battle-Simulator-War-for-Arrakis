@@ -1,11 +1,11 @@
 name: bswfa_ui
 description: "Battle Simulator War For Arrakis"
 publish_to: 'none'
-version: 1.0.1+10
+version: 1.0.1+11
 
 environment:
-  sdk: '>=3.4.4 <4.0.0'
-  flutter: '>=3.22.3 <4.0.0'
+  sdk: '>=3.8.1 <4.0.0'
+  flutter: '>=3.32.5 <4.0.0'
 
 dependencies:
   bswfa_core:
@@ -13,17 +13,17 @@ dependencies:
   
   flutter:
     sdk: flutter
-  flutter_bloc: ^8.1.6
-  flutter_html: ^3.0.0-beta.2
-  freezed_annotation: ^2.4.3
-  package_info_plus: ^8.0.0
+  flutter_bloc: ^9.1.1
+  flutter_html: ^3.0.0
+  freezed_annotation: ^3.0.0
+  package_info_plus: ^8.3.0
   nested: any
 
 dev_dependencies:
-  build_runner: ^2.4.11
-  flutter_lints: ^4.0.0
+  build_runner: ^2.5.4
+  flutter_lints: ^6.0.0
   flutter_test:
     sdk: flutter
-  freezed: ^2.5.2
+  freezed: ^3.0.6
 flutter:
   uses-material-design: true

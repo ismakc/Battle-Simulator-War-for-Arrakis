@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,214 +10,175 @@ part of 'battle_result.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
 /// @nodoc
 mixin _$BattleResult {
-  int get playedCombatRounds => throw _privateConstructorUsedError;
-  BattleScenario get scenario => throw _privateConstructorUsedError;
-  BattleStatistic get statistic => throw _privateConstructorUsedError;
 
-  /// Create a copy of BattleResult
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  $BattleResultCopyWith<BattleResult> get copyWith =>
-      throw _privateConstructorUsedError;
+ int get playedCombatRounds; BattleScenario get scenario; BattleStatistic get statistic;
+/// Create a copy of BattleResult
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$BattleResultCopyWith<BattleResult> get copyWith => _$BattleResultCopyWithImpl<BattleResult>(this as BattleResult, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is BattleResult&&(identical(other.playedCombatRounds, playedCombatRounds) || other.playedCombatRounds == playedCombatRounds)&&(identical(other.scenario, scenario) || other.scenario == scenario)&&(identical(other.statistic, statistic) || other.statistic == statistic));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,playedCombatRounds,scenario,statistic);
+
+@override
+String toString() {
+  return 'BattleResult(playedCombatRounds: $playedCombatRounds, scenario: $scenario, statistic: $statistic)';
+}
+
+
 }
 
 /// @nodoc
-abstract class $BattleResultCopyWith<$Res> {
-  factory $BattleResultCopyWith(
-          BattleResult value, $Res Function(BattleResult) then) =
-      _$BattleResultCopyWithImpl<$Res, BattleResult>;
-  @useResult
-  $Res call(
-      {int playedCombatRounds,
-      BattleScenario scenario,
-      BattleStatistic statistic});
+abstract mixin class $BattleResultCopyWith<$Res>  {
+  factory $BattleResultCopyWith(BattleResult value, $Res Function(BattleResult) _then) = _$BattleResultCopyWithImpl;
+@useResult
+$Res call({
+ int playedCombatRounds, BattleScenario scenario, BattleStatistic statistic
+});
 
-  $BattleScenarioCopyWith<$Res> get scenario;
-  $BattleStatisticCopyWith<$Res> get statistic;
+
+$BattleScenarioCopyWith<$Res> get scenario;$BattleStatisticCopyWith<$Res> get statistic;
+
 }
-
 /// @nodoc
-class _$BattleResultCopyWithImpl<$Res, $Val extends BattleResult>
+class _$BattleResultCopyWithImpl<$Res>
     implements $BattleResultCopyWith<$Res> {
-  _$BattleResultCopyWithImpl(this._value, this._then);
+  _$BattleResultCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final BattleResult _self;
+  final $Res Function(BattleResult) _then;
 
-  /// Create a copy of BattleResult
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? playedCombatRounds = null,
-    Object? scenario = null,
-    Object? statistic = null,
-  }) {
-    return _then(_value.copyWith(
-      playedCombatRounds: null == playedCombatRounds
-          ? _value.playedCombatRounds
-          : playedCombatRounds // ignore: cast_nullable_to_non_nullable
-              as int,
-      scenario: null == scenario
-          ? _value.scenario
-          : scenario // ignore: cast_nullable_to_non_nullable
-              as BattleScenario,
-      statistic: null == statistic
-          ? _value.statistic
-          : statistic // ignore: cast_nullable_to_non_nullable
-              as BattleStatistic,
-    ) as $Val);
-  }
-
-  /// Create a copy of BattleResult
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $BattleScenarioCopyWith<$Res> get scenario {
-    return $BattleScenarioCopyWith<$Res>(_value.scenario, (value) {
-      return _then(_value.copyWith(scenario: value) as $Val);
-    });
-  }
-
-  /// Create a copy of BattleResult
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $BattleStatisticCopyWith<$Res> get statistic {
-    return $BattleStatisticCopyWith<$Res>(_value.statistic, (value) {
-      return _then(_value.copyWith(statistic: value) as $Val);
-    });
-  }
+/// Create a copy of BattleResult
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? playedCombatRounds = null,Object? scenario = null,Object? statistic = null,}) {
+  return _then(_self.copyWith(
+playedCombatRounds: null == playedCombatRounds ? _self.playedCombatRounds : playedCombatRounds // ignore: cast_nullable_to_non_nullable
+as int,scenario: null == scenario ? _self.scenario : scenario // ignore: cast_nullable_to_non_nullable
+as BattleScenario,statistic: null == statistic ? _self.statistic : statistic // ignore: cast_nullable_to_non_nullable
+as BattleStatistic,
+  ));
+}
+/// Create a copy of BattleResult
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$BattleScenarioCopyWith<$Res> get scenario {
+  
+  return $BattleScenarioCopyWith<$Res>(_self.scenario, (value) {
+    return _then(_self.copyWith(scenario: value));
+  });
+}/// Create a copy of BattleResult
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$BattleStatisticCopyWith<$Res> get statistic {
+  
+  return $BattleStatisticCopyWith<$Res>(_self.statistic, (value) {
+    return _then(_self.copyWith(statistic: value));
+  });
+}
 }
 
-/// @nodoc
-abstract class _$$BattleStatisticImplCopyWith<$Res>
-    implements $BattleResultCopyWith<$Res> {
-  factory _$$BattleStatisticImplCopyWith(_$BattleStatisticImpl value,
-          $Res Function(_$BattleStatisticImpl) then) =
-      __$$BattleStatisticImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {int playedCombatRounds,
-      BattleScenario scenario,
-      BattleStatistic statistic});
-
-  @override
-  $BattleScenarioCopyWith<$Res> get scenario;
-  @override
-  $BattleStatisticCopyWith<$Res> get statistic;
-}
-
-/// @nodoc
-class __$$BattleStatisticImplCopyWithImpl<$Res>
-    extends _$BattleResultCopyWithImpl<$Res, _$BattleStatisticImpl>
-    implements _$$BattleStatisticImplCopyWith<$Res> {
-  __$$BattleStatisticImplCopyWithImpl(
-      _$BattleStatisticImpl _value, $Res Function(_$BattleStatisticImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of BattleResult
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? playedCombatRounds = null,
-    Object? scenario = null,
-    Object? statistic = null,
-  }) {
-    return _then(_$BattleStatisticImpl(
-      playedCombatRounds: null == playedCombatRounds
-          ? _value.playedCombatRounds
-          : playedCombatRounds // ignore: cast_nullable_to_non_nullable
-              as int,
-      scenario: null == scenario
-          ? _value.scenario
-          : scenario // ignore: cast_nullable_to_non_nullable
-              as BattleScenario,
-      statistic: null == statistic
-          ? _value.statistic
-          : statistic // ignore: cast_nullable_to_non_nullable
-              as BattleStatistic,
-    ));
-  }
-}
 
 /// @nodoc
 
-class _$BattleStatisticImpl extends _BattleStatistic {
-  const _$BattleStatisticImpl(
-      {required this.playedCombatRounds,
-      required this.scenario,
-      required this.statistic})
-      : super._();
 
-  @override
-  final int playedCombatRounds;
-  @override
-  final BattleScenario scenario;
-  @override
-  final BattleStatistic statistic;
+class _BattleStatistic extends BattleResult {
+  const _BattleStatistic({required this.playedCombatRounds, required this.scenario, required this.statistic}): super._();
+  
 
-  @override
-  String toString() {
-    return 'BattleResult(playedCombatRounds: $playedCombatRounds, scenario: $scenario, statistic: $statistic)';
-  }
+@override final  int playedCombatRounds;
+@override final  BattleScenario scenario;
+@override final  BattleStatistic statistic;
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$BattleStatisticImpl &&
-            (identical(other.playedCombatRounds, playedCombatRounds) ||
-                other.playedCombatRounds == playedCombatRounds) &&
-            (identical(other.scenario, scenario) ||
-                other.scenario == scenario) &&
-            (identical(other.statistic, statistic) ||
-                other.statistic == statistic));
-  }
+/// Create a copy of BattleResult
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$BattleStatisticCopyWith<_BattleStatistic> get copyWith => __$BattleStatisticCopyWithImpl<_BattleStatistic>(this, _$identity);
 
-  @override
-  int get hashCode =>
-      Object.hash(runtimeType, playedCombatRounds, scenario, statistic);
 
-  /// Create a copy of BattleResult
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$BattleStatisticImplCopyWith<_$BattleStatisticImpl> get copyWith =>
-      __$$BattleStatisticImplCopyWithImpl<_$BattleStatisticImpl>(
-          this, _$identity);
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _BattleStatistic&&(identical(other.playedCombatRounds, playedCombatRounds) || other.playedCombatRounds == playedCombatRounds)&&(identical(other.scenario, scenario) || other.scenario == scenario)&&(identical(other.statistic, statistic) || other.statistic == statistic));
 }
 
-abstract class _BattleStatistic extends BattleResult {
-  const factory _BattleStatistic(
-      {required final int playedCombatRounds,
-      required final BattleScenario scenario,
-      required final BattleStatistic statistic}) = _$BattleStatisticImpl;
-  const _BattleStatistic._() : super._();
 
-  @override
-  int get playedCombatRounds;
-  @override
-  BattleScenario get scenario;
-  @override
-  BattleStatistic get statistic;
+@override
+int get hashCode => Object.hash(runtimeType,playedCombatRounds,scenario,statistic);
 
-  /// Create a copy of BattleResult
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$BattleStatisticImplCopyWith<_$BattleStatisticImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+@override
+String toString() {
+  return 'BattleResult(playedCombatRounds: $playedCombatRounds, scenario: $scenario, statistic: $statistic)';
 }
+
+
+}
+
+/// @nodoc
+abstract mixin class _$BattleStatisticCopyWith<$Res> implements $BattleResultCopyWith<$Res> {
+  factory _$BattleStatisticCopyWith(_BattleStatistic value, $Res Function(_BattleStatistic) _then) = __$BattleStatisticCopyWithImpl;
+@override @useResult
+$Res call({
+ int playedCombatRounds, BattleScenario scenario, BattleStatistic statistic
+});
+
+
+@override $BattleScenarioCopyWith<$Res> get scenario;@override $BattleStatisticCopyWith<$Res> get statistic;
+
+}
+/// @nodoc
+class __$BattleStatisticCopyWithImpl<$Res>
+    implements _$BattleStatisticCopyWith<$Res> {
+  __$BattleStatisticCopyWithImpl(this._self, this._then);
+
+  final _BattleStatistic _self;
+  final $Res Function(_BattleStatistic) _then;
+
+/// Create a copy of BattleResult
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? playedCombatRounds = null,Object? scenario = null,Object? statistic = null,}) {
+  return _then(_BattleStatistic(
+playedCombatRounds: null == playedCombatRounds ? _self.playedCombatRounds : playedCombatRounds // ignore: cast_nullable_to_non_nullable
+as int,scenario: null == scenario ? _self.scenario : scenario // ignore: cast_nullable_to_non_nullable
+as BattleScenario,statistic: null == statistic ? _self.statistic : statistic // ignore: cast_nullable_to_non_nullable
+as BattleStatistic,
+  ));
+}
+
+/// Create a copy of BattleResult
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$BattleScenarioCopyWith<$Res> get scenario {
+  
+  return $BattleScenarioCopyWith<$Res>(_self.scenario, (value) {
+    return _then(_self.copyWith(scenario: value));
+  });
+}/// Create a copy of BattleResult
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$BattleStatisticCopyWith<$Res> get statistic {
+  
+  return $BattleStatisticCopyWith<$Res>(_self.statistic, (value) {
+    return _then(_self.copyWith(statistic: value));
+  });
+}
+}
+
+// dart format on

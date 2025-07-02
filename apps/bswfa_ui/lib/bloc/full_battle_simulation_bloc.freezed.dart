@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,368 +10,296 @@ part of 'full_battle_simulation_bloc.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
 /// @nodoc
 mixin _$FullBattleSimulationEvent {
-  BattleScenario get battleScenario => throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(BattleScenario battleScenario) simulateFullBattle,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(BattleScenario battleScenario)? simulateFullBattle,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(BattleScenario battleScenario)? simulateFullBattle,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_SimulateFullBattle value) simulateFullBattle,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_SimulateFullBattle value)? simulateFullBattle,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_SimulateFullBattle value)? simulateFullBattle,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
-  $FullBattleSimulationEventCopyWith<FullBattleSimulationEvent> get copyWith =>
-      throw _privateConstructorUsedError;
+ BattleScenario get battleScenario;
+/// Create a copy of FullBattleSimulationEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$FullBattleSimulationEventCopyWith<FullBattleSimulationEvent> get copyWith => _$FullBattleSimulationEventCopyWithImpl<FullBattleSimulationEvent>(this as FullBattleSimulationEvent, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is FullBattleSimulationEvent&&(identical(other.battleScenario, battleScenario) || other.battleScenario == battleScenario));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,battleScenario);
+
+@override
+String toString() {
+  return 'FullBattleSimulationEvent(battleScenario: $battleScenario)';
+}
+
+
 }
 
 /// @nodoc
-abstract class $FullBattleSimulationEventCopyWith<$Res> {
-  factory $FullBattleSimulationEventCopyWith(FullBattleSimulationEvent value,
-          $Res Function(FullBattleSimulationEvent) then) =
-      _$FullBattleSimulationEventCopyWithImpl<$Res, FullBattleSimulationEvent>;
-  @useResult
-  $Res call({BattleScenario battleScenario});
+abstract mixin class $FullBattleSimulationEventCopyWith<$Res>  {
+  factory $FullBattleSimulationEventCopyWith(FullBattleSimulationEvent value, $Res Function(FullBattleSimulationEvent) _then) = _$FullBattleSimulationEventCopyWithImpl;
+@useResult
+$Res call({
+ BattleScenario battleScenario
+});
 
-  $BattleScenarioCopyWith<$Res> get battleScenario;
+
+$BattleScenarioCopyWith<$Res> get battleScenario;
+
 }
-
 /// @nodoc
-class _$FullBattleSimulationEventCopyWithImpl<$Res,
-        $Val extends FullBattleSimulationEvent>
+class _$FullBattleSimulationEventCopyWithImpl<$Res>
     implements $FullBattleSimulationEventCopyWith<$Res> {
-  _$FullBattleSimulationEventCopyWithImpl(this._value, this._then);
+  _$FullBattleSimulationEventCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final FullBattleSimulationEvent _self;
+  final $Res Function(FullBattleSimulationEvent) _then;
 
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? battleScenario = null,
-  }) {
-    return _then(_value.copyWith(
-      battleScenario: null == battleScenario
-          ? _value.battleScenario
-          : battleScenario // ignore: cast_nullable_to_non_nullable
-              as BattleScenario,
-    ) as $Val);
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $BattleScenarioCopyWith<$Res> get battleScenario {
-    return $BattleScenarioCopyWith<$Res>(_value.battleScenario, (value) {
-      return _then(_value.copyWith(battleScenario: value) as $Val);
-    });
-  }
+/// Create a copy of FullBattleSimulationEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? battleScenario = null,}) {
+  return _then(_self.copyWith(
+battleScenario: null == battleScenario ? _self.battleScenario : battleScenario // ignore: cast_nullable_to_non_nullable
+as BattleScenario,
+  ));
+}
+/// Create a copy of FullBattleSimulationEvent
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$BattleScenarioCopyWith<$Res> get battleScenario {
+  
+  return $BattleScenarioCopyWith<$Res>(_self.battleScenario, (value) {
+    return _then(_self.copyWith(battleScenario: value));
+  });
+}
 }
 
-/// @nodoc
-abstract class _$$SimulateFullBattleImplCopyWith<$Res>
-    implements $FullBattleSimulationEventCopyWith<$Res> {
-  factory _$$SimulateFullBattleImplCopyWith(_$SimulateFullBattleImpl value,
-          $Res Function(_$SimulateFullBattleImpl) then) =
-      __$$SimulateFullBattleImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({BattleScenario battleScenario});
-
-  @override
-  $BattleScenarioCopyWith<$Res> get battleScenario;
-}
-
-/// @nodoc
-class __$$SimulateFullBattleImplCopyWithImpl<$Res>
-    extends _$FullBattleSimulationEventCopyWithImpl<$Res,
-        _$SimulateFullBattleImpl>
-    implements _$$SimulateFullBattleImplCopyWith<$Res> {
-  __$$SimulateFullBattleImplCopyWithImpl(_$SimulateFullBattleImpl _value,
-      $Res Function(_$SimulateFullBattleImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? battleScenario = null,
-  }) {
-    return _then(_$SimulateFullBattleImpl(
-      null == battleScenario
-          ? _value.battleScenario
-          : battleScenario // ignore: cast_nullable_to_non_nullable
-              as BattleScenario,
-    ));
-  }
-}
 
 /// @nodoc
 
-class _$SimulateFullBattleImpl implements _SimulateFullBattle {
-  _$SimulateFullBattleImpl(this.battleScenario);
 
-  @override
-  final BattleScenario battleScenario;
+class _SimulateFullBattle implements FullBattleSimulationEvent {
+   _SimulateFullBattle(this.battleScenario);
+  
 
-  @override
-  String toString() {
-    return 'FullBattleSimulationEvent.simulateFullBattle(battleScenario: $battleScenario)';
-  }
+@override final  BattleScenario battleScenario;
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$SimulateFullBattleImpl &&
-            (identical(other.battleScenario, battleScenario) ||
-                other.battleScenario == battleScenario));
-  }
+/// Create a copy of FullBattleSimulationEvent
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$SimulateFullBattleCopyWith<_SimulateFullBattle> get copyWith => __$SimulateFullBattleCopyWithImpl<_SimulateFullBattle>(this, _$identity);
 
-  @override
-  int get hashCode => Object.hash(runtimeType, battleScenario);
 
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$SimulateFullBattleImplCopyWith<_$SimulateFullBattleImpl> get copyWith =>
-      __$$SimulateFullBattleImplCopyWithImpl<_$SimulateFullBattleImpl>(
-          this, _$identity);
 
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(BattleScenario battleScenario) simulateFullBattle,
-  }) {
-    return simulateFullBattle(battleScenario);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(BattleScenario battleScenario)? simulateFullBattle,
-  }) {
-    return simulateFullBattle?.call(battleScenario);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(BattleScenario battleScenario)? simulateFullBattle,
-    required TResult orElse(),
-  }) {
-    if (simulateFullBattle != null) {
-      return simulateFullBattle(battleScenario);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_SimulateFullBattle value) simulateFullBattle,
-  }) {
-    return simulateFullBattle(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_SimulateFullBattle value)? simulateFullBattle,
-  }) {
-    return simulateFullBattle?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_SimulateFullBattle value)? simulateFullBattle,
-    required TResult orElse(),
-  }) {
-    if (simulateFullBattle != null) {
-      return simulateFullBattle(this);
-    }
-    return orElse();
-  }
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SimulateFullBattle&&(identical(other.battleScenario, battleScenario) || other.battleScenario == battleScenario));
 }
 
-abstract class _SimulateFullBattle implements FullBattleSimulationEvent {
-  factory _SimulateFullBattle(final BattleScenario battleScenario) =
-      _$SimulateFullBattleImpl;
 
-  @override
-  BattleScenario get battleScenario;
-  @override
-  @JsonKey(ignore: true)
-  _$$SimulateFullBattleImplCopyWith<_$SimulateFullBattleImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+@override
+int get hashCode => Object.hash(runtimeType,battleScenario);
+
+@override
+String toString() {
+  return 'FullBattleSimulationEvent.simulateFullBattle(battleScenario: $battleScenario)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$SimulateFullBattleCopyWith<$Res> implements $FullBattleSimulationEventCopyWith<$Res> {
+  factory _$SimulateFullBattleCopyWith(_SimulateFullBattle value, $Res Function(_SimulateFullBattle) _then) = __$SimulateFullBattleCopyWithImpl;
+@override @useResult
+$Res call({
+ BattleScenario battleScenario
+});
+
+
+@override $BattleScenarioCopyWith<$Res> get battleScenario;
+
+}
+/// @nodoc
+class __$SimulateFullBattleCopyWithImpl<$Res>
+    implements _$SimulateFullBattleCopyWith<$Res> {
+  __$SimulateFullBattleCopyWithImpl(this._self, this._then);
+
+  final _SimulateFullBattle _self;
+  final $Res Function(_SimulateFullBattle) _then;
+
+/// Create a copy of FullBattleSimulationEvent
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? battleScenario = null,}) {
+  return _then(_SimulateFullBattle(
+null == battleScenario ? _self.battleScenario : battleScenario // ignore: cast_nullable_to_non_nullable
+as BattleScenario,
+  ));
+}
+
+/// Create a copy of FullBattleSimulationEvent
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$BattleScenarioCopyWith<$Res> get battleScenario {
+  
+  return $BattleScenarioCopyWith<$Res>(_self.battleScenario, (value) {
+    return _then(_self.copyWith(battleScenario: value));
+  });
+}
 }
 
 /// @nodoc
 mixin _$FullBattleSimulationState {
-  BattleResult get battleResult => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
-  $FullBattleSimulationStateCopyWith<FullBattleSimulationState> get copyWith =>
-      throw _privateConstructorUsedError;
+ BattleResult get battleResult;
+/// Create a copy of FullBattleSimulationState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$FullBattleSimulationStateCopyWith<FullBattleSimulationState> get copyWith => _$FullBattleSimulationStateCopyWithImpl<FullBattleSimulationState>(this as FullBattleSimulationState, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is FullBattleSimulationState&&(identical(other.battleResult, battleResult) || other.battleResult == battleResult));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,battleResult);
+
+@override
+String toString() {
+  return 'FullBattleSimulationState(battleResult: $battleResult)';
+}
+
+
 }
 
 /// @nodoc
-abstract class $FullBattleSimulationStateCopyWith<$Res> {
-  factory $FullBattleSimulationStateCopyWith(FullBattleSimulationState value,
-          $Res Function(FullBattleSimulationState) then) =
-      _$FullBattleSimulationStateCopyWithImpl<$Res, FullBattleSimulationState>;
-  @useResult
-  $Res call({BattleResult battleResult});
+abstract mixin class $FullBattleSimulationStateCopyWith<$Res>  {
+  factory $FullBattleSimulationStateCopyWith(FullBattleSimulationState value, $Res Function(FullBattleSimulationState) _then) = _$FullBattleSimulationStateCopyWithImpl;
+@useResult
+$Res call({
+ BattleResult battleResult
+});
 
-  $BattleResultCopyWith<$Res> get battleResult;
+
+$BattleResultCopyWith<$Res> get battleResult;
+
 }
-
 /// @nodoc
-class _$FullBattleSimulationStateCopyWithImpl<$Res,
-        $Val extends FullBattleSimulationState>
+class _$FullBattleSimulationStateCopyWithImpl<$Res>
     implements $FullBattleSimulationStateCopyWith<$Res> {
-  _$FullBattleSimulationStateCopyWithImpl(this._value, this._then);
+  _$FullBattleSimulationStateCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final FullBattleSimulationState _self;
+  final $Res Function(FullBattleSimulationState) _then;
 
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? battleResult = null,
-  }) {
-    return _then(_value.copyWith(
-      battleResult: null == battleResult
-          ? _value.battleResult
-          : battleResult // ignore: cast_nullable_to_non_nullable
-              as BattleResult,
-    ) as $Val);
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $BattleResultCopyWith<$Res> get battleResult {
-    return $BattleResultCopyWith<$Res>(_value.battleResult, (value) {
-      return _then(_value.copyWith(battleResult: value) as $Val);
-    });
-  }
+/// Create a copy of FullBattleSimulationState
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? battleResult = null,}) {
+  return _then(_self.copyWith(
+battleResult: null == battleResult ? _self.battleResult : battleResult // ignore: cast_nullable_to_non_nullable
+as BattleResult,
+  ));
+}
+/// Create a copy of FullBattleSimulationState
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$BattleResultCopyWith<$Res> get battleResult {
+  
+  return $BattleResultCopyWith<$Res>(_self.battleResult, (value) {
+    return _then(_self.copyWith(battleResult: value));
+  });
+}
 }
 
-/// @nodoc
-abstract class _$$FullBattleSimulationStateImplCopyWith<$Res>
-    implements $FullBattleSimulationStateCopyWith<$Res> {
-  factory _$$FullBattleSimulationStateImplCopyWith(
-          _$FullBattleSimulationStateImpl value,
-          $Res Function(_$FullBattleSimulationStateImpl) then) =
-      __$$FullBattleSimulationStateImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({BattleResult battleResult});
-
-  @override
-  $BattleResultCopyWith<$Res> get battleResult;
-}
-
-/// @nodoc
-class __$$FullBattleSimulationStateImplCopyWithImpl<$Res>
-    extends _$FullBattleSimulationStateCopyWithImpl<$Res,
-        _$FullBattleSimulationStateImpl>
-    implements _$$FullBattleSimulationStateImplCopyWith<$Res> {
-  __$$FullBattleSimulationStateImplCopyWithImpl(
-      _$FullBattleSimulationStateImpl _value,
-      $Res Function(_$FullBattleSimulationStateImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? battleResult = null,
-  }) {
-    return _then(_$FullBattleSimulationStateImpl(
-      battleResult: null == battleResult
-          ? _value.battleResult
-          : battleResult // ignore: cast_nullable_to_non_nullable
-              as BattleResult,
-    ));
-  }
-}
 
 /// @nodoc
 
-class _$FullBattleSimulationStateImpl implements _FullBattleSimulationState {
-  const _$FullBattleSimulationStateImpl({required this.battleResult});
 
-  @override
-  final BattleResult battleResult;
+class _FullBattleSimulationState implements FullBattleSimulationState {
+  const _FullBattleSimulationState({required this.battleResult});
+  
 
-  @override
-  String toString() {
-    return 'FullBattleSimulationState(battleResult: $battleResult)';
-  }
+@override final  BattleResult battleResult;
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$FullBattleSimulationStateImpl &&
-            (identical(other.battleResult, battleResult) ||
-                other.battleResult == battleResult));
-  }
+/// Create a copy of FullBattleSimulationState
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$FullBattleSimulationStateCopyWith<_FullBattleSimulationState> get copyWith => __$FullBattleSimulationStateCopyWithImpl<_FullBattleSimulationState>(this, _$identity);
 
-  @override
-  int get hashCode => Object.hash(runtimeType, battleResult);
 
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$FullBattleSimulationStateImplCopyWith<_$FullBattleSimulationStateImpl>
-      get copyWith => __$$FullBattleSimulationStateImplCopyWithImpl<
-          _$FullBattleSimulationStateImpl>(this, _$identity);
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _FullBattleSimulationState&&(identical(other.battleResult, battleResult) || other.battleResult == battleResult));
 }
 
-abstract class _FullBattleSimulationState implements FullBattleSimulationState {
-  const factory _FullBattleSimulationState(
-          {required final BattleResult battleResult}) =
-      _$FullBattleSimulationStateImpl;
 
-  @override
-  BattleResult get battleResult;
-  @override
-  @JsonKey(ignore: true)
-  _$$FullBattleSimulationStateImplCopyWith<_$FullBattleSimulationStateImpl>
-      get copyWith => throw _privateConstructorUsedError;
+@override
+int get hashCode => Object.hash(runtimeType,battleResult);
+
+@override
+String toString() {
+  return 'FullBattleSimulationState(battleResult: $battleResult)';
 }
+
+
+}
+
+/// @nodoc
+abstract mixin class _$FullBattleSimulationStateCopyWith<$Res> implements $FullBattleSimulationStateCopyWith<$Res> {
+  factory _$FullBattleSimulationStateCopyWith(_FullBattleSimulationState value, $Res Function(_FullBattleSimulationState) _then) = __$FullBattleSimulationStateCopyWithImpl;
+@override @useResult
+$Res call({
+ BattleResult battleResult
+});
+
+
+@override $BattleResultCopyWith<$Res> get battleResult;
+
+}
+/// @nodoc
+class __$FullBattleSimulationStateCopyWithImpl<$Res>
+    implements _$FullBattleSimulationStateCopyWith<$Res> {
+  __$FullBattleSimulationStateCopyWithImpl(this._self, this._then);
+
+  final _FullBattleSimulationState _self;
+  final $Res Function(_FullBattleSimulationState) _then;
+
+/// Create a copy of FullBattleSimulationState
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? battleResult = null,}) {
+  return _then(_FullBattleSimulationState(
+battleResult: null == battleResult ? _self.battleResult : battleResult // ignore: cast_nullable_to_non_nullable
+as BattleResult,
+  ));
+}
+
+/// Create a copy of FullBattleSimulationState
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$BattleResultCopyWith<$Res> get battleResult {
+  
+  return $BattleResultCopyWith<$Res>(_self.battleResult, (value) {
+    return _then(_self.copyWith(battleResult: value));
+  });
+}
+}
+
+// dart format on

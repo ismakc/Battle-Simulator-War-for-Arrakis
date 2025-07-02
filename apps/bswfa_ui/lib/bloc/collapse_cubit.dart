@@ -15,6 +15,6 @@ class CollapseCubit extends Cubit<CollapseState> {
 }
 
 @freezed
-class CollapseState with _$CollapseState {
+abstract class CollapseState with _$CollapseState {
   const factory CollapseState({@Default(false) bool collapsed}) = _CollapseState;
 }

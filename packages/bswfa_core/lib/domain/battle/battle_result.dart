@@ -7,7 +7,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'battle_result.freezed.dart';
 
 @freezed
-class BattleResult with _$BattleResult {
+abstract class BattleResult with _$BattleResult {
   const BattleResult._();
 
   const factory BattleResult({

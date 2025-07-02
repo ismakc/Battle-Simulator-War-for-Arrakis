@@ -40,7 +40,7 @@ class BattleScenarioEvent with _$BattleScenarioEvent {
 }
 
 @freezed
-class BattleScenarioState with _$BattleScenarioState {
+abstract class BattleScenarioState with _$BattleScenarioState {
   const factory BattleScenarioState({required BattleScenario battleScenario}) = _BattleScenarioState;
 
   factory BattleScenarioState.initial() => const BattleScenarioState(battleScenario: BattleScenario.defaultValues);

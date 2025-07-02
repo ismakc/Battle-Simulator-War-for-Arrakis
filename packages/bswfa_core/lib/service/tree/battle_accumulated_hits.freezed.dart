@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,208 +10,142 @@ part of 'battle_accumulated_hits.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
 /// @nodoc
 mixin _$BattleAccumulatedHits {
-  int get attackerHits => throw _privateConstructorUsedError;
-  int get squaredAttackerHits => throw _privateConstructorUsedError;
-  int get defenderHits => throw _privateConstructorUsedError;
-  int get squaredDefenderHits => throw _privateConstructorUsedError;
 
-  /// Create a copy of BattleAccumulatedHits
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  $BattleAccumulatedHitsCopyWith<BattleAccumulatedHits> get copyWith =>
-      throw _privateConstructorUsedError;
+ int get attackerHits; int get squaredAttackerHits; int get defenderHits; int get squaredDefenderHits;
+/// Create a copy of BattleAccumulatedHits
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$BattleAccumulatedHitsCopyWith<BattleAccumulatedHits> get copyWith => _$BattleAccumulatedHitsCopyWithImpl<BattleAccumulatedHits>(this as BattleAccumulatedHits, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is BattleAccumulatedHits&&(identical(other.attackerHits, attackerHits) || other.attackerHits == attackerHits)&&(identical(other.squaredAttackerHits, squaredAttackerHits) || other.squaredAttackerHits == squaredAttackerHits)&&(identical(other.defenderHits, defenderHits) || other.defenderHits == defenderHits)&&(identical(other.squaredDefenderHits, squaredDefenderHits) || other.squaredDefenderHits == squaredDefenderHits));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,attackerHits,squaredAttackerHits,defenderHits,squaredDefenderHits);
+
+@override
+String toString() {
+  return 'BattleAccumulatedHits(attackerHits: $attackerHits, squaredAttackerHits: $squaredAttackerHits, defenderHits: $defenderHits, squaredDefenderHits: $squaredDefenderHits)';
+}
+
+
 }
 
 /// @nodoc
-abstract class $BattleAccumulatedHitsCopyWith<$Res> {
-  factory $BattleAccumulatedHitsCopyWith(BattleAccumulatedHits value,
-          $Res Function(BattleAccumulatedHits) then) =
-      _$BattleAccumulatedHitsCopyWithImpl<$Res, BattleAccumulatedHits>;
-  @useResult
-  $Res call(
-      {int attackerHits,
-      int squaredAttackerHits,
-      int defenderHits,
-      int squaredDefenderHits});
-}
+abstract mixin class $BattleAccumulatedHitsCopyWith<$Res>  {
+  factory $BattleAccumulatedHitsCopyWith(BattleAccumulatedHits value, $Res Function(BattleAccumulatedHits) _then) = _$BattleAccumulatedHitsCopyWithImpl;
+@useResult
+$Res call({
+ int attackerHits, int squaredAttackerHits, int defenderHits, int squaredDefenderHits
+});
 
+
+
+
+}
 /// @nodoc
-class _$BattleAccumulatedHitsCopyWithImpl<$Res,
-        $Val extends BattleAccumulatedHits>
+class _$BattleAccumulatedHitsCopyWithImpl<$Res>
     implements $BattleAccumulatedHitsCopyWith<$Res> {
-  _$BattleAccumulatedHitsCopyWithImpl(this._value, this._then);
+  _$BattleAccumulatedHitsCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final BattleAccumulatedHits _self;
+  final $Res Function(BattleAccumulatedHits) _then;
 
-  /// Create a copy of BattleAccumulatedHits
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? attackerHits = null,
-    Object? squaredAttackerHits = null,
-    Object? defenderHits = null,
-    Object? squaredDefenderHits = null,
-  }) {
-    return _then(_value.copyWith(
-      attackerHits: null == attackerHits
-          ? _value.attackerHits
-          : attackerHits // ignore: cast_nullable_to_non_nullable
-              as int,
-      squaredAttackerHits: null == squaredAttackerHits
-          ? _value.squaredAttackerHits
-          : squaredAttackerHits // ignore: cast_nullable_to_non_nullable
-              as int,
-      defenderHits: null == defenderHits
-          ? _value.defenderHits
-          : defenderHits // ignore: cast_nullable_to_non_nullable
-              as int,
-      squaredDefenderHits: null == squaredDefenderHits
-          ? _value.squaredDefenderHits
-          : squaredDefenderHits // ignore: cast_nullable_to_non_nullable
-              as int,
-    ) as $Val);
-  }
+/// Create a copy of BattleAccumulatedHits
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? attackerHits = null,Object? squaredAttackerHits = null,Object? defenderHits = null,Object? squaredDefenderHits = null,}) {
+  return _then(_self.copyWith(
+attackerHits: null == attackerHits ? _self.attackerHits : attackerHits // ignore: cast_nullable_to_non_nullable
+as int,squaredAttackerHits: null == squaredAttackerHits ? _self.squaredAttackerHits : squaredAttackerHits // ignore: cast_nullable_to_non_nullable
+as int,defenderHits: null == defenderHits ? _self.defenderHits : defenderHits // ignore: cast_nullable_to_non_nullable
+as int,squaredDefenderHits: null == squaredDefenderHits ? _self.squaredDefenderHits : squaredDefenderHits // ignore: cast_nullable_to_non_nullable
+as int,
+  ));
 }
 
-/// @nodoc
-abstract class _$$AccumulatedHitsImplCopyWith<$Res>
-    implements $BattleAccumulatedHitsCopyWith<$Res> {
-  factory _$$AccumulatedHitsImplCopyWith(_$AccumulatedHitsImpl value,
-          $Res Function(_$AccumulatedHitsImpl) then) =
-      __$$AccumulatedHitsImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {int attackerHits,
-      int squaredAttackerHits,
-      int defenderHits,
-      int squaredDefenderHits});
 }
 
-/// @nodoc
-class __$$AccumulatedHitsImplCopyWithImpl<$Res>
-    extends _$BattleAccumulatedHitsCopyWithImpl<$Res, _$AccumulatedHitsImpl>
-    implements _$$AccumulatedHitsImplCopyWith<$Res> {
-  __$$AccumulatedHitsImplCopyWithImpl(
-      _$AccumulatedHitsImpl _value, $Res Function(_$AccumulatedHitsImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of BattleAccumulatedHits
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? attackerHits = null,
-    Object? squaredAttackerHits = null,
-    Object? defenderHits = null,
-    Object? squaredDefenderHits = null,
-  }) {
-    return _then(_$AccumulatedHitsImpl(
-      attackerHits: null == attackerHits
-          ? _value.attackerHits
-          : attackerHits // ignore: cast_nullable_to_non_nullable
-              as int,
-      squaredAttackerHits: null == squaredAttackerHits
-          ? _value.squaredAttackerHits
-          : squaredAttackerHits // ignore: cast_nullable_to_non_nullable
-              as int,
-      defenderHits: null == defenderHits
-          ? _value.defenderHits
-          : defenderHits // ignore: cast_nullable_to_non_nullable
-              as int,
-      squaredDefenderHits: null == squaredDefenderHits
-          ? _value.squaredDefenderHits
-          : squaredDefenderHits // ignore: cast_nullable_to_non_nullable
-              as int,
-    ));
-  }
-}
 
 /// @nodoc
 
-class _$AccumulatedHitsImpl extends _AccumulatedHits {
-  const _$AccumulatedHitsImpl(
-      {required this.attackerHits,
-      required this.squaredAttackerHits,
-      required this.defenderHits,
-      required this.squaredDefenderHits})
-      : super._();
 
-  @override
-  final int attackerHits;
-  @override
-  final int squaredAttackerHits;
-  @override
-  final int defenderHits;
-  @override
-  final int squaredDefenderHits;
+class _AccumulatedHits extends BattleAccumulatedHits {
+  const _AccumulatedHits({required this.attackerHits, required this.squaredAttackerHits, required this.defenderHits, required this.squaredDefenderHits}): super._();
+  
 
-  @override
-  String toString() {
-    return 'BattleAccumulatedHits(attackerHits: $attackerHits, squaredAttackerHits: $squaredAttackerHits, defenderHits: $defenderHits, squaredDefenderHits: $squaredDefenderHits)';
-  }
+@override final  int attackerHits;
+@override final  int squaredAttackerHits;
+@override final  int defenderHits;
+@override final  int squaredDefenderHits;
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$AccumulatedHitsImpl &&
-            (identical(other.attackerHits, attackerHits) ||
-                other.attackerHits == attackerHits) &&
-            (identical(other.squaredAttackerHits, squaredAttackerHits) ||
-                other.squaredAttackerHits == squaredAttackerHits) &&
-            (identical(other.defenderHits, defenderHits) ||
-                other.defenderHits == defenderHits) &&
-            (identical(other.squaredDefenderHits, squaredDefenderHits) ||
-                other.squaredDefenderHits == squaredDefenderHits));
-  }
+/// Create a copy of BattleAccumulatedHits
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$AccumulatedHitsCopyWith<_AccumulatedHits> get copyWith => __$AccumulatedHitsCopyWithImpl<_AccumulatedHits>(this, _$identity);
 
-  @override
-  int get hashCode => Object.hash(runtimeType, attackerHits,
-      squaredAttackerHits, defenderHits, squaredDefenderHits);
 
-  /// Create a copy of BattleAccumulatedHits
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$AccumulatedHitsImplCopyWith<_$AccumulatedHitsImpl> get copyWith =>
-      __$$AccumulatedHitsImplCopyWithImpl<_$AccumulatedHitsImpl>(
-          this, _$identity);
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _AccumulatedHits&&(identical(other.attackerHits, attackerHits) || other.attackerHits == attackerHits)&&(identical(other.squaredAttackerHits, squaredAttackerHits) || other.squaredAttackerHits == squaredAttackerHits)&&(identical(other.defenderHits, defenderHits) || other.defenderHits == defenderHits)&&(identical(other.squaredDefenderHits, squaredDefenderHits) || other.squaredDefenderHits == squaredDefenderHits));
 }
 
-abstract class _AccumulatedHits extends BattleAccumulatedHits {
-  const factory _AccumulatedHits(
-      {required final int attackerHits,
-      required final int squaredAttackerHits,
-      required final int defenderHits,
-      required final int squaredDefenderHits}) = _$AccumulatedHitsImpl;
-  const _AccumulatedHits._() : super._();
 
-  @override
-  int get attackerHits;
-  @override
-  int get squaredAttackerHits;
-  @override
-  int get defenderHits;
-  @override
-  int get squaredDefenderHits;
+@override
+int get hashCode => Object.hash(runtimeType,attackerHits,squaredAttackerHits,defenderHits,squaredDefenderHits);
 
-  /// Create a copy of BattleAccumulatedHits
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$AccumulatedHitsImplCopyWith<_$AccumulatedHitsImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+@override
+String toString() {
+  return 'BattleAccumulatedHits(attackerHits: $attackerHits, squaredAttackerHits: $squaredAttackerHits, defenderHits: $defenderHits, squaredDefenderHits: $squaredDefenderHits)';
 }
+
+
+}
+
+/// @nodoc
+abstract mixin class _$AccumulatedHitsCopyWith<$Res> implements $BattleAccumulatedHitsCopyWith<$Res> {
+  factory _$AccumulatedHitsCopyWith(_AccumulatedHits value, $Res Function(_AccumulatedHits) _then) = __$AccumulatedHitsCopyWithImpl;
+@override @useResult
+$Res call({
+ int attackerHits, int squaredAttackerHits, int defenderHits, int squaredDefenderHits
+});
+
+
+
+
+}
+/// @nodoc
+class __$AccumulatedHitsCopyWithImpl<$Res>
+    implements _$AccumulatedHitsCopyWith<$Res> {
+  __$AccumulatedHitsCopyWithImpl(this._self, this._then);
+
+  final _AccumulatedHits _self;
+  final $Res Function(_AccumulatedHits) _then;
+
+/// Create a copy of BattleAccumulatedHits
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? attackerHits = null,Object? squaredAttackerHits = null,Object? defenderHits = null,Object? squaredDefenderHits = null,}) {
+  return _then(_AccumulatedHits(
+attackerHits: null == attackerHits ? _self.attackerHits : attackerHits // ignore: cast_nullable_to_non_nullable
+as int,squaredAttackerHits: null == squaredAttackerHits ? _self.squaredAttackerHits : squaredAttackerHits // ignore: cast_nullable_to_non_nullable
+as int,defenderHits: null == defenderHits ? _self.defenderHits : defenderHits // ignore: cast_nullable_to_non_nullable
+as int,squaredDefenderHits: null == squaredDefenderHits ? _self.squaredDefenderHits : squaredDefenderHits // ignore: cast_nullable_to_non_nullable
+as int,
+  ));
+}
+
+
+}
+
+// dart format on

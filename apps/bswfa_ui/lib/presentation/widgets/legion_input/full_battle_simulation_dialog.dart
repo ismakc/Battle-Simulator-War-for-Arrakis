@@ -1,5 +1,5 @@
-import 'package:bswfa_ui/bloc/full_battle_simulation_bloc.dart';
 import 'package:bswfa_core/domain/battle/battle_result.dart';
+import 'package:bswfa_ui/bloc/full_battle_simulation_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -67,11 +67,7 @@ class FullBattleSimulationPopupDialog extends StatelessWidget {
             left: 20,
             child: Text(
               'Full Battle Simulation',
-              style: TextStyle(
-                color: Colors.black87,
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-              ),
+              style: TextStyle(color: Colors.black87, fontSize: 20, fontWeight: FontWeight.bold),
             ),
           ),
         ],
@@ -85,7 +81,10 @@ class FullBattleSimulationPopupDialog extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
-          Text(label, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.black54)),
+          Text(
+            label,
+            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.black54),
+          ),
           Text(value, style: const TextStyle(fontSize: 16)),
         ],
       ),

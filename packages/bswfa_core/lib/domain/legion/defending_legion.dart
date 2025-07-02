@@ -6,7 +6,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'defending_legion.freezed.dart';
 
 @freezed
-class DefendingLegion with _$DefendingLegion {
+abstract class DefendingLegion with _$DefendingLegion {
   const DefendingLegion._();
 
   const factory DefendingLegion({

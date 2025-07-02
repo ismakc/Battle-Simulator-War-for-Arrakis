@@ -2,4 +2,4 @@ name: bswfa
 publish_to: 'none'
 
 environment:
-  sdk: '>=3.4.4 <4.0.0'
+  sdk: '>=3.8.1 <4.0.0'

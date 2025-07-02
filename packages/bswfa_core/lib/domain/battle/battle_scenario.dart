@@ -5,11 +5,9 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'battle_scenario.freezed.dart';
 
 @freezed
-class BattleScenario with _$BattleScenario {
-  const factory BattleScenario({
-    required AttackingLegion attackingLegion,
-    required DefendingLegion defendingLegion,
-  }) = _BattleScenario;
+abstract class BattleScenario with _$BattleScenario {
+  const factory BattleScenario({required AttackingLegion attackingLegion, required DefendingLegion defendingLegion}) =
+      _BattleScenario;
 
   static const BattleScenario defaultValues = BattleScenario(
     attackingLegion: AttackingLegion.defaultValues,

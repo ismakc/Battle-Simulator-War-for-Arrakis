@@ -1,4 +1,4 @@
-package es.evilmonkey.bswfa_ui
+package es.evilmonkey.bswfa
 
 import io.flutter.embedding.android.FlutterActivity
 

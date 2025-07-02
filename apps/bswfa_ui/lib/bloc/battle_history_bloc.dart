@@ -26,9 +26,7 @@ class BattleHistoryBloc extends Bloc<BattleHistoryEvent, BattleHistoryState> {
   }
 
   FutureOr<void> _onReset(_Reset event, Emitter<BattleHistoryState> emit) {
-    emit(
-      const BattleHistoryState(battleHistory: <BattleResult>[]),
-    );
+    emit(const BattleHistoryState(battleHistory: <BattleResult>[]));
   }
 }
 
@@ -40,7 +38,7 @@ class BattleHistoryEvent with _$BattleHistoryEvent {
 }
 
 @freezed
-class BattleHistoryState with _$BattleHistoryState {
+abstract class BattleHistoryState with _$BattleHistoryState {
   const factory BattleHistoryState({required List<BattleResult> battleHistory}) = _BattleHistoryState;
 
   factory BattleHistoryState.initial() => const BattleHistoryState(battleHistory: <BattleResult>[]);
