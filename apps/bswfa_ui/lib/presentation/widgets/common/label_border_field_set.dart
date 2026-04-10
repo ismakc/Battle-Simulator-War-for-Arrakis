@@ -2,7 +2,11 @@ import 'package:flutter/material.dart';
 
 class LabeledBorderFieldset extends StatelessWidget {
   const LabeledBorderFieldset({
-    required this.label, required this.borderColor, required this.textColor, required this.child, super.key,
+    required this.label,
+    required this.borderColor,
+    required this.textColor,
+    required this.child,
+    super.key,
   });
 
   final String label;
@@ -16,7 +20,12 @@ class LabeledBorderFieldset extends StatelessWidget {
       children: <Widget>[
         Container(
           margin: const EdgeInsets.only(top: 6.0),
-          padding: const EdgeInsets.only(top: 15.0, bottom: 5.0, left: 8.0, right: 8.0),
+          padding: const EdgeInsets.only(
+            top: 15.0,
+            bottom: 5.0,
+            left: 8.0,
+            right: 8.0,
+          ),
           decoration: BoxDecoration(
             border: Border.all(color: borderColor, width: 2.0),
             borderRadius: BorderRadius.circular(10.0),

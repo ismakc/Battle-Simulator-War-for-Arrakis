@@ -10,20 +10,33 @@ class BattleHitsCalculator {
 
   static BattleHitsCalculator get instance => _instance;
 
-  (int attackerHits, int defenderHits) calculateHits(BattleScenario battleScenario, BattleDiceRoll battleDiceRoll) {
+  (int attackerHits, int defenderHits) calculateHits(
+    BattleScenario battleScenario,
+    BattleDiceRoll battleDiceRoll,
+  ) {
     final BattleStats attackerStats = BattleStats();
     final BattleStats defenderStats = BattleStats();
 
-    attackerStats.accumulateSwordHits(battleDiceRoll.attackerDiceRoll.swordCount);
-    defenderStats.accumulateSwordHits(battleDiceRoll.defenderDiceRoll.swordCount);
+    attackerStats.accumulateSwordHits(
+      battleDiceRoll.attackerDiceRoll.swordCount,
+    );
+    defenderStats.accumulateSwordHits(
+      battleDiceRoll.defenderDiceRoll.swordCount,
+    );
 
-    attackerStats.accumulateShields(battleDiceRoll.attackerDiceRoll.shieldCount);
-    defenderStats.accumulateShields(battleDiceRoll.defenderDiceRoll.shieldCount);
+    attackerStats.accumulateShields(
+      battleDiceRoll.attackerDiceRoll.shieldCount,
+    );
+    defenderStats.accumulateShields(
+      battleDiceRoll.defenderDiceRoll.shieldCount,
+    );
 
     attackerStats.accumulateStarHitsAndStarShields(
       namedLeaders: battleScenario.attackingLegion.namedLeaders,
       genericLeaders: battleScenario.attackingLegion.genericLeaders,
-      starCount: battleDiceRoll.attackerDiceRoll.starCount + (battleScenario.attackingLegion.surpriseAttack ? 1 : 0),
+      starCount:
+          battleDiceRoll.attackerDiceRoll.starCount +
+          (battleScenario.attackingLegion.surpriseAttack ? 1 : 0),
       policyOrderFunction: LeaderSelectorPolicy.orderAttackerLeaders,
     );
     defenderStats.accumulateStarHitsAndStarShields(
@@ -79,14 +92,20 @@ class BattleStats {
       starShields += orderedLeaders[usedStars].defense;
       usedStars++;
     }
-    while (usedStars < starCount && usedStars - orderedLeaders.length < genericLeaders) {
+    while (usedStars < starCount &&
+        usedStars - orderedLeaders.length < genericLeaders) {
       starHits++;
       usedStars++;
     }
   }
 
-  int calculateTotalHits({required int specialEliteUnits, required int opponentShields}) {
-    final int usefulShields = (opponentShields - specialEliteUnits).clamp(0, double.infinity).toInt();
+  int calculateTotalHits({
+    required int specialEliteUnits,
+    required int opponentShields,
+  }) {
+    final int usefulShields = (opponentShields - specialEliteUnits)
+        .clamp(0, double.infinity)
+        .toInt();
     return (totalSwords - usefulShields).clamp(0, double.infinity).toInt();
   }
 }

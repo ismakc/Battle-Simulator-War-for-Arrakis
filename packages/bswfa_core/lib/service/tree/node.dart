@@ -2,7 +2,7 @@ class Node<T> {
   Node(this.value) : children = <Node<T>>[];
 
   static const int defaultNodeInitialCapacity = 6;
-  
+
   final List<Node<T>> children;
   T value;
 

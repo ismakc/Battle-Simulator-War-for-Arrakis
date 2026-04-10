@@ -18,7 +18,10 @@ class SurpriseAttackInput extends StatelessWidget {
     return ClampFirstRow(
       flex: 6,
       maxWidth: 94,
-      firstChild: Text(label, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+      firstChild: Text(
+        label,
+        style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+      ),
       children: <Widget>[
         Align(
           alignment: Alignment.centerLeft,

@@ -1,11 +1,21 @@
 @echo off
+:: build_all.bat — Automatiza la generación de código Freezed para los paquetes Dart del monorepo bswfa.
+:: Ejecuta build_runner en orden: primero bswfa_core, luego bswfa_ui (el segundo depende del primero).
+:: Uso:
+::   build_all.bat        — Genera el código una vez en ambos paquetes.
+::   build_all.bat -w     — Inicia el generador en modo observación (watch) en ambos paquetes.
+:: Notas:
+::   - Ejecutar tras modificar cualquier clase anotada con @freezed.
+::   - Cada build se ejecuta en una ventana cmd separada para observar la salida.
 setlocal
 
+:: Determina si se activa el modo watch
 set watch_mode=false
 if "%1"=="-w" (
     set watch_mode=true
 )
 
+:: Define los paquetes a procesar (orden: core primero)
 set packages=packages\bswfa_core apps\bswfa_ui
 
 for %%p in (%packages%) do (

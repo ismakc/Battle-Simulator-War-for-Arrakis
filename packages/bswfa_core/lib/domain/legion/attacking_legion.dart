@@ -5,6 +5,10 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'attacking_legion.freezed.dart';
 
+/// Una clase que representa una legión atacante, que incluye información sobre
+/// los líderes genéricos, unidades regulares, unidades élite, unidades élite
+/// especiales, cartas usadas, líderes nombrados y si se ha realizado un ataque
+/// sorpresa.
 @freezed
 abstract class AttackingLegion with _$AttackingLegion {
   const AttackingLegion._();
@@ -21,12 +25,18 @@ abstract class AttackingLegion with _$AttackingLegion {
 
   static const AttackingLegion defaultValues = AttackingLegion();
 
+  /// El número de dados que se pueden lanzar en un ataque,
+  /// que es el mínimo entre 6 y la suma de unidades regulares,
+  /// élite, élite especiales y cartas usadas.
   int get diceCount {
     return min(6, regularUnits + eliteUnits + specialEliteUnits + usedCards);
   }
 
   int get maxStarsCount {
-    return min(diceCount, genericLeaders + namedLeaders.length + (surpriseAttack ? 1 : 0));
+    return min(
+      diceCount,
+      genericLeaders + namedLeaders.length + (surpriseAttack ? 1 : 0),
+    );
   }
 
   int get unlimitedMaxStarsCount {
@@ -34,7 +44,11 @@ abstract class AttackingLegion with _$AttackingLegion {
   }
 
   int get lifeCount {
-    return regularUnits + eliteUnits * 2 + specialEliteUnits * 2 + genericLeaders + namedLeaders.length;
+    return regularUnits +
+        eliteUnits * 2 +
+        specialEliteUnits * 2 +
+        genericLeaders +
+        namedLeaders.length;
   }
 
   int get totalUnits {

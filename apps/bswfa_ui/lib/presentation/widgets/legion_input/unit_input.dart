@@ -22,7 +22,10 @@ class UnitInput extends StatelessWidget {
       flex: 6,
       minWidth: 100.0,
       maxWidth: 100.0,
-      firstChild: Text(label, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+      firstChild: Text(
+        label,
+        style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+      ),
       children: <Widget>[
         Container(
           margin: const EdgeInsets.only(right: 8.0),

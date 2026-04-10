@@ -17,9 +17,7 @@ class MainTopBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return FittedBox(
       child: ConstrainedBox(
-        constraints: const BoxConstraints(
-          maxWidth: 600,
-        ),
+        constraints: const BoxConstraints(maxWidth: 600),
         child: AppBar(
           title: Stack(
             children: <Widget>[
@@ -34,23 +32,21 @@ class MainTopBar extends StatelessWidget implements PreferredSizeWidget {
                 top: 0,
                 child: FutureBuilder<String>(
                   future: _getVersionNumber(),
-                  builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
-                    final String versionText = snapshot.hasData ? '${snapshot.data} ' : '';
-                    return Text(
-                      versionText,
-                      style: const TextStyle(
-                        fontSize: 12.0,
-                      ),
-                    );
-                  },
+                  builder:
+                      (BuildContext context, AsyncSnapshot<String> snapshot) {
+                        final String versionText = snapshot.hasData
+                            ? '${snapshot.data} '
+                            : '';
+                        return Text(
+                          versionText,
+                          style: const TextStyle(fontSize: 12.0),
+                        );
+                      },
                 ),
               ),
             ],
           ),
-          actions: const <Widget>[
-            ResetButton(),
-            CollapseButton(),
-          ],
+          actions: const <Widget>[ResetButton(), CollapseButton()],
           backgroundColor: Colors.black87,
           centerTitle: true,
           titleTextStyle: const TextStyle(
@@ -79,8 +75,12 @@ class ResetButton extends StatelessWidget {
         color: Colors.amber,
         icon: const Icon(Icons.refresh),
         onPressed: () {
-          context.read<BattleHistoryBloc>().add(const BattleHistoryEvent.reset());
-          context.read<BattleScenarioBloc>().add(const BattleScenarioEvent.reset());
+          context.read<BattleHistoryBloc>().add(
+            const BattleHistoryEvent.reset(),
+          );
+          context.read<BattleScenarioBloc>().add(
+            const BattleScenarioEvent.reset(),
+          );
         },
       ),
     );
@@ -99,7 +99,9 @@ class CollapseButton extends StatelessWidget {
         icon: Builder(
           builder: (BuildContext context) {
             return Icon(
-              context.watch<CollapseCubit>().state.collapsed ? Icons.expand_more : Icons.expand_less,
+              context.watch<CollapseCubit>().state.collapsed
+                  ? Icons.expand_more
+                  : Icons.expand_less,
             );
           },
         ),

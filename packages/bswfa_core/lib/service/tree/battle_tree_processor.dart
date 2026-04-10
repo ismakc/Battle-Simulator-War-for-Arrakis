@@ -12,7 +12,10 @@ class BattleTreeProcessor {
   final Cache<int, BattleNodeState> memo;
 
   BattleNodeState processLeafState(BattleNodeState state) {
-    final (int attackerHits, int defenderHits) = hitsCalculator.calculateHits(scenario, state.battleDiceRoll);
+    final (int attackerHits, int defenderHits) = hitsCalculator.calculateHits(
+      scenario,
+      state.battleDiceRoll,
+    );
     final BattleNodeState updatedState = state.withAccumulatedHits(
       BattleAccumulatedHits(
         attackerHits: attackerHits,
@@ -24,11 +27,16 @@ class BattleTreeProcessor {
     return memo.put(state.battleDiceRoll.fullDiceRollBitMask(), updatedState);
   }
 
-  BattleNodeState updateNodeState(BattleNodeState state, List<BattleNodeState> childStates) {
+  BattleNodeState updateNodeState(
+    BattleNodeState state,
+    List<BattleNodeState> childStates,
+  ) {
     final BattleAccumulatedHits newAccumulatedHits = childStates
         .map((BattleNodeState e) => e.accumulator)
         .reduce((BattleAccumulatedHits a, BattleAccumulatedHits b) => a.add(b));
-    final BattleNodeState updatedState = state.withAccumulatedHits(newAccumulatedHits);
+    final BattleNodeState updatedState = state.withAccumulatedHits(
+      newAccumulatedHits,
+    );
     return memo.put(state.battleDiceRoll.fullDiceRollBitMask(), updatedState);
   }
 

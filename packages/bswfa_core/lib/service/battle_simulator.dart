@@ -14,7 +14,9 @@ class BattleSimulator {
   static BattleSimulator get instance => _instance;
 
   BattleResult simulateSingleRound(BattleScenario battleScenario) {
-    final BattleStatistic battleStatistic = BattleStatisticCalculator.calc(battleScenario);
+    final BattleStatistic battleStatistic = BattleStatisticCalculator.calc(
+      battleScenario,
+    );
     return BattleResult(
       playedCombatRounds: 1,
       statistic: battleStatistic,
@@ -30,29 +32,42 @@ class BattleSimulator {
     BattleScenario battleScenarioForSeveralRounds = battleScenario;
     while (!combatEnds) {
       rounds++;
-      final BattleResult result = simulateSingleRound(battleScenarioForSeveralRounds);
+      final BattleResult result = simulateSingleRound(
+        battleScenarioForSeveralRounds,
+      );
 
       totalAttackerExpectedHits += result.statistic.attackerExpectedHits;
       totalDefenderExpectedHits += result.statistic.defenderExpectedHits;
       if (rounds == 2) {
-        battleScenarioForSeveralRounds = battleScenarioForSeveralRounds.copyWith(
-          attackingLegion: battleScenarioForSeveralRounds.attackingLegion.copyWith(usedCards: 0, surpriseAttack: false),
-          defendingLegion: battleScenarioForSeveralRounds.defendingLegion.copyWith(
-            usedCards: 0,
-          ),
-        );
+        battleScenarioForSeveralRounds = battleScenarioForSeveralRounds
+            .copyWith(
+              attackingLegion: battleScenarioForSeveralRounds.attackingLegion
+                  .copyWith(usedCards: 0, surpriseAttack: false),
+              defendingLegion: battleScenarioForSeveralRounds.defendingLegion
+                  .copyWith(usedCards: 0),
+            );
       }
-      final AttackingLegion damagedAttackingLegion = _updateLegionAfterAttack(
-        Legion.fromAttackingLegion(battleScenarioForSeveralRounds.attackingLegion),
-        result.statistic.defenderExpectedHits,
-        battleScenarioForSeveralRounds.defendingLegion.settlementLevel > 0,
-      ).overwriteAttackingLegionWithLegion(battleScenarioForSeveralRounds.attackingLegion);
+      final AttackingLegion damagedAttackingLegion =
+          _updateLegionAfterAttack(
+            Legion.fromAttackingLegion(
+              battleScenarioForSeveralRounds.attackingLegion,
+            ),
+            result.statistic.defenderExpectedHits,
+            battleScenarioForSeveralRounds.defendingLegion.settlementLevel > 0,
+          ).overwriteAttackingLegionWithLegion(
+            battleScenarioForSeveralRounds.attackingLegion,
+          );
 
-      final DefendingLegion damagedDefendingLegion = _updateLegionAfterAttack(
-        Legion.fromDefendingLegion(battleScenarioForSeveralRounds.defendingLegion),
-        result.statistic.attackerExpectedHits,
-        false,
-      ).overwriteDefendingLegionWithLegion(battleScenarioForSeveralRounds.defendingLegion);
+      final DefendingLegion damagedDefendingLegion =
+          _updateLegionAfterAttack(
+            Legion.fromDefendingLegion(
+              battleScenarioForSeveralRounds.defendingLegion,
+            ),
+            result.statistic.attackerExpectedHits,
+            false,
+          ).overwriteDefendingLegionWithLegion(
+            battleScenarioForSeveralRounds.defendingLegion,
+          );
 
       battleScenarioForSeveralRounds = battleScenarioForSeveralRounds.copyWith(
         attackingLegion: damagedAttackingLegion,

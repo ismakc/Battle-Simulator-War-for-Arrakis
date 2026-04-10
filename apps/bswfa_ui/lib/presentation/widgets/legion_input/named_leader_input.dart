@@ -53,7 +53,9 @@ class _NamedLeaderInputState extends State<NamedLeaderInput> {
 
   @override
   Widget build(BuildContext context) {
-    final List<GestureDetector> leadersWidgets = NamedLeader.values.map((NamedLeader leader) {
+    final List<GestureDetector> leadersWidgets = NamedLeader.values.map((
+      NamedLeader leader,
+    ) {
       final bool isSelected = _values.contains(leader);
       return GestureDetector(
         onTap: () => _toggleLeaderSelection(leader),
@@ -84,7 +86,10 @@ class _NamedLeaderInputState extends State<NamedLeaderInput> {
       flex: 5,
       minWidth: 100.0,
       maxWidth: 100.0,
-      firstChild: const Text('Named', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+      firstChild: const Text(
+        'Named',
+        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+      ),
       children: <Widget>[
         Container(
           margin: const EdgeInsets.only(right: 8.0),
@@ -107,7 +112,10 @@ class _NamedLeaderInputState extends State<NamedLeaderInput> {
           children: firstRowChildren,
         ),
         if (secondRowChildren.isNotEmpty)
-          Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: secondRowChildren),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: secondRowChildren,
+          ),
       ],
     );
   }

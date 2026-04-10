@@ -1,6 +1,6 @@
-import 'package:bswfa_ui/bloc/battle_scenario_bloc.dart';
 import 'package:bswfa_core/domain/legion/attacking_legion.dart';
 import 'package:bswfa_core/domain/legion/named_leader.dart';
+import 'package:bswfa_ui/bloc/battle_scenario_bloc.dart';
 import 'package:bswfa_ui/presentation/widgets/common/label_border_field_set.dart';
 import 'package:bswfa_ui/presentation/widgets/legion_input/named_leader_input.dart';
 import 'package:bswfa_ui/presentation/widgets/legion_input/surprise_attack_input.dart';
@@ -13,8 +13,13 @@ class AttackingLegionInput extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocSelector<BattleScenarioBloc, BattleScenarioState, AttackingLegion>(
-      selector: (BattleScenarioState state) => state.battleScenario.attackingLegion,
+    return BlocSelector<
+      BattleScenarioBloc,
+      BattleScenarioState,
+      AttackingLegion
+    >(
+      selector: (BattleScenarioState state) =>
+          state.battleScenario.attackingLegion,
       builder: (BuildContext context, AttackingLegion state) {
         return LabeledBorderFieldset(
           label:
@@ -28,27 +33,33 @@ class AttackingLegionInput extends StatelessWidget {
                 label: 'Leader',
                 startPosition: state.genericLeaders,
                 onValueChanged: (int value) {
-                  context
-                      .read<BattleScenarioBloc>()
-                      .add(BattleScenarioEvent.updateAttackingLegion(state.copyWith(genericLeaders: value)));
+                  context.read<BattleScenarioBloc>().add(
+                    BattleScenarioEvent.updateAttackingLegion(
+                      state.copyWith(genericLeaders: value),
+                    ),
+                  );
                 },
               ),
               UnitInput(
                 label: 'Regular',
                 startPosition: state.regularUnits,
                 onValueChanged: (int value) {
-                  context
-                      .read<BattleScenarioBloc>()
-                      .add(BattleScenarioEvent.updateAttackingLegion(state.copyWith(regularUnits: value)));
+                  context.read<BattleScenarioBloc>().add(
+                    BattleScenarioEvent.updateAttackingLegion(
+                      state.copyWith(regularUnits: value),
+                    ),
+                  );
                 },
               ),
               UnitInput(
                 label: 'Elite',
                 startPosition: state.eliteUnits,
                 onValueChanged: (int value) {
-                  context
-                      .read<BattleScenarioBloc>()
-                      .add(BattleScenarioEvent.updateAttackingLegion(state.copyWith(eliteUnits: value)));
+                  context.read<BattleScenarioBloc>().add(
+                    BattleScenarioEvent.updateAttackingLegion(
+                      state.copyWith(eliteUnits: value),
+                    ),
+                  );
                 },
               ),
               UnitInput(
@@ -56,35 +67,43 @@ class AttackingLegionInput extends StatelessWidget {
                 startPosition: state.specialEliteUnits,
                 onValueChanged: (int value) {
                   context.read<BattleScenarioBloc>().add(
-                        BattleScenarioEvent.updateAttackingLegion(state.copyWith(specialEliteUnits: value)),
-                      );
+                    BattleScenarioEvent.updateAttackingLegion(
+                      state.copyWith(specialEliteUnits: value),
+                    ),
+                  );
                 },
               ),
               UnitInput(
                 label: 'Cards',
                 startPosition: state.usedCards,
                 onValueChanged: (int value) {
-                  context
-                      .read<BattleScenarioBloc>()
-                      .add(BattleScenarioEvent.updateAttackingLegion(state.copyWith(usedCards: value)));
+                  context.read<BattleScenarioBloc>().add(
+                    BattleScenarioEvent.updateAttackingLegion(
+                      state.copyWith(usedCards: value),
+                    ),
+                  );
                 },
               ),
               NamedLeaderInput(
                 label: 'Named',
                 values: state.namedLeaders,
                 onValueChanged: (List<NamedLeader> value) {
-                  context
-                      .read<BattleScenarioBloc>()
-                      .add(BattleScenarioEvent.updateAttackingLegion(state.copyWith(namedLeaders: value)));
+                  context.read<BattleScenarioBloc>().add(
+                    BattleScenarioEvent.updateAttackingLegion(
+                      state.copyWith(namedLeaders: value),
+                    ),
+                  );
                 },
               ),
               SurpriseAttackInput(
                 label: 'Surprise',
                 value: state.surpriseAttack,
                 onValueChanged: (bool value) {
-                  context
-                      .read<BattleScenarioBloc>()
-                      .add(BattleScenarioEvent.updateAttackingLegion(state.copyWith(surpriseAttack: value)));
+                  context.read<BattleScenarioBloc>().add(
+                    BattleScenarioEvent.updateAttackingLegion(
+                      state.copyWith(surpriseAttack: value),
+                    ),
+                  );
                 },
               ),
             ],

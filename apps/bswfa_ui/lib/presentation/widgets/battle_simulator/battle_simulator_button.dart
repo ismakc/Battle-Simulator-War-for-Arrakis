@@ -9,18 +9,24 @@ class BattleSimulatorButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      style: ElevatedButton.styleFrom(
-        backgroundColor: Colors.black87,
-      ),
+      style: ElevatedButton.styleFrom(backgroundColor: Colors.black87),
       onPressed: () {
-        final BattleScenarioState battleScenario = context.read<BattleScenarioBloc>().state;
-        context.read<BattleHistoryBloc>().add(BattleHistoryEvent.simulateBattle(battleScenario.battleScenario));
+        final BattleScenarioState battleScenario = context
+            .read<BattleScenarioBloc>()
+            .state;
+        context.read<BattleHistoryBloc>().add(
+          BattleHistoryEvent.simulateBattle(battleScenario.battleScenario),
+        );
       },
       child: const Align(
         heightFactor: 1.6,
         child: Text(
           'Simulate Battle',
-          style: TextStyle(fontSize: 18, color: Colors.amber, fontWeight: FontWeight.bold),
+          style: TextStyle(
+            fontSize: 18,
+            color: Colors.amber,
+            fontWeight: FontWeight.bold,
+          ),
         ),
       ),
     );

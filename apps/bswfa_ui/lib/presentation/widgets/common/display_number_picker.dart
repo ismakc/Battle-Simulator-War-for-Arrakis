@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 
 class DisplayNumberPicker extends StatefulWidget {
   const DisplayNumberPicker({
-    required this.datas, required this.startPosition, required this.onValueChanged, super.key,
+    required this.datas,
+    required this.startPosition,
+    required this.onValueChanged,
+    super.key,
   });
 
   final List<int> datas;
@@ -52,7 +55,11 @@ class _DisplayNumberPickerState extends State<DisplayNumberPicker> {
             alignment: Alignment.center,
             decoration: BoxDecoration(
               color: index == _selectedPosition ? Colors.amber : Colors.black87,
-              border: Border.all(color: index == _selectedPosition ? Colors.black87 : Colors.amber),
+              border: Border.all(
+                color: index == _selectedPosition
+                    ? Colors.black87
+                    : Colors.amber,
+              ),
               borderRadius: BorderRadius.circular(12.0),
             ),
             child: Text(
@@ -60,7 +67,9 @@ class _DisplayNumberPickerState extends State<DisplayNumberPicker> {
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
-                color: index == _selectedPosition ? Colors.black87 : Colors.amber,
+                color: index == _selectedPosition
+                    ? Colors.black87
+                    : Colors.amber,
               ),
             ),
           ),

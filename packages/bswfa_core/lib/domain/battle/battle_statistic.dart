@@ -24,8 +24,10 @@ abstract class BattleStatistic with _$BattleStatistic {
     return copyWith(
       attackerExpectedHits: attackerExpectedHits + val.attackerExpectedHits,
       defenderExpectedHits: defenderExpectedHits + val.defenderExpectedHits,
-      attackerStdDeviationHits: attackerStdDeviationHits + val.attackerStdDeviationHits,
-      defenderStdDeviationHits: defenderStdDeviationHits + val.defenderStdDeviationHits,
+      attackerStdDeviationHits:
+          attackerStdDeviationHits + val.attackerStdDeviationHits,
+      defenderStdDeviationHits:
+          defenderStdDeviationHits + val.defenderStdDeviationHits,
     );
   }
 }

@@ -4,7 +4,8 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'collapse_cubit.freezed.dart';
 
-bool isCollapsed(BuildContext context) => !context.watch<CollapseCubit>().state.collapsed;
+bool isCollapsed(BuildContext context) =>
+    !context.watch<CollapseCubit>().state.collapsed;
 
 class CollapseCubit extends Cubit<CollapseState> {
   CollapseCubit() : super(const CollapseState());
@@ -16,5 +17,6 @@ class CollapseCubit extends Cubit<CollapseState> {
 
 @freezed
 abstract class CollapseState with _$CollapseState {
-  const factory CollapseState({@Default(false) bool collapsed}) = _CollapseState;
+  const factory CollapseState({@Default(false) bool collapsed}) =
+      _CollapseState;
 }

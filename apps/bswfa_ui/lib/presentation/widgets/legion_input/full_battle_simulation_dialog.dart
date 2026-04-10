@@ -4,7 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class FullBattleSimulationPopupDialog extends StatelessWidget {
-  const FullBattleSimulationPopupDialog({required this.battleResult, super.key});
+  const FullBattleSimulationPopupDialog({
+    required this.battleResult,
+    super.key,
+  });
 
   final BattleResult battleResult;
 
@@ -37,7 +40,11 @@ class FullBattleSimulationPopupDialog extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    _buildAlignedText(context, 'Rounds: ', '${battleResult.playedCombatRounds} \u{23F3}'),
+                    _buildAlignedText(
+                      context,
+                      'Rounds: ',
+                      '${battleResult.playedCombatRounds} \u{23F3}',
+                    ),
                     _buildAlignedText(
                       context,
                       'Att.Hits: ',
@@ -48,7 +55,11 @@ class FullBattleSimulationPopupDialog extends StatelessWidget {
                       'Def.Hits: ',
                       '${battleResult.statistic.defenderExpectedHits.toStringAsFixed(2)} \u{2694}',
                     ),
-                    _buildAlignedText(context, 'Probable Winner: ', '${battleResult.winner()}\u{1F3C6}'),
+                    _buildAlignedText(
+                      context,
+                      'Probable Winner: ',
+                      '${battleResult.winner()}\u{1F3C6}',
+                    ),
                   ],
                 );
               },
@@ -67,7 +78,11 @@ class FullBattleSimulationPopupDialog extends StatelessWidget {
             left: 20,
             child: Text(
               'Full Battle Simulation',
-              style: TextStyle(color: Colors.black87, fontSize: 20, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                color: Colors.black87,
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
         ],
@@ -83,7 +98,11 @@ class FullBattleSimulationPopupDialog extends StatelessWidget {
         children: <Widget>[
           Text(
             label,
-            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.black54),
+            style: const TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+              color: Colors.black54,
+            ),
           ),
           Text(value, style: const TextStyle(fontSize: 16)),
         ],

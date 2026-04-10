@@ -44,7 +44,9 @@ abstract class Legion with _$Legion {
 
   static const Legion defaultValues = Legion();
 
-  AttackingLegion overwriteAttackingLegionWithLegion(AttackingLegion attackingLegion) {
+  AttackingLegion overwriteAttackingLegionWithLegion(
+    AttackingLegion attackingLegion,
+  ) {
     return attackingLegion.copyWith(
       genericLeaders: genericLeaders,
       regularUnits: regularUnits,
@@ -55,7 +57,9 @@ abstract class Legion with _$Legion {
     );
   }
 
-  DefendingLegion overwriteDefendingLegionWithLegion(DefendingLegion defendingLegion) {
+  DefendingLegion overwriteDefendingLegionWithLegion(
+    DefendingLegion defendingLegion,
+  ) {
     return defendingLegion.copyWith(
       genericLeaders: genericLeaders,
       regularUnits: regularUnits,
@@ -71,7 +75,11 @@ abstract class Legion with _$Legion {
   }
 
   int get lifeCount {
-    return regularUnits + eliteUnits * 2 + specialEliteUnits * 2 + genericLeaders + namedLeaders.length;
+    return regularUnits +
+        eliteUnits * 2 +
+        specialEliteUnits * 2 +
+        genericLeaders +
+        namedLeaders.length;
   }
 
   int get totalUnits {
@@ -84,19 +92,32 @@ abstract class Legion with _$Legion {
 
   Legion calculateOptimalLoss() {
     final Map<String, Legion?> damagedLegions = <String, Legion?>{
-      'minusLeader': genericLeaders == 0 ? null : copyWith(genericLeaders: genericLeaders - 1),
-      'minusRegular': regularUnits == 0 ? null : copyWith(regularUnits: regularUnits - 1),
-      'minusElite': eliteUnits == 0 ? null : copyWith(regularUnits: regularUnits + 1, eliteUnits: eliteUnits - 1),
+      'minusLeader': genericLeaders == 0
+          ? null
+          : copyWith(genericLeaders: genericLeaders - 1),
+      'minusRegular': regularUnits == 0
+          ? null
+          : copyWith(regularUnits: regularUnits - 1),
+      'minusElite': eliteUnits == 0
+          ? null
+          : copyWith(
+              regularUnits: regularUnits + 1,
+              eliteUnits: eliteUnits - 1,
+            ),
       'minusSpecial': specialEliteUnits == 0
           ? null
-          : copyWith(regularUnits: regularUnits + 1, specialEliteUnits: specialEliteUnits - 1),
+          : copyWith(
+              regularUnits: regularUnits + 1,
+              specialEliteUnits: specialEliteUnits - 1,
+            ),
       'minusNamed': namedLeaders.isEmpty
           ? null
           : copyWith(
               namedLeaders: List<NamedLeader>.from(namedLeaders)
                 ..sort(
-                  (NamedLeader a, NamedLeader b) =>
-                      b.attack != a.attack ? b.attack.compareTo(a.attack) : b.defense.compareTo(a.defense),
+                  (NamedLeader a, NamedLeader b) => b.attack != a.attack
+                      ? b.attack.compareTo(a.attack)
+                      : b.defense.compareTo(a.defense),
                 )
                 ..removeLast(),
             ),
@@ -115,7 +136,8 @@ abstract class Legion with _$Legion {
       final bool shouldUpdate =
           maxValue == null ||
           diceCount > maxValue ||
-          (diceCount == maxValue && shouldReplaceSelectedEntry(selectedEntry, entry, diceCount));
+          (diceCount == maxValue &&
+              shouldReplaceSelectedEntry(selectedEntry, entry, diceCount));
 
       if (shouldUpdate) {
         selectedEntry = entry;
@@ -137,11 +159,13 @@ abstract class Legion with _$Legion {
 
     switch (entry.key) {
       case 'minusLeader':
-        return genericLeaders > 0 && (genericLeaders + namedLeaders.length) > diceCount;
+        return genericLeaders > 0 &&
+            (genericLeaders + namedLeaders.length) > diceCount;
       case 'minusElite':
         return selectedEntry.key != 'minusElite';
       case 'minusSpecial':
-        return selectedEntry.key != 'minusElite' && selectedEntry.key != 'minusSpecial';
+        return selectedEntry.key != 'minusElite' &&
+            selectedEntry.key != 'minusSpecial';
       case 'minusNamed':
         return totalUnits == 1 || selectedEntry.key != 'minusRegular';
       case 'minusRegular':

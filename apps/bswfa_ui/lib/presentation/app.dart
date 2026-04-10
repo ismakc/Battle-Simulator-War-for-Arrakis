@@ -15,14 +15,25 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: <SingleChildWidget>[
-        BlocProvider<CollapseCubit>(create: (BuildContext context) => CollapseCubit()),
-        BlocProvider<BattleScenarioBloc>(create: (BuildContext context) => BattleScenarioBloc()),
-        BlocProvider<BattleHistoryBloc>(create: (BuildContext context) => BattleHistoryBloc()),
-        BlocProvider<FullBattleSimulationBloc>(create: (BuildContext context) => FullBattleSimulationBloc()),
+        BlocProvider<CollapseCubit>(
+          create: (BuildContext context) => CollapseCubit(),
+        ),
+        BlocProvider<BattleScenarioBloc>(
+          create: (BuildContext context) => BattleScenarioBloc(),
+        ),
+        BlocProvider<BattleHistoryBloc>(
+          create: (BuildContext context) => BattleHistoryBloc(),
+        ),
+        BlocProvider<FullBattleSimulationBloc>(
+          create: (BuildContext context) => FullBattleSimulationBloc(),
+        ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        theme: ThemeData(useMaterial3: true, scaffoldBackgroundColor: Colors.white),
+        theme: ThemeData(
+          useMaterial3: true,
+          scaffoldBackgroundColor: Colors.white,
+        ),
         themeMode: ThemeMode.light,
         title: 'WfA Battle Simulator',
         home: const ContentFrame(
@@ -44,7 +55,10 @@ class ContentFrame extends StatelessWidget {
       child: ColoredBox(
         color: Colors.white,
         child: Center(
-          child: ConstrainedBox(constraints: const BoxConstraints(maxWidth: 600), child: child),
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 600),
+            child: child,
+          ),
         ),
       ),
     );

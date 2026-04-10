@@ -9,7 +9,9 @@ class BattleTreeDicePermutator {
   final BattleTreeProcessor battleTreeProcessor;
 
   Node<BattleNodeState> createBattleTree() {
-    final Node<BattleNodeState> rootNode = Node<BattleNodeState>(BattleNodeState.initialState());
+    final Node<BattleNodeState> rootNode = Node<BattleNodeState>(
+      BattleNodeState.initialState(),
+    );
     buildBattleTree(
       rootNode,
       battleTreeProcessor.scenario.attackingLegion.diceCount,
@@ -18,7 +20,11 @@ class BattleTreeDicePermutator {
     return rootNode;
   }
 
-  void buildBattleTree(Node<BattleNodeState> node, int attackerDiceCount, int defenderDiceCount) {
+  void buildBattleTree(
+    Node<BattleNodeState> node,
+    int attackerDiceCount,
+    int defenderDiceCount,
+  ) {
     if (attackerDiceCount > 0) {
       buildChildNodes(
         node,
@@ -48,7 +54,9 @@ class BattleTreeDicePermutator {
   ) {
     for (final Die face in Die.faces) {
       final BattleNodeState nextState = stateUpdater(node.value, face);
-      final BattleNodeState? memoizedState = battleTreeProcessor.memoization(nextState);
+      final BattleNodeState? memoizedState = battleTreeProcessor.memoization(
+        nextState,
+      );
       if (memoizedState != null) {
         node.addNodeChild(memoizedState);
         // Skipping already calculated state
@@ -60,14 +68,20 @@ class BattleTreeDicePermutator {
   }
 
   void processLeafNode(Node<BattleNodeState> node) {
-    final BattleNodeState updatedState = battleTreeProcessor.processLeafState(node.value);
+    final BattleNodeState updatedState = battleTreeProcessor.processLeafState(
+      node.value,
+    );
     node.updateNodeValue(updatedState);
   }
 
   void postProcessParentNode(Node<BattleNodeState> node) {
-    final List<BattleNodeState> childrenStates =
-        node.children.map((Node<BattleNodeState> child) => child.value).toList();
-    final BattleNodeState updatedState = battleTreeProcessor.updateNodeState(node.value, childrenStates);
+    final List<BattleNodeState> childrenStates = node.children
+        .map((Node<BattleNodeState> child) => child.value)
+        .toList();
+    final BattleNodeState updatedState = battleTreeProcessor.updateNodeState(
+      node.value,
+      childrenStates,
+    );
     node.updateNodeValue(updatedState);
   }
 }

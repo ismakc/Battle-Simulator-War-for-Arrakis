@@ -1,5 +1,5 @@
-import 'package:bswfa_ui/bloc/battle_history_bloc.dart';
 import 'package:bswfa_core/domain/battle/battle_result.dart';
+import 'package:bswfa_ui/bloc/battle_history_bloc.dart';
 import 'package:bswfa_ui/presentation/widgets/battle_simulator/battle_history_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -24,9 +24,7 @@ class BattleHistory extends StatelessWidget {
             );
           },
           separatorBuilder: (BuildContext context, int index) {
-            return Container(
-              margin: const EdgeInsets.symmetric(vertical: 3.0),
-            );
+            return Container(margin: const EdgeInsets.symmetric(vertical: 3.0));
           },
         );
       },

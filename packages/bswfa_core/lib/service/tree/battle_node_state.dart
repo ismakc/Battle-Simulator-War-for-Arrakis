@@ -10,7 +10,10 @@ class BattleNodeState {
   final BattleAccumulatedHits accumulator;
 
   static BattleNodeState initialState() {
-    return const BattleNodeState(BattleDiceRoll.defaultValues, BattleAccumulatedHits.initialValues);
+    return const BattleNodeState(
+      BattleDiceRoll.defaultValues,
+      BattleAccumulatedHits.initialValues,
+    );
   }
 
   BattleNodeState withAttackerDie(Die newAttackerDieFace) {
@@ -33,14 +36,27 @@ class BattleNodeState {
     return BattleNodeState(battleDiceRoll, accumulatedHits);
   }
 
-  BattleNodeState withDie(Die die, DiceRoll diceRoll, BattleDiceRoll Function(BattleDiceRoll, DiceRoll) updater) {
+  BattleNodeState withDie(
+    Die die,
+    DiceRoll diceRoll,
+    BattleDiceRoll Function(BattleDiceRoll, DiceRoll) updater,
+  ) {
     switch (die) {
       case Die.sword:
-        return BattleNodeState(updater(battleDiceRoll, diceRoll.addSword()), accumulator);
+        return BattleNodeState(
+          updater(battleDiceRoll, diceRoll.addSword()),
+          accumulator,
+        );
       case Die.shield:
-        return BattleNodeState(updater(battleDiceRoll, diceRoll.addShield()), accumulator);
+        return BattleNodeState(
+          updater(battleDiceRoll, diceRoll.addShield()),
+          accumulator,
+        );
       case Die.star:
-        return BattleNodeState(updater(battleDiceRoll, diceRoll.addStar()), accumulator);
+        return BattleNodeState(
+          updater(battleDiceRoll, diceRoll.addStar()),
+          accumulator,
+        );
     }
   }
 }

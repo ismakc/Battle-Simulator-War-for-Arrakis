@@ -16,7 +16,10 @@ class BattleHistoryBloc extends Bloc<BattleHistoryEvent, BattleHistoryState> {
 
   final BattleSimulator simulator = BattleSimulator.instance;
 
-  FutureOr<void> _onSimulateBattle(_SimulateBattle event, Emitter<BattleHistoryState> emit) {
+  FutureOr<void> _onSimulateBattle(
+    _SimulateBattle event,
+    Emitter<BattleHistoryState> emit,
+  ) {
     emit(
       BattleHistoryState(
         battleHistory: List<BattleResult>.of(state.battleHistory)
@@ -32,14 +35,18 @@ class BattleHistoryBloc extends Bloc<BattleHistoryEvent, BattleHistoryState> {
 
 @freezed
 class BattleHistoryEvent with _$BattleHistoryEvent {
-  factory BattleHistoryEvent.simulateBattle(BattleScenario battleScenario) = _SimulateBattle;
+  factory BattleHistoryEvent.simulateBattle(BattleScenario battleScenario) =
+      _SimulateBattle;
 
   const factory BattleHistoryEvent.reset() = _Reset;
 }
 
 @freezed
 abstract class BattleHistoryState with _$BattleHistoryState {
-  const factory BattleHistoryState({required List<BattleResult> battleHistory}) = _BattleHistoryState;
+  const factory BattleHistoryState({
+    required List<BattleResult> battleHistory,
+  }) = _BattleHistoryState;
 
-  factory BattleHistoryState.initial() => const BattleHistoryState(battleHistory: <BattleResult>[]);
+  factory BattleHistoryState.initial() =>
+      const BattleHistoryState(battleHistory: <BattleResult>[]);
 }
