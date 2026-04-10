@@ -3,11 +3,11 @@ description: "Core Battle Simulator War For Arrakis"
 publish_to: 'none'
 
 environment:
-  sdk: '>=3.8.1 <4.0.0'
+  sdk: '>=3.11.4 <4.0.0'
 
 dependencies:
-  freezed_annotation: ^3.0.0
+  freezed_annotation: ^3.1.0
 
 dev_dependencies:
-  build_runner: ^2.5.4
-  freezed: ^3.0.6
+  build_runner: ^2.13.1
+  freezed: ^3.2.5

@@ -1,6 +1,5 @@
-// dart format width=80
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -81,6 +80,136 @@ $BattleScenarioCopyWith<$Res> get battleScenario {
 }
 }
 
+
+/// Adds pattern-matching-related methods to [FullBattleSimulationEvent].
+extension FullBattleSimulationEventPatterns on FullBattleSimulationEvent {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _SimulateFullBattle value)?  simulateFullBattle,required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _SimulateFullBattle() when simulateFullBattle != null:
+return simulateFullBattle(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _SimulateFullBattle value)  simulateFullBattle,}){
+final _that = this;
+switch (_that) {
+case _SimulateFullBattle():
+return simulateFullBattle(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _SimulateFullBattle value)?  simulateFullBattle,}){
+final _that = this;
+switch (_that) {
+case _SimulateFullBattle() when simulateFullBattle != null:
+return simulateFullBattle(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( BattleScenario battleScenario)?  simulateFullBattle,required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _SimulateFullBattle() when simulateFullBattle != null:
+return simulateFullBattle(_that.battleScenario);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( BattleScenario battleScenario)  simulateFullBattle,}) {final _that = this;
+switch (_that) {
+case _SimulateFullBattle():
+return simulateFullBattle(_that.battleScenario);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( BattleScenario battleScenario)?  simulateFullBattle,}) {final _that = this;
+switch (_that) {
+case _SimulateFullBattle() when simulateFullBattle != null:
+return simulateFullBattle(_that.battleScenario);case _:
+  return null;
+
+}
+}
+
+}
 
 /// @nodoc
 
@@ -226,6 +355,136 @@ $BattleResultCopyWith<$Res> get battleResult {
 }
 }
 
+
+/// Adds pattern-matching-related methods to [FullBattleSimulationState].
+extension FullBattleSimulationStatePatterns on FullBattleSimulationState {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _FullBattleSimulationState value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _FullBattleSimulationState() when $default != null:
+return $default(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _FullBattleSimulationState value)  $default,){
+final _that = this;
+switch (_that) {
+case _FullBattleSimulationState():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _FullBattleSimulationState value)?  $default,){
+final _that = this;
+switch (_that) {
+case _FullBattleSimulationState() when $default != null:
+return $default(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( BattleResult battleResult)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _FullBattleSimulationState() when $default != null:
+return $default(_that.battleResult);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( BattleResult battleResult)  $default,) {final _that = this;
+switch (_that) {
+case _FullBattleSimulationState():
+return $default(_that.battleResult);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( BattleResult battleResult)?  $default,) {final _that = this;
+switch (_that) {
+case _FullBattleSimulationState() when $default != null:
+return $default(_that.battleResult);case _:
+  return null;
+
+}
+}
+
+}
 
 /// @nodoc
 
