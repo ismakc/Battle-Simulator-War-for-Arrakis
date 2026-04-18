@@ -1,17 +1,17 @@
-import 'package:bswfa_core/domain/battle/battle_scenario.dart';
-import 'package:bswfa_core/service/battle_hits_calculator.dart';
+import 'package:bswfa_core/battle/battle_hits_calculator.dart';
+import 'package:bswfa_core/battle/battle_scenario.dart';
 import 'package:bswfa_core/service/tree/battle_accumulated_hits.dart';
 import 'package:bswfa_core/service/tree/battle_node_state.dart';
 import 'package:bswfa_core/service/tree/cache.dart';
 
 class BattleTreeProcessor {
-  BattleTreeProcessor(this.scenario, this.hitsCalculator, this.memo);
+  BattleTreeProcessor(this.scenario, this.memo);
 
   final BattleScenario scenario;
-  final BattleHitsCalculator hitsCalculator;
   final Cache<int, BattleNodeState> memo;
 
   BattleNodeState processLeafState(BattleNodeState state) {
+    var hitsCalculator = BattleHitsCalculator();
     final (int attackerHits, int defenderHits) = hitsCalculator.calculateHits(
       scenario,
       state.battleDiceRoll,
@@ -24,7 +24,7 @@ class BattleTreeProcessor {
         squaredDefenderHits: defenderHits * defenderHits,
       ),
     );
-    return memo.put(state.battleDiceRoll.fullDiceRollBitMask(), updatedState);
+    return memo.put(state.battleDiceRoll.cacheKey, updatedState);
   }
 
   BattleNodeState updateNodeState(
@@ -37,12 +37,12 @@ class BattleTreeProcessor {
     final BattleNodeState updatedState = state.withAccumulatedHits(
       newAccumulatedHits,
     );
-    return memo.put(state.battleDiceRoll.fullDiceRollBitMask(), updatedState);
+    return memo.put(state.battleDiceRoll.cacheKey, updatedState);
   }
 
   BattleNodeState? memoization(BattleNodeState state) {
-    if (memo.containsKey(state.battleDiceRoll.fullDiceRollBitMask())) {
-      return memo.get(state.battleDiceRoll.fullDiceRollBitMask());
+    if (memo.containsKey(state.battleDiceRoll.cacheKey)) {
+      return memo.get(state.battleDiceRoll.cacheKey);
     } else {
       return null;
     }

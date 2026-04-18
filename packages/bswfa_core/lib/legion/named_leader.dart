@@ -1,5 +1,6 @@
 // ignore_for_file: constant_identifier_names
 
+/// Líderes con nombre y su perfil fijo de combate (ataque/defensa).
 enum NamedLeader {
   leader0_1(0, 1),
   leader0_1_duplicate(0, 1),
@@ -18,5 +19,6 @@ enum NamedLeader {
   final int attack;
   final int defense;
 
+  /// Representación compacta para UI y logs (`ataque/defensa`).
   String get displayAsString => "$attack/$defense";
 }

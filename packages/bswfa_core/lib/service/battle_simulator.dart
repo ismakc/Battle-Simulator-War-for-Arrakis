@@ -1,9 +1,8 @@
-import 'package:bswfa_core/domain/battle/battle_result.dart';
-import 'package:bswfa_core/domain/battle/battle_scenario.dart';
-import 'package:bswfa_core/domain/battle/battle_statistic.dart';
-import 'package:bswfa_core/domain/legion/attacking_legion.dart';
-import 'package:bswfa_core/domain/legion/defending_legion.dart';
-import 'package:bswfa_core/domain/legion/legion.dart';
+import 'package:bswfa_core/battle/battle_result.dart';
+import 'package:bswfa_core/battle/battle_scenario.dart';
+import 'package:bswfa_core/battle/battle_statistic.dart';
+import 'package:bswfa_core/legion/legion.dart';
+import 'package:bswfa_core/legion/legion_optimal_loss.dart';
 import 'package:bswfa_core/service/battle_statistic_calculator.dart';
 
 class BattleSimulator {
@@ -17,6 +16,7 @@ class BattleSimulator {
     final BattleStatistic battleStatistic = BattleStatisticCalculator.calc(
       battleScenario,
     );
+
     return BattleResult(
       playedCombatRounds: 1,
       statistic: battleStatistic,
@@ -47,41 +47,45 @@ class BattleSimulator {
                   .copyWith(usedCards: 0),
             );
       }
-      final AttackingLegion damagedAttackingLegion =
+      final AttackingLegion updateAttackingLegionAfterAttack =
           _updateLegionAfterAttack(
-            Legion.fromAttackingLegion(
-              battleScenarioForSeveralRounds.attackingLegion,
-            ),
-            result.statistic.defenderExpectedHits,
-            battleScenarioForSeveralRounds.defendingLegion.settlementLevel > 0,
-          ).overwriteAttackingLegionWithLegion(
-            battleScenarioForSeveralRounds.attackingLegion,
-          );
+        battleScenarioForSeveralRounds.attackingLegion,
+        result.statistic.defenderExpectedHits,
+        battleScenarioForSeveralRounds.defendingLegion.settlementLevel > 0,
+      );
+
+      final AttackingLegion damagedAttackingLegion =
+          updateAttackingLegionAfterAttack;
+
+      final DefendingLegion updateDefendingLegionAfterAttack =
+          _updateLegionAfterAttack(
+        battleScenarioForSeveralRounds.defendingLegion,
+        result.statistic.attackerExpectedHits,
+        false,
+      );
 
       final DefendingLegion damagedDefendingLegion =
-          _updateLegionAfterAttack(
-            Legion.fromDefendingLegion(
-              battleScenarioForSeveralRounds.defendingLegion,
-            ),
-            result.statistic.attackerExpectedHits,
-            false,
-          ).overwriteDefendingLegionWithLegion(
-            battleScenarioForSeveralRounds.defendingLegion,
-          );
+          updateDefendingLegionAfterAttack;
 
       battleScenarioForSeveralRounds = battleScenarioForSeveralRounds.copyWith(
         attackingLegion: damagedAttackingLegion,
         defendingLegion: damagedDefendingLegion,
       );
 
-      if (battleScenarioForSeveralRounds.attackingLegion.totalUnits == 0 ||
-          battleScenarioForSeveralRounds.defendingLegion.totalUnits == 0 ||
+      if (battleScenarioForSeveralRounds.attackingLegion.totalUnits ==
+              0 ||
+          battleScenarioForSeveralRounds.defendingLegion.totalUnits ==
+              0 ||
           totalAttackerExpectedHits >
               battleScenarioForSeveralRounds.attackingLegion.totalUnits +
-                  battleScenarioForSeveralRounds.attackingLegion.totalLeaders ||
+                  battleScenarioForSeveralRounds
+                      .attackingLegion
+                      .totalLeaders ||
           totalDefenderExpectedHits >
               battleScenarioForSeveralRounds.defendingLegion.totalUnits +
-                  battleScenarioForSeveralRounds.defendingLegion.totalLeaders) {
+                  battleScenarioForSeveralRounds
+                      .defendingLegion
+                      .totalLeaders) {
         combatEnds = true;
       }
     }
@@ -101,20 +105,28 @@ class BattleSimulator {
     );
   }
 
-  Legion _updateLegionAfterAttack(
-    Legion legion,
+  T _updateLegionAfterAttack<T extends Legion>(
+    T legion,
     double expectedHits,
     bool additionalHitToContinue,
   ) {
     int i = 1;
-    Legion damagedLegion = legion;
+    T damagedLegion = legion;
     while (i <= expectedHits.round() && damagedLegion.totalUnits > 0) {
-      damagedLegion = damagedLegion.calculateOptimalLoss();
+      damagedLegion =
+          LegionOptimalLoss.calculateOptimalLoss(damagedLegion).applyTo(
+                damagedLegion,
+              )
+              as T;
       i++;
     }
 
     if (damagedLegion.totalUnits > 0 && additionalHitToContinue) {
-      damagedLegion = damagedLegion.calculateOptimalLoss();
+      damagedLegion =
+          LegionOptimalLoss.calculateOptimalLoss(damagedLegion).applyTo(
+                damagedLegion,
+              )
+              as T;
     }
     return damagedLegion;
   }

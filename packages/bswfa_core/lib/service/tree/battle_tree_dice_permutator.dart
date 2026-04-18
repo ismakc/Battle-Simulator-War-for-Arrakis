@@ -1,4 +1,4 @@
-import 'package:bswfa_core/domain/roll/die.dart';
+import 'package:bswfa_core/roll/battle_die.dart';
 import 'package:bswfa_core/service/tree/battle_node_state.dart';
 import 'package:bswfa_core/service/tree/battle_tree_processor.dart';
 import 'package:bswfa_core/service/tree/node.dart';
@@ -12,11 +12,13 @@ class BattleTreeDicePermutator {
     final Node<BattleNodeState> rootNode = Node<BattleNodeState>(
       BattleNodeState.initialState(),
     );
+
     buildBattleTree(
       rootNode,
       battleTreeProcessor.scenario.attackingLegion.diceCount,
       battleTreeProcessor.scenario.defendingLegion.diceCount,
     );
+
     return rootNode;
   }
 
@@ -30,7 +32,7 @@ class BattleTreeDicePermutator {
         node,
         attackerDiceCount - 1,
         defenderDiceCount,
-        (BattleNodeState state, Die die) => state.withAttackerDie(die),
+        (BattleNodeState state, BattleDie die) => state.withAttackerDie(die),
       );
       postProcessParentNode(node);
     } else if (defenderDiceCount > 0) {
@@ -38,7 +40,7 @@ class BattleTreeDicePermutator {
         node,
         attackerDiceCount,
         defenderDiceCount - 1,
-        (BattleNodeState state, Die die) => state.withDefenderDie(die),
+        (BattleNodeState state, BattleDie die) => state.withDefenderDie(die),
       );
       postProcessParentNode(node);
     } else {
@@ -50,9 +52,9 @@ class BattleTreeDicePermutator {
     Node<BattleNodeState> node,
     int attackerDiceCount,
     int defenderDiceCount,
-    BattleNodeState Function(BattleNodeState, Die) stateUpdater,
+    BattleNodeState Function(BattleNodeState, BattleDie) stateUpdater,
   ) {
-    for (final Die face in Die.faces) {
+    for (final BattleDie face in BattleDie.faces) {
       final BattleNodeState nextState = stateUpdater(node.value, face);
       final BattleNodeState? memoizedState = battleTreeProcessor.memoization(
         nextState,

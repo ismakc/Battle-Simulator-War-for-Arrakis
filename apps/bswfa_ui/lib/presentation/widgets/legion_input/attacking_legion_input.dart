@@ -23,7 +23,7 @@ class AttackingLegionInput extends StatelessWidget {
       builder: (BuildContext context, AttackingLegion state) {
         return LabeledBorderFieldset(
           label:
-              'Attacking Legion ( ${state.diceCount}\u{1F3B2}of ${state.unlimitedMaxDiceCount}  /  ${state.maxStarsCount}\u{2B50}of ${state.unlimitedMaxStarsCount}  /  -${state.specialEliteUnits}\u{1F6E1}  /  ${state.lifeCount}\u{2764}\u{FE0F} )',
+              'Attacking Legion ( ${state.diceCount}\u{1F3B2}of ${state.unlimitedDiceCount}  /  ${state.maxStarsCount}\u{2B50}of ${state.unlimitedStarsCount}  /  -${state.removedShieldsCount}\u{1F6E1}  /  ${state.lifeCount}\u{2764}\u{FE0F} )',
           borderColor: Colors.amber,
           textColor: Colors.black87,
           child: Wrap(

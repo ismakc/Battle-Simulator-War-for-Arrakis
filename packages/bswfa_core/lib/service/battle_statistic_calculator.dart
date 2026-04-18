@@ -1,9 +1,8 @@
 import 'dart:math' as math;
 
-import 'package:bswfa_core/domain/battle/battle_scenario.dart';
-import 'package:bswfa_core/domain/battle/battle_statistic.dart';
-import 'package:bswfa_core/domain/roll/die.dart';
-import 'package:bswfa_core/service/battle_hits_calculator.dart';
+import 'package:bswfa_core/battle/battle_scenario.dart';
+import 'package:bswfa_core/battle/battle_statistic.dart';
+import 'package:bswfa_core/roll/battle_die.dart';
 import 'package:bswfa_core/service/tree/battle_node_state.dart';
 import 'package:bswfa_core/service/tree/battle_tree_dice_permutator.dart';
 import 'package:bswfa_core/service/tree/battle_tree_processor.dart';
@@ -19,14 +18,10 @@ class BattleStatisticCalculator {
   BattleStatisticCalculator._();
 
   static BattleStatistic calc(BattleScenario scenario) {
-    final BattleHitsCalculator hitsCalculator = BattleHitsCalculator.instance;
-
-    final Cache<int, BattleNodeState> cache =
-        Cache<int, BattleNodeState>.create();
+    final Cache<int, BattleNodeState> cache = Cache<int, BattleNodeState>.create();
 
     final BattleTreeProcessor battleTreeProcessor = BattleTreeProcessor(
       scenario,
-      hitsCalculator,
       cache,
     );
 
@@ -121,7 +116,7 @@ class BattleStatisticCalculator {
   static int _totalOccurrences(BattleScenario battleScenario) {
     return math
         .pow(
-          Die.faces.length,
+          BattleDie.faces.length,
           battleScenario.attackingLegion.diceCount +
               battleScenario.defendingLegion.diceCount,
         )

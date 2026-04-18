@@ -106,10 +106,10 @@ extension BattleResultPatterns on BattleResult {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _BattleStatistic value)?  $default,{required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _BattleResult value)?  $default,{required TResult orElse(),}){
 final _that = this;
 switch (_that) {
-case _BattleStatistic() when $default != null:
+case _BattleResult() when $default != null:
 return $default(_that);case _:
   return orElse();
 
@@ -128,10 +128,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _BattleStatistic value)  $default,){
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _BattleResult value)  $default,){
 final _that = this;
 switch (_that) {
-case _BattleStatistic():
+case _BattleResult():
 return $default(_that);case _:
   throw StateError('Unexpected subclass');
 
@@ -149,10 +149,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _BattleStatistic value)?  $default,){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _BattleResult value)?  $default,){
 final _that = this;
 switch (_that) {
-case _BattleStatistic() when $default != null:
+case _BattleResult() when $default != null:
 return $default(_that);case _:
   return null;
 
@@ -172,7 +172,7 @@ return $default(_that);case _:
 
 @optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int playedCombatRounds,  BattleScenario scenario,  BattleStatistic statistic)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
-case _BattleStatistic() when $default != null:
+case _BattleResult() when $default != null:
 return $default(_that.playedCombatRounds,_that.scenario,_that.statistic);case _:
   return orElse();
 
@@ -193,7 +193,7 @@ return $default(_that.playedCombatRounds,_that.scenario,_that.statistic);case _:
 
 @optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int playedCombatRounds,  BattleScenario scenario,  BattleStatistic statistic)  $default,) {final _that = this;
 switch (_that) {
-case _BattleStatistic():
+case _BattleResult():
 return $default(_that.playedCombatRounds,_that.scenario,_that.statistic);case _:
   throw StateError('Unexpected subclass');
 
@@ -213,7 +213,7 @@ return $default(_that.playedCombatRounds,_that.scenario,_that.statistic);case _:
 
 @optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int playedCombatRounds,  BattleScenario scenario,  BattleStatistic statistic)?  $default,) {final _that = this;
 switch (_that) {
-case _BattleStatistic() when $default != null:
+case _BattleResult() when $default != null:
 return $default(_that.playedCombatRounds,_that.scenario,_that.statistic);case _:
   return null;
 
@@ -225,8 +225,8 @@ return $default(_that.playedCombatRounds,_that.scenario,_that.statistic);case _:
 /// @nodoc
 
 
-class _BattleStatistic extends BattleResult {
-  const _BattleStatistic({required this.playedCombatRounds, required this.scenario, required this.statistic}): super._();
+class _BattleResult extends BattleResult {
+  const _BattleResult({required this.playedCombatRounds, required this.scenario, required this.statistic}): super._();
   
 
 @override final  int playedCombatRounds;
@@ -237,13 +237,13 @@ class _BattleStatistic extends BattleResult {
 /// with the given fields replaced by the non-null parameter values.
 @override @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-_$BattleStatisticCopyWith<_BattleStatistic> get copyWith => __$BattleStatisticCopyWithImpl<_BattleStatistic>(this, _$identity);
+_$BattleResultCopyWith<_BattleResult> get copyWith => __$BattleResultCopyWithImpl<_BattleResult>(this, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _BattleStatistic&&(identical(other.playedCombatRounds, playedCombatRounds) || other.playedCombatRounds == playedCombatRounds)&&(identical(other.scenario, scenario) || other.scenario == scenario)&&(identical(other.statistic, statistic) || other.statistic == statistic));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _BattleResult&&(identical(other.playedCombatRounds, playedCombatRounds) || other.playedCombatRounds == playedCombatRounds)&&(identical(other.scenario, scenario) || other.scenario == scenario)&&(identical(other.statistic, statistic) || other.statistic == statistic));
 }
 
 
@@ -259,8 +259,8 @@ String toString() {
 }
 
 /// @nodoc
-abstract mixin class _$BattleStatisticCopyWith<$Res> implements $BattleResultCopyWith<$Res> {
-  factory _$BattleStatisticCopyWith(_BattleStatistic value, $Res Function(_BattleStatistic) _then) = __$BattleStatisticCopyWithImpl;
+abstract mixin class _$BattleResultCopyWith<$Res> implements $BattleResultCopyWith<$Res> {
+  factory _$BattleResultCopyWith(_BattleResult value, $Res Function(_BattleResult) _then) = __$BattleResultCopyWithImpl;
 @override @useResult
 $Res call({
  int playedCombatRounds, BattleScenario scenario, BattleStatistic statistic
@@ -271,17 +271,17 @@ $Res call({
 
 }
 /// @nodoc
-class __$BattleStatisticCopyWithImpl<$Res>
-    implements _$BattleStatisticCopyWith<$Res> {
-  __$BattleStatisticCopyWithImpl(this._self, this._then);
+class __$BattleResultCopyWithImpl<$Res>
+    implements _$BattleResultCopyWith<$Res> {
+  __$BattleResultCopyWithImpl(this._self, this._then);
 
-  final _BattleStatistic _self;
-  final $Res Function(_BattleStatistic) _then;
+  final _BattleResult _self;
+  final $Res Function(_BattleResult) _then;
 
 /// Create a copy of BattleResult
 /// with the given fields replaced by the non-null parameter values.
 @override @pragma('vm:prefer-inline') $Res call({Object? playedCombatRounds = null,Object? scenario = null,Object? statistic = null,}) {
-  return _then(_BattleStatistic(
+  return _then(_BattleResult(
 playedCombatRounds: null == playedCombatRounds ? _self.playedCombatRounds : playedCombatRounds // ignore: cast_nullable_to_non_nullable
 as int,scenario: null == scenario ? _self.scenario : scenario // ignore: cast_nullable_to_non_nullable
 as BattleScenario,statistic: null == statistic ? _self.statistic : statistic // ignore: cast_nullable_to_non_nullable

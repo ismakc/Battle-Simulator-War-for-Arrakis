@@ -202,12 +202,12 @@ _$UpdateAttackingLegionCopyWith<_UpdateAttackingLegion> get copyWith => __$Updat
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _UpdateAttackingLegion&&(identical(other.attackingLegion, attackingLegion) || other.attackingLegion == attackingLegion));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _UpdateAttackingLegion&&const DeepCollectionEquality().equals(other.attackingLegion, attackingLegion));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,attackingLegion);
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(attackingLegion));
 
 @override
 String toString() {
@@ -226,7 +226,7 @@ $Res call({
 });
 
 
-$AttackingLegionCopyWith<$Res> get attackingLegion;
+
 
 }
 /// @nodoc
@@ -239,23 +239,14 @@ class __$UpdateAttackingLegionCopyWithImpl<$Res>
 
 /// Create a copy of BattleScenarioEvent
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? attackingLegion = null,}) {
+@pragma('vm:prefer-inline') $Res call({Object? attackingLegion = freezed,}) {
   return _then(_UpdateAttackingLegion(
-null == attackingLegion ? _self.attackingLegion : attackingLegion // ignore: cast_nullable_to_non_nullable
+freezed == attackingLegion ? _self.attackingLegion : attackingLegion // ignore: cast_nullable_to_non_nullable
 as AttackingLegion,
   ));
 }
 
-/// Create a copy of BattleScenarioEvent
-/// with the given fields replaced by the non-null parameter values.
-@override
-@pragma('vm:prefer-inline')
-$AttackingLegionCopyWith<$Res> get attackingLegion {
-  
-  return $AttackingLegionCopyWith<$Res>(_self.attackingLegion, (value) {
-    return _then(_self.copyWith(attackingLegion: value));
-  });
-}
+
 }
 
 /// @nodoc
@@ -277,12 +268,12 @@ _$UpdateDefendingLegionCopyWith<_UpdateDefendingLegion> get copyWith => __$Updat
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _UpdateDefendingLegion&&(identical(other.defendingLegion, defendingLegion) || other.defendingLegion == defendingLegion));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _UpdateDefendingLegion&&const DeepCollectionEquality().equals(other.defendingLegion, defendingLegion));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,defendingLegion);
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(defendingLegion));
 
 @override
 String toString() {
@@ -301,7 +292,7 @@ $Res call({
 });
 
 
-$DefendingLegionCopyWith<$Res> get defendingLegion;
+
 
 }
 /// @nodoc
@@ -314,23 +305,14 @@ class __$UpdateDefendingLegionCopyWithImpl<$Res>
 
 /// Create a copy of BattleScenarioEvent
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? defendingLegion = null,}) {
+@pragma('vm:prefer-inline') $Res call({Object? defendingLegion = freezed,}) {
   return _then(_UpdateDefendingLegion(
-null == defendingLegion ? _self.defendingLegion : defendingLegion // ignore: cast_nullable_to_non_nullable
+freezed == defendingLegion ? _self.defendingLegion : defendingLegion // ignore: cast_nullable_to_non_nullable
 as DefendingLegion,
   ));
 }
 
-/// Create a copy of BattleScenarioEvent
-/// with the given fields replaced by the non-null parameter values.
-@override
-@pragma('vm:prefer-inline')
-$DefendingLegionCopyWith<$Res> get defendingLegion {
-  
-  return $DefendingLegionCopyWith<$Res>(_self.defendingLegion, (value) {
-    return _then(_self.copyWith(defendingLegion: value));
-  });
-}
+
 }
 
 /// @nodoc

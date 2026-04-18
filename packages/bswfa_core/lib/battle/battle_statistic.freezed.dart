@@ -209,13 +209,13 @@ return $default(_that.attackerExpectedHits,_that.attackerStdDeviationHits,_that.
 
 
 class _BattleStatistic extends BattleStatistic {
-  const _BattleStatistic({required this.attackerExpectedHits, required this.attackerStdDeviationHits, required this.defenderExpectedHits, required this.defenderStdDeviationHits}): super._();
+  const _BattleStatistic({this.attackerExpectedHits = .0, this.attackerStdDeviationHits = .0, this.defenderExpectedHits = .0, this.defenderStdDeviationHits = .0}): super._();
   
 
-@override final  double attackerExpectedHits;
-@override final  double attackerStdDeviationHits;
-@override final  double defenderExpectedHits;
-@override final  double defenderStdDeviationHits;
+@override@JsonKey() final  double attackerExpectedHits;
+@override@JsonKey() final  double attackerStdDeviationHits;
+@override@JsonKey() final  double defenderExpectedHits;
+@override@JsonKey() final  double defenderStdDeviationHits;
 
 /// Create a copy of BattleStatistic
 /// with the given fields replaced by the non-null parameter values.
