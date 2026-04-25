@@ -1,8 +1,8 @@
 import 'package:bswfa_core/battle/battle_hits_calculator.dart';
 import 'package:bswfa_core/battle/battle_scenario.dart';
-import 'package:bswfa_core/service/tree/battle_accumulated_hits.dart';
-import 'package:bswfa_core/service/tree/battle_node_state.dart';
-import 'package:bswfa_core/service/tree/battle_node_state_cache.dart';
+import 'package:bswfa_core/battle/statistics/tree/battle_accumulated_hits.dart';
+import 'package:bswfa_core/battle/statistics/tree/battle_node_state.dart';
+import 'package:bswfa_core/battle/statistics/tree/battle_node_state_cache.dart';
 
 /// Resuelve estados de combate, calculando impactos en hojas, agregando
 /// resultados en estados padre y reutilizando estados ya cacheados.

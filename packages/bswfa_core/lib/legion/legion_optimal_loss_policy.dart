@@ -11,39 +11,39 @@ enum _LossOption {
   removeNamedLeader,
 }
 
-class LegionOptimalLoss {
-  const LegionOptimalLoss._();
+class LegionOptimalLossPolicy {
+  const LegionOptimalLossPolicy._();
 
   /// Calcula la mejor resolución para aplicar una única baja.
-  static LegionResolution calculateOptimalLoss(Legion legion) {
+  static LegionResolution selectOptimalLoss(Legion legion) {
     final Map<_LossOption, LegionResolution?> options =
         <_LossOption, LegionResolution?>{
           _LossOption.removeGenericLeader: legion.genericLeaders == 0
               ? null
               : const LegionResolution(
-                  changes: <LegionChange>[LegionChange.removeGenericLeader()],
+                  appliedChanges: <LegionChange>[LegionChange.removeGenericLeader()],
                 ),
           _LossOption.removeRegularUnit: legion.regularUnits == 0
               ? null
               : const LegionResolution(
-                  changes: <LegionChange>[LegionChange.removeRegularUnit()],
+                  appliedChanges: <LegionChange>[LegionChange.removeRegularUnit()],
                 ),
           _LossOption.downgradeEliteUnit: legion.eliteUnits == 0
               ? null
               : const LegionResolution(
-                  changes: <LegionChange>[LegionChange.downgradeEliteUnit()],
+                  appliedChanges: <LegionChange>[LegionChange.downgradeEliteUnit()],
                 ),
           _LossOption.downgradeSpecialEliteUnit: legion.specialEliteUnits == 0
               ? null
               : const LegionResolution(
-                  changes: <LegionChange>[
+                  appliedChanges: <LegionChange>[
                     LegionChange.downgradeSpecialEliteUnit(),
                   ],
                 ),
           _LossOption.removeNamedLeader: legion.namedLeaders.isEmpty
               ? null
               : LegionResolution(
-                  changes: <LegionChange>[
+                  appliedChanges: <LegionChange>[
                     LegionChange.removeNamedLeader(
                       leader: NamedLeaderLossSelectionPolicy.selectLeaderToLose(
                         legion.namedLeaders,
@@ -97,22 +97,61 @@ class LegionOptimalLoss {
 
     switch (candidateEntry.key) {
       case _LossOption.removeGenericLeader:
-        return legion.genericLeaders > 0 &&
-            legion.totalLeaders > legion.diceCount;
+        return _shouldPreferRemovingGenericLeader(legion);
 
       case _LossOption.downgradeEliteUnit:
-        return selectedEntry.key != _LossOption.downgradeEliteUnit;
+        return _shouldPreferDowngradingEliteUnit(selectedEntry.key);
 
       case _LossOption.downgradeSpecialEliteUnit:
-        return selectedEntry.key != _LossOption.downgradeEliteUnit &&
-            selectedEntry.key != _LossOption.downgradeSpecialEliteUnit;
+        return _shouldPreferDowngradingSpecialEliteUnit(selectedEntry.key);
 
       case _LossOption.removeNamedLeader:
-        return legion.totalUnits == 1 ||
-            selectedEntry.key != _LossOption.removeRegularUnit;
+        return _shouldPreferRemovingNamedLeader(
+          legion: legion,
+          selectedLossOption: selectedEntry.key,
+        );
 
       case _LossOption.removeRegularUnit:
-        return selectedEntry.key != _LossOption.removeRegularUnit;
+        return _shouldPreferRemovingRegularUnit(selectedEntry.key);
     }
+  }
+
+  /// Si sobran líderes respecto al máximo de dados, sacrificar un líder genérico
+  /// puede preservar la pegada igual que otras opciones sin perder unidades.
+  static bool _shouldPreferRemovingGenericLeader(Legion legion) {
+    return legion.genericLeaders > 0 && legion.totalLeaders > legion.diceCount;
+  }
+
+  /// Entre opciones equivalentes, degradar una élite normal se prioriza frente
+  /// a cualquier opción distinta de esa misma degradación.
+  static bool _shouldPreferDowngradingEliteUnit(
+    _LossOption selectedLossOption,
+  ) {
+    return selectedLossOption != _LossOption.downgradeEliteUnit;
+  }
+
+  /// La degradación de élite especial solo se prefiere si no se ha elegido ya
+  /// degradar una élite normal ni otra élite especial.
+  static bool _shouldPreferDowngradingSpecialEliteUnit(
+    _LossOption selectedLossOption,
+  ) {
+    return selectedLossOption != _LossOption.downgradeEliteUnit &&
+        selectedLossOption != _LossOption.downgradeSpecialEliteUnit;
+  }
+
+  /// Perder un líder nombrado solo se prioriza cuando apenas quedan unidades
+  /// combatientes o cuando la alternativa actual no es perder una regular.
+  static bool _shouldPreferRemovingNamedLeader({
+    required Legion legion,
+    required _LossOption selectedLossOption,
+  }) {
+    return legion.totalUnits == 1 ||
+        selectedLossOption != _LossOption.removeRegularUnit;
+  }
+
+  /// Perder una unidad regular se prioriza sobre cualquier opción distinta de
+  /// perder otra unidad regular.
+  static bool _shouldPreferRemovingRegularUnit(_LossOption selectedLossOption) {
+    return selectedLossOption != _LossOption.removeRegularUnit;
   }
 }

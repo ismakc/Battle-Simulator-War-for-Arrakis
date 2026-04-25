@@ -1,5 +1,5 @@
 import 'package:bswfa_core/battle/battle_scenario.dart';
-import 'package:bswfa_core/result/automatic_battle_end_reason.dart';
+import 'package:bswfa_core/battle/result/automatic_battle_end_reason.dart';
 
 /// Define cuándo la app da por terminado un combate al resolverlo
 /// automáticamente sin más intervención del jugador.

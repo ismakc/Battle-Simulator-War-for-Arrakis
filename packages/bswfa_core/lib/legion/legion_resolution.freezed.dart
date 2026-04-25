@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$LegionResolution {
 
- List<LegionChange> get changes;
+ List<LegionChange> get appliedChanges;
 /// Create a copy of LegionResolution
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $LegionResolutionCopyWith<LegionResolution> get copyWith => _$LegionResolutionCo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is LegionResolution&&const DeepCollectionEquality().equals(other.changes, changes));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is LegionResolution&&const DeepCollectionEquality().equals(other.appliedChanges, appliedChanges));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(changes));
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(appliedChanges));
 
 @override
 String toString() {
-  return 'LegionResolution(changes: $changes)';
+  return 'LegionResolution(appliedChanges: $appliedChanges)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $LegionResolutionCopyWith<$Res>  {
   factory $LegionResolutionCopyWith(LegionResolution value, $Res Function(LegionResolution) _then) = _$LegionResolutionCopyWithImpl;
 @useResult
 $Res call({
- List<LegionChange> changes
+ List<LegionChange> appliedChanges
 });
 
 
@@ -62,9 +62,9 @@ class _$LegionResolutionCopyWithImpl<$Res>
 
 /// Create a copy of LegionResolution
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? changes = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? appliedChanges = null,}) {
   return _then(_self.copyWith(
-changes: null == changes ? _self.changes : changes // ignore: cast_nullable_to_non_nullable
+appliedChanges: null == appliedChanges ? _self.appliedChanges : appliedChanges // ignore: cast_nullable_to_non_nullable
 as List<LegionChange>,
   ));
 }
@@ -150,10 +150,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( List<LegionChange> changes)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( List<LegionChange> appliedChanges)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _LegionResolution() when $default != null:
-return $default(_that.changes);case _:
+return $default(_that.appliedChanges);case _:
   return orElse();
 
 }
@@ -171,10 +171,10 @@ return $default(_that.changes);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( List<LegionChange> changes)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( List<LegionChange> appliedChanges)  $default,) {final _that = this;
 switch (_that) {
 case _LegionResolution():
-return $default(_that.changes);case _:
+return $default(_that.appliedChanges);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -191,10 +191,10 @@ return $default(_that.changes);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( List<LegionChange> changes)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( List<LegionChange> appliedChanges)?  $default,) {final _that = this;
 switch (_that) {
 case _LegionResolution() when $default != null:
-return $default(_that.changes);case _:
+return $default(_that.appliedChanges);case _:
   return null;
 
 }
@@ -206,14 +206,14 @@ return $default(_that.changes);case _:
 
 
 class _LegionResolution extends LegionResolution {
-  const _LegionResolution({final  List<LegionChange> changes = const <LegionChange>[]}): _changes = changes,super._();
+  const _LegionResolution({final  List<LegionChange> appliedChanges = const <LegionChange>[]}): _appliedChanges = appliedChanges,super._();
   
 
- final  List<LegionChange> _changes;
-@override@JsonKey() List<LegionChange> get changes {
-  if (_changes is EqualUnmodifiableListView) return _changes;
+ final  List<LegionChange> _appliedChanges;
+@override@JsonKey() List<LegionChange> get appliedChanges {
+  if (_appliedChanges is EqualUnmodifiableListView) return _appliedChanges;
   // ignore: implicit_dynamic_type
-  return EqualUnmodifiableListView(_changes);
+  return EqualUnmodifiableListView(_appliedChanges);
 }
 
 
@@ -227,16 +227,16 @@ _$LegionResolutionCopyWith<_LegionResolution> get copyWith => __$LegionResolutio
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _LegionResolution&&const DeepCollectionEquality().equals(other._changes, _changes));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _LegionResolution&&const DeepCollectionEquality().equals(other._appliedChanges, _appliedChanges));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_changes));
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_appliedChanges));
 
 @override
 String toString() {
-  return 'LegionResolution(changes: $changes)';
+  return 'LegionResolution(appliedChanges: $appliedChanges)';
 }
 
 
@@ -247,7 +247,7 @@ abstract mixin class _$LegionResolutionCopyWith<$Res> implements $LegionResoluti
   factory _$LegionResolutionCopyWith(_LegionResolution value, $Res Function(_LegionResolution) _then) = __$LegionResolutionCopyWithImpl;
 @override @useResult
 $Res call({
- List<LegionChange> changes
+ List<LegionChange> appliedChanges
 });
 
 
@@ -264,9 +264,9 @@ class __$LegionResolutionCopyWithImpl<$Res>
 
 /// Create a copy of LegionResolution
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? changes = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? appliedChanges = null,}) {
   return _then(_LegionResolution(
-changes: null == changes ? _self._changes : changes // ignore: cast_nullable_to_non_nullable
+appliedChanges: null == appliedChanges ? _self._appliedChanges : appliedChanges // ignore: cast_nullable_to_non_nullable
 as List<LegionChange>,
   ));
 }

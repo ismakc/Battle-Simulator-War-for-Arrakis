@@ -1,7 +1,7 @@
 import 'package:bswfa_core/battle/battle_scenario.dart';
 import 'package:bswfa_core/battle/battle_statistic.dart';
-import 'package:bswfa_core/result/automatic_battle_end_reason.dart';
-import 'package:bswfa_core/result/battle_result.dart';
+import 'package:bswfa_core/battle/result/automatic_battle_end_reason.dart';
+import 'package:bswfa_core/battle/result/battle_result.dart';
 
 /// Estado acumulado de una simulación automática de combate.
 class AutomaticBattleState {

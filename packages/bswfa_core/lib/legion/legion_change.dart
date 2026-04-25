@@ -4,21 +4,25 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'legion_change.freezed.dart';
 
+/// Cambio atómico aplicado a una legión como resultado de resolver una baja.
 @freezed
 sealed class LegionChange with _$LegionChange {
   const LegionChange._();
 
+  /// Elimina un líder genérico de la legión.
   const factory LegionChange.removeGenericLeader() = RemoveGenericLeader;
 
+  /// Elimina una unidad regular de la legión.
   const factory LegionChange.removeRegularUnit() = RemoveRegularUnit;
 
-  /// Una baja de élite degrada una unidad élite a unidad regular.
+  /// Una baja sobre una unidad élite la degrada a unidad regular.
   const factory LegionChange.downgradeEliteUnit() = DowngradeEliteUnit;
 
-  /// Una baja de unidad especial élite degrada una unidad especial élite a regular.
+  /// Una baja sobre una unidad élite especial la degrada a unidad regular.
   const factory LegionChange.downgradeSpecialEliteUnit() =
       DowngradeSpecialEliteUnit;
 
+  /// Elimina un líder nombrado concreto de la legión.
   const factory LegionChange.removeNamedLeader({required NamedLeader leader}) =
       RemoveNamedLeader;
 

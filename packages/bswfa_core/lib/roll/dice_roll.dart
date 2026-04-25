@@ -42,19 +42,7 @@ class DiceRoll {
   static const DiceRoll zero = DiceRoll._(0);
 
   final int bitmask;
-
-  static Future<DiceRoll> fromCounts({
-    required int swordCount,
-    required int shieldCount,
-    required int starCount,
-  }) async {
-    return DiceRoll._(
-      (swordCount << swordOffset) |
-          (shieldCount << shieldOffset) |
-          (starCount << starOffset),
-    );
-  }
-
+  
   int get swordCount => (bitmask >> swordOffset) & countMask;
 
   int get shieldCount => (bitmask >> shieldOffset) & countMask;

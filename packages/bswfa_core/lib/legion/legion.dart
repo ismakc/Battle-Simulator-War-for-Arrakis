@@ -39,8 +39,8 @@ abstract class Legion with _$Legion {
   /// Total de líderes (genéricos y de renombre) en la legión.
   int get totalLeaders => genericLeaders + namedLeaders.length;
 
-  /// Total de vidas en la legión
-  int get lifeCount =>
+  /// Capacidad total restante para absorber bajas en la legión.
+  int get remainingLossCapacity =>
       regularUnits +
       (eliteUnits * 2) +
       (specialEliteUnits * 2) +
@@ -48,22 +48,22 @@ abstract class Legion with _$Legion {
       namedLeaders.length;
 
   /// Indica si la legión atacante tiene un ataque sorpresa activo.
-  /// La legión defensora no puede tener esta propiedad activa.
+  ///
+  /// Lanza un [StateError] si se consulta sobre una legión defensora.
   bool get surpriseAttack => map(
     attacking: (AttackingLegion legion) => legion.surpriseAttack,
-    defending: (_) {
-      assert(false, 'DefendingLegion cannot have a surpriseAttack.');
-      return false;
-    },
+    defending: (_) => throw StateError(
+      'DefendingLegion cannot have a surpriseAttack.',
+    ),
   );
 
   /// Nivel de asentamiento de la legión defensora.
-  /// La legión atacante no puede tener esta propiedad activa.
+  ///
+  /// Lanza un [StateError] si se consulta sobre una legión atacante.
   int get settlementLevel => map(
-    attacking: (_) {
-      assert(false, 'AttackingLegion cannot have a settlementLevel.');
-      return 0;
-    },
+    attacking: (_) => throw StateError(
+      'AttackingLegion cannot have a settlementLevel.',
+    ),
     defending: (DefendingLegion legion) => legion.settlementLevel,
   );
 

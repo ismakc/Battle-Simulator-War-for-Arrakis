@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$BattleStatistic {
 
- double get attackerExpectedHits; double get attackerStdDeviationHits; double get defenderExpectedHits; double get defenderStdDeviationHits;
+ double get attackerExpectedHits; double get attackerHitsStdDeviation; double get defenderExpectedHits; double get defenderHitsStdDeviation;
 /// Create a copy of BattleStatistic
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $BattleStatisticCopyWith<BattleStatistic> get copyWith => _$BattleStatisticCopyW
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is BattleStatistic&&(identical(other.attackerExpectedHits, attackerExpectedHits) || other.attackerExpectedHits == attackerExpectedHits)&&(identical(other.attackerStdDeviationHits, attackerStdDeviationHits) || other.attackerStdDeviationHits == attackerStdDeviationHits)&&(identical(other.defenderExpectedHits, defenderExpectedHits) || other.defenderExpectedHits == defenderExpectedHits)&&(identical(other.defenderStdDeviationHits, defenderStdDeviationHits) || other.defenderStdDeviationHits == defenderStdDeviationHits));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is BattleStatistic&&(identical(other.attackerExpectedHits, attackerExpectedHits) || other.attackerExpectedHits == attackerExpectedHits)&&(identical(other.attackerHitsStdDeviation, attackerHitsStdDeviation) || other.attackerHitsStdDeviation == attackerHitsStdDeviation)&&(identical(other.defenderExpectedHits, defenderExpectedHits) || other.defenderExpectedHits == defenderExpectedHits)&&(identical(other.defenderHitsStdDeviation, defenderHitsStdDeviation) || other.defenderHitsStdDeviation == defenderHitsStdDeviation));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,attackerExpectedHits,attackerStdDeviationHits,defenderExpectedHits,defenderStdDeviationHits);
+int get hashCode => Object.hash(runtimeType,attackerExpectedHits,attackerHitsStdDeviation,defenderExpectedHits,defenderHitsStdDeviation);
 
 @override
 String toString() {
-  return 'BattleStatistic(attackerExpectedHits: $attackerExpectedHits, attackerStdDeviationHits: $attackerStdDeviationHits, defenderExpectedHits: $defenderExpectedHits, defenderStdDeviationHits: $defenderStdDeviationHits)';
+  return 'BattleStatistic(attackerExpectedHits: $attackerExpectedHits, attackerHitsStdDeviation: $attackerHitsStdDeviation, defenderExpectedHits: $defenderExpectedHits, defenderHitsStdDeviation: $defenderHitsStdDeviation)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $BattleStatisticCopyWith<$Res>  {
   factory $BattleStatisticCopyWith(BattleStatistic value, $Res Function(BattleStatistic) _then) = _$BattleStatisticCopyWithImpl;
 @useResult
 $Res call({
- double attackerExpectedHits, double attackerStdDeviationHits, double defenderExpectedHits, double defenderStdDeviationHits
+ double attackerExpectedHits, double attackerHitsStdDeviation, double defenderExpectedHits, double defenderHitsStdDeviation
 });
 
 
@@ -62,12 +62,12 @@ class _$BattleStatisticCopyWithImpl<$Res>
 
 /// Create a copy of BattleStatistic
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? attackerExpectedHits = null,Object? attackerStdDeviationHits = null,Object? defenderExpectedHits = null,Object? defenderStdDeviationHits = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? attackerExpectedHits = null,Object? attackerHitsStdDeviation = null,Object? defenderExpectedHits = null,Object? defenderHitsStdDeviation = null,}) {
   return _then(_self.copyWith(
 attackerExpectedHits: null == attackerExpectedHits ? _self.attackerExpectedHits : attackerExpectedHits // ignore: cast_nullable_to_non_nullable
-as double,attackerStdDeviationHits: null == attackerStdDeviationHits ? _self.attackerStdDeviationHits : attackerStdDeviationHits // ignore: cast_nullable_to_non_nullable
+as double,attackerHitsStdDeviation: null == attackerHitsStdDeviation ? _self.attackerHitsStdDeviation : attackerHitsStdDeviation // ignore: cast_nullable_to_non_nullable
 as double,defenderExpectedHits: null == defenderExpectedHits ? _self.defenderExpectedHits : defenderExpectedHits // ignore: cast_nullable_to_non_nullable
-as double,defenderStdDeviationHits: null == defenderStdDeviationHits ? _self.defenderStdDeviationHits : defenderStdDeviationHits // ignore: cast_nullable_to_non_nullable
+as double,defenderHitsStdDeviation: null == defenderHitsStdDeviation ? _self.defenderHitsStdDeviation : defenderHitsStdDeviation // ignore: cast_nullable_to_non_nullable
 as double,
   ));
 }
@@ -153,10 +153,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( double attackerExpectedHits,  double attackerStdDeviationHits,  double defenderExpectedHits,  double defenderStdDeviationHits)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( double attackerExpectedHits,  double attackerHitsStdDeviation,  double defenderExpectedHits,  double defenderHitsStdDeviation)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _BattleStatistic() when $default != null:
-return $default(_that.attackerExpectedHits,_that.attackerStdDeviationHits,_that.defenderExpectedHits,_that.defenderStdDeviationHits);case _:
+return $default(_that.attackerExpectedHits,_that.attackerHitsStdDeviation,_that.defenderExpectedHits,_that.defenderHitsStdDeviation);case _:
   return orElse();
 
 }
@@ -174,10 +174,10 @@ return $default(_that.attackerExpectedHits,_that.attackerStdDeviationHits,_that.
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( double attackerExpectedHits,  double attackerStdDeviationHits,  double defenderExpectedHits,  double defenderStdDeviationHits)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( double attackerExpectedHits,  double attackerHitsStdDeviation,  double defenderExpectedHits,  double defenderHitsStdDeviation)  $default,) {final _that = this;
 switch (_that) {
 case _BattleStatistic():
-return $default(_that.attackerExpectedHits,_that.attackerStdDeviationHits,_that.defenderExpectedHits,_that.defenderStdDeviationHits);case _:
+return $default(_that.attackerExpectedHits,_that.attackerHitsStdDeviation,_that.defenderExpectedHits,_that.defenderHitsStdDeviation);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -194,10 +194,10 @@ return $default(_that.attackerExpectedHits,_that.attackerStdDeviationHits,_that.
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( double attackerExpectedHits,  double attackerStdDeviationHits,  double defenderExpectedHits,  double defenderStdDeviationHits)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( double attackerExpectedHits,  double attackerHitsStdDeviation,  double defenderExpectedHits,  double defenderHitsStdDeviation)?  $default,) {final _that = this;
 switch (_that) {
 case _BattleStatistic() when $default != null:
-return $default(_that.attackerExpectedHits,_that.attackerStdDeviationHits,_that.defenderExpectedHits,_that.defenderStdDeviationHits);case _:
+return $default(_that.attackerExpectedHits,_that.attackerHitsStdDeviation,_that.defenderExpectedHits,_that.defenderHitsStdDeviation);case _:
   return null;
 
 }
@@ -209,13 +209,13 @@ return $default(_that.attackerExpectedHits,_that.attackerStdDeviationHits,_that.
 
 
 class _BattleStatistic extends BattleStatistic {
-  const _BattleStatistic({this.attackerExpectedHits = .0, this.attackerStdDeviationHits = .0, this.defenderExpectedHits = .0, this.defenderStdDeviationHits = .0}): super._();
+  const _BattleStatistic({this.attackerExpectedHits = .0, this.attackerHitsStdDeviation = .0, this.defenderExpectedHits = .0, this.defenderHitsStdDeviation = .0}): super._();
   
 
 @override@JsonKey() final  double attackerExpectedHits;
-@override@JsonKey() final  double attackerStdDeviationHits;
+@override@JsonKey() final  double attackerHitsStdDeviation;
 @override@JsonKey() final  double defenderExpectedHits;
-@override@JsonKey() final  double defenderStdDeviationHits;
+@override@JsonKey() final  double defenderHitsStdDeviation;
 
 /// Create a copy of BattleStatistic
 /// with the given fields replaced by the non-null parameter values.
@@ -227,16 +227,16 @@ _$BattleStatisticCopyWith<_BattleStatistic> get copyWith => __$BattleStatisticCo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _BattleStatistic&&(identical(other.attackerExpectedHits, attackerExpectedHits) || other.attackerExpectedHits == attackerExpectedHits)&&(identical(other.attackerStdDeviationHits, attackerStdDeviationHits) || other.attackerStdDeviationHits == attackerStdDeviationHits)&&(identical(other.defenderExpectedHits, defenderExpectedHits) || other.defenderExpectedHits == defenderExpectedHits)&&(identical(other.defenderStdDeviationHits, defenderStdDeviationHits) || other.defenderStdDeviationHits == defenderStdDeviationHits));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _BattleStatistic&&(identical(other.attackerExpectedHits, attackerExpectedHits) || other.attackerExpectedHits == attackerExpectedHits)&&(identical(other.attackerHitsStdDeviation, attackerHitsStdDeviation) || other.attackerHitsStdDeviation == attackerHitsStdDeviation)&&(identical(other.defenderExpectedHits, defenderExpectedHits) || other.defenderExpectedHits == defenderExpectedHits)&&(identical(other.defenderHitsStdDeviation, defenderHitsStdDeviation) || other.defenderHitsStdDeviation == defenderHitsStdDeviation));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,attackerExpectedHits,attackerStdDeviationHits,defenderExpectedHits,defenderStdDeviationHits);
+int get hashCode => Object.hash(runtimeType,attackerExpectedHits,attackerHitsStdDeviation,defenderExpectedHits,defenderHitsStdDeviation);
 
 @override
 String toString() {
-  return 'BattleStatistic(attackerExpectedHits: $attackerExpectedHits, attackerStdDeviationHits: $attackerStdDeviationHits, defenderExpectedHits: $defenderExpectedHits, defenderStdDeviationHits: $defenderStdDeviationHits)';
+  return 'BattleStatistic(attackerExpectedHits: $attackerExpectedHits, attackerHitsStdDeviation: $attackerHitsStdDeviation, defenderExpectedHits: $defenderExpectedHits, defenderHitsStdDeviation: $defenderHitsStdDeviation)';
 }
 
 
@@ -247,7 +247,7 @@ abstract mixin class _$BattleStatisticCopyWith<$Res> implements $BattleStatistic
   factory _$BattleStatisticCopyWith(_BattleStatistic value, $Res Function(_BattleStatistic) _then) = __$BattleStatisticCopyWithImpl;
 @override @useResult
 $Res call({
- double attackerExpectedHits, double attackerStdDeviationHits, double defenderExpectedHits, double defenderStdDeviationHits
+ double attackerExpectedHits, double attackerHitsStdDeviation, double defenderExpectedHits, double defenderHitsStdDeviation
 });
 
 
@@ -264,12 +264,12 @@ class __$BattleStatisticCopyWithImpl<$Res>
 
 /// Create a copy of BattleStatistic
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? attackerExpectedHits = null,Object? attackerStdDeviationHits = null,Object? defenderExpectedHits = null,Object? defenderStdDeviationHits = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? attackerExpectedHits = null,Object? attackerHitsStdDeviation = null,Object? defenderExpectedHits = null,Object? defenderHitsStdDeviation = null,}) {
   return _then(_BattleStatistic(
 attackerExpectedHits: null == attackerExpectedHits ? _self.attackerExpectedHits : attackerExpectedHits // ignore: cast_nullable_to_non_nullable
-as double,attackerStdDeviationHits: null == attackerStdDeviationHits ? _self.attackerStdDeviationHits : attackerStdDeviationHits // ignore: cast_nullable_to_non_nullable
+as double,attackerHitsStdDeviation: null == attackerHitsStdDeviation ? _self.attackerHitsStdDeviation : attackerHitsStdDeviation // ignore: cast_nullable_to_non_nullable
 as double,defenderExpectedHits: null == defenderExpectedHits ? _self.defenderExpectedHits : defenderExpectedHits // ignore: cast_nullable_to_non_nullable
-as double,defenderStdDeviationHits: null == defenderStdDeviationHits ? _self.defenderStdDeviationHits : defenderStdDeviationHits // ignore: cast_nullable_to_non_nullable
+as double,defenderHitsStdDeviation: null == defenderHitsStdDeviation ? _self.defenderHitsStdDeviation : defenderHitsStdDeviation // ignore: cast_nullable_to_non_nullable
 as double,
   ));
 }

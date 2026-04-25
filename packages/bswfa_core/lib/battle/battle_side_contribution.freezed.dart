@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$BattleSideContribution {
 
- int get swords; int get shields; int get starSwords; int get starShields;
+ int get swords; int get shields; int get leaderActivatedSwords; int get leaderActivatedShields;
 /// Create a copy of BattleSideContribution
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $BattleSideContributionCopyWith<BattleSideContribution> get copyWith => _$Battle
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is BattleSideContribution&&(identical(other.swords, swords) || other.swords == swords)&&(identical(other.shields, shields) || other.shields == shields)&&(identical(other.starSwords, starSwords) || other.starSwords == starSwords)&&(identical(other.starShields, starShields) || other.starShields == starShields));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is BattleSideContribution&&(identical(other.swords, swords) || other.swords == swords)&&(identical(other.shields, shields) || other.shields == shields)&&(identical(other.leaderActivatedSwords, leaderActivatedSwords) || other.leaderActivatedSwords == leaderActivatedSwords)&&(identical(other.leaderActivatedShields, leaderActivatedShields) || other.leaderActivatedShields == leaderActivatedShields));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,swords,shields,starSwords,starShields);
+int get hashCode => Object.hash(runtimeType,swords,shields,leaderActivatedSwords,leaderActivatedShields);
 
 @override
 String toString() {
-  return 'BattleSideContribution(swords: $swords, shields: $shields, starSwords: $starSwords, starShields: $starShields)';
+  return 'BattleSideContribution(swords: $swords, shields: $shields, leaderActivatedSwords: $leaderActivatedSwords, leaderActivatedShields: $leaderActivatedShields)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $BattleSideContributionCopyWith<$Res>  {
   factory $BattleSideContributionCopyWith(BattleSideContribution value, $Res Function(BattleSideContribution) _then) = _$BattleSideContributionCopyWithImpl;
 @useResult
 $Res call({
- int swords, int shields, int starSwords, int starShields
+ int swords, int shields, int leaderActivatedSwords, int leaderActivatedShields
 });
 
 
@@ -62,12 +62,12 @@ class _$BattleSideContributionCopyWithImpl<$Res>
 
 /// Create a copy of BattleSideContribution
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? swords = null,Object? shields = null,Object? starSwords = null,Object? starShields = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? swords = null,Object? shields = null,Object? leaderActivatedSwords = null,Object? leaderActivatedShields = null,}) {
   return _then(_self.copyWith(
 swords: null == swords ? _self.swords : swords // ignore: cast_nullable_to_non_nullable
 as int,shields: null == shields ? _self.shields : shields // ignore: cast_nullable_to_non_nullable
-as int,starSwords: null == starSwords ? _self.starSwords : starSwords // ignore: cast_nullable_to_non_nullable
-as int,starShields: null == starShields ? _self.starShields : starShields // ignore: cast_nullable_to_non_nullable
+as int,leaderActivatedSwords: null == leaderActivatedSwords ? _self.leaderActivatedSwords : leaderActivatedSwords // ignore: cast_nullable_to_non_nullable
+as int,leaderActivatedShields: null == leaderActivatedShields ? _self.leaderActivatedShields : leaderActivatedShields // ignore: cast_nullable_to_non_nullable
 as int,
   ));
 }
@@ -153,10 +153,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int swords,  int shields,  int starSwords,  int starShields)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int swords,  int shields,  int leaderActivatedSwords,  int leaderActivatedShields)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _BattleSideContribution() when $default != null:
-return $default(_that.swords,_that.shields,_that.starSwords,_that.starShields);case _:
+return $default(_that.swords,_that.shields,_that.leaderActivatedSwords,_that.leaderActivatedShields);case _:
   return orElse();
 
 }
@@ -174,10 +174,10 @@ return $default(_that.swords,_that.shields,_that.starSwords,_that.starShields);c
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int swords,  int shields,  int starSwords,  int starShields)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int swords,  int shields,  int leaderActivatedSwords,  int leaderActivatedShields)  $default,) {final _that = this;
 switch (_that) {
 case _BattleSideContribution():
-return $default(_that.swords,_that.shields,_that.starSwords,_that.starShields);case _:
+return $default(_that.swords,_that.shields,_that.leaderActivatedSwords,_that.leaderActivatedShields);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -194,10 +194,10 @@ return $default(_that.swords,_that.shields,_that.starSwords,_that.starShields);c
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int swords,  int shields,  int starSwords,  int starShields)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int swords,  int shields,  int leaderActivatedSwords,  int leaderActivatedShields)?  $default,) {final _that = this;
 switch (_that) {
 case _BattleSideContribution() when $default != null:
-return $default(_that.swords,_that.shields,_that.starSwords,_that.starShields);case _:
+return $default(_that.swords,_that.shields,_that.leaderActivatedSwords,_that.leaderActivatedShields);case _:
   return null;
 
 }
@@ -209,13 +209,13 @@ return $default(_that.swords,_that.shields,_that.starSwords,_that.starShields);c
 
 
 class _BattleSideContribution extends BattleSideContribution {
-  const _BattleSideContribution({this.swords = 0, this.shields = 0, this.starSwords = 0, this.starShields = 0}): super._();
+  const _BattleSideContribution({this.swords = 0, this.shields = 0, this.leaderActivatedSwords = 0, this.leaderActivatedShields = 0}): super._();
   
 
 @override@JsonKey() final  int swords;
 @override@JsonKey() final  int shields;
-@override@JsonKey() final  int starSwords;
-@override@JsonKey() final  int starShields;
+@override@JsonKey() final  int leaderActivatedSwords;
+@override@JsonKey() final  int leaderActivatedShields;
 
 /// Create a copy of BattleSideContribution
 /// with the given fields replaced by the non-null parameter values.
@@ -227,16 +227,16 @@ _$BattleSideContributionCopyWith<_BattleSideContribution> get copyWith => __$Bat
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _BattleSideContribution&&(identical(other.swords, swords) || other.swords == swords)&&(identical(other.shields, shields) || other.shields == shields)&&(identical(other.starSwords, starSwords) || other.starSwords == starSwords)&&(identical(other.starShields, starShields) || other.starShields == starShields));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _BattleSideContribution&&(identical(other.swords, swords) || other.swords == swords)&&(identical(other.shields, shields) || other.shields == shields)&&(identical(other.leaderActivatedSwords, leaderActivatedSwords) || other.leaderActivatedSwords == leaderActivatedSwords)&&(identical(other.leaderActivatedShields, leaderActivatedShields) || other.leaderActivatedShields == leaderActivatedShields));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,swords,shields,starSwords,starShields);
+int get hashCode => Object.hash(runtimeType,swords,shields,leaderActivatedSwords,leaderActivatedShields);
 
 @override
 String toString() {
-  return 'BattleSideContribution(swords: $swords, shields: $shields, starSwords: $starSwords, starShields: $starShields)';
+  return 'BattleSideContribution(swords: $swords, shields: $shields, leaderActivatedSwords: $leaderActivatedSwords, leaderActivatedShields: $leaderActivatedShields)';
 }
 
 
@@ -247,7 +247,7 @@ abstract mixin class _$BattleSideContributionCopyWith<$Res> implements $BattleSi
   factory _$BattleSideContributionCopyWith(_BattleSideContribution value, $Res Function(_BattleSideContribution) _then) = __$BattleSideContributionCopyWithImpl;
 @override @useResult
 $Res call({
- int swords, int shields, int starSwords, int starShields
+ int swords, int shields, int leaderActivatedSwords, int leaderActivatedShields
 });
 
 
@@ -264,12 +264,12 @@ class __$BattleSideContributionCopyWithImpl<$Res>
 
 /// Create a copy of BattleSideContribution
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? swords = null,Object? shields = null,Object? starSwords = null,Object? starShields = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? swords = null,Object? shields = null,Object? leaderActivatedSwords = null,Object? leaderActivatedShields = null,}) {
   return _then(_BattleSideContribution(
 swords: null == swords ? _self.swords : swords // ignore: cast_nullable_to_non_nullable
 as int,shields: null == shields ? _self.shields : shields // ignore: cast_nullable_to_non_nullable
-as int,starSwords: null == starSwords ? _self.starSwords : starSwords // ignore: cast_nullable_to_non_nullable
-as int,starShields: null == starShields ? _self.starShields : starShields // ignore: cast_nullable_to_non_nullable
+as int,leaderActivatedSwords: null == leaderActivatedSwords ? _self.leaderActivatedSwords : leaderActivatedSwords // ignore: cast_nullable_to_non_nullable
+as int,leaderActivatedShields: null == leaderActivatedShields ? _self.leaderActivatedShields : leaderActivatedShields // ignore: cast_nullable_to_non_nullable
 as int,
   ));
 }

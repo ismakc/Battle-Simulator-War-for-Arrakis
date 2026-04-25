@@ -1,7 +1,7 @@
+import 'package:bswfa_core/battle/statistics/tree/battle_accumulated_hits.dart';
 import 'package:bswfa_core/roll/battle_dice_roll.dart';
 import 'package:bswfa_core/roll/battle_die.dart';
 import 'package:bswfa_core/roll/dice_roll.dart';
-import 'package:bswfa_core/service/tree/battle_accumulated_hits.dart';
 
 /// Estado inmutable de un nodo durante la permutación de tiradas.
 ///

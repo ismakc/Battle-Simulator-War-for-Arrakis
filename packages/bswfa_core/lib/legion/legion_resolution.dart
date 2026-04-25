@@ -9,10 +9,10 @@ abstract class LegionResolution with _$LegionResolution {
   const LegionResolution._();
 
   const factory LegionResolution({
-    @Default(<LegionChange>[]) List<LegionChange> changes,
+    @Default(<LegionChange>[]) List<LegionChange> appliedChanges,
   }) = _LegionResolution;
 
-  bool get isEmpty => changes.isEmpty;
+  bool get isEmpty => appliedChanges.isEmpty;
 
-  Legion applyTo(Legion legion) => legion.applyChanges(changes);
+  Legion applyTo(Legion legion) => legion.applyChanges(appliedChanges);
 }
