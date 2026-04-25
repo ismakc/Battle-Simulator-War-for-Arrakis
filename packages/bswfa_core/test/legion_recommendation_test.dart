@@ -36,6 +36,42 @@ void main() {
       );
     });
 
+    test('includes settlement only in contextual battle value', () {
+      final DefendingLegion legion = DefendingLegion(
+        regularUnits: 1,
+        settlementLevel: 2,
+      );
+
+      expect(LegionRecommendationCostPolicy.calculate(legion), 1);
+      expect(LegionRecommendationCostPolicy.calculateBattleValue(legion), 3);
+    });
+
+    test('starts evaluation near the enemy battle value', () {
+      final LegionRecommendationResolver resolver =
+          LegionRecommendationResolver();
+
+      final List<LegionRecommendation> recommendations = resolver.resolve(
+        LegionRecommendationRequest(
+          enemyLegion: DefendingLegion(regularUnits: 1),
+          ownRole: LegionRecommendationRole.attacker,
+          maxRounds: 1,
+          targetWinProbability: 0,
+          limit: 1,
+          maxEvaluatedCandidates: 1,
+          constraints: LegionRecommendationConstraints(
+            maxRegularUnits: 1,
+            maxEliteUnits: 0,
+            maxSpecialEliteUnits: 1,
+            maxGenericLeaders: 0,
+          ),
+        ),
+      );
+
+      expect(recommendations, hasLength(1));
+      expect(recommendations.single.legion.regularUnits, 1);
+      expect(recommendations.single.legion.specialEliteUnits, 0);
+    });
+
     test('returns at most three attacker recommendations', () {
       final LegionRecommendationResolver resolver =
           LegionRecommendationResolver();

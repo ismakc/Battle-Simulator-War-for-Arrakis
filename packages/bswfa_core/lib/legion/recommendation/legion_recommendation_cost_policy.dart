@@ -8,6 +8,7 @@ class LegionRecommendationCostPolicy {
   static const double regularUnitCost = 1.00;
   static const double eliteUnitCost = 1.75;
   static const double specialEliteUnitCost = 2.75;
+  static const double settlementLevelCost = regularUnitCost;
 
   static double calculate(Legion legion) {
     return legion.genericLeaders * genericLeaderCost +
@@ -18,6 +19,15 @@ class LegionRecommendationCostPolicy {
           attacking: (AttackingLegion attackingLegion) =>
               attackingLegion.surpriseAttack ? surpriseAttackCost : 0,
           defending: (_) => 0,
+        );
+  }
+
+  static double calculateBattleValue(Legion legion) {
+    return calculate(legion) +
+        legion.map(
+          attacking: (_) => 0,
+          defending: (DefendingLegion defendingLegion) =>
+              defendingLegion.settlementLevel * settlementLevelCost,
         );
   }
 }

@@ -77,9 +77,14 @@ class LegionRecommendationResolver {
     LegionRecommendationRequest request,
   ) {
     final List<Legion> candidates = _buildCandidateLegions(request).toList();
+    final double enemyBattleValue =
+        LegionRecommendationCostPolicy.calculateBattleValue(
+          request.enemyLegion,
+        );
+
     candidates.sort(
       (Legion left, Legion right) =>
-          _compareCandidateLegions(request, left, right),
+          _compareCandidateLegions(request, enemyBattleValue, left, right),
     );
 
     return candidates
@@ -213,10 +218,15 @@ class LegionRecommendationResolver {
 
   int _compareCandidateLegions(
     LegionRecommendationRequest request,
+    double enemyBattleValue,
     Legion left,
     Legion right,
   ) {
     return _compareByFields(<int>[
+      _compareDoubleAscending(
+        _battleValueDistance(left, enemyBattleValue),
+        _battleValueDistance(right, enemyBattleValue),
+      ),
       _compareDoubleDescending(
         _estimateCandidateStrength(request, left),
         _estimateCandidateStrength(request, right),
@@ -230,6 +240,12 @@ class LegionRecommendationResolver {
         right.totalUnits + right.totalLeaders,
       ),
     ]);
+  }
+
+  double _battleValueDistance(Legion legion, double targetBattleValue) {
+    return (LegionRecommendationCostPolicy.calculateBattleValue(legion) -
+            targetBattleValue)
+        .abs();
   }
 
   double _estimateCandidateStrength(
