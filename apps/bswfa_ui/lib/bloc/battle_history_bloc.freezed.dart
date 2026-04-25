@@ -287,7 +287,7 @@ String toString() {
 /// @nodoc
 mixin _$BattleHistoryState {
 
- List<BattleResult> get battleHistory;
+ List<RoundBattleSummary> get battleHistory;
 /// Create a copy of BattleHistoryState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -318,7 +318,7 @@ abstract mixin class $BattleHistoryStateCopyWith<$Res>  {
   factory $BattleHistoryStateCopyWith(BattleHistoryState value, $Res Function(BattleHistoryState) _then) = _$BattleHistoryStateCopyWithImpl;
 @useResult
 $Res call({
- List<BattleResult> battleHistory
+ List<RoundBattleSummary> battleHistory
 });
 
 
@@ -338,7 +338,7 @@ class _$BattleHistoryStateCopyWithImpl<$Res>
 @pragma('vm:prefer-inline') @override $Res call({Object? battleHistory = null,}) {
   return _then(_self.copyWith(
 battleHistory: null == battleHistory ? _self.battleHistory : battleHistory // ignore: cast_nullable_to_non_nullable
-as List<BattleResult>,
+as List<RoundBattleSummary>,
   ));
 }
 
@@ -423,7 +423,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( List<BattleResult> battleHistory)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( List<RoundBattleSummary> battleHistory)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _BattleHistoryState() when $default != null:
 return $default(_that.battleHistory);case _:
@@ -444,7 +444,7 @@ return $default(_that.battleHistory);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( List<BattleResult> battleHistory)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( List<RoundBattleSummary> battleHistory)  $default,) {final _that = this;
 switch (_that) {
 case _BattleHistoryState():
 return $default(_that.battleHistory);case _:
@@ -464,7 +464,7 @@ return $default(_that.battleHistory);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( List<BattleResult> battleHistory)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( List<RoundBattleSummary> battleHistory)?  $default,) {final _that = this;
 switch (_that) {
 case _BattleHistoryState() when $default != null:
 return $default(_that.battleHistory);case _:
@@ -479,11 +479,11 @@ return $default(_that.battleHistory);case _:
 
 
 class _BattleHistoryState implements BattleHistoryState {
-  const _BattleHistoryState({required final  List<BattleResult> battleHistory}): _battleHistory = battleHistory;
+  const _BattleHistoryState({required final  List<RoundBattleSummary> battleHistory}): _battleHistory = battleHistory;
   
 
- final  List<BattleResult> _battleHistory;
-@override List<BattleResult> get battleHistory {
+ final  List<RoundBattleSummary> _battleHistory;
+@override List<RoundBattleSummary> get battleHistory {
   if (_battleHistory is EqualUnmodifiableListView) return _battleHistory;
   // ignore: implicit_dynamic_type
   return EqualUnmodifiableListView(_battleHistory);
@@ -520,7 +520,7 @@ abstract mixin class _$BattleHistoryStateCopyWith<$Res> implements $BattleHistor
   factory _$BattleHistoryStateCopyWith(_BattleHistoryState value, $Res Function(_BattleHistoryState) _then) = __$BattleHistoryStateCopyWithImpl;
 @override @useResult
 $Res call({
- List<BattleResult> battleHistory
+ List<RoundBattleSummary> battleHistory
 });
 
 
@@ -540,7 +540,7 @@ class __$BattleHistoryStateCopyWithImpl<$Res>
 @override @pragma('vm:prefer-inline') $Res call({Object? battleHistory = null,}) {
   return _then(_BattleHistoryState(
 battleHistory: null == battleHistory ? _self._battleHistory : battleHistory // ignore: cast_nullable_to_non_nullable
-as List<BattleResult>,
+as List<RoundBattleSummary>,
   ));
 }
 

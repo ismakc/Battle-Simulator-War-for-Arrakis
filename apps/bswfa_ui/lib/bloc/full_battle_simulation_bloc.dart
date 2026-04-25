@@ -1,8 +1,10 @@
 import 'dart:async';
 
-import 'package:bswfa_core/domain/battle/battle_result.dart';
-import 'package:bswfa_core/domain/battle/battle_scenario.dart';
-import 'package:bswfa_core/service/battle_simulator.dart';
+import 'package:bswfa_core/battle/battle_scenario.dart';
+import 'package:bswfa_core/battle/battle_statistic.dart';
+import 'package:bswfa_core/battle/result/automatic_battle_end_reason.dart';
+import 'package:bswfa_core/battle/result/battle_result.dart';
+import 'package:bswfa_core/battle/simulation/automatic_battle_resolver.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -14,7 +16,7 @@ class FullBattleSimulationBloc
     on<_SimulateFullBattle>(_onSimulateFullBattle);
   }
 
-  final BattleSimulator simulator = BattleSimulator.instance;
+  final AutomaticBattleResolver resolver = const AutomaticBattleResolver();
 
   FutureOr<void> _onSimulateFullBattle(
     _SimulateFullBattle event,
@@ -22,7 +24,7 @@ class FullBattleSimulationBloc
   ) {
     emit(
       FullBattleSimulationState(
-        battleResult: simulator.simulateMultipleRounds(event.battleScenario),
+        battleResult: resolver.resolve(event.battleScenario),
       ),
     );
   }
@@ -41,6 +43,14 @@ abstract class FullBattleSimulationState with _$FullBattleSimulationState {
     required BattleResult battleResult,
   }) = _FullBattleSimulationState;
 
-  factory FullBattleSimulationState.initial() =>
-      const FullBattleSimulationState(battleResult: BattleResult.defaultValues);
+  factory FullBattleSimulationState.initial() {
+    return const FullBattleSimulationState(
+      battleResult: BattleResult(
+        playedCombatRounds: 0,
+        endReason: AutomaticBattleEndReason.notResolved,
+        resultingScenario: BattleScenario(),
+        statistic: BattleStatistic(),
+      ),
+    );
+  }
 }

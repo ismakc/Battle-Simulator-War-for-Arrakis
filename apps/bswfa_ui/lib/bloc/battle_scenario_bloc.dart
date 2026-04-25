@@ -1,8 +1,7 @@
 import 'dart:async';
 
-import 'package:bswfa_core/domain/battle/battle_scenario.dart';
-import 'package:bswfa_core/domain/legion/attacking_legion.dart';
-import 'package:bswfa_core/domain/legion/defending_legion.dart';
+import 'package:bswfa_core/battle/battle_scenario.dart';
+import 'package:bswfa_core/legion/legion.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -37,9 +36,7 @@ class BattleScenarioBloc
   }
 
   FutureOr<void> _onReset(_Reset event, Emitter<BattleScenarioState> emit) {
-    emit(
-      const BattleScenarioState(battleScenario: BattleScenario.defaultValues),
-    );
+    emit(const BattleScenarioState(battleScenario: BattleScenario()));
   }
 }
 
@@ -62,5 +59,5 @@ abstract class BattleScenarioState with _$BattleScenarioState {
       _BattleScenarioState;
 
   factory BattleScenarioState.initial() =>
-      const BattleScenarioState(battleScenario: BattleScenario.defaultValues);
+      const BattleScenarioState(battleScenario: BattleScenario());
 }

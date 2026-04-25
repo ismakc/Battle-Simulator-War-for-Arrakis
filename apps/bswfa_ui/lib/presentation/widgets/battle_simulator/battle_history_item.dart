@@ -1,17 +1,18 @@
-import 'package:bswfa_core/domain/battle/battle_result.dart';
+import 'package:bswfa_core/legion/legion.dart';
 import 'package:bswfa_ui/bloc/full_battle_simulation_bloc.dart';
+import 'package:bswfa_ui/model/round_battle_summary.dart';
 import 'package:bswfa_ui/presentation/widgets/legion_input/full_battle_simulation_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class BattleHistoryItem extends StatelessWidget {
   const BattleHistoryItem({
-    required this.battleResult,
+    required this.roundSummary,
     required this.displayIndex,
     super.key,
   });
 
-  final BattleResult battleResult;
+  final RoundBattleSummary roundSummary;
   final int displayIndex;
 
   @override
@@ -19,7 +20,7 @@ class BattleHistoryItem extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         context.read<FullBattleSimulationBloc>().add(
-          FullBattleSimulationEvent.simulateFullBattle(battleResult.scenario),
+          FullBattleSimulationEvent.simulateFullBattle(roundSummary.scenario),
         );
         _showPopup(context);
       },
@@ -56,15 +57,15 @@ class BattleHistoryItem extends StatelessWidget {
                   children: <Widget>[
                     _buildRow(
                       label: 'Att.Hits:',
-                      hits: battleResult.statistic.attackerExpectedHits,
-                      legion: battleResult.attackingLegion,
+                      hits: roundSummary.statistic.attackerExpectedHits,
+                      legion: roundSummary.scenario.attackingLegion,
                       isAttacker: true,
                     ),
                     const SizedBox(height: 3.0),
                     _buildRow(
                       label: 'Def.Hits:',
-                      hits: battleResult.statistic.defenderExpectedHits,
-                      legion: battleResult.defendingLegion,
+                      hits: roundSummary.statistic.defenderExpectedHits,
+                      legion: roundSummary.scenario.defendingLegion,
                       isAttacker: false,
                     ),
                   ],
@@ -80,7 +81,7 @@ class BattleHistoryItem extends StatelessWidget {
   Widget _buildRow({
     required String label,
     required double hits,
-    required dynamic legion,
+    required Legion legion,
     required bool isAttacker,
   }) {
     return Padding(

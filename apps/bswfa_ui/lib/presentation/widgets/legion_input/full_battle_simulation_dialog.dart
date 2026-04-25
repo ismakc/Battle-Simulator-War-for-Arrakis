@@ -1,4 +1,4 @@
-import 'package:bswfa_core/domain/battle/battle_result.dart';
+import 'package:bswfa_core/battle/result/battle_result.dart';
 import 'package:bswfa_ui/bloc/full_battle_simulation_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -27,7 +27,7 @@ class FullBattleSimulationPopupDialog extends StatelessWidget {
               border: Border.all(color: Colors.amber, width: 2),
               boxShadow: <BoxShadow>[
                 BoxShadow(
-                  color: Colors.black.withOpacity(0.1),
+                  color: Colors.black.withValues(alpha: 0.1),
                   spreadRadius: 5,
                   blurRadius: 7,
                   offset: const Offset(0, 3),

@@ -31,7 +31,7 @@ class SurpriseAttackInput extends StatelessWidget {
               fit: BoxFit.fitWidth,
               child: Switch(
                 value: value,
-                activeColor: Colors.amber,
+                activeThumbColor: Colors.amber,
                 onChanged: onValueChanged,
               ),
             ),

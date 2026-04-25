@@ -202,12 +202,12 @@ _$UpdateAttackingLegionCopyWith<_UpdateAttackingLegion> get copyWith => __$Updat
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _UpdateAttackingLegion&&const DeepCollectionEquality().equals(other.attackingLegion, attackingLegion));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _UpdateAttackingLegion&&(identical(other.attackingLegion, attackingLegion) || other.attackingLegion == attackingLegion));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(attackingLegion));
+int get hashCode => Object.hash(runtimeType,attackingLegion);
 
 @override
 String toString() {
@@ -239,9 +239,9 @@ class __$UpdateAttackingLegionCopyWithImpl<$Res>
 
 /// Create a copy of BattleScenarioEvent
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? attackingLegion = freezed,}) {
+@pragma('vm:prefer-inline') $Res call({Object? attackingLegion = null,}) {
   return _then(_UpdateAttackingLegion(
-freezed == attackingLegion ? _self.attackingLegion : attackingLegion // ignore: cast_nullable_to_non_nullable
+null == attackingLegion ? _self.attackingLegion : attackingLegion // ignore: cast_nullable_to_non_nullable
 as AttackingLegion,
   ));
 }
@@ -268,12 +268,12 @@ _$UpdateDefendingLegionCopyWith<_UpdateDefendingLegion> get copyWith => __$Updat
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _UpdateDefendingLegion&&const DeepCollectionEquality().equals(other.defendingLegion, defendingLegion));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _UpdateDefendingLegion&&(identical(other.defendingLegion, defendingLegion) || other.defendingLegion == defendingLegion));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(defendingLegion));
+int get hashCode => Object.hash(runtimeType,defendingLegion);
 
 @override
 String toString() {
@@ -305,9 +305,9 @@ class __$UpdateDefendingLegionCopyWithImpl<$Res>
 
 /// Create a copy of BattleScenarioEvent
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? defendingLegion = freezed,}) {
+@pragma('vm:prefer-inline') $Res call({Object? defendingLegion = null,}) {
   return _then(_UpdateDefendingLegion(
-freezed == defendingLegion ? _self.defendingLegion : defendingLegion // ignore: cast_nullable_to_non_nullable
+null == defendingLegion ? _self.defendingLegion : defendingLegion // ignore: cast_nullable_to_non_nullable
 as DefendingLegion,
   ));
 }

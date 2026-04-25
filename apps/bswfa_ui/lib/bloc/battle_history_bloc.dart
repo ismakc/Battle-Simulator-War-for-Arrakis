@@ -1,10 +1,10 @@
 import 'dart:async';
 
-import 'package:bswfa_core/domain/battle/battle_result.dart';
-import 'package:bswfa_core/domain/battle/battle_scenario.dart';
-import 'package:bswfa_core/service/battle_simulator.dart';
+import 'package:bswfa_core/battle/battle_scenario.dart';
+import 'package:bswfa_core/battle/statistics/battle_statistic_calculator.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:bswfa_ui/model/round_battle_summary.dart';
 
 part 'battle_history_bloc.freezed.dart';
 
@@ -14,22 +14,25 @@ class BattleHistoryBloc extends Bloc<BattleHistoryEvent, BattleHistoryState> {
     on<_Reset>(_onReset);
   }
 
-  final BattleSimulator simulator = BattleSimulator.instance;
-
   FutureOr<void> _onSimulateBattle(
     _SimulateBattle event,
     Emitter<BattleHistoryState> emit,
   ) {
+    final RoundBattleSummary roundSummary = RoundBattleSummary(
+      scenario: event.battleScenario,
+      statistic: BattleStatisticCalculator.calculate(event.battleScenario),
+    );
+
     emit(
       BattleHistoryState(
-        battleHistory: List<BattleResult>.of(state.battleHistory)
-          ..insert(0, simulator.simulateSingleRound(event.battleScenario)),
+        battleHistory: List<RoundBattleSummary>.of(state.battleHistory)
+          ..insert(0, roundSummary),
       ),
     );
   }
 
   FutureOr<void> _onReset(_Reset event, Emitter<BattleHistoryState> emit) {
-    emit(const BattleHistoryState(battleHistory: <BattleResult>[]));
+    emit(const BattleHistoryState(battleHistory: <RoundBattleSummary>[]));
   }
 }
 
@@ -44,9 +47,9 @@ class BattleHistoryEvent with _$BattleHistoryEvent {
 @freezed
 abstract class BattleHistoryState with _$BattleHistoryState {
   const factory BattleHistoryState({
-    required List<BattleResult> battleHistory,
+    required List<RoundBattleSummary> battleHistory,
   }) = _BattleHistoryState;
 
   factory BattleHistoryState.initial() =>
-      const BattleHistoryState(battleHistory: <BattleResult>[]);
+      const BattleHistoryState(battleHistory: <RoundBattleSummary>[]);
 }

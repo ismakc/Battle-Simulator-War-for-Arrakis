@@ -19,6 +19,6 @@ enum NamedLeader {
   final int attack;
   final int defense;
 
-  /// Representación compacta para UI y logs (`ataque/defensa`).
-  String get displayAsString => "$attack/$defense";
+  /// Perfil de combate compacto (`ataque/defensa`).
+  String get combatProfile => '$attack/$defense';
 }

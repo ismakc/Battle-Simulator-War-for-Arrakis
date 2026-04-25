@@ -1,14 +1,14 @@
 import 'package:bswfa_core/legion/legion.dart';
 import 'package:bswfa_core/legion/legion_change.dart';
 import 'package:bswfa_core/legion/legion_resolution.dart';
-import 'package:bswfa_core/legion/named_leader.dart';
+import 'package:bswfa_core/legion/named_leader_loss_selection_policy.dart';
 
 enum _LossOption {
-  minusLeader,
-  minusRegular,
-  minusElite,
-  minusSpecial,
-  minusNamed,
+  removeGenericLeader,
+  removeRegularUnit,
+  downgradeEliteUnit,
+  downgradeSpecialEliteUnit,
+  removeNamedLeader,
 }
 
 class LegionOptimalLoss {
@@ -18,34 +18,36 @@ class LegionOptimalLoss {
   static LegionResolution calculateOptimalLoss(Legion legion) {
     final Map<_LossOption, LegionResolution?> options =
         <_LossOption, LegionResolution?>{
-          _LossOption.minusLeader: legion.genericLeaders == 0
+          _LossOption.removeGenericLeader: legion.genericLeaders == 0
               ? null
               : const LegionResolution(
                   changes: <LegionChange>[LegionChange.removeGenericLeader()],
                 ),
-          _LossOption.minusRegular: legion.regularUnits == 0
+          _LossOption.removeRegularUnit: legion.regularUnits == 0
               ? null
               : const LegionResolution(
                   changes: <LegionChange>[LegionChange.removeRegularUnit()],
                 ),
-          _LossOption.minusElite: legion.eliteUnits == 0
+          _LossOption.downgradeEliteUnit: legion.eliteUnits == 0
               ? null
               : const LegionResolution(
                   changes: <LegionChange>[LegionChange.downgradeEliteUnit()],
                 ),
-          _LossOption.minusSpecial: legion.specialEliteUnits == 0
+          _LossOption.downgradeSpecialEliteUnit: legion.specialEliteUnits == 0
               ? null
               : const LegionResolution(
                   changes: <LegionChange>[
                     LegionChange.downgradeSpecialEliteUnit(),
                   ],
                 ),
-          _LossOption.minusNamed: legion.namedLeaders.isEmpty
+          _LossOption.removeNamedLeader: legion.namedLeaders.isEmpty
               ? null
               : LegionResolution(
                   changes: <LegionChange>[
                     LegionChange.removeNamedLeader(
-                      leader: _selectNamedLeaderToLose(legion.namedLeaders),
+                      leader: NamedLeaderLossSelectionPolicy.selectLeaderToLose(
+                        legion.namedLeaders,
+                      ),
                     ),
                   ],
                 ),
@@ -83,17 +85,6 @@ class LegionOptimalLoss {
     return selectedEntry?.value ?? const LegionResolution();
   }
 
-  static NamedLeader _selectNamedLeaderToLose(List<NamedLeader> leaders) {
-    final List<NamedLeader> sorted = List<NamedLeader>.from(leaders)
-      ..sort(
-        (NamedLeader a, NamedLeader b) => b.attack != a.attack
-            ? b.attack.compareTo(a.attack)
-            : b.defense.compareTo(a.defense),
-      );
-
-    return sorted.last;
-  }
-
   /// Regla de desempate cuando varias resoluciones preservan el mismo `diceCount`.
   static bool _shouldReplaceSelectedEntry({
     required Legion legion,
@@ -105,23 +96,23 @@ class LegionOptimalLoss {
     }
 
     switch (candidateEntry.key) {
-      case _LossOption.minusLeader:
+      case _LossOption.removeGenericLeader:
         return legion.genericLeaders > 0 &&
             legion.totalLeaders > legion.diceCount;
 
-      case _LossOption.minusElite:
-        return selectedEntry.key != _LossOption.minusElite;
+      case _LossOption.downgradeEliteUnit:
+        return selectedEntry.key != _LossOption.downgradeEliteUnit;
 
-      case _LossOption.minusSpecial:
-        return selectedEntry.key != _LossOption.minusElite &&
-            selectedEntry.key != _LossOption.minusSpecial;
+      case _LossOption.downgradeSpecialEliteUnit:
+        return selectedEntry.key != _LossOption.downgradeEliteUnit &&
+            selectedEntry.key != _LossOption.downgradeSpecialEliteUnit;
 
-      case _LossOption.minusNamed:
+      case _LossOption.removeNamedLeader:
         return legion.totalUnits == 1 ||
-            selectedEntry.key != _LossOption.minusRegular;
+            selectedEntry.key != _LossOption.removeRegularUnit;
 
-      case _LossOption.minusRegular:
-        return selectedEntry.key != _LossOption.minusRegular;
+      case _LossOption.removeRegularUnit:
+        return selectedEntry.key != _LossOption.removeRegularUnit;
     }
   }
 }

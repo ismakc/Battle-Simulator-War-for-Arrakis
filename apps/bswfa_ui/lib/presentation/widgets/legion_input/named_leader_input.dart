@@ -1,4 +1,4 @@
-import 'package:bswfa_core/domain/legion/named_leader.dart';
+import 'package:bswfa_core/legion/named_leader.dart';
 import 'package:bswfa_ui/presentation/widgets/common/clamp_first_row.dart';
 import 'package:flutter/material.dart';
 
@@ -71,7 +71,7 @@ class _NamedLeaderInputState extends State<NamedLeaderInput> {
             borderRadius: BorderRadius.circular(12.0),
           ),
           child: Text(
-            leader.displayAsString,
+            leader.combatProfile,
             style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,

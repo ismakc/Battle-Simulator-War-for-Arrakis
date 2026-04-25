@@ -1,5 +1,5 @@
-import 'package:bswfa_core/domain/legion/attacking_legion.dart';
-import 'package:bswfa_core/domain/legion/named_leader.dart';
+import 'package:bswfa_core/legion/legion.dart';
+import 'package:bswfa_core/legion/named_leader.dart';
 import 'package:bswfa_ui/bloc/battle_scenario_bloc.dart';
 import 'package:bswfa_ui/presentation/widgets/common/label_border_field_set.dart';
 import 'package:bswfa_ui/presentation/widgets/legion_input/named_leader_input.dart';
@@ -23,7 +23,7 @@ class AttackingLegionInput extends StatelessWidget {
       builder: (BuildContext context, AttackingLegion state) {
         return LabeledBorderFieldset(
           label:
-              'Attacking Legion ( ${state.diceCount}\u{1F3B2}of ${state.unlimitedDiceCount}  /  ${state.maxStarsCount}\u{2B50}of ${state.unlimitedStarsCount}  /  -${state.removedShieldsCount}\u{1F6E1}  /  ${state.lifeCount}\u{2764}\u{FE0F} )',
+              'Attacking Legion ( ${state.diceCount}\u{1F3B2}of ${state.unlimitedDiceCount}  /  ${state.maxStarsCount}\u{2B50}of ${state.unlimitedStarsCount}  /  -${state.removedShieldsCount}\u{1F6E1}  /  ${state.remainingLossCapacity}\u{2764}\u{FE0F} )',
           borderColor: Colors.amber,
           textColor: Colors.black87,
           child: Wrap(

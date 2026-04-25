@@ -9,19 +9,19 @@ import 'package:bswfa_core/service/tree/battle_accumulated_hits.dart';
 /// acumulados hasta ese punto del árbol.
 class BattleNodeState {
   /// Crea un estado con la tirada actual y los impactos acumulados.
-  const BattleNodeState(this.battleDiceRoll, this.accumulator);
+  const BattleNodeState(this.battleDiceRoll, this.accumulatedHits);
 
   /// Tirada compuesta de atacante y defensor para este nodo.
   final BattleDiceRoll battleDiceRoll;
 
   /// Impactos acumulados durante el recorrido de este nodo.
-  final BattleAccumulatedHits accumulator;
+  final BattleAccumulatedHits accumulatedHits;
 
   /// Estado inicial del árbol: tirada vacía e impactos a cero.
   static BattleNodeState initialState() {
     return const BattleNodeState(
       BattleDiceRoll(),
-      BattleAccumulatedHits.initialValues,
+      BattleAccumulatedHits.zero,
     );
   }
 
@@ -57,17 +57,17 @@ class BattleNodeState {
       case BattleDie.sword:
         return BattleNodeState(
           updater(battleDiceRoll, diceRoll.addSword()),
-          accumulator,
+          accumulatedHits,
         );
       case BattleDie.shield:
         return BattleNodeState(
           updater(battleDiceRoll, diceRoll.addShield()),
-          accumulator,
+          accumulatedHits,
         );
       case BattleDie.star:
         return BattleNodeState(
           updater(battleDiceRoll, diceRoll.addStar()),
-          accumulator,
+          accumulatedHits,
         );
     }
   }

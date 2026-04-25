@@ -1,5 +1,5 @@
-import 'package:bswfa_core/domain/battle/battle_result.dart';
 import 'package:bswfa_ui/bloc/battle_history_bloc.dart';
+import 'package:bswfa_ui/model/round_battle_summary.dart';
 import 'package:bswfa_ui/presentation/widgets/battle_simulator/battle_history_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -16,10 +16,10 @@ class BattleHistory extends StatelessWidget {
           physics: const NeverScrollableScrollPhysics(),
           itemCount: state.battleHistory.length,
           itemBuilder: (BuildContext context, int index) {
-            final BattleResult battleResult = state.battleHistory[index];
+            final RoundBattleSummary roundSummary = state.battleHistory[index];
             return BattleHistoryItem(
               key: ValueKey<int>(index),
-              battleResult: battleResult,
+              roundSummary: roundSummary,
               displayIndex: state.battleHistory.length - index,
             );
           },

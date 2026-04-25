@@ -13,19 +13,19 @@ abstract class BattleAccumulatedHits with _$BattleAccumulatedHits {
     required int squaredDefenderHits,
   }) = _AccumulatedHits;
 
-  static const BattleAccumulatedHits initialValues = BattleAccumulatedHits(
+  static const BattleAccumulatedHits zero = BattleAccumulatedHits(
     attackerHits: 0,
     defenderHits: 0,
     squaredAttackerHits: 0,
     squaredDefenderHits: 0,
   );
 
-  BattleAccumulatedHits add(BattleAccumulatedHits val) {
+  BattleAccumulatedHits add(BattleAccumulatedHits other) {
     return copyWith(
-      attackerHits: attackerHits + val.attackerHits,
-      defenderHits: defenderHits + val.defenderHits,
-      squaredAttackerHits: squaredAttackerHits + val.squaredAttackerHits,
-      squaredDefenderHits: squaredDefenderHits + val.squaredDefenderHits,
+      attackerHits: attackerHits + other.attackerHits,
+      defenderHits: defenderHits + other.defenderHits,
+      squaredAttackerHits: squaredAttackerHits + other.squaredAttackerHits,
+      squaredDefenderHits: squaredDefenderHits + other.squaredDefenderHits,
     );
   }
 }
