@@ -15,9 +15,20 @@ class BattleRoundDistributionResolver {
     this.hitsCalculator = const BattleHitsCalculator(),
   });
 
+  static final Map<BattleScenario, List<BattleRoundOutcome>>
+  _resolvedScenarioCache = <BattleScenario, List<BattleRoundOutcome>>{};
+  static final Map<int, List<_DiceRollOutcome>> _diceRollOutcomeCache =
+      <int, List<_DiceRollOutcome>>{};
+
   final BattleHitsCalculator hitsCalculator;
 
   List<BattleRoundOutcome> resolve(BattleScenario scenario) {
+    final List<BattleRoundOutcome>? cachedOutcomes =
+        _resolvedScenarioCache[scenario];
+    if (cachedOutcomes != null) {
+      return cachedOutcomes;
+    }
+
     final List<_DiceRollOutcome> attackerRolls = _buildDiceRollOutcomes(
       scenario.attackingLegion.diceCount,
     );
@@ -60,7 +71,7 @@ class BattleRoundDistributionResolver {
       }
     }
 
-    return <BattleRoundOutcome>[
+    final List<BattleRoundOutcome> outcomes = <BattleRoundOutcome>[
       for (final MapEntry<_RoundOutcomeKey, double> entry
           in probabilities.entries)
         BattleRoundOutcome(
@@ -70,6 +81,9 @@ class BattleRoundDistributionResolver {
           defenderHits: entry.key.defenderHits,
         ),
     ];
+
+    _resolvedScenarioCache[scenario] = outcomes;
+    return outcomes;
   }
 
   BattleScenario _applyRoundHits(
@@ -131,6 +145,12 @@ class BattleRoundDistributionResolver {
   }
 
   List<_DiceRollOutcome> _buildDiceRollOutcomes(int diceCount) {
+    final List<_DiceRollOutcome>? cachedOutcomes =
+        _diceRollOutcomeCache[diceCount];
+    if (cachedOutcomes != null) {
+      return cachedOutcomes;
+    }
+
     final int totalOutcomes = math.pow(6, diceCount).toInt();
     final List<_DiceRollOutcome> outcomes = <_DiceRollOutcome>[];
 
@@ -157,6 +177,7 @@ class BattleRoundDistributionResolver {
       }
     }
 
+    _diceRollOutcomeCache[diceCount] = outcomes;
     return outcomes;
   }
 

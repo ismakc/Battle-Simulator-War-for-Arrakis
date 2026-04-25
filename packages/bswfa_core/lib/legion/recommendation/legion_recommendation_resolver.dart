@@ -21,41 +21,43 @@ class LegionRecommendationResolver {
   List<LegionRecommendation> resolve(LegionRecommendationRequest request) {
     _validateRequest(request);
 
-    final List<LegionRecommendation> recommendations =
-        _buildCandidateLegions(request).map((Legion candidateLegion) {
-          final BattleScenario scenario = _buildScenario(
-            request,
-            candidateLegion,
-          );
-          final BattleDistribution distribution = battleDistributionResolver
-              .resolve(initialScenario: scenario, maxRounds: request.maxRounds);
-          final double ownWinProbability = _ownWinProbability(
-            request.ownRole,
-            distribution,
-          );
-          final double ownLoseProbability = _ownLoseProbability(
-            request.ownRole,
-            distribution,
-          );
-          final double cost = LegionRecommendationCostPolicy.calculate(
-            candidateLegion,
-          );
+    final List<Legion> candidateLegions = _selectCandidateLegionsToEvaluate(
+      request,
+    );
 
-          return LegionRecommendation(
-            legion: candidateLegion,
-            distribution: distribution,
-            ownWinProbability: ownWinProbability,
-            ownLoseProbability: ownLoseProbability,
-            cost: cost,
-            score: _calculateScore(
-              ownWinProbability: ownWinProbability,
-              ownLoseProbability: ownLoseProbability,
-              cost: cost,
-              distribution: distribution,
-            ),
-            meetsTarget: ownWinProbability >= request.targetWinProbability,
-          );
-        }).toList();
+    final List<LegionRecommendation> recommendations = candidateLegions.map((
+      Legion candidateLegion,
+    ) {
+      final BattleScenario scenario = _buildScenario(request, candidateLegion);
+      final BattleDistribution distribution = battleDistributionResolver
+          .resolve(initialScenario: scenario, maxRounds: request.maxRounds);
+      final double ownWinProbability = _ownWinProbability(
+        request.ownRole,
+        distribution,
+      );
+      final double ownLoseProbability = _ownLoseProbability(
+        request.ownRole,
+        distribution,
+      );
+      final double cost = LegionRecommendationCostPolicy.calculate(
+        candidateLegion,
+      );
+
+      return LegionRecommendation(
+        legion: candidateLegion,
+        distribution: distribution,
+        ownWinProbability: ownWinProbability,
+        ownLoseProbability: ownLoseProbability,
+        cost: cost,
+        score: _calculateScore(
+          ownWinProbability: ownWinProbability,
+          ownLoseProbability: ownLoseProbability,
+          cost: cost,
+          distribution: distribution,
+        ),
+        meetsTarget: ownWinProbability >= request.targetWinProbability,
+      );
+    }).toList();
 
     recommendations.sort(_compareRecommendations);
 
@@ -69,6 +71,20 @@ class LegionRecommendationResolver {
     final int limit = math.min(3, request.limit);
 
     return selectedRecommendations.take(limit).toList(growable: false);
+  }
+
+  List<Legion> _selectCandidateLegionsToEvaluate(
+    LegionRecommendationRequest request,
+  ) {
+    final List<Legion> candidates = _buildCandidateLegions(request).toList();
+    candidates.sort(
+      (Legion left, Legion right) =>
+          _compareCandidateLegions(request, left, right),
+    );
+
+    return candidates
+        .take(math.min(request.maxEvaluatedCandidates, candidates.length))
+        .toList(growable: false);
   }
 
   Iterable<Legion> _buildCandidateLegions(
@@ -195,6 +211,48 @@ class LegionRecommendationResolver {
         (distribution.resolvedProbability * 0.0001);
   }
 
+  int _compareCandidateLegions(
+    LegionRecommendationRequest request,
+    Legion left,
+    Legion right,
+  ) {
+    return _compareByFields(<int>[
+      _compareDoubleDescending(
+        _estimateCandidateStrength(request, left),
+        _estimateCandidateStrength(request, right),
+      ),
+      _compareDoubleAscending(
+        LegionRecommendationCostPolicy.calculate(left),
+        LegionRecommendationCostPolicy.calculate(right),
+      ),
+      _compareIntAscending(
+        left.totalUnits + left.totalLeaders,
+        right.totalUnits + right.totalLeaders,
+      ),
+    ]);
+  }
+
+  double _estimateCandidateStrength(
+    LegionRecommendationRequest request,
+    Legion legion,
+  ) {
+    final double attackBonus = legion.genericLeaders * 0.35;
+    final double defenseBonus = legion.remainingLossCapacity * 0.25;
+    final double diceBonus = legion.diceCount * 1.5;
+    final double specialEliteBonus = legion.specialEliteUnits * 0.5;
+    final double surpriseAttackBonus =
+        request.ownRole == LegionRecommendationRole.attacker &&
+            (legion as AttackingLegion).surpriseAttack
+        ? 0.2
+        : 0;
+
+    return diceBonus +
+        attackBonus +
+        defenseBonus +
+        specialEliteBonus +
+        surpriseAttackBonus;
+  }
+
   int _compareRecommendations(
     LegionRecommendation left,
     LegionRecommendation right,
@@ -256,6 +314,13 @@ class LegionRecommendationResolver {
         request.limit,
         'limit',
         'limit must be positive.',
+      );
+    }
+    if (request.maxEvaluatedCandidates <= 0) {
+      throw ArgumentError.value(
+        request.maxEvaluatedCandidates,
+        'maxEvaluatedCandidates',
+        'maxEvaluatedCandidates must be positive.',
       );
     }
     if (request.targetWinProbability < 0 || request.targetWinProbability > 1) {

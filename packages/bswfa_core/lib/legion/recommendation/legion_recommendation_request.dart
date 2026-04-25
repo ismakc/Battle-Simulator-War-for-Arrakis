@@ -10,6 +10,7 @@ class LegionRecommendationRequest {
     this.maxRounds = 3,
     this.targetWinProbability = 0.6,
     this.limit = 3,
+    this.maxEvaluatedCandidates = 250,
   });
 
   final Legion enemyLegion;
@@ -18,4 +19,5 @@ class LegionRecommendationRequest {
   final int maxRounds;
   final double targetWinProbability;
   final int limit;
+  final int maxEvaluatedCandidates;
 }
