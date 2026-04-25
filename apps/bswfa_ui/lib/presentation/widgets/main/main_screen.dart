@@ -2,8 +2,7 @@ import 'dart:ui';
 
 import 'package:bswfa_ui/bloc/collapse_cubit.dart';
 import 'package:bswfa_ui/presentation/widgets/battle_simulator/battle_history.dart';
-import 'package:bswfa_ui/presentation/widgets/battle_simulator/battle_scenario_setup.dart';
-import 'package:bswfa_ui/presentation/widgets/battle_simulator/battle_simulator_button.dart';
+import 'package:bswfa_ui/presentation/widgets/battle_simulator/battle_mode_panel.dart';
 import 'package:bswfa_ui/presentation/widgets/common/collapsed.dart';
 import 'package:flutter/material.dart';
 
@@ -23,13 +22,7 @@ class MainScreen extends StatelessWidget {
               child: FittedBox(
                 child: ConstrainedBox(
                   constraints: const BoxConstraints(maxWidth: 600),
-                  child: const Wrap(
-                    runSpacing: 8.0,
-                    children: <Widget>[
-                      BattleScenarioSetup(),
-                      BattleSimulatorButton(),
-                    ],
-                  ),
+                  child: const BattleModePanel(),
                 ),
               ),
             ),
