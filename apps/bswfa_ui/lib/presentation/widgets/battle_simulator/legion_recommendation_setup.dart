@@ -1,4 +1,5 @@
 import 'package:bswfa_core/legion/legion.dart';
+import 'package:bswfa_core/legion/legion_limits.dart';
 import 'package:bswfa_core/legion/recommendation/legion_recommendation.dart';
 import 'package:bswfa_core/legion/recommendation/legion_recommendation_constraints.dart';
 import 'package:bswfa_core/legion/recommendation/legion_recommendation_request.dart';
@@ -7,7 +8,10 @@ import 'package:bswfa_core/legion/recommendation/legion_recommendation_role.dart
 import 'package:bswfa_ui/presentation/widgets/common/label_border_field_set.dart';
 import 'package:bswfa_ui/presentation/widgets/legion_input/surprise_attack_input.dart';
 import 'package:bswfa_ui/presentation/widgets/legion_input/unit_input.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+
+const int _defaultMaxEvaluatedCandidates = 100;
 
 class LegionRecommendationSetup extends StatefulWidget {
   const LegionRecommendationSetup({super.key});
@@ -27,15 +31,14 @@ class _LegionRecommendationSetupState extends State<LegionRecommendationSetup> {
   bool _enemySurpriseAttack = false;
   int _enemySettlementLevel = 0;
 
-  int _maxRegularUnits = 0;
-  int _maxEliteUnits = 0;
-  int _maxSpecialEliteUnits = 0;
-  int _maxGenericLeaders = 0;
   bool _allowSurpriseAttack = false;
   int _settlementLevel = 0;
+  int _maxEvaluatedCandidates = _defaultMaxEvaluatedCandidates;
 
   List<LegionRecommendation>? _recommendations;
   Object? _recommendationError;
+  bool _isLoading = false;
+  int _requestVersion = 0;
 
   bool get _recommendingAttacker =>
       _ownRole == LegionRecommendationRole.attacker;
@@ -52,6 +55,8 @@ class _LegionRecommendationSetupState extends State<LegionRecommendationSetup> {
               _ownRole = value;
               _recommendations = null;
               _recommendationError = null;
+              _isLoading = false;
+              _requestVersion++;
             });
           },
         ),
@@ -75,45 +80,55 @@ class _LegionRecommendationSetupState extends State<LegionRecommendationSetup> {
           onSettlementLevelChanged: (int value) =>
               _updateEnemy(settlementLevel: value),
         ),
-        _OwnAvailabilityInput(
+        _OwnBattleContextInput(
           ownRole: _ownRole,
-          maxRegularUnits: _maxRegularUnits,
-          maxEliteUnits: _maxEliteUnits,
-          maxSpecialEliteUnits: _maxSpecialEliteUnits,
-          maxGenericLeaders: _maxGenericLeaders,
           allowSurpriseAttack: _allowSurpriseAttack,
           settlementLevel: _settlementLevel,
-          onMaxRegularUnitsChanged: (int value) =>
-              _updateAvailability(maxRegularUnits: value),
-          onMaxEliteUnitsChanged: (int value) =>
-              _updateAvailability(maxEliteUnits: value),
-          onMaxSpecialEliteUnitsChanged: (int value) =>
-              _updateAvailability(maxSpecialEliteUnits: value),
-          onMaxGenericLeadersChanged: (int value) =>
-              _updateAvailability(maxGenericLeaders: value),
           onAllowSurpriseAttackChanged: (bool value) =>
-              _updateAvailability(allowSurpriseAttack: value),
+              _updateOwnContext(allowSurpriseAttack: value),
           onSettlementLevelChanged: (int value) =>
-              _updateAvailability(settlementLevel: value),
+              _updateOwnContext(settlementLevel: value),
+        ),
+        _RecommendationAdvancedOptions(
+          maxEvaluatedCandidates: _maxEvaluatedCandidates,
+          onMaxEvaluatedCandidatesChanged: (int value) {
+            setState(() {
+              _maxEvaluatedCandidates = value;
+              _recommendations = null;
+              _recommendationError = null;
+              _isLoading = false;
+              _requestVersion++;
+            });
+          },
         ),
         ElevatedButton.icon(
           style: ElevatedButton.styleFrom(
             backgroundColor: Colors.black87,
             foregroundColor: Colors.amber,
           ),
-          onPressed: _resolveRecommendations,
-          icon: const Icon(Icons.manage_search_outlined),
-          label: const Align(
+          onPressed: _isLoading ? null : _resolveRecommendations,
+          icon: _isLoading
+              ? const SizedBox(
+                  width: 18.0,
+                  height: 18.0,
+                  child: CircularProgressIndicator(strokeWidth: 2.0),
+                )
+              : const Icon(Icons.manage_search_outlined),
+          label: Align(
             heightFactor: 1.6,
             child: Text(
-              'Recomendar legion',
-              style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
+              _isLoading ? 'Calculando...' : 'Recomendar legion',
+              style: const TextStyle(
+                fontSize: 18.0,
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
         ),
         _RecommendationResults(
           recommendations: _recommendations,
           error: _recommendationError,
+          isLoading: _isLoading,
         ),
       ],
     );
@@ -136,57 +151,59 @@ class _LegionRecommendationSetupState extends State<LegionRecommendationSetup> {
       _enemySettlementLevel = settlementLevel ?? _enemySettlementLevel;
       _recommendations = null;
       _recommendationError = null;
+      _isLoading = false;
+      _requestVersion++;
     });
   }
 
-  void _updateAvailability({
-    int? maxRegularUnits,
-    int? maxEliteUnits,
-    int? maxSpecialEliteUnits,
-    int? maxGenericLeaders,
-    bool? allowSurpriseAttack,
-    int? settlementLevel,
-  }) {
+  void _updateOwnContext({bool? allowSurpriseAttack, int? settlementLevel}) {
     setState(() {
-      _maxRegularUnits = maxRegularUnits ?? _maxRegularUnits;
-      _maxEliteUnits = maxEliteUnits ?? _maxEliteUnits;
-      _maxSpecialEliteUnits = maxSpecialEliteUnits ?? _maxSpecialEliteUnits;
-      _maxGenericLeaders = maxGenericLeaders ?? _maxGenericLeaders;
       _allowSurpriseAttack = allowSurpriseAttack ?? _allowSurpriseAttack;
       _settlementLevel = settlementLevel ?? _settlementLevel;
       _recommendations = null;
       _recommendationError = null;
+      _isLoading = false;
+      _requestVersion++;
     });
   }
 
-  void _resolveRecommendations() {
-    try {
-      final List<LegionRecommendation> recommendations =
-          const LegionRecommendationResolver().resolve(
-            LegionRecommendationRequest(
-              enemyLegion: _buildEnemyLegion(),
-              ownRole: _ownRole,
-              constraints: LegionRecommendationConstraints(
-                maxRegularUnits: _maxRegularUnits,
-                maxEliteUnits: _maxEliteUnits,
-                maxSpecialEliteUnits: _maxSpecialEliteUnits,
-                maxGenericLeaders: _maxGenericLeaders,
-                allowSurpriseAttack: _recommendingAttacker
-                    ? _allowSurpriseAttack
-                    : false,
-                settlementLevel: _recommendingAttacker ? 0 : _settlementLevel,
-              ),
-            ),
-          );
+  Future<void> _resolveRecommendations() async {
+    final int requestVersion = _requestVersion;
+    setState(() {
+      _isLoading = true;
+      _recommendationError = null;
+    });
 
+    try {
+      final List<LegionRecommendation> recommendations = await compute(
+        _resolveLegionRecommendations,
+        _RecommendationResolveInput(
+          enemyLegion: _buildEnemyLegion(),
+          ownRole: _ownRole,
+          allowSurpriseAttack: _recommendingAttacker
+              ? _allowSurpriseAttack
+              : false,
+          settlementLevel: _recommendingAttacker ? 0 : _settlementLevel,
+          maxEvaluatedCandidates: _maxEvaluatedCandidates,
+        ),
+      );
+
+      if (!mounted || requestVersion != _requestVersion) {
+        return;
+      }
       setState(() {
         _recommendations = recommendations;
         _recommendationError = null;
+        _isLoading = false;
       });
     } catch (error) {
+      if (!mounted || requestVersion != _requestVersion) {
+        return;
+      }
       setState(() {
         _recommendations = null;
         _recommendationError = error;
+        _isLoading = false;
       });
     }
   }
@@ -210,6 +227,42 @@ class _LegionRecommendationSetupState extends State<LegionRecommendationSetup> {
       surpriseAttack: _enemySurpriseAttack,
     );
   }
+}
+
+class _RecommendationResolveInput {
+  const _RecommendationResolveInput({
+    required this.enemyLegion,
+    required this.ownRole,
+    required this.allowSurpriseAttack,
+    required this.settlementLevel,
+    required this.maxEvaluatedCandidates,
+  });
+
+  final Legion enemyLegion;
+  final LegionRecommendationRole ownRole;
+  final bool allowSurpriseAttack;
+  final int settlementLevel;
+  final int maxEvaluatedCandidates;
+}
+
+List<LegionRecommendation> _resolveLegionRecommendations(
+  _RecommendationResolveInput input,
+) {
+  return const LegionRecommendationResolver().resolve(
+    LegionRecommendationRequest(
+      enemyLegion: input.enemyLegion,
+      ownRole: input.ownRole,
+      constraints: LegionRecommendationConstraints(
+        maxRegularUnits: LegionLimits.maxUnitsPerType,
+        maxEliteUnits: LegionLimits.maxUnitsPerType,
+        maxSpecialEliteUnits: LegionLimits.maxUnitsPerType,
+        maxGenericLeaders: LegionLimits.maxLeaders,
+        allowSurpriseAttack: input.allowSurpriseAttack,
+        settlementLevel: input.settlementLevel,
+      ),
+      maxEvaluatedCandidates: input.maxEvaluatedCandidates,
+    ),
+  );
 }
 
 class _RoleSelector extends StatelessWidget {
@@ -334,34 +387,18 @@ class _EnemyLegionInput extends StatelessWidget {
   }
 }
 
-class _OwnAvailabilityInput extends StatelessWidget {
-  const _OwnAvailabilityInput({
+class _OwnBattleContextInput extends StatelessWidget {
+  const _OwnBattleContextInput({
     required this.ownRole,
-    required this.maxRegularUnits,
-    required this.maxEliteUnits,
-    required this.maxSpecialEliteUnits,
-    required this.maxGenericLeaders,
     required this.allowSurpriseAttack,
     required this.settlementLevel,
-    required this.onMaxRegularUnitsChanged,
-    required this.onMaxEliteUnitsChanged,
-    required this.onMaxSpecialEliteUnitsChanged,
-    required this.onMaxGenericLeadersChanged,
     required this.onAllowSurpriseAttackChanged,
     required this.onSettlementLevelChanged,
   });
 
   final LegionRecommendationRole ownRole;
-  final int maxRegularUnits;
-  final int maxEliteUnits;
-  final int maxSpecialEliteUnits;
-  final int maxGenericLeaders;
   final bool allowSurpriseAttack;
   final int settlementLevel;
-  final ValueChanged<int> onMaxRegularUnitsChanged;
-  final ValueChanged<int> onMaxEliteUnitsChanged;
-  final ValueChanged<int> onMaxSpecialEliteUnitsChanged;
-  final ValueChanged<int> onMaxGenericLeadersChanged;
   final ValueChanged<bool> onAllowSurpriseAttackChanged;
   final ValueChanged<int> onSettlementLevelChanged;
 
@@ -371,45 +408,17 @@ class _OwnAvailabilityInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return LabeledBorderFieldset(
-      label: 'Own Availability',
+      label: 'Battle Context',
       borderColor: Colors.amber,
       textColor: Colors.black87,
       child: Wrap(
         spacing: 12.0,
         runSpacing: 12.0,
         children: <Widget>[
-          _SizedInput(
-            child: UnitInput(
-              label: 'Max leader',
-              startPosition: maxGenericLeaders,
-              onValueChanged: onMaxGenericLeadersChanged,
-            ),
-          ),
-          _SizedInput(
-            child: UnitInput(
-              label: 'Max regular',
-              startPosition: maxRegularUnits,
-              onValueChanged: onMaxRegularUnitsChanged,
-            ),
-          ),
-          _SizedInput(
-            child: UnitInput(
-              label: 'Max elite',
-              startPosition: maxEliteUnits,
-              onValueChanged: onMaxEliteUnitsChanged,
-            ),
-          ),
-          _SizedInput(
-            child: UnitInput(
-              label: 'Max special',
-              startPosition: maxSpecialEliteUnits,
-              onValueChanged: onMaxSpecialEliteUnitsChanged,
-            ),
-          ),
           if (_recommendingAttacker)
             _SizedInput(
               child: SurpriseAttackInput(
-                label: 'Allow surprise',
+                label: 'Can surprise',
                 value: allowSurpriseAttack,
                 onValueChanged: onAllowSurpriseAttackChanged,
               ),
@@ -428,14 +437,74 @@ class _OwnAvailabilityInput extends StatelessWidget {
   }
 }
 
+class _RecommendationAdvancedOptions extends StatelessWidget {
+  const _RecommendationAdvancedOptions({
+    required this.maxEvaluatedCandidates,
+    required this.onMaxEvaluatedCandidatesChanged,
+  });
+
+  final int maxEvaluatedCandidates;
+  final ValueChanged<int> onMaxEvaluatedCandidatesChanged;
+
+  @override
+  Widget build(BuildContext context) {
+    return Theme(
+      data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
+      child: ExpansionTile(
+        tilePadding: EdgeInsets.zero,
+        childrenPadding: const EdgeInsets.only(bottom: 4.0),
+        title: const Text(
+          'Advanced',
+          style: TextStyle(
+            fontSize: 13.0,
+            fontWeight: FontWeight.w700,
+            color: Colors.black54,
+          ),
+        ),
+        subtitle: Text(
+          'Evaluating $maxEvaluatedCandidates candidates',
+          style: const TextStyle(fontSize: 12.0),
+        ),
+        children: <Widget>[
+          const SizedBox(height: 8.0),
+          Align(
+            alignment: Alignment.centerLeft,
+            child: SegmentedButton<int>(
+              segments: const <ButtonSegment<int>>[
+                ButtonSegment<int>(value: 50, label: Text('50')),
+                ButtonSegment<int>(value: 100, label: Text('100')),
+                ButtonSegment<int>(value: 150, label: Text('150')),
+                ButtonSegment<int>(value: 250, label: Text('250')),
+              ],
+              selected: <int>{maxEvaluatedCandidates},
+              onSelectionChanged: (Set<int> value) {
+                onMaxEvaluatedCandidatesChanged(value.first);
+              },
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
 class _RecommendationResults extends StatelessWidget {
-  const _RecommendationResults({required this.recommendations, this.error});
+  const _RecommendationResults({
+    required this.recommendations,
+    required this.isLoading,
+    this.error,
+  });
 
   final List<LegionRecommendation>? recommendations;
+  final bool isLoading;
   final Object? error;
 
   @override
   Widget build(BuildContext context) {
+    if (isLoading) {
+      return const _LoadingResults();
+    }
+
     if (error != null) {
       return _EmptyResults(message: 'No se pudo calcular: $error');
     }
@@ -652,6 +721,34 @@ class _EmptyResults extends StatelessWidget {
         border: Border.all(color: Colors.black12),
       ),
       child: Text(message, style: const TextStyle(color: Colors.black54)),
+    );
+  }
+}
+
+class _LoadingResults extends StatelessWidget {
+  const _LoadingResults();
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(12.0),
+      decoration: BoxDecoration(
+        color: Colors.black87.withValues(alpha: 0.04),
+        borderRadius: BorderRadius.circular(8.0),
+        border: Border.all(color: Colors.black12),
+      ),
+      child: const Row(
+        children: <Widget>[
+          SizedBox(
+            width: 18.0,
+            height: 18.0,
+            child: CircularProgressIndicator(strokeWidth: 2.0),
+          ),
+          SizedBox(width: 10.0),
+          Text('Calculando recomendaciones...'),
+        ],
+      ),
     );
   }
 }
