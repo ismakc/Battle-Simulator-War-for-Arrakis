@@ -1,5 +1,4 @@
 import 'package:bswfa_core/legion/named_leader.dart';
-import 'package:bswfa_ui/presentation/widgets/common/clamp_first_row.dart';
 import 'package:flutter/material.dart';
 
 class NamedLeaderInput extends StatefulWidget {
@@ -53,70 +52,79 @@ class _NamedLeaderInputState extends State<NamedLeaderInput> {
 
   @override
   Widget build(BuildContext context) {
-    final List<GestureDetector> leadersWidgets = NamedLeader.values.map((
+    final ThemeData theme = Theme.of(context);
+    final List<Widget> leadersWidgets = NamedLeader.values.map((
       NamedLeader leader,
     ) {
       final bool isSelected = _values.contains(leader);
       return GestureDetector(
         onTap: () => _toggleLeaderSelection(leader),
         child: Container(
-          height: 40,
-          width: 48,
+          height: 42,
+          width: 58,
           alignment: Alignment.center,
           decoration: BoxDecoration(
-            color: isSelected ? Colors.amber : Colors.black87,
+            color: isSelected ? Colors.amber : Colors.white,
             border: Border.all(
-              color: isSelected ? Colors.black87 : Colors.amber,
+              color: isSelected ? Colors.black87 : Colors.black26,
             ),
             borderRadius: BorderRadius.circular(12.0),
           ),
           child: Text(
             leader.combatProfile,
             style: TextStyle(
-              fontSize: 18,
+              fontSize: 16,
               fontWeight: FontWeight.bold,
-              color: isSelected ? Colors.black87 : Colors.amber,
+              color: isSelected ? Colors.black87 : Colors.black87,
             ),
           ),
         ),
       );
     }).toList();
 
-    return ClampFirstRow(
-      flex: 5,
-      minWidth: 100.0,
-      maxWidth: 100.0,
-      firstChild: const Text(
-        'Named',
-        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+    return Container(
+      padding: const EdgeInsets.all(12.0),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(16.0),
+        border: Border.all(color: Colors.black12),
       ),
-      children: <Widget>[
-        Container(
-          margin: const EdgeInsets.only(right: 8.0),
-          child: _buildFlexibleRows(context, leadersWidgets),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildFlexibleRows(BuildContext context, List<Widget> children) {
-    final int midpoint = (children.length / 2).ceil();
-    final List<Widget> firstRowChildren = children.sublist(0, midpoint);
-    final List<Widget> secondRowChildren = children.sublist(midpoint);
-
-    return Wrap(
-      runSpacing: 3.0,
-      children: <Widget>[
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: firstRowChildren,
-        ),
-        if (secondRowChildren.isNotEmpty)
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: secondRowChildren,
+            children: <Widget>[
+              Text(
+                widget.label,
+                style: theme.textTheme.titleMedium?.copyWith(
+                  fontWeight: FontWeight.w700,
+                  color: Colors.black87,
+                ),
+              ),
+              const SizedBox(width: 8.0),
+              Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 8.0,
+                  vertical: 4.0,
+                ),
+                decoration: BoxDecoration(
+                  color: Colors.black87,
+                  borderRadius: BorderRadius.circular(999.0),
+                ),
+                child: Text(
+                  '${_values.length}',
+                  style: const TextStyle(
+                    color: Colors.amber,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+              ),
+            ],
           ),
-      ],
+          const SizedBox(height: 10.0),
+          Wrap(spacing: 8.0, runSpacing: 8.0, children: leadersWidgets),
+        ],
+      ),
     );
   }
 }

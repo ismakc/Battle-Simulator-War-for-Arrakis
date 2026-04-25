@@ -1,4 +1,3 @@
-import 'package:bswfa_ui/presentation/widgets/common/clamp_first_row.dart';
 import 'package:flutter/material.dart';
 
 class SurpriseAttackInput extends StatelessWidget {
@@ -15,29 +14,45 @@ class SurpriseAttackInput extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ClampFirstRow(
-      flex: 6,
-      maxWidth: 94,
-      firstChild: Text(
-        label,
-        style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+    final ThemeData theme = Theme.of(context);
+
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 10.0),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(16.0),
+        border: Border.all(color: Colors.black12),
       ),
-      children: <Widget>[
-        Align(
-          alignment: Alignment.centerLeft,
-          child: SizedBox(
-            width: 60,
-            child: FittedBox(
-              fit: BoxFit.fitWidth,
-              child: Switch(
-                value: value,
-                activeThumbColor: Colors.amber,
-                onChanged: onValueChanged,
-              ),
+      child: Row(
+        children: <Widget>[
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text(
+                  label,
+                  style: theme.textTheme.titleMedium?.copyWith(
+                    fontWeight: FontWeight.w700,
+                    color: Colors.black87,
+                  ),
+                ),
+                const SizedBox(height: 2.0),
+                Text(
+                  value ? 'Enabled' : 'Disabled',
+                  style: theme.textTheme.bodySmall?.copyWith(
+                    color: Colors.black54,
+                  ),
+                ),
+              ],
             ),
           ),
-        ),
-      ],
+          Switch(
+            value: value,
+            activeThumbColor: Colors.amber,
+            onChanged: onValueChanged,
+          ),
+        ],
+      ),
     );
   }
 }
