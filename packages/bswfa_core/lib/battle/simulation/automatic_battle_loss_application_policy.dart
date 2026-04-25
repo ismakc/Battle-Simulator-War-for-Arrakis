@@ -6,24 +6,21 @@ import 'package:bswfa_core/legion/legion_optimal_loss_policy.dart';
 class AutomaticBattleLossApplicationPolicy {
   const AutomaticBattleLossApplicationPolicy._();
 
-  /// Resuelve automáticamente las bajas del atacante a partir de los impactos
-  /// esperados del defensor. Si el combate continúa contra un asentamiento,
-  /// añade además la baja extra exigida por las reglas para seguir atacando.
-  static AttackingLegion resolveAttackerLosses(
+  /// Resuelve automáticamente las bajas de combate del atacante a partir de
+  /// los impactos esperados del defensor.
+  static AttackingLegion resolveAttackerCombatLosses(
     AttackingLegion legion,
-    double expectedHits, {
-    required bool mustTakeSettlementHitToContinue,
-  }) {
-    AttackingLegion damagedLegion = _applyRoundedExpectedHits(
-      legion,
-      expectedHits,
-    );
+    double expectedHits,
+  ) {
+    return _applyRoundedExpectedHits(legion, expectedHits);
+  }
 
-    if (mustTakeSettlementHitToContinue && damagedLegion.totalUnits > 0) {
-      damagedLegion = _applySingleOptimalLoss(damagedLegion);
-    }
-
-    return damagedLegion;
+  /// Aplica la baja extra que el atacante debe sufrir si decide continuar
+  /// contra un asentamiento tras resolver las bajas de combate.
+  static AttackingLegion resolveAttackerContinuationLoss(
+    AttackingLegion legion,
+  ) {
+    return _normalizeDestroyedLegion(_applySingleOptimalLoss(legion));
   }
 
   /// Resuelve automáticamente las bajas del defensor a partir de los impactos
@@ -44,8 +41,10 @@ class AutomaticBattleLossApplicationPolicy {
     int appliedHits = 0;
     T damagedLegion = legion;
 
-    while (appliedHits < expectedHits.round() && damagedLegion.totalUnits > 0) {
+    while (appliedHits < expectedHits.round() &&
+        damagedLegion.remainingLossCapacity > 0) {
       damagedLegion = _applySingleOptimalLoss(damagedLegion);
+      damagedLegion = _normalizeDestroyedLegion(damagedLegion);
       appliedHits++;
     }
 
@@ -55,5 +54,13 @@ class AutomaticBattleLossApplicationPolicy {
   static T _applySingleOptimalLoss<T extends Legion>(T legion) {
     return LegionOptimalLossPolicy.selectOptimalLoss(legion).applyTo(legion)
         as T;
+  }
+
+  static T _normalizeDestroyedLegion<T extends Legion>(T legion) {
+    if (legion.totalUnits > 0 || legion.totalLeaders == 0) {
+      return legion;
+    }
+
+    return legion.copyWith(genericLeaders: 0, namedLeaders: const []) as T;
   }
 }

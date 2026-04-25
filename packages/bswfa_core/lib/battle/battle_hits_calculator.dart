@@ -2,7 +2,6 @@ import 'dart:math' as math;
 
 import 'package:bswfa_core/battle/battle_scenario.dart';
 import 'package:bswfa_core/battle/battle_side_contribution.dart';
-import 'package:bswfa_core/battle/leader_activation_order_policy.dart';
 import 'package:bswfa_core/legion/legion.dart';
 import 'package:bswfa_core/legion/named_leader.dart';
 import 'package:bswfa_core/roll/battle_dice_roll.dart';
@@ -14,17 +13,31 @@ class BattleHitsCalculator {
   const BattleHitsCalculator();
 
   (int attackerHits, int defenderHits) calculateHits(
-      BattleScenario scenario,
-      BattleDiceRoll diceRoll,
-      ) {
-    final BattleSideContribution attackerOutcome = _calculateAttackerOutcome(
-      legion: scenario.attackingLegion,
-      diceRoll: diceRoll.attackerDiceRoll,
-    );
+    BattleScenario scenario,
+    BattleDiceRoll diceRoll,
+  ) {
+    final List<BattleSideContribution> attackerOutcomes =
+        _calculateAttackerOutcomes(
+          legion: scenario.attackingLegion,
+          diceRoll: diceRoll.attackerDiceRoll,
+        );
 
-    final BattleSideContribution defenderOutcome = _calculateDefenderOutcome(
-      legion: scenario.defendingLegion,
-      diceRoll: diceRoll.defenderDiceRoll,
+    final List<BattleSideContribution> defenderOutcomes =
+        _calculateDefenderOutcomes(
+          legion: scenario.defendingLegion,
+          diceRoll: diceRoll.defenderDiceRoll,
+        );
+
+    final (
+      BattleSideContribution attackerOutcome,
+      BattleSideContribution defenderOutcome,
+    ) = _selectLeaderActivationOutcomes(
+      attackerOutcomes: attackerOutcomes,
+      defenderOutcomes: defenderOutcomes,
+      attackerRemovedOpponentShields:
+          scenario.attackingLegion.removedShieldsCount,
+      defenderRemovedOpponentShields:
+          scenario.defendingLegion.removedShieldsCount,
     );
 
     final int attackerHits = _calculateInflictedHits(
@@ -42,11 +55,11 @@ class BattleHitsCalculator {
     return (attackerHits, defenderHits);
   }
 
-  BattleSideContribution _calculateAttackerOutcome({
+  List<BattleSideContribution> _calculateAttackerOutcomes({
     required AttackingLegion legion,
     required DiceRoll diceRoll,
   }) {
-    return _calculateSideOutcome(
+    return _calculateSideOutcomes(
       namedLeaders: legion.namedLeaders,
       genericLeaders: legion.genericLeaders,
       swordCount: diceRoll.swordCount,
@@ -55,11 +68,11 @@ class BattleHitsCalculator {
     );
   }
 
-  BattleSideContribution _calculateDefenderOutcome({
+  List<BattleSideContribution> _calculateDefenderOutcomes({
     required DefendingLegion legion,
     required DiceRoll diceRoll,
   }) {
-    return _calculateSideOutcome(
+    return _calculateSideOutcomes(
       namedLeaders: legion.namedLeaders,
       genericLeaders: legion.genericLeaders,
       swordCount: diceRoll.swordCount,
@@ -68,41 +81,136 @@ class BattleHitsCalculator {
     );
   }
 
-  BattleSideContribution _calculateSideOutcome({
+  List<BattleSideContribution> _calculateSideOutcomes({
     required List<NamedLeader> namedLeaders,
     required int genericLeaders,
     required int swordCount,
     required int shieldCount,
     required int starCount,
   }) {
-    final List<NamedLeader> orderedLeaders =
-    LeaderActivationOrderPolicy.orderForActivation(namedLeaders);
+    final List<({int swords, int shields})> leaderProfiles =
+        <({int swords, int shields})>[
+          for (final NamedLeader leader in namedLeaders)
+            (swords: leader.attack, shields: leader.defense),
+          for (int i = 0; i < genericLeaders; i++) (swords: 1, shields: 0),
+        ];
 
-    int usedNamedLeaderStars = 0;
-    int leaderActivatedSwords = 0;
-    int leaderActivatedShields = 0;
+    final int activations = math.min(starCount, leaderProfiles.length);
+    final Set<({int swords, int shields})> activatedProfiles =
+        _buildActivatedLeaderProfiles(leaderProfiles, activations);
 
-    while (
-    usedNamedLeaderStars < starCount &&
-        usedNamedLeaderStars < orderedLeaders.length
-    ) {
-      final NamedLeader leader = orderedLeaders[usedNamedLeaderStars];
-      leaderActivatedSwords += leader.attack;
-      leaderActivatedShields += leader.defense;
-      usedNamedLeaderStars++;
+    return <BattleSideContribution>[
+      for (final ({int swords, int shields}) profile in activatedProfiles)
+        BattleSideContribution(
+          swords: swordCount,
+          shields: shieldCount,
+          leaderActivatedSwords: profile.swords,
+          leaderActivatedShields: profile.shields,
+        ),
+    ];
+  }
+
+  Set<({int swords, int shields})> _buildActivatedLeaderProfiles(
+    List<({int swords, int shields})> leaderProfiles,
+    int activations,
+  ) {
+    final Set<({int swords, int shields})> profiles =
+        <({int swords, int shields})>{};
+
+    void visit(int startIndex, int remaining, int swords, int shields) {
+      if (remaining == 0) {
+        profiles.add((swords: swords, shields: shields));
+        return;
+      }
+
+      for (int i = startIndex; i <= leaderProfiles.length - remaining; i++) {
+        final ({int swords, int shields}) leader = leaderProfiles[i];
+        visit(
+          i + 1,
+          remaining - 1,
+          swords + leader.swords,
+          shields + leader.shields,
+        );
+      }
     }
 
-    final int assignedGenericLeaderStars =
-    (starCount - usedNamedLeaderStars).clamp(0, genericLeaders);
+    visit(0, activations, 0, 0);
+    return profiles;
+  }
 
-    leaderActivatedSwords += assignedGenericLeaderStars;
+  (BattleSideContribution, BattleSideContribution)
+  _selectLeaderActivationOutcomes({
+    required List<BattleSideContribution> attackerOutcomes,
+    required List<BattleSideContribution> defenderOutcomes,
+    required int attackerRemovedOpponentShields,
+    required int defenderRemovedOpponentShields,
+  }) {
+    BattleSideContribution? selectedAttackerOutcome;
+    BattleSideContribution? selectedDefenderOutcome;
+    int? selectedAttackerHits;
+    int? selectedDefenderHits;
 
-    return BattleSideContribution(
-      swords: swordCount,
-      shields: shieldCount,
-      leaderActivatedSwords: leaderActivatedSwords,
-      leaderActivatedShields: leaderActivatedShields,
-    );
+    for (final BattleSideContribution attackerOutcome in attackerOutcomes) {
+      final _ResolvedOutcome defenderBestResponse = _selectDefenderBestResponse(
+        attackerOutcome: attackerOutcome,
+        defenderOutcomes: defenderOutcomes,
+        attackerRemovedOpponentShields: attackerRemovedOpponentShields,
+        defenderRemovedOpponentShields: defenderRemovedOpponentShields,
+      );
+
+      final bool shouldReplace =
+          selectedAttackerOutcome == null ||
+          defenderBestResponse.attackerHits > selectedAttackerHits! ||
+          (defenderBestResponse.attackerHits == selectedAttackerHits &&
+              defenderBestResponse.defenderHits < selectedDefenderHits!);
+
+      if (shouldReplace) {
+        selectedAttackerOutcome = attackerOutcome;
+        selectedDefenderOutcome = defenderBestResponse.defenderOutcome;
+        selectedAttackerHits = defenderBestResponse.attackerHits;
+        selectedDefenderHits = defenderBestResponse.defenderHits;
+      }
+    }
+
+    return (selectedAttackerOutcome!, selectedDefenderOutcome!);
+  }
+
+  _ResolvedOutcome _selectDefenderBestResponse({
+    required BattleSideContribution attackerOutcome,
+    required List<BattleSideContribution> defenderOutcomes,
+    required int attackerRemovedOpponentShields,
+    required int defenderRemovedOpponentShields,
+  }) {
+    _ResolvedOutcome? selected;
+
+    for (final BattleSideContribution defenderOutcome in defenderOutcomes) {
+      final int attackerHits = _calculateInflictedHits(
+        outcome: attackerOutcome,
+        opponentOutcome: defenderOutcome,
+        removedOpponentShields: attackerRemovedOpponentShields,
+      );
+      final int defenderHits = _calculateInflictedHits(
+        outcome: defenderOutcome,
+        opponentOutcome: attackerOutcome,
+        removedOpponentShields: defenderRemovedOpponentShields,
+      );
+
+      final bool shouldReplace =
+          selected == null ||
+          defenderHits > selected.defenderHits ||
+          (defenderHits == selected.defenderHits &&
+              attackerHits < selected.attackerHits);
+
+      if (shouldReplace) {
+        selected = _ResolvedOutcome(
+          defenderOutcome: defenderOutcome,
+          attackerHits: attackerHits,
+          defenderHits: defenderHits,
+        );
+      }
+    }
+
+    return selected!;
   }
 
   int _calculateInflictedHits({
@@ -117,4 +225,16 @@ class BattleHitsCalculator {
 
     return math.max(0, outcome.totalSwords - effectiveOpponentShields);
   }
+}
+
+class _ResolvedOutcome {
+  const _ResolvedOutcome({
+    required this.defenderOutcome,
+    required this.attackerHits,
+    required this.defenderHits,
+  });
+
+  final BattleSideContribution defenderOutcome;
+  final int attackerHits;
+  final int defenderHits;
 }

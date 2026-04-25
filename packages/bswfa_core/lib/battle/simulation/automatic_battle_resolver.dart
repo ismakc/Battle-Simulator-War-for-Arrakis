@@ -33,7 +33,7 @@ class AutomaticBattleResolver {
 
       endReason = AutomaticBattleEndPolicy.resolveEndReason(
         currentScenario: state.currentScenario,
-        totalAttackerExpectedHits: state.totalAttackerExpectedHits,
+        totalDefenderExpectedHits: state.totalDefenderExpectedHits,
       );
     }
 

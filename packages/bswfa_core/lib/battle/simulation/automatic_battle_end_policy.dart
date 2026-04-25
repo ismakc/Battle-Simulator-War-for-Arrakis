@@ -8,7 +8,7 @@ class AutomaticBattleEndPolicy {
 
   static AutomaticBattleEndReason? resolveEndReason({
     required BattleScenario currentScenario,
-    required double totalAttackerExpectedHits,
+    required double totalDefenderExpectedHits,
   }) {
     final AutomaticBattleEndReason? destructionEndReason =
         _resolveDestructionEndReason(currentScenario);
@@ -19,7 +19,7 @@ class AutomaticBattleEndPolicy {
 
     if (_isAttackerUnableToContinue(
       currentScenario: currentScenario,
-      totalAttackerExpectedHits: totalAttackerExpectedHits,
+      totalDefenderExpectedHits: totalDefenderExpectedHits,
     )) {
       return AutomaticBattleEndReason.attackerUnableToContinue;
     }
@@ -56,9 +56,9 @@ class AutomaticBattleEndPolicy {
   /// Esta es una heurística de la app, no una regla literal del juego.
   static bool _isAttackerUnableToContinue({
     required BattleScenario currentScenario,
-    required double totalAttackerExpectedHits,
+    required double totalDefenderExpectedHits,
   }) {
-    return totalAttackerExpectedHits >
+    return totalDefenderExpectedHits >
         currentScenario.attackingLegion.totalUnits +
             currentScenario.attackingLegion.totalLeaders;
   }
