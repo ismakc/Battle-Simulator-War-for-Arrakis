@@ -83,6 +83,27 @@ Combat die faces:
 
 ## Implemented Rule Interpretation
 
+### Literal Rule Baseline (PDF pages 24-27)
+
+Battle flow in the board game is, literally:
+1. Both players may discard Planning cards for extra dice.
+2. Both players roll combat dice equal to units, plus cards, plus settlement rank for the defender, capped at 6.
+3. Surprise attack adds 1 star only in round 1.
+4. Players resolve leader abilities from rolled stars.
+5. Special elite units remove opponent shields immediately before casualties.
+6. Both sides remove casualties, attacker first.
+7. The attacker decides whether to continue.
+8. If the defender is in a settlement and the attacker continues, the attacker must take 1 extra hit immediately.
+9. If the attacker continues, the defender may retreat.
+10. The battle ends if the attacker ceases the attack, the defender retreats, or one or both legions are destroyed.
+
+Important consequences from the rules:
+- Leader ability choice is a player decision, not a fixed ordering rule.
+- Casualty removal is a player decision, not a forced deterministic sequence.
+- Remaining hits and shields do not carry over between rounds.
+- If all units in a legion are removed, surviving leaders are also removed.
+- Undefended settlements are automatically defeated by the attacker without combat rolls.
+
 ### Single Round Hit Calculation
 
 Main file:
@@ -103,6 +124,7 @@ Leader activation policy:
 
 Important note:
 - `leader_activation_order_policy.dart` still exists, but the current hit calculator no longer depends on it for actual round resolution.
+- The rules say the attacker chooses leader applications first if both sides have a choice. The current hit calculator approximates this with a simultaneous heuristic outcome selection rather than an explicit ordered player-choice model.
 
 ### Casualty Resolution
 
@@ -117,6 +139,7 @@ Current rules and heuristics:
 
 Important distinction:
 - Some loss logic is a heuristic for automatic simulation, not a literal player-choice resolver.
+- The board game allows the player to choose casualties hit by hit. The current core uses policy-driven automatic choices where no player input exists.
 
 ### Automatic Battle
 
@@ -134,6 +157,8 @@ Current assumptions:
 
 Important limitation:
 - The automatic multi-round resolver is still heuristic because it applies rounded expected hits rather than propagating full state distributions.
+- The board game contains explicit attacker cease-attack and defender retreat choices. Current automatic battle flows intentionally suppress those choices unless a future task adds them.
+- The current recommendation engine assumes battle-to-resolution under those same automatic choices.
 
 ## Exact Probability Engine
 
@@ -147,6 +172,7 @@ Design:
 - Groups outcomes by `(swords, shields, stars)` counts.
 - Computes multinomial weights for grouped outcomes.
 - Applies battle results and aggregates equivalent post-round scenarios.
+- Assumes the current automatic casualty policy once concrete round hits are known.
 
 Performance design:
 - Caches grouped dice outcomes per dice count.
@@ -161,6 +187,7 @@ Design:
 - Propagates a `Map<BattleScenario, probability>` over rounds.
 - Aggregates attacker win, defender win, draw, and unresolved probability.
 - Uses `AutomaticBattleRoundPolicy` for cross-round cleanup (`surpriseAttack`, `usedCards`).
+- Does not model cease-attack or retreat decision branches.
 
 Main return type:
 - [battle_distribution.dart](/C:/Users/ismae/dvl/bswfa/packages/bswfa_core/lib/battle/distribution/battle_distribution.dart)
@@ -191,6 +218,7 @@ Explicitly excluded for now:
 - `usedCards`
 - `NamedLeader`
 - retreat logic
+- attacker cease-attack choice
 
 ### Recommendation Request
 
@@ -252,6 +280,9 @@ Flow:
 
 This was added specifically to reduce UI lock-ups caused by evaluating too many candidates.
 
+Interpretation note:
+- Recommendation quality is "best candidate under the current automatic battle model", not "best candidate under full human choice trees from the board game".
+
 ## UI Integration Expectations
 
 The UI should not reimplement battle logic.
@@ -300,7 +331,20 @@ The exact distribution engine exists, but the older automatic battle resolver st
 
 If future work needs fully exact automatic outcomes, that resolver should be rebuilt on top of the distribution engine instead of expected-hit rounding.
 
-### 2. Recommendation Search Is Bounded, Not Optimal
+### 2. Core Does Not Yet Model Full Human Choice Trees
+
+The board game includes explicit choices for:
+- card discard count per round,
+- leader activation selection,
+- casualty allocation,
+- attacker cease-attack,
+- defender retreat.
+
+The current core only models some of these exactly and resolves the others through fixed policies or by excluding them from scope.
+
+This is intentional for now, but any claim of "rules exactness" must be read in that context.
+
+### 3. Recommendation Search Is Bounded, Not Optimal
 
 The recommender deliberately stops after `maxEvaluatedCandidates`.
 
@@ -310,7 +354,7 @@ Implication:
 
 This is an intentional tradeoff.
 
-### 3. Named Leaders And Used Cards Are Out Of Scope
+### 4. Named Leaders And Used Cards Are Out Of Scope
 
 The current recommender ignores them completely.
 
@@ -320,11 +364,11 @@ If they are added later:
 - update tests,
 - re-check performance.
 
-### 4. UI Must Use Background Execution
+### 5. UI Must Use Background Execution
 
 Core optimizations reduce cost but do not eliminate the need for background execution in Flutter.
 
-### 5. Legacy Files May No Longer Reflect Final Logic
+### 6. Legacy Files May No Longer Reflect Final Logic
 
 Example:
 - `leader_activation_order_policy.dart` remains in the tree even though leader activation now happens by outcome enumeration and heuristic selection in the hit calculator.
@@ -351,4 +395,3 @@ Recent core work was split into small commits:
 - `e0e4506` Add bswfa_core agent guide
 
 Use those commits to inspect implementation intent if needed.
-
