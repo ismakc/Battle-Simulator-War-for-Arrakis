@@ -49,6 +49,92 @@ void main() {
       },
     );
 
+    test('applies surprise attack as an extra attacker star in round hits', () {
+      final BattleHitsCalculator calculator = BattleHitsCalculator();
+
+      final (int attackerHits, int defenderHits) = calculator.calculateHits(
+        BattleScenario(
+          attackingLegion: AttackingLegion(
+            genericLeaders: 1,
+            surpriseAttack: true,
+          ),
+        ),
+        const BattleDiceRoll(),
+      );
+
+      expect(attackerHits, 1);
+      expect(defenderHits, 0);
+    });
+
+    test('caps leader activations to the available number of stars', () {
+      final BattleHitsCalculator calculator = BattleHitsCalculator();
+
+      final (int attackerHits, int defenderHits) = calculator.calculateHits(
+        BattleScenario(
+          attackingLegion: AttackingLegion(
+            namedLeaders: <NamedLeader>[
+              NamedLeader.leader2_0,
+              NamedLeader.leader0_3,
+            ],
+          ),
+        ),
+        BattleDiceRoll(
+          attackerDiceRoll: DiceRoll.zero.addStar(),
+          defenderDiceRoll: DiceRoll.zero,
+        ),
+      );
+
+      expect(attackerHits, 2);
+      expect(defenderHits, 0);
+    });
+
+    test(
+      'special elite units remove opponent shields before hits are applied',
+      () {
+        final BattleHitsCalculator calculator = BattleHitsCalculator();
+
+        final (int attackerHits, int defenderHits) = calculator.calculateHits(
+          BattleScenario(
+            attackingLegion: AttackingLegion(
+              regularUnits: 1,
+              specialEliteUnits: 1,
+            ),
+            defendingLegion: DefendingLegion(regularUnits: 2),
+          ),
+          BattleDiceRoll(
+            attackerDiceRoll: DiceRoll.zero.addSword().addSword(),
+            defenderDiceRoll: DiceRoll.zero.addShield().addShield(),
+          ),
+        );
+
+        expect(attackerHits, 1);
+        expect(defenderHits, 0);
+      },
+    );
+
+    test('breaks equal-hit leader choices by minimizing suffered hits', () {
+      final BattleHitsCalculator calculator = BattleHitsCalculator();
+
+      final (int attackerHits, int defenderHits) = calculator.calculateHits(
+        BattleScenario(
+          attackingLegion: AttackingLegion(
+            namedLeaders: <NamedLeader>[
+              NamedLeader.leader1_0,
+              NamedLeader.leader1_1,
+            ],
+          ),
+          defendingLegion: DefendingLegion(regularUnits: 1),
+        ),
+        BattleDiceRoll(
+          attackerDiceRoll: DiceRoll.zero.addStar(),
+          defenderDiceRoll: DiceRoll.zero.addSword(),
+        ),
+      );
+
+      expect(attackerHits, 1);
+      expect(defenderHits, 0);
+    });
+
     test('removes surviving leaders when the last unit is destroyed', () {
       final AttackingLegion legion =
           AutomaticBattleLossApplicationPolicy.resolveAttackerCombatLosses(
