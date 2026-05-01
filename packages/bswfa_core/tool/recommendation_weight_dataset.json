@@ -1,0 +1,3599 @@
+{
+  "generatedAtUtc": "2026-04-30T12:17:22.162180Z",
+  "entryCount": 112,
+  "splitCounts": {
+    "train": 84,
+    "holdout": 12,
+    "validation": 16
+  },
+  "roleCounts": {
+    "attacker": 56,
+    "defender": 56
+  },
+  "entries": [
+    {
+      "id": "attacker__large__command_mix__tight__r2__e1__s1__g2__st2",
+      "split": "train",
+      "ownRole": "attacker",
+      "enemyLegion": {
+        "type": "defending",
+        "genericLeaders": 2,
+        "regularUnits": 2,
+        "eliteUnits": 1,
+        "specialEliteUnits": 1,
+        "usedCards": 0,
+        "settlementLevel": 2
+      },
+      "constraints": {
+        "maxRegularUnits": 6,
+        "maxEliteUnits": 3,
+        "maxSpecialEliteUnits": 2,
+        "maxGenericLeaders": 3,
+        "allowSurpriseAttack": false,
+        "settlementLevel": 0
+      },
+      "maxRounds": 4,
+      "targetWinProbability": 0.6,
+      "limit": 3,
+      "maxEvaluatedCandidates": 220,
+      "tags": [
+        "role:attacker",
+        "band:large",
+        "enemy:command_mix",
+        "constraints:tight"
+      ]
+    },
+    {
+      "id": "attacker__large__command_mix__tight__r3__e1__s1__g2__st2",
+      "split": "train",
+      "ownRole": "attacker",
+      "enemyLegion": {
+        "type": "defending",
+        "genericLeaders": 2,
+        "regularUnits": 3,
+        "eliteUnits": 1,
+        "specialEliteUnits": 1,
+        "usedCards": 0,
+        "settlementLevel": 2
+      },
+      "constraints": {
+        "maxRegularUnits": 6,
+        "maxEliteUnits": 3,
+        "maxSpecialEliteUnits": 2,
+        "maxGenericLeaders": 3,
+        "allowSurpriseAttack": false,
+        "settlementLevel": 0
+      },
+      "maxRounds": 4,
+      "targetWinProbability": 0.6,
+      "limit": 3,
+      "maxEvaluatedCandidates": 220,
+      "tags": [
+        "role:attacker",
+        "band:large",
+        "enemy:command_mix",
+        "constraints:tight"
+      ]
+    },
+    {
+      "id": "attacker__large__command_mix__wide__r2__e1__s1__g2__st2",
+      "split": "train",
+      "ownRole": "attacker",
+      "enemyLegion": {
+        "type": "defending",
+        "genericLeaders": 2,
+        "regularUnits": 2,
+        "eliteUnits": 1,
+        "specialEliteUnits": 1,
+        "usedCards": 0,
+        "settlementLevel": 2
+      },
+      "constraints": {
+        "maxRegularUnits": 6,
+        "maxEliteUnits": 3,
+        "maxSpecialEliteUnits": 2,
+        "maxGenericLeaders": 4,
+        "allowSurpriseAttack": true,
+        "settlementLevel": 0
+      },
+      "maxRounds": 4,
+      "targetWinProbability": 0.6,
+      "limit": 3,
+      "maxEvaluatedCandidates": 220,
+      "tags": [
+        "role:attacker",
+        "band:large",
+        "enemy:command_mix",
+        "constraints:wide"
+      ]
+    },
+    {
+      "id": "attacker__large__command_mix__wide__r3__e1__s1__g2__st2",
+      "split": "holdout",
+      "ownRole": "attacker",
+      "enemyLegion": {
+        "type": "defending",
+        "genericLeaders": 2,
+        "regularUnits": 3,
+        "eliteUnits": 1,
+        "specialEliteUnits": 1,
+        "usedCards": 0,
+        "settlementLevel": 2
+      },
+      "constraints": {
+        "maxRegularUnits": 6,
+        "maxEliteUnits": 3,
+        "maxSpecialEliteUnits": 2,
+        "maxGenericLeaders": 4,
+        "allowSurpriseAttack": true,
+        "settlementLevel": 0
+      },
+      "maxRounds": 4,
+      "targetWinProbability": 0.6,
+      "limit": 3,
+      "maxEvaluatedCandidates": 220,
+      "tags": [
+        "role:attacker",
+        "band:large",
+        "enemy:command_mix",
+        "constraints:wide"
+      ]
+    },
+    {
+      "id": "attacker__large__elite_mix__tight__r4__e1__s0__g0__st2",
+      "split": "validation",
+      "ownRole": "attacker",
+      "enemyLegion": {
+        "type": "defending",
+        "genericLeaders": 0,
+        "regularUnits": 4,
+        "eliteUnits": 1,
+        "specialEliteUnits": 0,
+        "usedCards": 0,
+        "settlementLevel": 2
+      },
+      "constraints": {
+        "maxRegularUnits": 6,
+        "maxEliteUnits": 3,
+        "maxSpecialEliteUnits": 2,
+        "maxGenericLeaders": 3,
+        "allowSurpriseAttack": false,
+        "settlementLevel": 0
+      },
+      "maxRounds": 4,
+      "targetWinProbability": 0.6,
+      "limit": 3,
+      "maxEvaluatedCandidates": 220,
+      "tags": [
+        "role:attacker",
+        "band:large",
+        "enemy:elite_mix",
+        "constraints:tight"
+      ]
+    },
+    {
+      "id": "attacker__large__elite_mix__tight__r5__e1__s0__g0__st2",
+      "split": "train",
+      "ownRole": "attacker",
+      "enemyLegion": {
+        "type": "defending",
+        "genericLeaders": 0,
+        "regularUnits": 5,
+        "eliteUnits": 1,
+        "specialEliteUnits": 0,
+        "usedCards": 0,
+        "settlementLevel": 2
+      },
+      "constraints": {
+        "maxRegularUnits": 6,
+        "maxEliteUnits": 3,
+        "maxSpecialEliteUnits": 2,
+        "maxGenericLeaders": 3,
+        "allowSurpriseAttack": false,
+        "settlementLevel": 0
+      },
+      "maxRounds": 4,
+      "targetWinProbability": 0.6,
+      "limit": 3,
+      "maxEvaluatedCandidates": 220,
+      "tags": [
+        "role:attacker",
+        "band:large",
+        "enemy:elite_mix",
+        "constraints:tight"
+      ]
+    },
+    {
+      "id": "attacker__large__elite_mix__wide__r4__e1__s0__g0__st2",
+      "split": "train",
+      "ownRole": "attacker",
+      "enemyLegion": {
+        "type": "defending",
+        "genericLeaders": 0,
+        "regularUnits": 4,
+        "eliteUnits": 1,
+        "specialEliteUnits": 0,
+        "usedCards": 0,
+        "settlementLevel": 2
+      },
+      "constraints": {
+        "maxRegularUnits": 6,
+        "maxEliteUnits": 3,
+        "maxSpecialEliteUnits": 2,
+        "maxGenericLeaders": 4,
+        "allowSurpriseAttack": true,
+        "settlementLevel": 0
+      },
+      "maxRounds": 4,
+      "targetWinProbability": 0.6,
+      "limit": 3,
+      "maxEvaluatedCandidates": 220,
+      "tags": [
+        "role:attacker",
+        "band:large",
+        "enemy:elite_mix",
+        "constraints:wide"
+      ]
+    },
+    {
+      "id": "attacker__large__elite_mix__wide__r5__e1__s0__g0__st2",
+      "split": "train",
+      "ownRole": "attacker",
+      "enemyLegion": {
+        "type": "defending",
+        "genericLeaders": 0,
+        "regularUnits": 5,
+        "eliteUnits": 1,
+        "specialEliteUnits": 0,
+        "usedCards": 0,
+        "settlementLevel": 2
+      },
+      "constraints": {
+        "maxRegularUnits": 6,
+        "maxEliteUnits": 3,
+        "maxSpecialEliteUnits": 2,
+        "maxGenericLeaders": 4,
+        "allowSurpriseAttack": true,
+        "settlementLevel": 0
+      },
+      "maxRounds": 4,
+      "targetWinProbability": 0.6,
+      "limit": 3,
+      "maxEvaluatedCandidates": 220,
+      "tags": [
+        "role:attacker",
+        "band:large",
+        "enemy:elite_mix",
+        "constraints:wide"
+      ]
+    },
+    {
+      "id": "attacker__large__fortified_line__tight__r5__e0__s0__g1__st4",
+      "split": "train",
+      "ownRole": "attacker",
+      "enemyLegion": {
+        "type": "defending",
+        "genericLeaders": 1,
+        "regularUnits": 5,
+        "eliteUnits": 0,
+        "specialEliteUnits": 0,
+        "usedCards": 0,
+        "settlementLevel": 4
+      },
+      "constraints": {
+        "maxRegularUnits": 6,
+        "maxEliteUnits": 3,
+        "maxSpecialEliteUnits": 2,
+        "maxGenericLeaders": 3,
+        "allowSurpriseAttack": false,
+        "settlementLevel": 0
+      },
+      "maxRounds": 4,
+      "targetWinProbability": 0.6,
+      "limit": 3,
+      "maxEvaluatedCandidates": 220,
+      "tags": [
+        "role:attacker",
+        "band:large",
+        "enemy:fortified_line",
+        "constraints:tight"
+      ]
+    },
+    {
+      "id": "attacker__large__fortified_line__tight__r6__e0__s0__g1__st4",
+      "split": "holdout",
+      "ownRole": "attacker",
+      "enemyLegion": {
+        "type": "defending",
+        "genericLeaders": 1,
+        "regularUnits": 6,
+        "eliteUnits": 0,
+        "specialEliteUnits": 0,
+        "usedCards": 0,
+        "settlementLevel": 4
+      },
+      "constraints": {
+        "maxRegularUnits": 6,
+        "maxEliteUnits": 3,
+        "maxSpecialEliteUnits": 2,
+        "maxGenericLeaders": 3,
+        "allowSurpriseAttack": false,
+        "settlementLevel": 0
+      },
+      "maxRounds": 4,
+      "targetWinProbability": 0.6,
+      "limit": 3,
+      "maxEvaluatedCandidates": 220,
+      "tags": [
+        "role:attacker",
+        "band:large",
+        "enemy:fortified_line",
+        "constraints:tight"
+      ]
+    },
+    {
+      "id": "attacker__large__fortified_line__wide__r5__e0__s0__g1__st4",
+      "split": "train",
+      "ownRole": "attacker",
+      "enemyLegion": {
+        "type": "defending",
+        "genericLeaders": 1,
+        "regularUnits": 5,
+        "eliteUnits": 0,
+        "specialEliteUnits": 0,
+        "usedCards": 0,
+        "settlementLevel": 4
+      },
+      "constraints": {
+        "maxRegularUnits": 6,
+        "maxEliteUnits": 3,
+        "maxSpecialEliteUnits": 2,
+        "maxGenericLeaders": 4,
+        "allowSurpriseAttack": true,
+        "settlementLevel": 0
+      },
+      "maxRounds": 4,
+      "targetWinProbability": 0.6,
+      "limit": 3,
+      "maxEvaluatedCandidates": 220,
+      "tags": [
+        "role:attacker",
+        "band:large",
+        "enemy:fortified_line",
+        "constraints:wide"
+      ]
+    },
+    {
+      "id": "attacker__large__fortified_line__wide__r6__e0__s0__g1__st4",
+      "split": "train",
+      "ownRole": "attacker",
+      "enemyLegion": {
+        "type": "defending",
+        "genericLeaders": 1,
+        "regularUnits": 6,
+        "eliteUnits": 0,
+        "specialEliteUnits": 0,
+        "usedCards": 0,
+        "settlementLevel": 4
+      },
+      "constraints": {
+        "maxRegularUnits": 6,
+        "maxEliteUnits": 3,
+        "maxSpecialEliteUnits": 2,
+        "maxGenericLeaders": 4,
+        "allowSurpriseAttack": true,
+        "settlementLevel": 0
+      },
+      "maxRounds": 4,
+      "targetWinProbability": 0.6,
+      "limit": 3,
+      "maxEvaluatedCandidates": 220,
+      "tags": [
+        "role:attacker",
+        "band:large",
+        "enemy:fortified_line",
+        "constraints:wide"
+      ]
+    },
+    {
+      "id": "attacker__large__leader_mix__tight__r3__e1__s0__g1__st2",
+      "split": "train",
+      "ownRole": "attacker",
+      "enemyLegion": {
+        "type": "defending",
+        "genericLeaders": 1,
+        "regularUnits": 3,
+        "eliteUnits": 1,
+        "specialEliteUnits": 0,
+        "usedCards": 0,
+        "settlementLevel": 2
+      },
+      "constraints": {
+        "maxRegularUnits": 6,
+        "maxEliteUnits": 3,
+        "maxSpecialEliteUnits": 2,
+        "maxGenericLeaders": 3,
+        "allowSurpriseAttack": false,
+        "settlementLevel": 0
+      },
+      "maxRounds": 4,
+      "targetWinProbability": 0.6,
+      "limit": 3,
+      "maxEvaluatedCandidates": 220,
+      "tags": [
+        "role:attacker",
+        "band:large",
+        "enemy:leader_mix",
+        "constraints:tight"
+      ]
+    },
+    {
+      "id": "attacker__large__leader_mix__tight__r4__e1__s0__g1__st2",
+      "split": "train",
+      "ownRole": "attacker",
+      "enemyLegion": {
+        "type": "defending",
+        "genericLeaders": 1,
+        "regularUnits": 4,
+        "eliteUnits": 1,
+        "specialEliteUnits": 0,
+        "usedCards": 0,
+        "settlementLevel": 2
+      },
+      "constraints": {
+        "maxRegularUnits": 6,
+        "maxEliteUnits": 3,
+        "maxSpecialEliteUnits": 2,
+        "maxGenericLeaders": 3,
+        "allowSurpriseAttack": false,
+        "settlementLevel": 0
+      },
+      "maxRounds": 4,
+      "targetWinProbability": 0.6,
+      "limit": 3,
+      "maxEvaluatedCandidates": 220,
+      "tags": [
+        "role:attacker",
+        "band:large",
+        "enemy:leader_mix",
+        "constraints:tight"
+      ]
+    },
+    {
+      "id": "attacker__large__leader_mix__wide__r3__e1__s0__g1__st2",
+      "split": "train",
+      "ownRole": "attacker",
+      "enemyLegion": {
+        "type": "defending",
+        "genericLeaders": 1,
+        "regularUnits": 3,
+        "eliteUnits": 1,
+        "specialEliteUnits": 0,
+        "usedCards": 0,
+        "settlementLevel": 2
+      },
+      "constraints": {
+        "maxRegularUnits": 6,
+        "maxEliteUnits": 3,
+        "maxSpecialEliteUnits": 2,
+        "maxGenericLeaders": 4,
+        "allowSurpriseAttack": true,
+        "settlementLevel": 0
+      },
+      "maxRounds": 4,
+      "targetWinProbability": 0.6,
+      "limit": 3,
+      "maxEvaluatedCandidates": 220,
+      "tags": [
+        "role:attacker",
+        "band:large",
+        "enemy:leader_mix",
+        "constraints:wide"
+      ]
+    },
+    {
+      "id": "attacker__large__leader_mix__wide__r4__e1__s0__g1__st2",
+      "split": "train",
+      "ownRole": "attacker",
+      "enemyLegion": {
+        "type": "defending",
+        "genericLeaders": 1,
+        "regularUnits": 4,
+        "eliteUnits": 1,
+        "specialEliteUnits": 0,
+        "usedCards": 0,
+        "settlementLevel": 2
+      },
+      "constraints": {
+        "maxRegularUnits": 6,
+        "maxEliteUnits": 3,
+        "maxSpecialEliteUnits": 2,
+        "maxGenericLeaders": 4,
+        "allowSurpriseAttack": true,
+        "settlementLevel": 0
+      },
+      "maxRounds": 4,
+      "targetWinProbability": 0.6,
+      "limit": 3,
+      "maxEvaluatedCandidates": 220,
+      "tags": [
+        "role:attacker",
+        "band:large",
+        "enemy:leader_mix",
+        "constraints:wide"
+      ]
+    },
+    {
+      "id": "attacker__large__regular_line__tight__r5__e0__s0__g0__st2",
+      "split": "holdout",
+      "ownRole": "attacker",
+      "enemyLegion": {
+        "type": "defending",
+        "genericLeaders": 0,
+        "regularUnits": 5,
+        "eliteUnits": 0,
+        "specialEliteUnits": 0,
+        "usedCards": 0,
+        "settlementLevel": 2
+      },
+      "constraints": {
+        "maxRegularUnits": 6,
+        "maxEliteUnits": 3,
+        "maxSpecialEliteUnits": 2,
+        "maxGenericLeaders": 3,
+        "allowSurpriseAttack": false,
+        "settlementLevel": 0
+      },
+      "maxRounds": 4,
+      "targetWinProbability": 0.6,
+      "limit": 3,
+      "maxEvaluatedCandidates": 220,
+      "tags": [
+        "role:attacker",
+        "band:large",
+        "enemy:regular_line",
+        "constraints:tight"
+      ]
+    },
+    {
+      "id": "attacker__large__regular_line__tight__r6__e0__s0__g0__st2",
+      "split": "train",
+      "ownRole": "attacker",
+      "enemyLegion": {
+        "type": "defending",
+        "genericLeaders": 0,
+        "regularUnits": 6,
+        "eliteUnits": 0,
+        "specialEliteUnits": 0,
+        "usedCards": 0,
+        "settlementLevel": 2
+      },
+      "constraints": {
+        "maxRegularUnits": 6,
+        "maxEliteUnits": 3,
+        "maxSpecialEliteUnits": 2,
+        "maxGenericLeaders": 3,
+        "allowSurpriseAttack": false,
+        "settlementLevel": 0
+      },
+      "maxRounds": 4,
+      "targetWinProbability": 0.6,
+      "limit": 3,
+      "maxEvaluatedCandidates": 220,
+      "tags": [
+        "role:attacker",
+        "band:large",
+        "enemy:regular_line",
+        "constraints:tight"
+      ]
+    },
+    {
+      "id": "attacker__large__regular_line__wide__r5__e0__s0__g0__st2",
+      "split": "train",
+      "ownRole": "attacker",
+      "enemyLegion": {
+        "type": "defending",
+        "genericLeaders": 0,
+        "regularUnits": 5,
+        "eliteUnits": 0,
+        "specialEliteUnits": 0,
+        "usedCards": 0,
+        "settlementLevel": 2
+      },
+      "constraints": {
+        "maxRegularUnits": 6,
+        "maxEliteUnits": 3,
+        "maxSpecialEliteUnits": 2,
+        "maxGenericLeaders": 4,
+        "allowSurpriseAttack": true,
+        "settlementLevel": 0
+      },
+      "maxRounds": 4,
+      "targetWinProbability": 0.6,
+      "limit": 3,
+      "maxEvaluatedCandidates": 220,
+      "tags": [
+        "role:attacker",
+        "band:large",
+        "enemy:regular_line",
+        "constraints:wide"
+      ]
+    },
+    {
+      "id": "attacker__large__regular_line__wide__r6__e0__s0__g0__st2",
+      "split": "train",
+      "ownRole": "attacker",
+      "enemyLegion": {
+        "type": "defending",
+        "genericLeaders": 0,
+        "regularUnits": 6,
+        "eliteUnits": 0,
+        "specialEliteUnits": 0,
+        "usedCards": 0,
+        "settlementLevel": 2
+      },
+      "constraints": {
+        "maxRegularUnits": 6,
+        "maxEliteUnits": 3,
+        "maxSpecialEliteUnits": 2,
+        "maxGenericLeaders": 4,
+        "allowSurpriseAttack": true,
+        "settlementLevel": 0
+      },
+      "maxRounds": 4,
+      "targetWinProbability": 0.6,
+      "limit": 3,
+      "maxEvaluatedCandidates": 220,
+      "tags": [
+        "role:attacker",
+        "band:large",
+        "enemy:regular_line",
+        "constraints:wide"
+      ]
+    },
+    {
+      "id": "attacker__large__special_mix__tight__r4__e0__s1__g0__st2",
+      "split": "validation",
+      "ownRole": "attacker",
+      "enemyLegion": {
+        "type": "defending",
+        "genericLeaders": 0,
+        "regularUnits": 4,
+        "eliteUnits": 0,
+        "specialEliteUnits": 1,
+        "usedCards": 0,
+        "settlementLevel": 2
+      },
+      "constraints": {
+        "maxRegularUnits": 6,
+        "maxEliteUnits": 3,
+        "maxSpecialEliteUnits": 2,
+        "maxGenericLeaders": 3,
+        "allowSurpriseAttack": false,
+        "settlementLevel": 0
+      },
+      "maxRounds": 4,
+      "targetWinProbability": 0.6,
+      "limit": 3,
+      "maxEvaluatedCandidates": 220,
+      "tags": [
+        "role:attacker",
+        "band:large",
+        "enemy:special_mix",
+        "constraints:tight"
+      ]
+    },
+    {
+      "id": "attacker__large__special_mix__tight__r5__e0__s1__g0__st2",
+      "split": "train",
+      "ownRole": "attacker",
+      "enemyLegion": {
+        "type": "defending",
+        "genericLeaders": 0,
+        "regularUnits": 5,
+        "eliteUnits": 0,
+        "specialEliteUnits": 1,
+        "usedCards": 0,
+        "settlementLevel": 2
+      },
+      "constraints": {
+        "maxRegularUnits": 6,
+        "maxEliteUnits": 3,
+        "maxSpecialEliteUnits": 2,
+        "maxGenericLeaders": 3,
+        "allowSurpriseAttack": false,
+        "settlementLevel": 0
+      },
+      "maxRounds": 4,
+      "targetWinProbability": 0.6,
+      "limit": 3,
+      "maxEvaluatedCandidates": 220,
+      "tags": [
+        "role:attacker",
+        "band:large",
+        "enemy:special_mix",
+        "constraints:tight"
+      ]
+    },
+    {
+      "id": "attacker__large__special_mix__wide__r4__e0__s1__g0__st2",
+      "split": "train",
+      "ownRole": "attacker",
+      "enemyLegion": {
+        "type": "defending",
+        "genericLeaders": 0,
+        "regularUnits": 4,
+        "eliteUnits": 0,
+        "specialEliteUnits": 1,
+        "usedCards": 0,
+        "settlementLevel": 2
+      },
+      "constraints": {
+        "maxRegularUnits": 6,
+        "maxEliteUnits": 3,
+        "maxSpecialEliteUnits": 2,
+        "maxGenericLeaders": 4,
+        "allowSurpriseAttack": true,
+        "settlementLevel": 0
+      },
+      "maxRounds": 4,
+      "targetWinProbability": 0.6,
+      "limit": 3,
+      "maxEvaluatedCandidates": 220,
+      "tags": [
+        "role:attacker",
+        "band:large",
+        "enemy:special_mix",
+        "constraints:wide"
+      ]
+    },
+    {
+      "id": "attacker__large__special_mix__wide__r5__e0__s1__g0__st2",
+      "split": "validation",
+      "ownRole": "attacker",
+      "enemyLegion": {
+        "type": "defending",
+        "genericLeaders": 0,
+        "regularUnits": 5,
+        "eliteUnits": 0,
+        "specialEliteUnits": 1,
+        "usedCards": 0,
+        "settlementLevel": 2
+      },
+      "constraints": {
+        "maxRegularUnits": 6,
+        "maxEliteUnits": 3,
+        "maxSpecialEliteUnits": 2,
+        "maxGenericLeaders": 4,
+        "allowSurpriseAttack": true,
+        "settlementLevel": 0
+      },
+      "maxRounds": 4,
+      "targetWinProbability": 0.6,
+      "limit": 3,
+      "maxEvaluatedCandidates": 220,
+      "tags": [
+        "role:attacker",
+        "band:large",
+        "enemy:special_mix",
+        "constraints:wide"
+      ]
+    },
+    {
+      "id": "attacker__medium__command_mix__tight__r1__e1__s1__g2__st1",
+      "split": "train",
+      "ownRole": "attacker",
+      "enemyLegion": {
+        "type": "defending",
+        "genericLeaders": 2,
+        "regularUnits": 1,
+        "eliteUnits": 1,
+        "specialEliteUnits": 1,
+        "usedCards": 0,
+        "settlementLevel": 1
+      },
+      "constraints": {
+        "maxRegularUnits": 4,
+        "maxEliteUnits": 2,
+        "maxSpecialEliteUnits": 1,
+        "maxGenericLeaders": 2,
+        "allowSurpriseAttack": false,
+        "settlementLevel": 0
+      },
+      "maxRounds": 3,
+      "targetWinProbability": 0.6,
+      "limit": 3,
+      "maxEvaluatedCandidates": 140,
+      "tags": [
+        "role:attacker",
+        "band:medium",
+        "enemy:command_mix",
+        "constraints:tight"
+      ]
+    },
+    {
+      "id": "attacker__medium__command_mix__wide__r1__e1__s1__g2__st1",
+      "split": "validation",
+      "ownRole": "attacker",
+      "enemyLegion": {
+        "type": "defending",
+        "genericLeaders": 2,
+        "regularUnits": 1,
+        "eliteUnits": 1,
+        "specialEliteUnits": 1,
+        "usedCards": 0,
+        "settlementLevel": 1
+      },
+      "constraints": {
+        "maxRegularUnits": 5,
+        "maxEliteUnits": 2,
+        "maxSpecialEliteUnits": 2,
+        "maxGenericLeaders": 3,
+        "allowSurpriseAttack": true,
+        "settlementLevel": 0
+      },
+      "maxRounds": 3,
+      "targetWinProbability": 0.6,
+      "limit": 3,
+      "maxEvaluatedCandidates": 140,
+      "tags": [
+        "role:attacker",
+        "band:medium",
+        "enemy:command_mix",
+        "constraints:wide"
+      ]
+    },
+    {
+      "id": "attacker__medium__elite_mix__tight__r2__e1__s0__g0__st1",
+      "split": "train",
+      "ownRole": "attacker",
+      "enemyLegion": {
+        "type": "defending",
+        "genericLeaders": 0,
+        "regularUnits": 2,
+        "eliteUnits": 1,
+        "specialEliteUnits": 0,
+        "usedCards": 0,
+        "settlementLevel": 1
+      },
+      "constraints": {
+        "maxRegularUnits": 4,
+        "maxEliteUnits": 2,
+        "maxSpecialEliteUnits": 1,
+        "maxGenericLeaders": 2,
+        "allowSurpriseAttack": false,
+        "settlementLevel": 0
+      },
+      "maxRounds": 3,
+      "targetWinProbability": 0.6,
+      "limit": 3,
+      "maxEvaluatedCandidates": 140,
+      "tags": [
+        "role:attacker",
+        "band:medium",
+        "enemy:elite_mix",
+        "constraints:tight"
+      ]
+    },
+    {
+      "id": "attacker__medium__elite_mix__tight__r3__e1__s0__g0__st1",
+      "split": "validation",
+      "ownRole": "attacker",
+      "enemyLegion": {
+        "type": "defending",
+        "genericLeaders": 0,
+        "regularUnits": 3,
+        "eliteUnits": 1,
+        "specialEliteUnits": 0,
+        "usedCards": 0,
+        "settlementLevel": 1
+      },
+      "constraints": {
+        "maxRegularUnits": 4,
+        "maxEliteUnits": 2,
+        "maxSpecialEliteUnits": 1,
+        "maxGenericLeaders": 2,
+        "allowSurpriseAttack": false,
+        "settlementLevel": 0
+      },
+      "maxRounds": 3,
+      "targetWinProbability": 0.6,
+      "limit": 3,
+      "maxEvaluatedCandidates": 140,
+      "tags": [
+        "role:attacker",
+        "band:medium",
+        "enemy:elite_mix",
+        "constraints:tight"
+      ]
+    },
+    {
+      "id": "attacker__medium__elite_mix__wide__r2__e1__s0__g0__st1",
+      "split": "train",
+      "ownRole": "attacker",
+      "enemyLegion": {
+        "type": "defending",
+        "genericLeaders": 0,
+        "regularUnits": 2,
+        "eliteUnits": 1,
+        "specialEliteUnits": 0,
+        "usedCards": 0,
+        "settlementLevel": 1
+      },
+      "constraints": {
+        "maxRegularUnits": 5,
+        "maxEliteUnits": 2,
+        "maxSpecialEliteUnits": 2,
+        "maxGenericLeaders": 3,
+        "allowSurpriseAttack": true,
+        "settlementLevel": 0
+      },
+      "maxRounds": 3,
+      "targetWinProbability": 0.6,
+      "limit": 3,
+      "maxEvaluatedCandidates": 140,
+      "tags": [
+        "role:attacker",
+        "band:medium",
+        "enemy:elite_mix",
+        "constraints:wide"
+      ]
+    },
+    {
+      "id": "attacker__medium__elite_mix__wide__r3__e1__s0__g0__st1",
+      "split": "train",
+      "ownRole": "attacker",
+      "enemyLegion": {
+        "type": "defending",
+        "genericLeaders": 0,
+        "regularUnits": 3,
+        "eliteUnits": 1,
+        "specialEliteUnits": 0,
+        "usedCards": 0,
+        "settlementLevel": 1
+      },
+      "constraints": {
+        "maxRegularUnits": 5,
+        "maxEliteUnits": 2,
+        "maxSpecialEliteUnits": 2,
+        "maxGenericLeaders": 3,
+        "allowSurpriseAttack": true,
+        "settlementLevel": 0
+      },
+      "maxRounds": 3,
+      "targetWinProbability": 0.6,
+      "limit": 3,
+      "maxEvaluatedCandidates": 140,
+      "tags": [
+        "role:attacker",
+        "band:medium",
+        "enemy:elite_mix",
+        "constraints:wide"
+      ]
+    },
+    {
+      "id": "attacker__medium__fortified_line__tight__r3__e0__s0__g0__st3",
+      "split": "train",
+      "ownRole": "attacker",
+      "enemyLegion": {
+        "type": "defending",
+        "genericLeaders": 0,
+        "regularUnits": 3,
+        "eliteUnits": 0,
+        "specialEliteUnits": 0,
+        "usedCards": 0,
+        "settlementLevel": 3
+      },
+      "constraints": {
+        "maxRegularUnits": 4,
+        "maxEliteUnits": 2,
+        "maxSpecialEliteUnits": 1,
+        "maxGenericLeaders": 2,
+        "allowSurpriseAttack": false,
+        "settlementLevel": 0
+      },
+      "maxRounds": 3,
+      "targetWinProbability": 0.6,
+      "limit": 3,
+      "maxEvaluatedCandidates": 140,
+      "tags": [
+        "role:attacker",
+        "band:medium",
+        "enemy:fortified_line",
+        "constraints:tight"
+      ]
+    },
+    {
+      "id": "attacker__medium__fortified_line__tight__r4__e0__s0__g1__st3",
+      "split": "train",
+      "ownRole": "attacker",
+      "enemyLegion": {
+        "type": "defending",
+        "genericLeaders": 1,
+        "regularUnits": 4,
+        "eliteUnits": 0,
+        "specialEliteUnits": 0,
+        "usedCards": 0,
+        "settlementLevel": 3
+      },
+      "constraints": {
+        "maxRegularUnits": 4,
+        "maxEliteUnits": 2,
+        "maxSpecialEliteUnits": 1,
+        "maxGenericLeaders": 2,
+        "allowSurpriseAttack": false,
+        "settlementLevel": 0
+      },
+      "maxRounds": 3,
+      "targetWinProbability": 0.6,
+      "limit": 3,
+      "maxEvaluatedCandidates": 140,
+      "tags": [
+        "role:attacker",
+        "band:medium",
+        "enemy:fortified_line",
+        "constraints:tight"
+      ]
+    },
+    {
+      "id": "attacker__medium__fortified_line__wide__r3__e0__s0__g0__st3",
+      "split": "train",
+      "ownRole": "attacker",
+      "enemyLegion": {
+        "type": "defending",
+        "genericLeaders": 0,
+        "regularUnits": 3,
+        "eliteUnits": 0,
+        "specialEliteUnits": 0,
+        "usedCards": 0,
+        "settlementLevel": 3
+      },
+      "constraints": {
+        "maxRegularUnits": 5,
+        "maxEliteUnits": 2,
+        "maxSpecialEliteUnits": 2,
+        "maxGenericLeaders": 3,
+        "allowSurpriseAttack": true,
+        "settlementLevel": 0
+      },
+      "maxRounds": 3,
+      "targetWinProbability": 0.6,
+      "limit": 3,
+      "maxEvaluatedCandidates": 140,
+      "tags": [
+        "role:attacker",
+        "band:medium",
+        "enemy:fortified_line",
+        "constraints:wide"
+      ]
+    },
+    {
+      "id": "attacker__medium__fortified_line__wide__r4__e0__s0__g1__st3",
+      "split": "train",
+      "ownRole": "attacker",
+      "enemyLegion": {
+        "type": "defending",
+        "genericLeaders": 1,
+        "regularUnits": 4,
+        "eliteUnits": 0,
+        "specialEliteUnits": 0,
+        "usedCards": 0,
+        "settlementLevel": 3
+      },
+      "constraints": {
+        "maxRegularUnits": 5,
+        "maxEliteUnits": 2,
+        "maxSpecialEliteUnits": 2,
+        "maxGenericLeaders": 3,
+        "allowSurpriseAttack": true,
+        "settlementLevel": 0
+      },
+      "maxRounds": 3,
+      "targetWinProbability": 0.6,
+      "limit": 3,
+      "maxEvaluatedCandidates": 140,
+      "tags": [
+        "role:attacker",
+        "band:medium",
+        "enemy:fortified_line",
+        "constraints:wide"
+      ]
+    },
+    {
+      "id": "attacker__medium__leader_mix__tight__r1__e1__s0__g1__st1",
+      "split": "train",
+      "ownRole": "attacker",
+      "enemyLegion": {
+        "type": "defending",
+        "genericLeaders": 1,
+        "regularUnits": 1,
+        "eliteUnits": 1,
+        "specialEliteUnits": 0,
+        "usedCards": 0,
+        "settlementLevel": 1
+      },
+      "constraints": {
+        "maxRegularUnits": 4,
+        "maxEliteUnits": 2,
+        "maxSpecialEliteUnits": 1,
+        "maxGenericLeaders": 2,
+        "allowSurpriseAttack": false,
+        "settlementLevel": 0
+      },
+      "maxRounds": 3,
+      "targetWinProbability": 0.6,
+      "limit": 3,
+      "maxEvaluatedCandidates": 140,
+      "tags": [
+        "role:attacker",
+        "band:medium",
+        "enemy:leader_mix",
+        "constraints:tight"
+      ]
+    },
+    {
+      "id": "attacker__medium__leader_mix__tight__r2__e1__s0__g1__st1",
+      "split": "validation",
+      "ownRole": "attacker",
+      "enemyLegion": {
+        "type": "defending",
+        "genericLeaders": 1,
+        "regularUnits": 2,
+        "eliteUnits": 1,
+        "specialEliteUnits": 0,
+        "usedCards": 0,
+        "settlementLevel": 1
+      },
+      "constraints": {
+        "maxRegularUnits": 4,
+        "maxEliteUnits": 2,
+        "maxSpecialEliteUnits": 1,
+        "maxGenericLeaders": 2,
+        "allowSurpriseAttack": false,
+        "settlementLevel": 0
+      },
+      "maxRounds": 3,
+      "targetWinProbability": 0.6,
+      "limit": 3,
+      "maxEvaluatedCandidates": 140,
+      "tags": [
+        "role:attacker",
+        "band:medium",
+        "enemy:leader_mix",
+        "constraints:tight"
+      ]
+    },
+    {
+      "id": "attacker__medium__leader_mix__wide__r1__e1__s0__g1__st1",
+      "split": "validation",
+      "ownRole": "attacker",
+      "enemyLegion": {
+        "type": "defending",
+        "genericLeaders": 1,
+        "regularUnits": 1,
+        "eliteUnits": 1,
+        "specialEliteUnits": 0,
+        "usedCards": 0,
+        "settlementLevel": 1
+      },
+      "constraints": {
+        "maxRegularUnits": 5,
+        "maxEliteUnits": 2,
+        "maxSpecialEliteUnits": 2,
+        "maxGenericLeaders": 3,
+        "allowSurpriseAttack": true,
+        "settlementLevel": 0
+      },
+      "maxRounds": 3,
+      "targetWinProbability": 0.6,
+      "limit": 3,
+      "maxEvaluatedCandidates": 140,
+      "tags": [
+        "role:attacker",
+        "band:medium",
+        "enemy:leader_mix",
+        "constraints:wide"
+      ]
+    },
+    {
+      "id": "attacker__medium__leader_mix__wide__r2__e1__s0__g1__st1",
+      "split": "train",
+      "ownRole": "attacker",
+      "enemyLegion": {
+        "type": "defending",
+        "genericLeaders": 1,
+        "regularUnits": 2,
+        "eliteUnits": 1,
+        "specialEliteUnits": 0,
+        "usedCards": 0,
+        "settlementLevel": 1
+      },
+      "constraints": {
+        "maxRegularUnits": 5,
+        "maxEliteUnits": 2,
+        "maxSpecialEliteUnits": 2,
+        "maxGenericLeaders": 3,
+        "allowSurpriseAttack": true,
+        "settlementLevel": 0
+      },
+      "maxRounds": 3,
+      "targetWinProbability": 0.6,
+      "limit": 3,
+      "maxEvaluatedCandidates": 140,
+      "tags": [
+        "role:attacker",
+        "band:medium",
+        "enemy:leader_mix",
+        "constraints:wide"
+      ]
+    },
+    {
+      "id": "attacker__medium__regular_line__tight__r3__e0__s0__g0__st1",
+      "split": "validation",
+      "ownRole": "attacker",
+      "enemyLegion": {
+        "type": "defending",
+        "genericLeaders": 0,
+        "regularUnits": 3,
+        "eliteUnits": 0,
+        "specialEliteUnits": 0,
+        "usedCards": 0,
+        "settlementLevel": 1
+      },
+      "constraints": {
+        "maxRegularUnits": 4,
+        "maxEliteUnits": 2,
+        "maxSpecialEliteUnits": 1,
+        "maxGenericLeaders": 2,
+        "allowSurpriseAttack": false,
+        "settlementLevel": 0
+      },
+      "maxRounds": 3,
+      "targetWinProbability": 0.6,
+      "limit": 3,
+      "maxEvaluatedCandidates": 140,
+      "tags": [
+        "role:attacker",
+        "band:medium",
+        "enemy:regular_line",
+        "constraints:tight"
+      ]
+    },
+    {
+      "id": "attacker__medium__regular_line__tight__r4__e0__s0__g0__st1",
+      "split": "train",
+      "ownRole": "attacker",
+      "enemyLegion": {
+        "type": "defending",
+        "genericLeaders": 0,
+        "regularUnits": 4,
+        "eliteUnits": 0,
+        "specialEliteUnits": 0,
+        "usedCards": 0,
+        "settlementLevel": 1
+      },
+      "constraints": {
+        "maxRegularUnits": 4,
+        "maxEliteUnits": 2,
+        "maxSpecialEliteUnits": 1,
+        "maxGenericLeaders": 2,
+        "allowSurpriseAttack": false,
+        "settlementLevel": 0
+      },
+      "maxRounds": 3,
+      "targetWinProbability": 0.6,
+      "limit": 3,
+      "maxEvaluatedCandidates": 140,
+      "tags": [
+        "role:attacker",
+        "band:medium",
+        "enemy:regular_line",
+        "constraints:tight"
+      ]
+    },
+    {
+      "id": "attacker__medium__regular_line__wide__r3__e0__s0__g0__st1",
+      "split": "train",
+      "ownRole": "attacker",
+      "enemyLegion": {
+        "type": "defending",
+        "genericLeaders": 0,
+        "regularUnits": 3,
+        "eliteUnits": 0,
+        "specialEliteUnits": 0,
+        "usedCards": 0,
+        "settlementLevel": 1
+      },
+      "constraints": {
+        "maxRegularUnits": 5,
+        "maxEliteUnits": 2,
+        "maxSpecialEliteUnits": 2,
+        "maxGenericLeaders": 3,
+        "allowSurpriseAttack": true,
+        "settlementLevel": 0
+      },
+      "maxRounds": 3,
+      "targetWinProbability": 0.6,
+      "limit": 3,
+      "maxEvaluatedCandidates": 140,
+      "tags": [
+        "role:attacker",
+        "band:medium",
+        "enemy:regular_line",
+        "constraints:wide"
+      ]
+    },
+    {
+      "id": "attacker__medium__regular_line__wide__r4__e0__s0__g0__st1",
+      "split": "train",
+      "ownRole": "attacker",
+      "enemyLegion": {
+        "type": "defending",
+        "genericLeaders": 0,
+        "regularUnits": 4,
+        "eliteUnits": 0,
+        "specialEliteUnits": 0,
+        "usedCards": 0,
+        "settlementLevel": 1
+      },
+      "constraints": {
+        "maxRegularUnits": 5,
+        "maxEliteUnits": 2,
+        "maxSpecialEliteUnits": 2,
+        "maxGenericLeaders": 3,
+        "allowSurpriseAttack": true,
+        "settlementLevel": 0
+      },
+      "maxRounds": 3,
+      "targetWinProbability": 0.6,
+      "limit": 3,
+      "maxEvaluatedCandidates": 140,
+      "tags": [
+        "role:attacker",
+        "band:medium",
+        "enemy:regular_line",
+        "constraints:wide"
+      ]
+    },
+    {
+      "id": "attacker__medium__special_mix__tight__r2__e0__s1__g0__st1",
+      "split": "train",
+      "ownRole": "attacker",
+      "enemyLegion": {
+        "type": "defending",
+        "genericLeaders": 0,
+        "regularUnits": 2,
+        "eliteUnits": 0,
+        "specialEliteUnits": 1,
+        "usedCards": 0,
+        "settlementLevel": 1
+      },
+      "constraints": {
+        "maxRegularUnits": 4,
+        "maxEliteUnits": 2,
+        "maxSpecialEliteUnits": 1,
+        "maxGenericLeaders": 2,
+        "allowSurpriseAttack": false,
+        "settlementLevel": 0
+      },
+      "maxRounds": 3,
+      "targetWinProbability": 0.6,
+      "limit": 3,
+      "maxEvaluatedCandidates": 140,
+      "tags": [
+        "role:attacker",
+        "band:medium",
+        "enemy:special_mix",
+        "constraints:tight"
+      ]
+    },
+    {
+      "id": "attacker__medium__special_mix__tight__r3__e0__s1__g0__st1",
+      "split": "train",
+      "ownRole": "attacker",
+      "enemyLegion": {
+        "type": "defending",
+        "genericLeaders": 0,
+        "regularUnits": 3,
+        "eliteUnits": 0,
+        "specialEliteUnits": 1,
+        "usedCards": 0,
+        "settlementLevel": 1
+      },
+      "constraints": {
+        "maxRegularUnits": 4,
+        "maxEliteUnits": 2,
+        "maxSpecialEliteUnits": 1,
+        "maxGenericLeaders": 2,
+        "allowSurpriseAttack": false,
+        "settlementLevel": 0
+      },
+      "maxRounds": 3,
+      "targetWinProbability": 0.6,
+      "limit": 3,
+      "maxEvaluatedCandidates": 140,
+      "tags": [
+        "role:attacker",
+        "band:medium",
+        "enemy:special_mix",
+        "constraints:tight"
+      ]
+    },
+    {
+      "id": "attacker__medium__special_mix__wide__r2__e0__s1__g0__st1",
+      "split": "train",
+      "ownRole": "attacker",
+      "enemyLegion": {
+        "type": "defending",
+        "genericLeaders": 0,
+        "regularUnits": 2,
+        "eliteUnits": 0,
+        "specialEliteUnits": 1,
+        "usedCards": 0,
+        "settlementLevel": 1
+      },
+      "constraints": {
+        "maxRegularUnits": 5,
+        "maxEliteUnits": 2,
+        "maxSpecialEliteUnits": 2,
+        "maxGenericLeaders": 3,
+        "allowSurpriseAttack": true,
+        "settlementLevel": 0
+      },
+      "maxRounds": 3,
+      "targetWinProbability": 0.6,
+      "limit": 3,
+      "maxEvaluatedCandidates": 140,
+      "tags": [
+        "role:attacker",
+        "band:medium",
+        "enemy:special_mix",
+        "constraints:wide"
+      ]
+    },
+    {
+      "id": "attacker__medium__special_mix__wide__r3__e0__s1__g0__st1",
+      "split": "train",
+      "ownRole": "attacker",
+      "enemyLegion": {
+        "type": "defending",
+        "genericLeaders": 0,
+        "regularUnits": 3,
+        "eliteUnits": 0,
+        "specialEliteUnits": 1,
+        "usedCards": 0,
+        "settlementLevel": 1
+      },
+      "constraints": {
+        "maxRegularUnits": 5,
+        "maxEliteUnits": 2,
+        "maxSpecialEliteUnits": 2,
+        "maxGenericLeaders": 3,
+        "allowSurpriseAttack": true,
+        "settlementLevel": 0
+      },
+      "maxRounds": 3,
+      "targetWinProbability": 0.6,
+      "limit": 3,
+      "maxEvaluatedCandidates": 140,
+      "tags": [
+        "role:attacker",
+        "band:medium",
+        "enemy:special_mix",
+        "constraints:wide"
+      ]
+    },
+    {
+      "id": "attacker__small__elite_mix__tight__r0__e1__s0__g0__st0",
+      "split": "train",
+      "ownRole": "attacker",
+      "enemyLegion": {
+        "type": "defending",
+        "genericLeaders": 0,
+        "regularUnits": 0,
+        "eliteUnits": 1,
+        "specialEliteUnits": 0,
+        "usedCards": 0,
+        "settlementLevel": 0
+      },
+      "constraints": {
+        "maxRegularUnits": 3,
+        "maxEliteUnits": 1,
+        "maxSpecialEliteUnits": 1,
+        "maxGenericLeaders": 1,
+        "allowSurpriseAttack": false,
+        "settlementLevel": 0
+      },
+      "maxRounds": 2,
+      "targetWinProbability": 0.6,
+      "limit": 3,
+      "maxEvaluatedCandidates": 80,
+      "tags": [
+        "role:attacker",
+        "band:small",
+        "enemy:elite_mix",
+        "constraints:tight"
+      ]
+    },
+    {
+      "id": "attacker__small__elite_mix__tight__r1__e1__s0__g0__st0",
+      "split": "holdout",
+      "ownRole": "attacker",
+      "enemyLegion": {
+        "type": "defending",
+        "genericLeaders": 0,
+        "regularUnits": 1,
+        "eliteUnits": 1,
+        "specialEliteUnits": 0,
+        "usedCards": 0,
+        "settlementLevel": 0
+      },
+      "constraints": {
+        "maxRegularUnits": 3,
+        "maxEliteUnits": 1,
+        "maxSpecialEliteUnits": 1,
+        "maxGenericLeaders": 1,
+        "allowSurpriseAttack": false,
+        "settlementLevel": 0
+      },
+      "maxRounds": 2,
+      "targetWinProbability": 0.6,
+      "limit": 3,
+      "maxEvaluatedCandidates": 80,
+      "tags": [
+        "role:attacker",
+        "band:small",
+        "enemy:elite_mix",
+        "constraints:tight"
+      ]
+    },
+    {
+      "id": "attacker__small__elite_mix__wide__r0__e1__s0__g0__st0",
+      "split": "train",
+      "ownRole": "attacker",
+      "enemyLegion": {
+        "type": "defending",
+        "genericLeaders": 0,
+        "regularUnits": 0,
+        "eliteUnits": 1,
+        "specialEliteUnits": 0,
+        "usedCards": 0,
+        "settlementLevel": 0
+      },
+      "constraints": {
+        "maxRegularUnits": 4,
+        "maxEliteUnits": 1,
+        "maxSpecialEliteUnits": 1,
+        "maxGenericLeaders": 1,
+        "allowSurpriseAttack": true,
+        "settlementLevel": 0
+      },
+      "maxRounds": 2,
+      "targetWinProbability": 0.6,
+      "limit": 3,
+      "maxEvaluatedCandidates": 80,
+      "tags": [
+        "role:attacker",
+        "band:small",
+        "enemy:elite_mix",
+        "constraints:wide"
+      ]
+    },
+    {
+      "id": "attacker__small__elite_mix__wide__r1__e1__s0__g0__st0",
+      "split": "train",
+      "ownRole": "attacker",
+      "enemyLegion": {
+        "type": "defending",
+        "genericLeaders": 0,
+        "regularUnits": 1,
+        "eliteUnits": 1,
+        "specialEliteUnits": 0,
+        "usedCards": 0,
+        "settlementLevel": 0
+      },
+      "constraints": {
+        "maxRegularUnits": 4,
+        "maxEliteUnits": 1,
+        "maxSpecialEliteUnits": 1,
+        "maxGenericLeaders": 1,
+        "allowSurpriseAttack": true,
+        "settlementLevel": 0
+      },
+      "maxRounds": 2,
+      "targetWinProbability": 0.6,
+      "limit": 3,
+      "maxEvaluatedCandidates": 80,
+      "tags": [
+        "role:attacker",
+        "band:small",
+        "enemy:elite_mix",
+        "constraints:wide"
+      ]
+    },
+    {
+      "id": "attacker__small__regular_line__tight__r1__e0__s0__g0__st0",
+      "split": "train",
+      "ownRole": "attacker",
+      "enemyLegion": {
+        "type": "defending",
+        "genericLeaders": 0,
+        "regularUnits": 1,
+        "eliteUnits": 0,
+        "specialEliteUnits": 0,
+        "usedCards": 0,
+        "settlementLevel": 0
+      },
+      "constraints": {
+        "maxRegularUnits": 3,
+        "maxEliteUnits": 1,
+        "maxSpecialEliteUnits": 1,
+        "maxGenericLeaders": 1,
+        "allowSurpriseAttack": false,
+        "settlementLevel": 0
+      },
+      "maxRounds": 2,
+      "targetWinProbability": 0.6,
+      "limit": 3,
+      "maxEvaluatedCandidates": 80,
+      "tags": [
+        "role:attacker",
+        "band:small",
+        "enemy:regular_line",
+        "constraints:tight"
+      ]
+    },
+    {
+      "id": "attacker__small__regular_line__tight__r2__e0__s0__g0__st0",
+      "split": "validation",
+      "ownRole": "attacker",
+      "enemyLegion": {
+        "type": "defending",
+        "genericLeaders": 0,
+        "regularUnits": 2,
+        "eliteUnits": 0,
+        "specialEliteUnits": 0,
+        "usedCards": 0,
+        "settlementLevel": 0
+      },
+      "constraints": {
+        "maxRegularUnits": 3,
+        "maxEliteUnits": 1,
+        "maxSpecialEliteUnits": 1,
+        "maxGenericLeaders": 1,
+        "allowSurpriseAttack": false,
+        "settlementLevel": 0
+      },
+      "maxRounds": 2,
+      "targetWinProbability": 0.6,
+      "limit": 3,
+      "maxEvaluatedCandidates": 80,
+      "tags": [
+        "role:attacker",
+        "band:small",
+        "enemy:regular_line",
+        "constraints:tight"
+      ]
+    },
+    {
+      "id": "attacker__small__regular_line__wide__r1__e0__s0__g0__st0",
+      "split": "train",
+      "ownRole": "attacker",
+      "enemyLegion": {
+        "type": "defending",
+        "genericLeaders": 0,
+        "regularUnits": 1,
+        "eliteUnits": 0,
+        "specialEliteUnits": 0,
+        "usedCards": 0,
+        "settlementLevel": 0
+      },
+      "constraints": {
+        "maxRegularUnits": 4,
+        "maxEliteUnits": 1,
+        "maxSpecialEliteUnits": 1,
+        "maxGenericLeaders": 1,
+        "allowSurpriseAttack": true,
+        "settlementLevel": 0
+      },
+      "maxRounds": 2,
+      "targetWinProbability": 0.6,
+      "limit": 3,
+      "maxEvaluatedCandidates": 80,
+      "tags": [
+        "role:attacker",
+        "band:small",
+        "enemy:regular_line",
+        "constraints:wide"
+      ]
+    },
+    {
+      "id": "attacker__small__regular_line__wide__r2__e0__s0__g0__st0",
+      "split": "train",
+      "ownRole": "attacker",
+      "enemyLegion": {
+        "type": "defending",
+        "genericLeaders": 0,
+        "regularUnits": 2,
+        "eliteUnits": 0,
+        "specialEliteUnits": 0,
+        "usedCards": 0,
+        "settlementLevel": 0
+      },
+      "constraints": {
+        "maxRegularUnits": 4,
+        "maxEliteUnits": 1,
+        "maxSpecialEliteUnits": 1,
+        "maxGenericLeaders": 1,
+        "allowSurpriseAttack": true,
+        "settlementLevel": 0
+      },
+      "maxRounds": 2,
+      "targetWinProbability": 0.6,
+      "limit": 3,
+      "maxEvaluatedCandidates": 80,
+      "tags": [
+        "role:attacker",
+        "band:small",
+        "enemy:regular_line",
+        "constraints:wide"
+      ]
+    },
+    {
+      "id": "attacker__small__special_mix__tight__r1__e0__s1__g0__st0",
+      "split": "holdout",
+      "ownRole": "attacker",
+      "enemyLegion": {
+        "type": "defending",
+        "genericLeaders": 0,
+        "regularUnits": 1,
+        "eliteUnits": 0,
+        "specialEliteUnits": 1,
+        "usedCards": 0,
+        "settlementLevel": 0
+      },
+      "constraints": {
+        "maxRegularUnits": 3,
+        "maxEliteUnits": 1,
+        "maxSpecialEliteUnits": 1,
+        "maxGenericLeaders": 1,
+        "allowSurpriseAttack": false,
+        "settlementLevel": 0
+      },
+      "maxRounds": 2,
+      "targetWinProbability": 0.6,
+      "limit": 3,
+      "maxEvaluatedCandidates": 80,
+      "tags": [
+        "role:attacker",
+        "band:small",
+        "enemy:special_mix",
+        "constraints:tight"
+      ]
+    },
+    {
+      "id": "attacker__small__special_mix__wide__r1__e0__s1__g0__st0",
+      "split": "validation",
+      "ownRole": "attacker",
+      "enemyLegion": {
+        "type": "defending",
+        "genericLeaders": 0,
+        "regularUnits": 1,
+        "eliteUnits": 0,
+        "specialEliteUnits": 1,
+        "usedCards": 0,
+        "settlementLevel": 0
+      },
+      "constraints": {
+        "maxRegularUnits": 4,
+        "maxEliteUnits": 1,
+        "maxSpecialEliteUnits": 1,
+        "maxGenericLeaders": 1,
+        "allowSurpriseAttack": true,
+        "settlementLevel": 0
+      },
+      "maxRounds": 2,
+      "targetWinProbability": 0.6,
+      "limit": 3,
+      "maxEvaluatedCandidates": 80,
+      "tags": [
+        "role:attacker",
+        "band:small",
+        "enemy:special_mix",
+        "constraints:wide"
+      ]
+    },
+    {
+      "id": "defender__large__command_mix__fortified__r2__e1__s1__g2__sa0",
+      "split": "train",
+      "ownRole": "defender",
+      "enemyLegion": {
+        "type": "attacking",
+        "genericLeaders": 2,
+        "regularUnits": 2,
+        "eliteUnits": 1,
+        "specialEliteUnits": 1,
+        "usedCards": 0,
+        "surpriseAttack": false
+      },
+      "constraints": {
+        "maxRegularUnits": 6,
+        "maxEliteUnits": 3,
+        "maxSpecialEliteUnits": 2,
+        "maxGenericLeaders": 4,
+        "allowSurpriseAttack": false,
+        "settlementLevel": 4
+      },
+      "maxRounds": 4,
+      "targetWinProbability": 0.6,
+      "limit": 3,
+      "maxEvaluatedCandidates": 220,
+      "tags": [
+        "role:defender",
+        "band:large",
+        "enemy:command_mix",
+        "constraints:fortified"
+      ]
+    },
+    {
+      "id": "defender__large__command_mix__fortified__r3__e1__s1__g2__sa0",
+      "split": "holdout",
+      "ownRole": "defender",
+      "enemyLegion": {
+        "type": "attacking",
+        "genericLeaders": 2,
+        "regularUnits": 3,
+        "eliteUnits": 1,
+        "specialEliteUnits": 1,
+        "usedCards": 0,
+        "surpriseAttack": false
+      },
+      "constraints": {
+        "maxRegularUnits": 6,
+        "maxEliteUnits": 3,
+        "maxSpecialEliteUnits": 2,
+        "maxGenericLeaders": 4,
+        "allowSurpriseAttack": false,
+        "settlementLevel": 4
+      },
+      "maxRounds": 4,
+      "targetWinProbability": 0.6,
+      "limit": 3,
+      "maxEvaluatedCandidates": 220,
+      "tags": [
+        "role:defender",
+        "band:large",
+        "enemy:command_mix",
+        "constraints:fortified"
+      ]
+    },
+    {
+      "id": "defender__large__command_mix__open_field__r2__e1__s1__g2__sa0",
+      "split": "train",
+      "ownRole": "defender",
+      "enemyLegion": {
+        "type": "attacking",
+        "genericLeaders": 2,
+        "regularUnits": 2,
+        "eliteUnits": 1,
+        "specialEliteUnits": 1,
+        "usedCards": 0,
+        "surpriseAttack": false
+      },
+      "constraints": {
+        "maxRegularUnits": 5,
+        "maxEliteUnits": 2,
+        "maxSpecialEliteUnits": 2,
+        "maxGenericLeaders": 3,
+        "allowSurpriseAttack": false,
+        "settlementLevel": 0
+      },
+      "maxRounds": 4,
+      "targetWinProbability": 0.6,
+      "limit": 3,
+      "maxEvaluatedCandidates": 220,
+      "tags": [
+        "role:defender",
+        "band:large",
+        "enemy:command_mix",
+        "constraints:open_field"
+      ]
+    },
+    {
+      "id": "defender__large__command_mix__open_field__r3__e1__s1__g2__sa0",
+      "split": "train",
+      "ownRole": "defender",
+      "enemyLegion": {
+        "type": "attacking",
+        "genericLeaders": 2,
+        "regularUnits": 3,
+        "eliteUnits": 1,
+        "specialEliteUnits": 1,
+        "usedCards": 0,
+        "surpriseAttack": false
+      },
+      "constraints": {
+        "maxRegularUnits": 5,
+        "maxEliteUnits": 2,
+        "maxSpecialEliteUnits": 2,
+        "maxGenericLeaders": 3,
+        "allowSurpriseAttack": false,
+        "settlementLevel": 0
+      },
+      "maxRounds": 4,
+      "targetWinProbability": 0.6,
+      "limit": 3,
+      "maxEvaluatedCandidates": 220,
+      "tags": [
+        "role:defender",
+        "band:large",
+        "enemy:command_mix",
+        "constraints:open_field"
+      ]
+    },
+    {
+      "id": "defender__large__elite_mix__fortified__r4__e1__s0__g0__sa0",
+      "split": "holdout",
+      "ownRole": "defender",
+      "enemyLegion": {
+        "type": "attacking",
+        "genericLeaders": 0,
+        "regularUnits": 4,
+        "eliteUnits": 1,
+        "specialEliteUnits": 0,
+        "usedCards": 0,
+        "surpriseAttack": false
+      },
+      "constraints": {
+        "maxRegularUnits": 6,
+        "maxEliteUnits": 3,
+        "maxSpecialEliteUnits": 2,
+        "maxGenericLeaders": 4,
+        "allowSurpriseAttack": false,
+        "settlementLevel": 4
+      },
+      "maxRounds": 4,
+      "targetWinProbability": 0.6,
+      "limit": 3,
+      "maxEvaluatedCandidates": 220,
+      "tags": [
+        "role:defender",
+        "band:large",
+        "enemy:elite_mix",
+        "constraints:fortified"
+      ]
+    },
+    {
+      "id": "defender__large__elite_mix__fortified__r5__e1__s0__g0__sa0",
+      "split": "train",
+      "ownRole": "defender",
+      "enemyLegion": {
+        "type": "attacking",
+        "genericLeaders": 0,
+        "regularUnits": 5,
+        "eliteUnits": 1,
+        "specialEliteUnits": 0,
+        "usedCards": 0,
+        "surpriseAttack": false
+      },
+      "constraints": {
+        "maxRegularUnits": 6,
+        "maxEliteUnits": 3,
+        "maxSpecialEliteUnits": 2,
+        "maxGenericLeaders": 4,
+        "allowSurpriseAttack": false,
+        "settlementLevel": 4
+      },
+      "maxRounds": 4,
+      "targetWinProbability": 0.6,
+      "limit": 3,
+      "maxEvaluatedCandidates": 220,
+      "tags": [
+        "role:defender",
+        "band:large",
+        "enemy:elite_mix",
+        "constraints:fortified"
+      ]
+    },
+    {
+      "id": "defender__large__elite_mix__open_field__r4__e1__s0__g0__sa0",
+      "split": "train",
+      "ownRole": "defender",
+      "enemyLegion": {
+        "type": "attacking",
+        "genericLeaders": 0,
+        "regularUnits": 4,
+        "eliteUnits": 1,
+        "specialEliteUnits": 0,
+        "usedCards": 0,
+        "surpriseAttack": false
+      },
+      "constraints": {
+        "maxRegularUnits": 5,
+        "maxEliteUnits": 2,
+        "maxSpecialEliteUnits": 2,
+        "maxGenericLeaders": 3,
+        "allowSurpriseAttack": false,
+        "settlementLevel": 0
+      },
+      "maxRounds": 4,
+      "targetWinProbability": 0.6,
+      "limit": 3,
+      "maxEvaluatedCandidates": 220,
+      "tags": [
+        "role:defender",
+        "band:large",
+        "enemy:elite_mix",
+        "constraints:open_field"
+      ]
+    },
+    {
+      "id": "defender__large__elite_mix__open_field__r5__e1__s0__g0__sa0",
+      "split": "train",
+      "ownRole": "defender",
+      "enemyLegion": {
+        "type": "attacking",
+        "genericLeaders": 0,
+        "regularUnits": 5,
+        "eliteUnits": 1,
+        "specialEliteUnits": 0,
+        "usedCards": 0,
+        "surpriseAttack": false
+      },
+      "constraints": {
+        "maxRegularUnits": 5,
+        "maxEliteUnits": 2,
+        "maxSpecialEliteUnits": 2,
+        "maxGenericLeaders": 3,
+        "allowSurpriseAttack": false,
+        "settlementLevel": 0
+      },
+      "maxRounds": 4,
+      "targetWinProbability": 0.6,
+      "limit": 3,
+      "maxEvaluatedCandidates": 220,
+      "tags": [
+        "role:defender",
+        "band:large",
+        "enemy:elite_mix",
+        "constraints:open_field"
+      ]
+    },
+    {
+      "id": "defender__large__leader_mix__fortified__r3__e1__s0__g1__sa0",
+      "split": "train",
+      "ownRole": "defender",
+      "enemyLegion": {
+        "type": "attacking",
+        "genericLeaders": 1,
+        "regularUnits": 3,
+        "eliteUnits": 1,
+        "specialEliteUnits": 0,
+        "usedCards": 0,
+        "surpriseAttack": false
+      },
+      "constraints": {
+        "maxRegularUnits": 6,
+        "maxEliteUnits": 3,
+        "maxSpecialEliteUnits": 2,
+        "maxGenericLeaders": 4,
+        "allowSurpriseAttack": false,
+        "settlementLevel": 4
+      },
+      "maxRounds": 4,
+      "targetWinProbability": 0.6,
+      "limit": 3,
+      "maxEvaluatedCandidates": 220,
+      "tags": [
+        "role:defender",
+        "band:large",
+        "enemy:leader_mix",
+        "constraints:fortified"
+      ]
+    },
+    {
+      "id": "defender__large__leader_mix__fortified__r4__e1__s0__g1__sa0",
+      "split": "train",
+      "ownRole": "defender",
+      "enemyLegion": {
+        "type": "attacking",
+        "genericLeaders": 1,
+        "regularUnits": 4,
+        "eliteUnits": 1,
+        "specialEliteUnits": 0,
+        "usedCards": 0,
+        "surpriseAttack": false
+      },
+      "constraints": {
+        "maxRegularUnits": 6,
+        "maxEliteUnits": 3,
+        "maxSpecialEliteUnits": 2,
+        "maxGenericLeaders": 4,
+        "allowSurpriseAttack": false,
+        "settlementLevel": 4
+      },
+      "maxRounds": 4,
+      "targetWinProbability": 0.6,
+      "limit": 3,
+      "maxEvaluatedCandidates": 220,
+      "tags": [
+        "role:defender",
+        "band:large",
+        "enemy:leader_mix",
+        "constraints:fortified"
+      ]
+    },
+    {
+      "id": "defender__large__leader_mix__open_field__r3__e1__s0__g1__sa0",
+      "split": "train",
+      "ownRole": "defender",
+      "enemyLegion": {
+        "type": "attacking",
+        "genericLeaders": 1,
+        "regularUnits": 3,
+        "eliteUnits": 1,
+        "specialEliteUnits": 0,
+        "usedCards": 0,
+        "surpriseAttack": false
+      },
+      "constraints": {
+        "maxRegularUnits": 5,
+        "maxEliteUnits": 2,
+        "maxSpecialEliteUnits": 2,
+        "maxGenericLeaders": 3,
+        "allowSurpriseAttack": false,
+        "settlementLevel": 0
+      },
+      "maxRounds": 4,
+      "targetWinProbability": 0.6,
+      "limit": 3,
+      "maxEvaluatedCandidates": 220,
+      "tags": [
+        "role:defender",
+        "band:large",
+        "enemy:leader_mix",
+        "constraints:open_field"
+      ]
+    },
+    {
+      "id": "defender__large__leader_mix__open_field__r4__e1__s0__g1__sa0",
+      "split": "holdout",
+      "ownRole": "defender",
+      "enemyLegion": {
+        "type": "attacking",
+        "genericLeaders": 1,
+        "regularUnits": 4,
+        "eliteUnits": 1,
+        "specialEliteUnits": 0,
+        "usedCards": 0,
+        "surpriseAttack": false
+      },
+      "constraints": {
+        "maxRegularUnits": 5,
+        "maxEliteUnits": 2,
+        "maxSpecialEliteUnits": 2,
+        "maxGenericLeaders": 3,
+        "allowSurpriseAttack": false,
+        "settlementLevel": 0
+      },
+      "maxRounds": 4,
+      "targetWinProbability": 0.6,
+      "limit": 3,
+      "maxEvaluatedCandidates": 220,
+      "tags": [
+        "role:defender",
+        "band:large",
+        "enemy:leader_mix",
+        "constraints:open_field"
+      ]
+    },
+    {
+      "id": "defender__large__regular_wave__fortified__r5__e0__s0__g0__sa0",
+      "split": "train",
+      "ownRole": "defender",
+      "enemyLegion": {
+        "type": "attacking",
+        "genericLeaders": 0,
+        "regularUnits": 5,
+        "eliteUnits": 0,
+        "specialEliteUnits": 0,
+        "usedCards": 0,
+        "surpriseAttack": false
+      },
+      "constraints": {
+        "maxRegularUnits": 6,
+        "maxEliteUnits": 3,
+        "maxSpecialEliteUnits": 2,
+        "maxGenericLeaders": 4,
+        "allowSurpriseAttack": false,
+        "settlementLevel": 4
+      },
+      "maxRounds": 4,
+      "targetWinProbability": 0.6,
+      "limit": 3,
+      "maxEvaluatedCandidates": 220,
+      "tags": [
+        "role:defender",
+        "band:large",
+        "enemy:regular_wave",
+        "constraints:fortified"
+      ]
+    },
+    {
+      "id": "defender__large__regular_wave__fortified__r6__e0__s0__g0__sa0",
+      "split": "train",
+      "ownRole": "defender",
+      "enemyLegion": {
+        "type": "attacking",
+        "genericLeaders": 0,
+        "regularUnits": 6,
+        "eliteUnits": 0,
+        "specialEliteUnits": 0,
+        "usedCards": 0,
+        "surpriseAttack": false
+      },
+      "constraints": {
+        "maxRegularUnits": 6,
+        "maxEliteUnits": 3,
+        "maxSpecialEliteUnits": 2,
+        "maxGenericLeaders": 4,
+        "allowSurpriseAttack": false,
+        "settlementLevel": 4
+      },
+      "maxRounds": 4,
+      "targetWinProbability": 0.6,
+      "limit": 3,
+      "maxEvaluatedCandidates": 220,
+      "tags": [
+        "role:defender",
+        "band:large",
+        "enemy:regular_wave",
+        "constraints:fortified"
+      ]
+    },
+    {
+      "id": "defender__large__regular_wave__open_field__r5__e0__s0__g0__sa0",
+      "split": "train",
+      "ownRole": "defender",
+      "enemyLegion": {
+        "type": "attacking",
+        "genericLeaders": 0,
+        "regularUnits": 5,
+        "eliteUnits": 0,
+        "specialEliteUnits": 0,
+        "usedCards": 0,
+        "surpriseAttack": false
+      },
+      "constraints": {
+        "maxRegularUnits": 5,
+        "maxEliteUnits": 2,
+        "maxSpecialEliteUnits": 2,
+        "maxGenericLeaders": 3,
+        "allowSurpriseAttack": false,
+        "settlementLevel": 0
+      },
+      "maxRounds": 4,
+      "targetWinProbability": 0.6,
+      "limit": 3,
+      "maxEvaluatedCandidates": 220,
+      "tags": [
+        "role:defender",
+        "band:large",
+        "enemy:regular_wave",
+        "constraints:open_field"
+      ]
+    },
+    {
+      "id": "defender__large__regular_wave__open_field__r6__e0__s0__g0__sa0",
+      "split": "holdout",
+      "ownRole": "defender",
+      "enemyLegion": {
+        "type": "attacking",
+        "genericLeaders": 0,
+        "regularUnits": 6,
+        "eliteUnits": 0,
+        "specialEliteUnits": 0,
+        "usedCards": 0,
+        "surpriseAttack": false
+      },
+      "constraints": {
+        "maxRegularUnits": 5,
+        "maxEliteUnits": 2,
+        "maxSpecialEliteUnits": 2,
+        "maxGenericLeaders": 3,
+        "allowSurpriseAttack": false,
+        "settlementLevel": 0
+      },
+      "maxRounds": 4,
+      "targetWinProbability": 0.6,
+      "limit": 3,
+      "maxEvaluatedCandidates": 220,
+      "tags": [
+        "role:defender",
+        "band:large",
+        "enemy:regular_wave",
+        "constraints:open_field"
+      ]
+    },
+    {
+      "id": "defender__large__special_mix__fortified__r4__e0__s1__g0__sa0",
+      "split": "train",
+      "ownRole": "defender",
+      "enemyLegion": {
+        "type": "attacking",
+        "genericLeaders": 0,
+        "regularUnits": 4,
+        "eliteUnits": 0,
+        "specialEliteUnits": 1,
+        "usedCards": 0,
+        "surpriseAttack": false
+      },
+      "constraints": {
+        "maxRegularUnits": 6,
+        "maxEliteUnits": 3,
+        "maxSpecialEliteUnits": 2,
+        "maxGenericLeaders": 4,
+        "allowSurpriseAttack": false,
+        "settlementLevel": 4
+      },
+      "maxRounds": 4,
+      "targetWinProbability": 0.6,
+      "limit": 3,
+      "maxEvaluatedCandidates": 220,
+      "tags": [
+        "role:defender",
+        "band:large",
+        "enemy:special_mix",
+        "constraints:fortified"
+      ]
+    },
+    {
+      "id": "defender__large__special_mix__fortified__r5__e0__s1__g0__sa0",
+      "split": "train",
+      "ownRole": "defender",
+      "enemyLegion": {
+        "type": "attacking",
+        "genericLeaders": 0,
+        "regularUnits": 5,
+        "eliteUnits": 0,
+        "specialEliteUnits": 1,
+        "usedCards": 0,
+        "surpriseAttack": false
+      },
+      "constraints": {
+        "maxRegularUnits": 6,
+        "maxEliteUnits": 3,
+        "maxSpecialEliteUnits": 2,
+        "maxGenericLeaders": 4,
+        "allowSurpriseAttack": false,
+        "settlementLevel": 4
+      },
+      "maxRounds": 4,
+      "targetWinProbability": 0.6,
+      "limit": 3,
+      "maxEvaluatedCandidates": 220,
+      "tags": [
+        "role:defender",
+        "band:large",
+        "enemy:special_mix",
+        "constraints:fortified"
+      ]
+    },
+    {
+      "id": "defender__large__special_mix__open_field__r4__e0__s1__g0__sa0",
+      "split": "train",
+      "ownRole": "defender",
+      "enemyLegion": {
+        "type": "attacking",
+        "genericLeaders": 0,
+        "regularUnits": 4,
+        "eliteUnits": 0,
+        "specialEliteUnits": 1,
+        "usedCards": 0,
+        "surpriseAttack": false
+      },
+      "constraints": {
+        "maxRegularUnits": 5,
+        "maxEliteUnits": 2,
+        "maxSpecialEliteUnits": 2,
+        "maxGenericLeaders": 3,
+        "allowSurpriseAttack": false,
+        "settlementLevel": 0
+      },
+      "maxRounds": 4,
+      "targetWinProbability": 0.6,
+      "limit": 3,
+      "maxEvaluatedCandidates": 220,
+      "tags": [
+        "role:defender",
+        "band:large",
+        "enemy:special_mix",
+        "constraints:open_field"
+      ]
+    },
+    {
+      "id": "defender__large__special_mix__open_field__r5__e0__s1__g0__sa0",
+      "split": "train",
+      "ownRole": "defender",
+      "enemyLegion": {
+        "type": "attacking",
+        "genericLeaders": 0,
+        "regularUnits": 5,
+        "eliteUnits": 0,
+        "specialEliteUnits": 1,
+        "usedCards": 0,
+        "surpriseAttack": false
+      },
+      "constraints": {
+        "maxRegularUnits": 5,
+        "maxEliteUnits": 2,
+        "maxSpecialEliteUnits": 2,
+        "maxGenericLeaders": 3,
+        "allowSurpriseAttack": false,
+        "settlementLevel": 0
+      },
+      "maxRounds": 4,
+      "targetWinProbability": 0.6,
+      "limit": 3,
+      "maxEvaluatedCandidates": 220,
+      "tags": [
+        "role:defender",
+        "band:large",
+        "enemy:special_mix",
+        "constraints:open_field"
+      ]
+    },
+    {
+      "id": "defender__large__surprise_assault__fortified__r4__e0__s1__g1__sa1",
+      "split": "train",
+      "ownRole": "defender",
+      "enemyLegion": {
+        "type": "attacking",
+        "genericLeaders": 1,
+        "regularUnits": 4,
+        "eliteUnits": 0,
+        "specialEliteUnits": 1,
+        "usedCards": 0,
+        "surpriseAttack": true
+      },
+      "constraints": {
+        "maxRegularUnits": 6,
+        "maxEliteUnits": 3,
+        "maxSpecialEliteUnits": 2,
+        "maxGenericLeaders": 4,
+        "allowSurpriseAttack": false,
+        "settlementLevel": 4
+      },
+      "maxRounds": 4,
+      "targetWinProbability": 0.6,
+      "limit": 3,
+      "maxEvaluatedCandidates": 220,
+      "tags": [
+        "role:defender",
+        "band:large",
+        "enemy:surprise_assault",
+        "constraints:fortified"
+      ]
+    },
+    {
+      "id": "defender__large__surprise_assault__fortified__r5__e0__s1__g2__sa1",
+      "split": "validation",
+      "ownRole": "defender",
+      "enemyLegion": {
+        "type": "attacking",
+        "genericLeaders": 2,
+        "regularUnits": 5,
+        "eliteUnits": 0,
+        "specialEliteUnits": 1,
+        "usedCards": 0,
+        "surpriseAttack": true
+      },
+      "constraints": {
+        "maxRegularUnits": 6,
+        "maxEliteUnits": 3,
+        "maxSpecialEliteUnits": 2,
+        "maxGenericLeaders": 4,
+        "allowSurpriseAttack": false,
+        "settlementLevel": 4
+      },
+      "maxRounds": 4,
+      "targetWinProbability": 0.6,
+      "limit": 3,
+      "maxEvaluatedCandidates": 220,
+      "tags": [
+        "role:defender",
+        "band:large",
+        "enemy:surprise_assault",
+        "constraints:fortified"
+      ]
+    },
+    {
+      "id": "defender__large__surprise_assault__open_field__r4__e0__s1__g1__sa1",
+      "split": "train",
+      "ownRole": "defender",
+      "enemyLegion": {
+        "type": "attacking",
+        "genericLeaders": 1,
+        "regularUnits": 4,
+        "eliteUnits": 0,
+        "specialEliteUnits": 1,
+        "usedCards": 0,
+        "surpriseAttack": true
+      },
+      "constraints": {
+        "maxRegularUnits": 5,
+        "maxEliteUnits": 2,
+        "maxSpecialEliteUnits": 2,
+        "maxGenericLeaders": 3,
+        "allowSurpriseAttack": false,
+        "settlementLevel": 0
+      },
+      "maxRounds": 4,
+      "targetWinProbability": 0.6,
+      "limit": 3,
+      "maxEvaluatedCandidates": 220,
+      "tags": [
+        "role:defender",
+        "band:large",
+        "enemy:surprise_assault",
+        "constraints:open_field"
+      ]
+    },
+    {
+      "id": "defender__large__surprise_assault__open_field__r5__e0__s1__g2__sa1",
+      "split": "holdout",
+      "ownRole": "defender",
+      "enemyLegion": {
+        "type": "attacking",
+        "genericLeaders": 2,
+        "regularUnits": 5,
+        "eliteUnits": 0,
+        "specialEliteUnits": 1,
+        "usedCards": 0,
+        "surpriseAttack": true
+      },
+      "constraints": {
+        "maxRegularUnits": 5,
+        "maxEliteUnits": 2,
+        "maxSpecialEliteUnits": 2,
+        "maxGenericLeaders": 3,
+        "allowSurpriseAttack": false,
+        "settlementLevel": 0
+      },
+      "maxRounds": 4,
+      "targetWinProbability": 0.6,
+      "limit": 3,
+      "maxEvaluatedCandidates": 220,
+      "tags": [
+        "role:defender",
+        "band:large",
+        "enemy:surprise_assault",
+        "constraints:open_field"
+      ]
+    },
+    {
+      "id": "defender__medium__command_mix__fortified__r1__e1__s1__g2__sa0",
+      "split": "train",
+      "ownRole": "defender",
+      "enemyLegion": {
+        "type": "attacking",
+        "genericLeaders": 2,
+        "regularUnits": 1,
+        "eliteUnits": 1,
+        "specialEliteUnits": 1,
+        "usedCards": 0,
+        "surpriseAttack": false
+      },
+      "constraints": {
+        "maxRegularUnits": 5,
+        "maxEliteUnits": 2,
+        "maxSpecialEliteUnits": 1,
+        "maxGenericLeaders": 3,
+        "allowSurpriseAttack": false,
+        "settlementLevel": 3
+      },
+      "maxRounds": 3,
+      "targetWinProbability": 0.6,
+      "limit": 3,
+      "maxEvaluatedCandidates": 140,
+      "tags": [
+        "role:defender",
+        "band:medium",
+        "enemy:command_mix",
+        "constraints:fortified"
+      ]
+    },
+    {
+      "id": "defender__medium__command_mix__open_field__r1__e1__s1__g2__sa0",
+      "split": "validation",
+      "ownRole": "defender",
+      "enemyLegion": {
+        "type": "attacking",
+        "genericLeaders": 2,
+        "regularUnits": 1,
+        "eliteUnits": 1,
+        "specialEliteUnits": 1,
+        "usedCards": 0,
+        "surpriseAttack": false
+      },
+      "constraints": {
+        "maxRegularUnits": 4,
+        "maxEliteUnits": 2,
+        "maxSpecialEliteUnits": 1,
+        "maxGenericLeaders": 2,
+        "allowSurpriseAttack": false,
+        "settlementLevel": 0
+      },
+      "maxRounds": 3,
+      "targetWinProbability": 0.6,
+      "limit": 3,
+      "maxEvaluatedCandidates": 140,
+      "tags": [
+        "role:defender",
+        "band:medium",
+        "enemy:command_mix",
+        "constraints:open_field"
+      ]
+    },
+    {
+      "id": "defender__medium__elite_mix__fortified__r2__e1__s0__g0__sa0",
+      "split": "train",
+      "ownRole": "defender",
+      "enemyLegion": {
+        "type": "attacking",
+        "genericLeaders": 0,
+        "regularUnits": 2,
+        "eliteUnits": 1,
+        "specialEliteUnits": 0,
+        "usedCards": 0,
+        "surpriseAttack": false
+      },
+      "constraints": {
+        "maxRegularUnits": 5,
+        "maxEliteUnits": 2,
+        "maxSpecialEliteUnits": 1,
+        "maxGenericLeaders": 3,
+        "allowSurpriseAttack": false,
+        "settlementLevel": 3
+      },
+      "maxRounds": 3,
+      "targetWinProbability": 0.6,
+      "limit": 3,
+      "maxEvaluatedCandidates": 140,
+      "tags": [
+        "role:defender",
+        "band:medium",
+        "enemy:elite_mix",
+        "constraints:fortified"
+      ]
+    },
+    {
+      "id": "defender__medium__elite_mix__fortified__r3__e1__s0__g0__sa0",
+      "split": "train",
+      "ownRole": "defender",
+      "enemyLegion": {
+        "type": "attacking",
+        "genericLeaders": 0,
+        "regularUnits": 3,
+        "eliteUnits": 1,
+        "specialEliteUnits": 0,
+        "usedCards": 0,
+        "surpriseAttack": false
+      },
+      "constraints": {
+        "maxRegularUnits": 5,
+        "maxEliteUnits": 2,
+        "maxSpecialEliteUnits": 1,
+        "maxGenericLeaders": 3,
+        "allowSurpriseAttack": false,
+        "settlementLevel": 3
+      },
+      "maxRounds": 3,
+      "targetWinProbability": 0.6,
+      "limit": 3,
+      "maxEvaluatedCandidates": 140,
+      "tags": [
+        "role:defender",
+        "band:medium",
+        "enemy:elite_mix",
+        "constraints:fortified"
+      ]
+    },
+    {
+      "id": "defender__medium__elite_mix__open_field__r2__e1__s0__g0__sa0",
+      "split": "validation",
+      "ownRole": "defender",
+      "enemyLegion": {
+        "type": "attacking",
+        "genericLeaders": 0,
+        "regularUnits": 2,
+        "eliteUnits": 1,
+        "specialEliteUnits": 0,
+        "usedCards": 0,
+        "surpriseAttack": false
+      },
+      "constraints": {
+        "maxRegularUnits": 4,
+        "maxEliteUnits": 2,
+        "maxSpecialEliteUnits": 1,
+        "maxGenericLeaders": 2,
+        "allowSurpriseAttack": false,
+        "settlementLevel": 0
+      },
+      "maxRounds": 3,
+      "targetWinProbability": 0.6,
+      "limit": 3,
+      "maxEvaluatedCandidates": 140,
+      "tags": [
+        "role:defender",
+        "band:medium",
+        "enemy:elite_mix",
+        "constraints:open_field"
+      ]
+    },
+    {
+      "id": "defender__medium__elite_mix__open_field__r3__e1__s0__g0__sa0",
+      "split": "train",
+      "ownRole": "defender",
+      "enemyLegion": {
+        "type": "attacking",
+        "genericLeaders": 0,
+        "regularUnits": 3,
+        "eliteUnits": 1,
+        "specialEliteUnits": 0,
+        "usedCards": 0,
+        "surpriseAttack": false
+      },
+      "constraints": {
+        "maxRegularUnits": 4,
+        "maxEliteUnits": 2,
+        "maxSpecialEliteUnits": 1,
+        "maxGenericLeaders": 2,
+        "allowSurpriseAttack": false,
+        "settlementLevel": 0
+      },
+      "maxRounds": 3,
+      "targetWinProbability": 0.6,
+      "limit": 3,
+      "maxEvaluatedCandidates": 140,
+      "tags": [
+        "role:defender",
+        "band:medium",
+        "enemy:elite_mix",
+        "constraints:open_field"
+      ]
+    },
+    {
+      "id": "defender__medium__leader_mix__fortified__r1__e1__s0__g1__sa0",
+      "split": "train",
+      "ownRole": "defender",
+      "enemyLegion": {
+        "type": "attacking",
+        "genericLeaders": 1,
+        "regularUnits": 1,
+        "eliteUnits": 1,
+        "specialEliteUnits": 0,
+        "usedCards": 0,
+        "surpriseAttack": false
+      },
+      "constraints": {
+        "maxRegularUnits": 5,
+        "maxEliteUnits": 2,
+        "maxSpecialEliteUnits": 1,
+        "maxGenericLeaders": 3,
+        "allowSurpriseAttack": false,
+        "settlementLevel": 3
+      },
+      "maxRounds": 3,
+      "targetWinProbability": 0.6,
+      "limit": 3,
+      "maxEvaluatedCandidates": 140,
+      "tags": [
+        "role:defender",
+        "band:medium",
+        "enemy:leader_mix",
+        "constraints:fortified"
+      ]
+    },
+    {
+      "id": "defender__medium__leader_mix__fortified__r2__e1__s0__g1__sa0",
+      "split": "train",
+      "ownRole": "defender",
+      "enemyLegion": {
+        "type": "attacking",
+        "genericLeaders": 1,
+        "regularUnits": 2,
+        "eliteUnits": 1,
+        "specialEliteUnits": 0,
+        "usedCards": 0,
+        "surpriseAttack": false
+      },
+      "constraints": {
+        "maxRegularUnits": 5,
+        "maxEliteUnits": 2,
+        "maxSpecialEliteUnits": 1,
+        "maxGenericLeaders": 3,
+        "allowSurpriseAttack": false,
+        "settlementLevel": 3
+      },
+      "maxRounds": 3,
+      "targetWinProbability": 0.6,
+      "limit": 3,
+      "maxEvaluatedCandidates": 140,
+      "tags": [
+        "role:defender",
+        "band:medium",
+        "enemy:leader_mix",
+        "constraints:fortified"
+      ]
+    },
+    {
+      "id": "defender__medium__leader_mix__open_field__r1__e1__s0__g1__sa0",
+      "split": "train",
+      "ownRole": "defender",
+      "enemyLegion": {
+        "type": "attacking",
+        "genericLeaders": 1,
+        "regularUnits": 1,
+        "eliteUnits": 1,
+        "specialEliteUnits": 0,
+        "usedCards": 0,
+        "surpriseAttack": false
+      },
+      "constraints": {
+        "maxRegularUnits": 4,
+        "maxEliteUnits": 2,
+        "maxSpecialEliteUnits": 1,
+        "maxGenericLeaders": 2,
+        "allowSurpriseAttack": false,
+        "settlementLevel": 0
+      },
+      "maxRounds": 3,
+      "targetWinProbability": 0.6,
+      "limit": 3,
+      "maxEvaluatedCandidates": 140,
+      "tags": [
+        "role:defender",
+        "band:medium",
+        "enemy:leader_mix",
+        "constraints:open_field"
+      ]
+    },
+    {
+      "id": "defender__medium__leader_mix__open_field__r2__e1__s0__g1__sa0",
+      "split": "holdout",
+      "ownRole": "defender",
+      "enemyLegion": {
+        "type": "attacking",
+        "genericLeaders": 1,
+        "regularUnits": 2,
+        "eliteUnits": 1,
+        "specialEliteUnits": 0,
+        "usedCards": 0,
+        "surpriseAttack": false
+      },
+      "constraints": {
+        "maxRegularUnits": 4,
+        "maxEliteUnits": 2,
+        "maxSpecialEliteUnits": 1,
+        "maxGenericLeaders": 2,
+        "allowSurpriseAttack": false,
+        "settlementLevel": 0
+      },
+      "maxRounds": 3,
+      "targetWinProbability": 0.6,
+      "limit": 3,
+      "maxEvaluatedCandidates": 140,
+      "tags": [
+        "role:defender",
+        "band:medium",
+        "enemy:leader_mix",
+        "constraints:open_field"
+      ]
+    },
+    {
+      "id": "defender__medium__regular_wave__fortified__r3__e0__s0__g0__sa0",
+      "split": "train",
+      "ownRole": "defender",
+      "enemyLegion": {
+        "type": "attacking",
+        "genericLeaders": 0,
+        "regularUnits": 3,
+        "eliteUnits": 0,
+        "specialEliteUnits": 0,
+        "usedCards": 0,
+        "surpriseAttack": false
+      },
+      "constraints": {
+        "maxRegularUnits": 5,
+        "maxEliteUnits": 2,
+        "maxSpecialEliteUnits": 1,
+        "maxGenericLeaders": 3,
+        "allowSurpriseAttack": false,
+        "settlementLevel": 3
+      },
+      "maxRounds": 3,
+      "targetWinProbability": 0.6,
+      "limit": 3,
+      "maxEvaluatedCandidates": 140,
+      "tags": [
+        "role:defender",
+        "band:medium",
+        "enemy:regular_wave",
+        "constraints:fortified"
+      ]
+    },
+    {
+      "id": "defender__medium__regular_wave__fortified__r4__e0__s0__g0__sa0",
+      "split": "train",
+      "ownRole": "defender",
+      "enemyLegion": {
+        "type": "attacking",
+        "genericLeaders": 0,
+        "regularUnits": 4,
+        "eliteUnits": 0,
+        "specialEliteUnits": 0,
+        "usedCards": 0,
+        "surpriseAttack": false
+      },
+      "constraints": {
+        "maxRegularUnits": 5,
+        "maxEliteUnits": 2,
+        "maxSpecialEliteUnits": 1,
+        "maxGenericLeaders": 3,
+        "allowSurpriseAttack": false,
+        "settlementLevel": 3
+      },
+      "maxRounds": 3,
+      "targetWinProbability": 0.6,
+      "limit": 3,
+      "maxEvaluatedCandidates": 140,
+      "tags": [
+        "role:defender",
+        "band:medium",
+        "enemy:regular_wave",
+        "constraints:fortified"
+      ]
+    },
+    {
+      "id": "defender__medium__regular_wave__open_field__r3__e0__s0__g0__sa0",
+      "split": "validation",
+      "ownRole": "defender",
+      "enemyLegion": {
+        "type": "attacking",
+        "genericLeaders": 0,
+        "regularUnits": 3,
+        "eliteUnits": 0,
+        "specialEliteUnits": 0,
+        "usedCards": 0,
+        "surpriseAttack": false
+      },
+      "constraints": {
+        "maxRegularUnits": 4,
+        "maxEliteUnits": 2,
+        "maxSpecialEliteUnits": 1,
+        "maxGenericLeaders": 2,
+        "allowSurpriseAttack": false,
+        "settlementLevel": 0
+      },
+      "maxRounds": 3,
+      "targetWinProbability": 0.6,
+      "limit": 3,
+      "maxEvaluatedCandidates": 140,
+      "tags": [
+        "role:defender",
+        "band:medium",
+        "enemy:regular_wave",
+        "constraints:open_field"
+      ]
+    },
+    {
+      "id": "defender__medium__regular_wave__open_field__r4__e0__s0__g0__sa0",
+      "split": "train",
+      "ownRole": "defender",
+      "enemyLegion": {
+        "type": "attacking",
+        "genericLeaders": 0,
+        "regularUnits": 4,
+        "eliteUnits": 0,
+        "specialEliteUnits": 0,
+        "usedCards": 0,
+        "surpriseAttack": false
+      },
+      "constraints": {
+        "maxRegularUnits": 4,
+        "maxEliteUnits": 2,
+        "maxSpecialEliteUnits": 1,
+        "maxGenericLeaders": 2,
+        "allowSurpriseAttack": false,
+        "settlementLevel": 0
+      },
+      "maxRounds": 3,
+      "targetWinProbability": 0.6,
+      "limit": 3,
+      "maxEvaluatedCandidates": 140,
+      "tags": [
+        "role:defender",
+        "band:medium",
+        "enemy:regular_wave",
+        "constraints:open_field"
+      ]
+    },
+    {
+      "id": "defender__medium__special_mix__fortified__r2__e0__s1__g0__sa0",
+      "split": "train",
+      "ownRole": "defender",
+      "enemyLegion": {
+        "type": "attacking",
+        "genericLeaders": 0,
+        "regularUnits": 2,
+        "eliteUnits": 0,
+        "specialEliteUnits": 1,
+        "usedCards": 0,
+        "surpriseAttack": false
+      },
+      "constraints": {
+        "maxRegularUnits": 5,
+        "maxEliteUnits": 2,
+        "maxSpecialEliteUnits": 1,
+        "maxGenericLeaders": 3,
+        "allowSurpriseAttack": false,
+        "settlementLevel": 3
+      },
+      "maxRounds": 3,
+      "targetWinProbability": 0.6,
+      "limit": 3,
+      "maxEvaluatedCandidates": 140,
+      "tags": [
+        "role:defender",
+        "band:medium",
+        "enemy:special_mix",
+        "constraints:fortified"
+      ]
+    },
+    {
+      "id": "defender__medium__special_mix__fortified__r3__e0__s1__g0__sa0",
+      "split": "train",
+      "ownRole": "defender",
+      "enemyLegion": {
+        "type": "attacking",
+        "genericLeaders": 0,
+        "regularUnits": 3,
+        "eliteUnits": 0,
+        "specialEliteUnits": 1,
+        "usedCards": 0,
+        "surpriseAttack": false
+      },
+      "constraints": {
+        "maxRegularUnits": 5,
+        "maxEliteUnits": 2,
+        "maxSpecialEliteUnits": 1,
+        "maxGenericLeaders": 3,
+        "allowSurpriseAttack": false,
+        "settlementLevel": 3
+      },
+      "maxRounds": 3,
+      "targetWinProbability": 0.6,
+      "limit": 3,
+      "maxEvaluatedCandidates": 140,
+      "tags": [
+        "role:defender",
+        "band:medium",
+        "enemy:special_mix",
+        "constraints:fortified"
+      ]
+    },
+    {
+      "id": "defender__medium__special_mix__open_field__r2__e0__s1__g0__sa0",
+      "split": "train",
+      "ownRole": "defender",
+      "enemyLegion": {
+        "type": "attacking",
+        "genericLeaders": 0,
+        "regularUnits": 2,
+        "eliteUnits": 0,
+        "specialEliteUnits": 1,
+        "usedCards": 0,
+        "surpriseAttack": false
+      },
+      "constraints": {
+        "maxRegularUnits": 4,
+        "maxEliteUnits": 2,
+        "maxSpecialEliteUnits": 1,
+        "maxGenericLeaders": 2,
+        "allowSurpriseAttack": false,
+        "settlementLevel": 0
+      },
+      "maxRounds": 3,
+      "targetWinProbability": 0.6,
+      "limit": 3,
+      "maxEvaluatedCandidates": 140,
+      "tags": [
+        "role:defender",
+        "band:medium",
+        "enemy:special_mix",
+        "constraints:open_field"
+      ]
+    },
+    {
+      "id": "defender__medium__special_mix__open_field__r3__e0__s1__g0__sa0",
+      "split": "train",
+      "ownRole": "defender",
+      "enemyLegion": {
+        "type": "attacking",
+        "genericLeaders": 0,
+        "regularUnits": 3,
+        "eliteUnits": 0,
+        "specialEliteUnits": 1,
+        "usedCards": 0,
+        "surpriseAttack": false
+      },
+      "constraints": {
+        "maxRegularUnits": 4,
+        "maxEliteUnits": 2,
+        "maxSpecialEliteUnits": 1,
+        "maxGenericLeaders": 2,
+        "allowSurpriseAttack": false,
+        "settlementLevel": 0
+      },
+      "maxRounds": 3,
+      "targetWinProbability": 0.6,
+      "limit": 3,
+      "maxEvaluatedCandidates": 140,
+      "tags": [
+        "role:defender",
+        "band:medium",
+        "enemy:special_mix",
+        "constraints:open_field"
+      ]
+    },
+    {
+      "id": "defender__medium__surprise_assault__fortified__r2__e0__s1__g1__sa1",
+      "split": "train",
+      "ownRole": "defender",
+      "enemyLegion": {
+        "type": "attacking",
+        "genericLeaders": 1,
+        "regularUnits": 2,
+        "eliteUnits": 0,
+        "specialEliteUnits": 1,
+        "usedCards": 0,
+        "surpriseAttack": true
+      },
+      "constraints": {
+        "maxRegularUnits": 5,
+        "maxEliteUnits": 2,
+        "maxSpecialEliteUnits": 1,
+        "maxGenericLeaders": 3,
+        "allowSurpriseAttack": false,
+        "settlementLevel": 3
+      },
+      "maxRounds": 3,
+      "targetWinProbability": 0.6,
+      "limit": 3,
+      "maxEvaluatedCandidates": 140,
+      "tags": [
+        "role:defender",
+        "band:medium",
+        "enemy:surprise_assault",
+        "constraints:fortified"
+      ]
+    },
+    {
+      "id": "defender__medium__surprise_assault__fortified__r3__e0__s1__g1__sa1",
+      "split": "train",
+      "ownRole": "defender",
+      "enemyLegion": {
+        "type": "attacking",
+        "genericLeaders": 1,
+        "regularUnits": 3,
+        "eliteUnits": 0,
+        "specialEliteUnits": 1,
+        "usedCards": 0,
+        "surpriseAttack": true
+      },
+      "constraints": {
+        "maxRegularUnits": 5,
+        "maxEliteUnits": 2,
+        "maxSpecialEliteUnits": 1,
+        "maxGenericLeaders": 3,
+        "allowSurpriseAttack": false,
+        "settlementLevel": 3
+      },
+      "maxRounds": 3,
+      "targetWinProbability": 0.6,
+      "limit": 3,
+      "maxEvaluatedCandidates": 140,
+      "tags": [
+        "role:defender",
+        "band:medium",
+        "enemy:surprise_assault",
+        "constraints:fortified"
+      ]
+    },
+    {
+      "id": "defender__medium__surprise_assault__open_field__r2__e0__s1__g1__sa1",
+      "split": "train",
+      "ownRole": "defender",
+      "enemyLegion": {
+        "type": "attacking",
+        "genericLeaders": 1,
+        "regularUnits": 2,
+        "eliteUnits": 0,
+        "specialEliteUnits": 1,
+        "usedCards": 0,
+        "surpriseAttack": true
+      },
+      "constraints": {
+        "maxRegularUnits": 4,
+        "maxEliteUnits": 2,
+        "maxSpecialEliteUnits": 1,
+        "maxGenericLeaders": 2,
+        "allowSurpriseAttack": false,
+        "settlementLevel": 0
+      },
+      "maxRounds": 3,
+      "targetWinProbability": 0.6,
+      "limit": 3,
+      "maxEvaluatedCandidates": 140,
+      "tags": [
+        "role:defender",
+        "band:medium",
+        "enemy:surprise_assault",
+        "constraints:open_field"
+      ]
+    },
+    {
+      "id": "defender__medium__surprise_assault__open_field__r3__e0__s1__g1__sa1",
+      "split": "validation",
+      "ownRole": "defender",
+      "enemyLegion": {
+        "type": "attacking",
+        "genericLeaders": 1,
+        "regularUnits": 3,
+        "eliteUnits": 0,
+        "specialEliteUnits": 1,
+        "usedCards": 0,
+        "surpriseAttack": true
+      },
+      "constraints": {
+        "maxRegularUnits": 4,
+        "maxEliteUnits": 2,
+        "maxSpecialEliteUnits": 1,
+        "maxGenericLeaders": 2,
+        "allowSurpriseAttack": false,
+        "settlementLevel": 0
+      },
+      "maxRounds": 3,
+      "targetWinProbability": 0.6,
+      "limit": 3,
+      "maxEvaluatedCandidates": 140,
+      "tags": [
+        "role:defender",
+        "band:medium",
+        "enemy:surprise_assault",
+        "constraints:open_field"
+      ]
+    },
+    {
+      "id": "defender__small__elite_mix__fortified__r0__e1__s0__g0__sa0",
+      "split": "holdout",
+      "ownRole": "defender",
+      "enemyLegion": {
+        "type": "attacking",
+        "genericLeaders": 0,
+        "regularUnits": 0,
+        "eliteUnits": 1,
+        "specialEliteUnits": 0,
+        "usedCards": 0,
+        "surpriseAttack": false
+      },
+      "constraints": {
+        "maxRegularUnits": 4,
+        "maxEliteUnits": 1,
+        "maxSpecialEliteUnits": 1,
+        "maxGenericLeaders": 1,
+        "allowSurpriseAttack": false,
+        "settlementLevel": 1
+      },
+      "maxRounds": 2,
+      "targetWinProbability": 0.6,
+      "limit": 3,
+      "maxEvaluatedCandidates": 80,
+      "tags": [
+        "role:defender",
+        "band:small",
+        "enemy:elite_mix",
+        "constraints:fortified"
+      ]
+    },
+    {
+      "id": "defender__small__elite_mix__fortified__r1__e1__s0__g0__sa0",
+      "split": "train",
+      "ownRole": "defender",
+      "enemyLegion": {
+        "type": "attacking",
+        "genericLeaders": 0,
+        "regularUnits": 1,
+        "eliteUnits": 1,
+        "specialEliteUnits": 0,
+        "usedCards": 0,
+        "surpriseAttack": false
+      },
+      "constraints": {
+        "maxRegularUnits": 4,
+        "maxEliteUnits": 1,
+        "maxSpecialEliteUnits": 1,
+        "maxGenericLeaders": 1,
+        "allowSurpriseAttack": false,
+        "settlementLevel": 1
+      },
+      "maxRounds": 2,
+      "targetWinProbability": 0.6,
+      "limit": 3,
+      "maxEvaluatedCandidates": 80,
+      "tags": [
+        "role:defender",
+        "band:small",
+        "enemy:elite_mix",
+        "constraints:fortified"
+      ]
+    },
+    {
+      "id": "defender__small__elite_mix__open_field__r0__e1__s0__g0__sa0",
+      "split": "train",
+      "ownRole": "defender",
+      "enemyLegion": {
+        "type": "attacking",
+        "genericLeaders": 0,
+        "regularUnits": 0,
+        "eliteUnits": 1,
+        "specialEliteUnits": 0,
+        "usedCards": 0,
+        "surpriseAttack": false
+      },
+      "constraints": {
+        "maxRegularUnits": 3,
+        "maxEliteUnits": 1,
+        "maxSpecialEliteUnits": 0,
+        "maxGenericLeaders": 1,
+        "allowSurpriseAttack": false,
+        "settlementLevel": 0
+      },
+      "maxRounds": 2,
+      "targetWinProbability": 0.6,
+      "limit": 3,
+      "maxEvaluatedCandidates": 80,
+      "tags": [
+        "role:defender",
+        "band:small",
+        "enemy:elite_mix",
+        "constraints:open_field"
+      ]
+    },
+    {
+      "id": "defender__small__elite_mix__open_field__r1__e1__s0__g0__sa0",
+      "split": "train",
+      "ownRole": "defender",
+      "enemyLegion": {
+        "type": "attacking",
+        "genericLeaders": 0,
+        "regularUnits": 1,
+        "eliteUnits": 1,
+        "specialEliteUnits": 0,
+        "usedCards": 0,
+        "surpriseAttack": false
+      },
+      "constraints": {
+        "maxRegularUnits": 3,
+        "maxEliteUnits": 1,
+        "maxSpecialEliteUnits": 0,
+        "maxGenericLeaders": 1,
+        "allowSurpriseAttack": false,
+        "settlementLevel": 0
+      },
+      "maxRounds": 2,
+      "targetWinProbability": 0.6,
+      "limit": 3,
+      "maxEvaluatedCandidates": 80,
+      "tags": [
+        "role:defender",
+        "band:small",
+        "enemy:elite_mix",
+        "constraints:open_field"
+      ]
+    },
+    {
+      "id": "defender__small__regular_wave__fortified__r1__e0__s0__g0__sa0",
+      "split": "train",
+      "ownRole": "defender",
+      "enemyLegion": {
+        "type": "attacking",
+        "genericLeaders": 0,
+        "regularUnits": 1,
+        "eliteUnits": 0,
+        "specialEliteUnits": 0,
+        "usedCards": 0,
+        "surpriseAttack": false
+      },
+      "constraints": {
+        "maxRegularUnits": 4,
+        "maxEliteUnits": 1,
+        "maxSpecialEliteUnits": 1,
+        "maxGenericLeaders": 1,
+        "allowSurpriseAttack": false,
+        "settlementLevel": 1
+      },
+      "maxRounds": 2,
+      "targetWinProbability": 0.6,
+      "limit": 3,
+      "maxEvaluatedCandidates": 80,
+      "tags": [
+        "role:defender",
+        "band:small",
+        "enemy:regular_wave",
+        "constraints:fortified"
+      ]
+    },
+    {
+      "id": "defender__small__regular_wave__fortified__r2__e0__s0__g0__sa0",
+      "split": "validation",
+      "ownRole": "defender",
+      "enemyLegion": {
+        "type": "attacking",
+        "genericLeaders": 0,
+        "regularUnits": 2,
+        "eliteUnits": 0,
+        "specialEliteUnits": 0,
+        "usedCards": 0,
+        "surpriseAttack": false
+      },
+      "constraints": {
+        "maxRegularUnits": 4,
+        "maxEliteUnits": 1,
+        "maxSpecialEliteUnits": 1,
+        "maxGenericLeaders": 1,
+        "allowSurpriseAttack": false,
+        "settlementLevel": 1
+      },
+      "maxRounds": 2,
+      "targetWinProbability": 0.6,
+      "limit": 3,
+      "maxEvaluatedCandidates": 80,
+      "tags": [
+        "role:defender",
+        "band:small",
+        "enemy:regular_wave",
+        "constraints:fortified"
+      ]
+    },
+    {
+      "id": "defender__small__regular_wave__open_field__r1__e0__s0__g0__sa0",
+      "split": "train",
+      "ownRole": "defender",
+      "enemyLegion": {
+        "type": "attacking",
+        "genericLeaders": 0,
+        "regularUnits": 1,
+        "eliteUnits": 0,
+        "specialEliteUnits": 0,
+        "usedCards": 0,
+        "surpriseAttack": false
+      },
+      "constraints": {
+        "maxRegularUnits": 3,
+        "maxEliteUnits": 1,
+        "maxSpecialEliteUnits": 0,
+        "maxGenericLeaders": 1,
+        "allowSurpriseAttack": false,
+        "settlementLevel": 0
+      },
+      "maxRounds": 2,
+      "targetWinProbability": 0.6,
+      "limit": 3,
+      "maxEvaluatedCandidates": 80,
+      "tags": [
+        "role:defender",
+        "band:small",
+        "enemy:regular_wave",
+        "constraints:open_field"
+      ]
+    },
+    {
+      "id": "defender__small__regular_wave__open_field__r2__e0__s0__g0__sa0",
+      "split": "train",
+      "ownRole": "defender",
+      "enemyLegion": {
+        "type": "attacking",
+        "genericLeaders": 0,
+        "regularUnits": 2,
+        "eliteUnits": 0,
+        "specialEliteUnits": 0,
+        "usedCards": 0,
+        "surpriseAttack": false
+      },
+      "constraints": {
+        "maxRegularUnits": 3,
+        "maxEliteUnits": 1,
+        "maxSpecialEliteUnits": 0,
+        "maxGenericLeaders": 1,
+        "allowSurpriseAttack": false,
+        "settlementLevel": 0
+      },
+      "maxRounds": 2,
+      "targetWinProbability": 0.6,
+      "limit": 3,
+      "maxEvaluatedCandidates": 80,
+      "tags": [
+        "role:defender",
+        "band:small",
+        "enemy:regular_wave",
+        "constraints:open_field"
+      ]
+    },
+    {
+      "id": "defender__small__special_mix__fortified__r1__e0__s1__g0__sa0",
+      "split": "train",
+      "ownRole": "defender",
+      "enemyLegion": {
+        "type": "attacking",
+        "genericLeaders": 0,
+        "regularUnits": 1,
+        "eliteUnits": 0,
+        "specialEliteUnits": 1,
+        "usedCards": 0,
+        "surpriseAttack": false
+      },
+      "constraints": {
+        "maxRegularUnits": 4,
+        "maxEliteUnits": 1,
+        "maxSpecialEliteUnits": 1,
+        "maxGenericLeaders": 1,
+        "allowSurpriseAttack": false,
+        "settlementLevel": 1
+      },
+      "maxRounds": 2,
+      "targetWinProbability": 0.6,
+      "limit": 3,
+      "maxEvaluatedCandidates": 80,
+      "tags": [
+        "role:defender",
+        "band:small",
+        "enemy:special_mix",
+        "constraints:fortified"
+      ]
+    },
+    {
+      "id": "defender__small__special_mix__open_field__r1__e0__s1__g0__sa0",
+      "split": "train",
+      "ownRole": "defender",
+      "enemyLegion": {
+        "type": "attacking",
+        "genericLeaders": 0,
+        "regularUnits": 1,
+        "eliteUnits": 0,
+        "specialEliteUnits": 1,
+        "usedCards": 0,
+        "surpriseAttack": false
+      },
+      "constraints": {
+        "maxRegularUnits": 3,
+        "maxEliteUnits": 1,
+        "maxSpecialEliteUnits": 0,
+        "maxGenericLeaders": 1,
+        "allowSurpriseAttack": false,
+        "settlementLevel": 0
+      },
+      "maxRounds": 2,
+      "targetWinProbability": 0.6,
+      "limit": 3,
+      "maxEvaluatedCandidates": 80,
+      "tags": [
+        "role:defender",
+        "band:small",
+        "enemy:special_mix",
+        "constraints:open_field"
+      ]
+    }
+  ]
+}

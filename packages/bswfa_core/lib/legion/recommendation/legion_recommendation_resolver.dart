@@ -76,20 +76,49 @@ class LegionRecommendationResolver {
   List<Legion> _selectCandidateLegionsToEvaluate(
     LegionRecommendationRequest request,
   ) {
-    final List<Legion> candidates = _buildCandidateLegions(request).toList();
+    final int maxCandidates = request.maxEvaluatedCandidates;
     final double enemyBattleValue =
-        LegionRecommendationCostPolicy.calculateBattleValue(
+        LegionRecommendationCostPolicy.calculateSearchBattleValue(
           request.enemyLegion,
         );
+    final List<_CandidateEvaluationData> selectedCandidates =
+        <_CandidateEvaluationData>[];
 
-    candidates.sort(
-      (Legion left, Legion right) =>
-          _compareCandidateLegions(request, enemyBattleValue, left, right),
-    );
+    for (final _CandidateEvaluationData candidateData
+        in _buildCandidateEvaluationData(request)) {
+      _insertCandidateInTopSelection(
+        selectedCandidates,
+        candidateData,
+        maxCandidates: maxCandidates,
+        compare:
+            (_CandidateEvaluationData left, _CandidateEvaluationData right) =>
+                _compareCandidateLegions(
+                  request,
+                  enemyBattleValue,
+                  left,
+                  right,
+                ),
+      );
+    }
 
-    return candidates
-        .take(math.min(request.maxEvaluatedCandidates, candidates.length))
+    return selectedCandidates
+        .map((_CandidateEvaluationData candidateData) => candidateData.legion)
         .toList(growable: false);
+  }
+
+  List<_CandidateEvaluationData> _buildCandidateEvaluationData(
+    LegionRecommendationRequest request,
+  ) {
+    return <_CandidateEvaluationData>[
+      for (final Legion legion in _buildCandidateLegions(request))
+        _CandidateEvaluationData(
+          legion: legion,
+          cost: LegionRecommendationCostPolicy.calculate(legion),
+          battleValue:
+              LegionRecommendationCostPolicy.calculateSearchBattleValue(legion),
+          estimatedStrength: _estimateCandidateStrength(request, legion),
+        ),
+    ];
   }
 
   Iterable<Legion> _buildCandidateLegions(
@@ -130,7 +159,7 @@ class LegionRecommendationResolver {
           specialEliteUnits++
         ) {
           final int totalUnits = regularUnits + eliteUnits + specialEliteUnits;
-          if (totalUnits == 0) {
+          if (totalUnits == 0 || totalUnits > LegionLimits.maxUnitsAndCards) {
             continue;
           }
 
@@ -219,33 +248,25 @@ class LegionRecommendationResolver {
   int _compareCandidateLegions(
     LegionRecommendationRequest request,
     double enemyBattleValue,
-    Legion left,
-    Legion right,
+    _CandidateEvaluationData left,
+    _CandidateEvaluationData right,
   ) {
     return _compareByFields(<int>[
       _compareDoubleAscending(
-        _battleValueDistance(left, enemyBattleValue),
-        _battleValueDistance(right, enemyBattleValue),
+        _battleValueDistance(left.battleValue, enemyBattleValue),
+        _battleValueDistance(right.battleValue, enemyBattleValue),
       ),
-      _compareDoubleDescending(
-        _estimateCandidateStrength(request, left),
-        _estimateCandidateStrength(request, right),
-      ),
-      _compareDoubleAscending(
-        LegionRecommendationCostPolicy.calculate(left),
-        LegionRecommendationCostPolicy.calculate(right),
-      ),
+      _compareDoubleDescending(left.estimatedStrength, right.estimatedStrength),
+      _compareDoubleAscending(left.cost, right.cost),
       _compareIntAscending(
-        left.totalUnits + left.totalLeaders,
-        right.totalUnits + right.totalLeaders,
+        left.legion.totalUnits + left.legion.totalLeaders,
+        right.legion.totalUnits + right.legion.totalLeaders,
       ),
     ]);
   }
 
-  double _battleValueDistance(Legion legion, double targetBattleValue) {
-    return (LegionRecommendationCostPolicy.calculateBattleValue(legion) -
-            targetBattleValue)
-        .abs();
+  double _battleValueDistance(double battleValue, double targetBattleValue) {
+    return (battleValue - targetBattleValue).abs();
   }
 
   double _estimateCandidateStrength(
@@ -313,6 +334,41 @@ class LegionRecommendationResolver {
     return left.compareTo(right);
   }
 
+  void _insertCandidateInTopSelection(
+    List<_CandidateEvaluationData> selectedCandidates,
+    _CandidateEvaluationData candidateData, {
+    required int maxCandidates,
+    required int Function(
+      _CandidateEvaluationData left,
+      _CandidateEvaluationData right,
+    )
+    compare,
+  }) {
+    if (selectedCandidates.isEmpty) {
+      selectedCandidates.add(candidateData);
+      return;
+    }
+
+    if (selectedCandidates.length == maxCandidates &&
+        compare(candidateData, selectedCandidates.last) >= 0) {
+      return;
+    }
+
+    int insertIndex = selectedCandidates.length;
+    for (int index = 0; index < selectedCandidates.length; index++) {
+      if (compare(candidateData, selectedCandidates[index]) < 0) {
+        insertIndex = index;
+        break;
+      }
+    }
+
+    selectedCandidates.insert(insertIndex, candidateData);
+
+    if (selectedCandidates.length > maxCandidates) {
+      selectedCandidates.removeLast();
+    }
+  }
+
   int _clampMax(int value, int maxValue) {
     return math.max(0, math.min(value, maxValue));
   }
@@ -366,4 +422,18 @@ class LegionRecommendationResolver {
         }
     }
   }
+}
+
+class _CandidateEvaluationData {
+  const _CandidateEvaluationData({
+    required this.legion,
+    required this.cost,
+    required this.battleValue,
+    required this.estimatedStrength,
+  });
+
+  final Legion legion;
+  final double cost;
+  final double battleValue;
+  final double estimatedStrength;
 }

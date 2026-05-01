@@ -10,6 +10,13 @@ class LegionRecommendationCostPolicy {
   static const double specialEliteUnitCost = 2.75;
   static const double settlementLevelCost = regularUnitCost;
 
+  static const double searchGenericLeaderWeight = 0.331;
+  static const double searchRegularUnitWeight = 1.000;
+  static const double searchEliteUnitWeight = 1.330;
+  static const double searchSpecialEliteUnitWeight = 2.053;
+  static const double searchSurpriseAttackWeight = 0.216;
+  static const double searchSettlementLevelWeight = 2.399;
+
   static double calculate(Legion legion) {
     return legion.genericLeaders * genericLeaderCost +
         legion.regularUnits * regularUnitCost +
@@ -28,6 +35,22 @@ class LegionRecommendationCostPolicy {
           attacking: (_) => 0,
           defending: (DefendingLegion defendingLegion) =>
               defendingLegion.settlementLevel * settlementLevelCost,
+        );
+  }
+
+  /// Valor contextual usado solo para preseleccionar candidatos del
+  /// recomendador. Estos pesos son heurísticos internos calibrados offline y
+  /// no sustituyen al coste oficial devuelto por [calculate].
+  static double calculateSearchBattleValue(Legion legion) {
+    return legion.genericLeaders * searchGenericLeaderWeight +
+        legion.regularUnits * searchRegularUnitWeight +
+        legion.eliteUnits * searchEliteUnitWeight +
+        legion.specialEliteUnits * searchSpecialEliteUnitWeight +
+        legion.map(
+          attacking: (AttackingLegion attackingLegion) =>
+              attackingLegion.surpriseAttack ? searchSurpriseAttackWeight : 0,
+          defending: (DefendingLegion defendingLegion) =>
+              defendingLegion.settlementLevel * searchSettlementLevelWeight,
         );
   }
 }

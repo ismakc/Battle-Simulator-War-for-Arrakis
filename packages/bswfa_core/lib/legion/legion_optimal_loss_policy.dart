@@ -1,157 +1,138 @@
 import 'package:bswfa_core/legion/legion.dart';
 import 'package:bswfa_core/legion/legion_change.dart';
 import 'package:bswfa_core/legion/legion_resolution.dart';
-import 'package:bswfa_core/legion/named_leader_loss_selection_policy.dart';
-
-enum _LossOption {
-  removeGenericLeader,
-  removeRegularUnit,
-  downgradeEliteUnit,
-  downgradeSpecialEliteUnit,
-  removeNamedLeader,
-}
+import 'package:bswfa_core/legion/named_leader.dart';
 
 class LegionOptimalLossPolicy {
   const LegionOptimalLossPolicy._();
 
-  /// Calcula la mejor resolución para aplicar una única baja.
+  static const double _genericLeaderWeight = 1.129;
+  static const double _regularUnitWeight = 1.000;
+  static const double _eliteUnitWeight = 1.685;
+  static const double _specialEliteUnitWeight = 2.148;
+  static const double _namedLeaderAttackWeight = 0.573;
+  static const double _namedLeaderDefenseWeight = 0.576;
+  static const double _diceCountWeight = 0.165;
+  static const double _lossCapacityWeight = 0.540;
+
+  /// Calcula la mejor resolución heurística para aplicar una única baja.
+  ///
+  /// La política conserva la legión que queda con mayor valor táctico estimado.
+  /// Estos pesos se calibraron offline contra continuaciones exactas
+  /// multi-ronda, usando `tool/evaluate_loss_policy_oracle.dart`.
   static LegionResolution selectOptimalLoss(Legion legion) {
-    final Map<_LossOption, LegionResolution?> options =
-        <_LossOption, LegionResolution?>{
-          _LossOption.removeGenericLeader: legion.genericLeaders == 0
-              ? null
-              : const LegionResolution(
-                  appliedChanges: <LegionChange>[LegionChange.removeGenericLeader()],
-                ),
-          _LossOption.removeRegularUnit: legion.regularUnits == 0
-              ? null
-              : const LegionResolution(
-                  appliedChanges: <LegionChange>[LegionChange.removeRegularUnit()],
-                ),
-          _LossOption.downgradeEliteUnit: legion.eliteUnits == 0
-              ? null
-              : const LegionResolution(
-                  appliedChanges: <LegionChange>[LegionChange.downgradeEliteUnit()],
-                ),
-          _LossOption.downgradeSpecialEliteUnit: legion.specialEliteUnits == 0
-              ? null
-              : const LegionResolution(
-                  appliedChanges: <LegionChange>[
-                    LegionChange.downgradeSpecialEliteUnit(),
-                  ],
-                ),
-          _LossOption.removeNamedLeader: legion.namedLeaders.isEmpty
-              ? null
-              : LegionResolution(
-                  appliedChanges: <LegionChange>[
-                    LegionChange.removeNamedLeader(
-                      leader: NamedLeaderLossSelectionPolicy.selectLeaderToLose(
-                        legion.namedLeaders,
-                      ),
-                    ),
-                  ],
-                ),
-        };
+    LegionResolution selectedResolution = const LegionResolution();
+    double? selectedScore;
 
-    MapEntry<_LossOption, LegionResolution?>? selectedEntry;
-    int? bestDiceCount;
-
-    for (final MapEntry<_LossOption, LegionResolution?> entry
-        in options.entries) {
-      final LegionResolution? resolution = entry.value;
-      if (resolution == null) {
-        continue;
-      }
-
+    for (final LegionResolution resolution in _buildLegalLosses(legion)) {
       final Legion candidate = resolution.applyTo(legion);
-      final int candidateDiceCount = candidate.diceCount;
+      final double candidateScore = _scoreRemainingLegion(candidate);
 
-      final bool shouldUpdate =
-          bestDiceCount == null ||
-          candidateDiceCount > bestDiceCount ||
-          (candidateDiceCount == bestDiceCount &&
-              _shouldReplaceSelectedEntry(
-                legion: legion,
-                selectedEntry: selectedEntry,
-                candidateEntry: entry,
-              ));
-
-      if (shouldUpdate) {
-        selectedEntry = entry;
-        bestDiceCount = candidateDiceCount;
+      if (selectedScore == null ||
+          candidateScore > selectedScore ||
+          (candidateScore == selectedScore &&
+              _shouldPreferForStableTieBreak(resolution, selectedResolution))) {
+        selectedResolution = resolution;
+        selectedScore = candidateScore;
       }
     }
 
-    return selectedEntry?.value ?? const LegionResolution();
+    return selectedResolution;
   }
 
-  /// Regla de desempate cuando varias resoluciones preservan el mismo `diceCount`.
-  static bool _shouldReplaceSelectedEntry({
-    required Legion legion,
-    required MapEntry<_LossOption, LegionResolution?>? selectedEntry,
-    required MapEntry<_LossOption, LegionResolution?> candidateEntry,
-  }) {
-    if (selectedEntry == null) {
-      return true;
+  static Iterable<LegionResolution> _buildLegalLosses(Legion legion) sync* {
+    if (legion.genericLeaders > 0) {
+      yield const LegionResolution(
+        appliedChanges: <LegionChange>[LegionChange.removeGenericLeader()],
+      );
+    }
+    if (legion.regularUnits > 0) {
+      yield const LegionResolution(
+        appliedChanges: <LegionChange>[LegionChange.removeRegularUnit()],
+      );
+    }
+    if (legion.eliteUnits > 0) {
+      yield const LegionResolution(
+        appliedChanges: <LegionChange>[LegionChange.downgradeEliteUnit()],
+      );
+    }
+    if (legion.specialEliteUnits > 0) {
+      yield const LegionResolution(
+        appliedChanges: <LegionChange>[
+          LegionChange.downgradeSpecialEliteUnit(),
+        ],
+      );
+    }
+    for (final NamedLeader leader in legion.namedLeaders) {
+      yield LegionResolution(
+        appliedChanges: <LegionChange>[
+          LegionChange.removeNamedLeader(leader: leader),
+        ],
+      );
+    }
+  }
+
+  static double _scoreRemainingLegion(Legion legion) {
+    if (legion.totalUnits == 0) {
+      return 0;
     }
 
-    switch (candidateEntry.key) {
-      case _LossOption.removeGenericLeader:
-        return _shouldPreferRemovingGenericLeader(legion);
+    final int namedAttack = legion.namedLeaders.fold(
+      0,
+      (int total, NamedLeader leader) => total + leader.attack,
+    );
+    final int namedDefense = legion.namedLeaders.fold(
+      0,
+      (int total, NamedLeader leader) => total + leader.defense,
+    );
 
-      case _LossOption.downgradeEliteUnit:
-        return _shouldPreferDowngradingEliteUnit(selectedEntry.key);
+    return legion.genericLeaders * _genericLeaderWeight +
+        legion.regularUnits * _regularUnitWeight +
+        legion.eliteUnits * _eliteUnitWeight +
+        legion.specialEliteUnits * _specialEliteUnitWeight +
+        namedAttack * _namedLeaderAttackWeight +
+        namedDefense * _namedLeaderDefenseWeight +
+        legion.diceCount * _diceCountWeight +
+        legion.remainingLossCapacity * _lossCapacityWeight;
+  }
 
-      case _LossOption.downgradeSpecialEliteUnit:
-        return _shouldPreferDowngradingSpecialEliteUnit(selectedEntry.key);
-
-      case _LossOption.removeNamedLeader:
-        return _shouldPreferRemovingNamedLeader(
-          legion: legion,
-          selectedLossOption: selectedEntry.key,
-        );
-
-      case _LossOption.removeRegularUnit:
-        return _shouldPreferRemovingRegularUnit(selectedEntry.key);
+  static bool _shouldPreferForStableTieBreak(
+    LegionResolution candidate,
+    LegionResolution selected,
+  ) {
+    final int candidatePriority = _resolutionPriority(candidate);
+    final int selectedPriority = _resolutionPriority(selected);
+    if (candidatePriority != selectedPriority) {
+      return candidatePriority < selectedPriority;
     }
+
+    return _resolutionLossWeight(candidate) < _resolutionLossWeight(selected);
   }
 
-  /// Si sobran líderes respecto al máximo de dados, sacrificar un líder genérico
-  /// puede preservar la pegada igual que otras opciones sin perder unidades.
-  static bool _shouldPreferRemovingGenericLeader(Legion legion) {
-    return legion.genericLeaders > 0 && legion.totalLeaders > legion.diceCount;
+  static int _resolutionPriority(LegionResolution resolution) {
+    final LegionChange? change = resolution.appliedChanges.firstOrNull;
+    return change?.map(
+          removeGenericLeader: (_) => 0,
+          removeRegularUnit: (_) => 1,
+          downgradeEliteUnit: (_) => 2,
+          downgradeSpecialEliteUnit: (_) => 3,
+          removeNamedLeader: (_) => 4,
+        ) ??
+        5;
   }
 
-  /// Entre opciones equivalentes, degradar una élite normal se prioriza frente
-  /// a cualquier opción distinta de esa misma degradación.
-  static bool _shouldPreferDowngradingEliteUnit(
-    _LossOption selectedLossOption,
-  ) {
-    return selectedLossOption != _LossOption.downgradeEliteUnit;
-  }
-
-  /// La degradación de élite especial solo se prefiere si no se ha elegido ya
-  /// degradar una élite normal ni otra élite especial.
-  static bool _shouldPreferDowngradingSpecialEliteUnit(
-    _LossOption selectedLossOption,
-  ) {
-    return selectedLossOption != _LossOption.downgradeEliteUnit &&
-        selectedLossOption != _LossOption.downgradeSpecialEliteUnit;
-  }
-
-  /// Perder un líder nombrado solo se prioriza cuando apenas quedan unidades
-  /// combatientes o cuando la alternativa actual no es perder una regular.
-  static bool _shouldPreferRemovingNamedLeader({
-    required Legion legion,
-    required _LossOption selectedLossOption,
-  }) {
-    return legion.totalUnits == 1 ||
-        selectedLossOption != _LossOption.removeRegularUnit;
-  }
-
-  /// Perder una unidad regular se prioriza sobre cualquier opción distinta de
-  /// perder otra unidad regular.
-  static bool _shouldPreferRemovingRegularUnit(_LossOption selectedLossOption) {
-    return selectedLossOption != _LossOption.removeRegularUnit;
+  static double _resolutionLossWeight(LegionResolution resolution) {
+    final LegionChange? change = resolution.appliedChanges.firstOrNull;
+    return change?.map(
+          removeGenericLeader: (_) => _genericLeaderWeight,
+          removeRegularUnit: (_) => _regularUnitWeight,
+          downgradeEliteUnit: (_) => _eliteUnitWeight - _regularUnitWeight,
+          downgradeSpecialEliteUnit: (_) =>
+              _specialEliteUnitWeight - _regularUnitWeight,
+          removeNamedLeader: (RemoveNamedLeader change) =>
+              (change.leader.attack * _namedLeaderAttackWeight) +
+              (change.leader.defense * _namedLeaderDefenseWeight),
+        ) ??
+        double.infinity;
   }
 }
