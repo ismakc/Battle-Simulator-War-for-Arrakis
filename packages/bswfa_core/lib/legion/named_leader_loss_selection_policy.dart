@@ -20,9 +20,9 @@ class NamedLeaderLossSelectionPolicy {
   /// Entre varios líderes nombrados, se pierde el menos valioso para el combate:
   /// primero el de menor ataque y, en empate, el de menor defensa.
   static bool _shouldPreferLosing(
-      NamedLeader candidate,
-      NamedLeader currentSelection,
-      ) {
+    NamedLeader candidate,
+    NamedLeader currentSelection,
+  ) {
     if (candidate.attack != currentSelection.attack) {
       return candidate.attack < currentSelection.attack;
     }

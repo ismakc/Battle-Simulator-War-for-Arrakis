@@ -1,5 +1,1 @@
-enum BattleWinner {
-  attacker,
-  defender,
-  draw,
-}
+enum BattleWinner { attacker, defender, draw }

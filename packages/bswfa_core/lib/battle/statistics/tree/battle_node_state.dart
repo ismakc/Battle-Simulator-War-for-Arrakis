@@ -19,10 +19,7 @@ class BattleNodeState {
 
   /// Estado inicial del árbol: tirada vacía e impactos a cero.
   static BattleNodeState initialState() {
-    return const BattleNodeState(
-      BattleDiceRoll(),
-      BattleAccumulatedHits.zero,
-    );
+    return const BattleNodeState(BattleDiceRoll(), BattleAccumulatedHits.zero);
   }
 
   /// Devuelve una nueva instancia añadiendo una cara al atacante.

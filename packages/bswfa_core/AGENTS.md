@@ -7,6 +7,7 @@ This file defines working rules for agents editing `packages/bswfa_core`.
 `bswfa_core` is the battle simulation and recommendation engine for the project.
 
 Main areas:
+
 - `lib/battle/`: hit calculation, round resolution, exact probability distribution, automatic battle flow.
 - `lib/legion/`: legion model, losses, recommendation engine.
 - `lib/roll/`: combat dice and roll encoding.
@@ -17,6 +18,7 @@ Main areas:
 Treat this package as domain logic, not UI support code.
 
 Priorities:
+
 - Keep battle rules explicit and reviewable.
 - Prefer deterministic, testable logic over convenience shortcuts.
 - Separate literal game rules from app heuristics.
@@ -25,6 +27,7 @@ Priorities:
 ## Domain Rules
 
 When changing combat logic, assume these distinctions matter:
+
 - A single combat round and a multi-round automatic battle are different layers.
 - `surpriseAttack` only applies to the first round.
 - `usedCards` are currently excluded from recommendation flows unless the task says otherwise.
@@ -37,13 +40,16 @@ When changing combat logic, assume these distinctions matter:
 Files under `lib/legion/recommendation/` are performance-sensitive.
 
 Current behavior to preserve unless the task changes it:
+
 - Return at most 3 recommendations by default.
 - Recommendation ranking is probability-first, then loss risk, then heuristic cost.
 - Candidate preselection is intentionally limited by `maxEvaluatedCandidates`.
 - Candidate preselection starts near the enemy battle value, including settlement value when relevant.
-- UI callers should run recommendation resolution off the main isolate, but the core should still avoid unnecessary combinatorial blowups.
+- UI callers should run recommendation resolution off the main isolate, but the core should still avoid unnecessary
+  combinatorial blowups.
 
 When editing the recommender:
+
 - Avoid evaluating all possible candidates unless there is a strong reason.
 - Prefer pruning, caching, and ordering improvements before adding more exhaustive search.
 - Keep displayed legion cost separate from contextual battle value.
@@ -53,11 +59,13 @@ When editing the recommender:
 Files under `lib/battle/distribution/` are also performance-sensitive.
 
 Current design intent:
+
 - Use exact grouped dice-count outcomes, not naive enumeration of every die sequence.
 - Cache reusable intermediate results when safe.
 - Keep probability mass conserved.
 
 If you change the distribution engine:
+
 - Verify that probabilities still sum to 1 within test tolerance.
 - Prefer grouping by equivalent outcomes over expanding the state tree blindly.
 
@@ -66,6 +74,7 @@ If you change the distribution engine:
 This package uses `freezed`.
 
 Rules:
+
 - If you edit a source file with a `part '*.freezed.dart';`, regenerate the corresponding generated file.
 - Do not hand-edit `*.freezed.dart` files.
 - If a task does not require changing a freezed model, avoid touching generated files.
@@ -79,13 +88,15 @@ dart analyze
 dart test
 ```
 
-If the change is tightly scoped and the full suite is too expensive, run at least the directly affected tests and state that explicitly.
+If the change is tightly scoped and the full suite is too expensive, run at least the directly affected tests and state
+that explicitly.
 
 ## Git
 
 This package may live in a dirty worktree.
 
 Rules:
+
 - Never revert unrelated changes.
 - Read `git status --short` before committing.
 - Commit only the files you changed.
@@ -101,12 +112,14 @@ Rules:
 ## Testing Expectations
 
 Prefer adding or updating targeted tests for:
+
 - combat rule changes,
 - probability aggregation changes,
 - loss-resolution changes,
 - recommendation ranking or validation changes.
 
 Good existing test anchors:
+
 - `battle_rules_test.dart`
 - `battle_distribution_test.dart`
 - `legion_contract_test.dart`

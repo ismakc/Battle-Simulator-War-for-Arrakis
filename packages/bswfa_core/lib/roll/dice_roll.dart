@@ -42,7 +42,7 @@ class DiceRoll {
   static const DiceRoll zero = DiceRoll._(0);
 
   final int bitmask;
-  
+
   int get swordCount => (bitmask >> swordOffset) & countMask;
 
   int get shieldCount => (bitmask >> shieldOffset) & countMask;

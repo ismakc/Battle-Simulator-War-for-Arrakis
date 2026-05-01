@@ -28,10 +28,8 @@ class BattleNodeStateResolver {
     final BattleAccumulatedHits aggregatedHits = childStates
         .map((BattleNodeState childState) => childState.accumulatedHits)
         .reduce(
-          (
-            BattleAccumulatedHits left,
-            BattleAccumulatedHits right,
-          ) => left.add(right),
+          (BattleAccumulatedHits left, BattleAccumulatedHits right) =>
+              left.add(right),
         );
 
     final BattleNodeState updatedState = state.withAccumulatedHits(

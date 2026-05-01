@@ -52,18 +52,16 @@ abstract class Legion with _$Legion {
   /// Lanza un [StateError] si se consulta sobre una legión defensora.
   bool get surpriseAttack => map(
     attacking: (AttackingLegion legion) => legion.surpriseAttack,
-    defending: (_) => throw StateError(
-      'DefendingLegion cannot have a surpriseAttack.',
-    ),
+    defending: (_) =>
+        throw StateError('DefendingLegion cannot have a surpriseAttack.'),
   );
 
   /// Nivel de asentamiento de la legión defensora.
   ///
   /// Lanza un [StateError] si se consulta sobre una legión atacante.
   int get settlementLevel => map(
-    attacking: (_) => throw StateError(
-      'AttackingLegion cannot have a settlementLevel.',
-    ),
+    attacking: (_) =>
+        throw StateError('AttackingLegion cannot have a settlementLevel.'),
     defending: (DefendingLegion legion) => legion.settlementLevel,
   );
 
