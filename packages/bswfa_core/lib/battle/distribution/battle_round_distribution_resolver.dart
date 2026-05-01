@@ -38,6 +38,10 @@ class BattleRoundDistributionResolver {
 
     final Map<_RoundOutcomeKey, double> probabilities =
         <_RoundOutcomeKey, double>{};
+    final Map<_AppliedHitsKey, BattleScenario> scenarioAfterHitsCache =
+        <_AppliedHitsKey, BattleScenario>{};
+    final Map<_LegionHitsKey, Legion> damagedLegionCache =
+        <_LegionHitsKey, Legion>{};
 
     for (final _DiceRollOutcome attackerRoll in attackerRolls) {
       for (final _DiceRollOutcome defenderRoll in defenderRolls) {
@@ -50,11 +54,19 @@ class BattleRoundDistributionResolver {
               ),
             );
 
-        final BattleScenario scenarioAfterRound = _applyRoundHits(
-          scenario,
-          attackerHits: attackerHits,
-          defenderHits: defenderHits,
-        );
+        final BattleScenario scenarioAfterRound = scenarioAfterHitsCache
+            .putIfAbsent(
+              _AppliedHitsKey(
+                attackerHits: attackerHits,
+                defenderHits: defenderHits,
+              ),
+              () => _applyRoundHits(
+                scenario,
+                attackerHits: attackerHits,
+                defenderHits: defenderHits,
+                damagedLegionCache: damagedLegionCache,
+              ),
+            );
         final double probability =
             attackerRoll.probability * defenderRoll.probability;
         final _RoundOutcomeKey key = _RoundOutcomeKey(
@@ -90,14 +102,17 @@ class BattleRoundDistributionResolver {
     BattleScenario scenario, {
     required int attackerHits,
     required int defenderHits,
+    required Map<_LegionHitsKey, Legion> damagedLegionCache,
   }) {
     final AttackingLegion attackerAfterCombatHits = _applyHits(
       scenario.attackingLegion,
       defenderHits,
+      damagedLegionCache,
     );
     final DefendingLegion defenderAfterCombatHits = _applyHits(
       scenario.defendingLegion,
       attackerHits,
+      damagedLegionCache,
     );
 
     final bool battleCanContinue =
@@ -117,7 +132,17 @@ class BattleRoundDistributionResolver {
     );
   }
 
-  T _applyHits<T extends Legion>(T legion, int hits) {
+  T _applyHits<T extends Legion>(
+    T legion,
+    int hits,
+    Map<_LegionHitsKey, Legion> damagedLegionCache,
+  ) {
+    final _LegionHitsKey cacheKey = _LegionHitsKey(legion: legion, hits: hits);
+    final Legion? cachedLegion = damagedLegionCache[cacheKey];
+    if (cachedLegion != null) {
+      return cachedLegion as T;
+    }
+
     T damagedLegion = legion;
 
     for (
@@ -133,6 +158,7 @@ class BattleRoundDistributionResolver {
       damagedLegion = _normalizeDestroyedLegion(damagedLegion);
     }
 
+    damagedLegionCache[cacheKey] = damagedLegion;
     return damagedLegion;
   }
 
@@ -232,6 +258,41 @@ class _DiceRollOutcome {
 
   final DiceRoll diceRoll;
   final double probability;
+}
+
+class _AppliedHitsKey {
+  const _AppliedHitsKey({
+    required this.attackerHits,
+    required this.defenderHits,
+  });
+
+  final int attackerHits;
+  final int defenderHits;
+
+  @override
+  bool operator ==(Object other) {
+    return other is _AppliedHitsKey &&
+        attackerHits == other.attackerHits &&
+        defenderHits == other.defenderHits;
+  }
+
+  @override
+  int get hashCode => Object.hash(attackerHits, defenderHits);
+}
+
+class _LegionHitsKey {
+  const _LegionHitsKey({required this.legion, required this.hits});
+
+  final Legion legion;
+  final int hits;
+
+  @override
+  bool operator ==(Object other) {
+    return other is _LegionHitsKey && legion == other.legion && hits == other.hits;
+  }
+
+  @override
+  int get hashCode => Object.hash(legion, hits);
 }
 
 class _RoundOutcomeKey {

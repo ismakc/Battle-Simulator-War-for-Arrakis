@@ -12,6 +12,9 @@ import 'package:bswfa_core/roll/dice_roll.dart';
 class BattleHitsCalculator {
   const BattleHitsCalculator();
 
+  static final Map<_SideOutcomeCacheKey, List<BattleSideContribution>>
+  _sideOutcomeCache = <_SideOutcomeCacheKey, List<BattleSideContribution>>{};
+
   (int attackerHits, int defenderHits) calculateHits(
     BattleScenario scenario,
     BattleDiceRoll diceRoll,
@@ -88,6 +91,18 @@ class BattleHitsCalculator {
     required int shieldCount,
     required int starCount,
   }) {
+    final _SideOutcomeCacheKey cacheKey = _SideOutcomeCacheKey(
+      leaderProfilesKey: _buildLeaderProfilesKey(namedLeaders, genericLeaders),
+      swordCount: swordCount,
+      shieldCount: shieldCount,
+      starCount: starCount,
+    );
+    final List<BattleSideContribution>? cachedOutcomes =
+        _sideOutcomeCache[cacheKey];
+    if (cachedOutcomes != null) {
+      return cachedOutcomes;
+    }
+
     final List<({int swords, int shields})> leaderProfiles =
         <({int swords, int shields})>[
           for (final NamedLeader leader in namedLeaders)
@@ -99,7 +114,7 @@ class BattleHitsCalculator {
     final Set<({int swords, int shields})> activatedProfiles =
         _buildActivatedLeaderProfiles(leaderProfiles, activations);
 
-    return <BattleSideContribution>[
+    final List<BattleSideContribution> outcomes = <BattleSideContribution>[
       for (final ({int swords, int shields}) profile in activatedProfiles)
         BattleSideContribution(
           swords: swordCount,
@@ -108,6 +123,26 @@ class BattleHitsCalculator {
           leaderActivatedShields: profile.shields,
         ),
     ];
+
+    _sideOutcomeCache[cacheKey] = outcomes;
+    return outcomes;
+  }
+
+  String _buildLeaderProfilesKey(
+    List<NamedLeader> namedLeaders,
+    int genericLeaders,
+  ) {
+    final List<int> profileCodes = <int>[
+      for (final NamedLeader leader in namedLeaders)
+        _encodeLeaderProfile(leader.attack, leader.defense),
+      for (int i = 0; i < genericLeaders; i++) _encodeLeaderProfile(1, 0),
+    ]..sort();
+
+    return profileCodes.join(',');
+  }
+
+  int _encodeLeaderProfile(int swords, int shields) {
+    return (swords << 4) | shields;
   }
 
   Set<({int swords, int shields})> _buildActivatedLeaderProfiles(
@@ -225,6 +260,37 @@ class BattleHitsCalculator {
 
     return math.max(0, outcome.totalSwords - effectiveOpponentShields);
   }
+}
+
+class _SideOutcomeCacheKey {
+  const _SideOutcomeCacheKey({
+    required this.leaderProfilesKey,
+    required this.swordCount,
+    required this.shieldCount,
+    required this.starCount,
+  });
+
+  final String leaderProfilesKey;
+  final int swordCount;
+  final int shieldCount;
+  final int starCount;
+
+  @override
+  bool operator ==(Object other) {
+    return other is _SideOutcomeCacheKey &&
+        leaderProfilesKey == other.leaderProfilesKey &&
+        swordCount == other.swordCount &&
+        shieldCount == other.shieldCount &&
+        starCount == other.starCount;
+  }
+
+  @override
+  int get hashCode => Object.hash(
+    leaderProfilesKey,
+    swordCount,
+    shieldCount,
+    starCount,
+  );
 }
 
 class _ResolvedOutcome {
