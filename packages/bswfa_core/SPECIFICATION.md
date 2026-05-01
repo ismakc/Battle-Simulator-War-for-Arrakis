@@ -164,6 +164,33 @@ Important distinction:
 - The board game allows the player to choose casualties hit by hit. The current core uses policy-driven automatic
   choices where no player input exists.
 
+Calibrated automatic loss-policy weights:
+
+- `genericLeader = 1.129`
+- `regularUnit = 1.000`
+- `eliteUnit = 1.685`
+- `specialEliteUnit = 2.148`
+- `namedLeaderAttack = 0.573`
+- `namedLeaderDefense = 0.576`
+- `diceCount = 0.165`
+- `lossCapacity = 0.540`
+
+How those weights are used:
+
+- `LegionOptimalLossPolicy` evaluates every legal single-hit casualty option.
+- Each option is applied to the current legion.
+- The policy keeps the resulting legion with the highest estimated tactical value.
+- A legion with no units left is valued as zero, even if leaders remain, because leaders are removed when all units are
+  gone.
+- Named leaders are evaluated individually, using their attack and defense values.
+
+Calibration note:
+
+- These numbers are not official board-game costs.
+- They are internal heuristic weights calibrated offline with `tool/evaluate_loss_policy_oracle.dart` against exact
+  continuation outcomes from the probability engine.
+- The purpose is to choose plausible automatic casualties when there is no human casualty-choice input.
+
 ### Automatic Battle
 
 Main files:
@@ -317,6 +344,15 @@ Important distinction:
 - `calculateBattleValue(...)` is official contextual battle value.
 - `calculateSearchBattleValue(...)` is an internal preselection heuristic.
 - Settlement is not part of displayed legion cost.
+- The user-facing recommendation result should expose the visible cost, not the internal search value.
+
+Calibration note:
+
+- Search weights were calibrated offline with `tool/run_recommendation_weight_search.dart` and
+  `tool/evaluate_recommendation_search_weights.dart`.
+- The calibration target is recommendation preselection quality: keep candidates near the best exact distribution result
+  while avoiding exhaustive evaluation in normal UI flows.
+- These weights should be recalibrated if candidate generation, battle resolution, or ranking semantics change.
 
 ### Candidate Search Strategy
 
@@ -458,10 +494,9 @@ If another AI continues work, likely next tasks are:
 
 Recent core work was split into small commits:
 
-- `77c3ac7` Add probabilistic battle distribution resolver
-- `4a91300` Add legion recommendation resolver
-- `5b55bec` Optimize legion recommendations
-- `af27b8f` Prioritize recommendations by enemy battle value
-- `e0e4506` Add bswfa_core agent guide
+- `46cbc00` Expand battle engine contract coverage.
+- `f774214` Cache battle hit and round loss resolution.
+- `c9a928c` Calibrate loss and recommendation heuristics.
+- `da84519` Commit remaining generated and formatting changes.
 
 Use those commits to inspect implementation intent if needed.
