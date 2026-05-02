@@ -12,6 +12,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 const int _defaultMaxEvaluatedCandidates = 100;
+const int _defaultMaxGenericLeaders = 2;
 
 class LegionRecommendationSetup extends StatefulWidget {
   const LegionRecommendationSetup({super.key});
@@ -30,6 +31,11 @@ class _LegionRecommendationSetupState extends State<LegionRecommendationSetup> {
   int _enemyGenericLeaders = 0;
   bool _enemySurpriseAttack = false;
   int _enemySettlementLevel = 0;
+
+  int _maxGenericLeaders = _defaultMaxGenericLeaders;
+  int _maxRegularUnits = LegionLimits.maxUnitsPerType;
+  int _maxEliteUnits = LegionLimits.maxUnitsPerType;
+  int _maxSpecialEliteUnits = LegionLimits.maxUnitsPerType;
 
   bool _allowSurpriseAttack = false;
   int _settlementLevel = 0;
@@ -79,6 +85,20 @@ class _LegionRecommendationSetupState extends State<LegionRecommendationSetup> {
               _updateEnemy(surpriseAttack: value),
           onSettlementLevelChanged: (int value) =>
               _updateEnemy(settlementLevel: value),
+        ),
+        _OwnAvailabilityInput(
+          maxGenericLeaders: _maxGenericLeaders,
+          maxRegularUnits: _maxRegularUnits,
+          maxEliteUnits: _maxEliteUnits,
+          maxSpecialEliteUnits: _maxSpecialEliteUnits,
+          onMaxGenericLeadersChanged: (int value) =>
+              _updateOwnAvailability(maxGenericLeaders: value),
+          onMaxRegularUnitsChanged: (int value) =>
+              _updateOwnAvailability(maxRegularUnits: value),
+          onMaxEliteUnitsChanged: (int value) =>
+              _updateOwnAvailability(maxEliteUnits: value),
+          onMaxSpecialEliteUnitsChanged: (int value) =>
+              _updateOwnAvailability(maxSpecialEliteUnits: value),
         ),
         _OwnBattleContextInput(
           ownRole: _ownRole,
@@ -156,6 +176,24 @@ class _LegionRecommendationSetupState extends State<LegionRecommendationSetup> {
     });
   }
 
+  void _updateOwnAvailability({
+    int? maxGenericLeaders,
+    int? maxRegularUnits,
+    int? maxEliteUnits,
+    int? maxSpecialEliteUnits,
+  }) {
+    setState(() {
+      _maxGenericLeaders = maxGenericLeaders ?? _maxGenericLeaders;
+      _maxRegularUnits = maxRegularUnits ?? _maxRegularUnits;
+      _maxEliteUnits = maxEliteUnits ?? _maxEliteUnits;
+      _maxSpecialEliteUnits = maxSpecialEliteUnits ?? _maxSpecialEliteUnits;
+      _recommendations = null;
+      _recommendationError = null;
+      _isLoading = false;
+      _requestVersion++;
+    });
+  }
+
   void _updateOwnContext({bool? allowSurpriseAttack, int? settlementLevel}) {
     setState(() {
       _allowSurpriseAttack = allowSurpriseAttack ?? _allowSurpriseAttack;
@@ -184,6 +222,10 @@ class _LegionRecommendationSetupState extends State<LegionRecommendationSetup> {
               ? _allowSurpriseAttack
               : false,
           settlementLevel: _recommendingAttacker ? 0 : _settlementLevel,
+          maxGenericLeaders: _maxGenericLeaders,
+          maxRegularUnits: _maxRegularUnits,
+          maxEliteUnits: _maxEliteUnits,
+          maxSpecialEliteUnits: _maxSpecialEliteUnits,
           maxEvaluatedCandidates: _maxEvaluatedCandidates,
         ),
       );
@@ -235,6 +277,10 @@ class _RecommendationResolveInput {
     required this.ownRole,
     required this.allowSurpriseAttack,
     required this.settlementLevel,
+    required this.maxGenericLeaders,
+    required this.maxRegularUnits,
+    required this.maxEliteUnits,
+    required this.maxSpecialEliteUnits,
     required this.maxEvaluatedCandidates,
   });
 
@@ -242,6 +288,10 @@ class _RecommendationResolveInput {
   final LegionRecommendationRole ownRole;
   final bool allowSurpriseAttack;
   final int settlementLevel;
+  final int maxGenericLeaders;
+  final int maxRegularUnits;
+  final int maxEliteUnits;
+  final int maxSpecialEliteUnits;
   final int maxEvaluatedCandidates;
 }
 
@@ -253,10 +303,10 @@ List<LegionRecommendation> _resolveLegionRecommendations(
       enemyLegion: input.enemyLegion,
       ownRole: input.ownRole,
       constraints: LegionRecommendationConstraints(
-        maxRegularUnits: LegionLimits.maxUnitsPerType,
-        maxEliteUnits: LegionLimits.maxUnitsPerType,
-        maxSpecialEliteUnits: LegionLimits.maxUnitsPerType,
-        maxGenericLeaders: LegionLimits.maxLeaders,
+        maxRegularUnits: input.maxRegularUnits,
+        maxEliteUnits: input.maxEliteUnits,
+        maxSpecialEliteUnits: input.maxSpecialEliteUnits,
+        maxGenericLeaders: input.maxGenericLeaders,
         allowSurpriseAttack: input.allowSurpriseAttack,
         settlementLevel: input.settlementLevel,
       ),
@@ -381,6 +431,71 @@ class _EnemyLegionInput extends StatelessWidget {
                 onValueChanged: onSurpriseAttackChanged,
               ),
             ),
+        ],
+      ),
+    );
+  }
+}
+
+class _OwnAvailabilityInput extends StatelessWidget {
+  const _OwnAvailabilityInput({
+    required this.maxGenericLeaders,
+    required this.maxRegularUnits,
+    required this.maxEliteUnits,
+    required this.maxSpecialEliteUnits,
+    required this.onMaxGenericLeadersChanged,
+    required this.onMaxRegularUnitsChanged,
+    required this.onMaxEliteUnitsChanged,
+    required this.onMaxSpecialEliteUnitsChanged,
+  });
+
+  final int maxGenericLeaders;
+  final int maxRegularUnits;
+  final int maxEliteUnits;
+  final int maxSpecialEliteUnits;
+  final ValueChanged<int> onMaxGenericLeadersChanged;
+  final ValueChanged<int> onMaxRegularUnitsChanged;
+  final ValueChanged<int> onMaxEliteUnitsChanged;
+  final ValueChanged<int> onMaxSpecialEliteUnitsChanged;
+
+  @override
+  Widget build(BuildContext context) {
+    return LabeledBorderFieldset(
+      label: 'Own Availability',
+      borderColor: Colors.black87,
+      textColor: Colors.black87,
+      child: Wrap(
+        spacing: 12.0,
+        runSpacing: 12.0,
+        children: <Widget>[
+          _SizedInput(
+            child: UnitInput(
+              label: 'Leader max',
+              startPosition: maxGenericLeaders,
+              onValueChanged: onMaxGenericLeadersChanged,
+            ),
+          ),
+          _SizedInput(
+            child: UnitInput(
+              label: 'Regular max',
+              startPosition: maxRegularUnits,
+              onValueChanged: onMaxRegularUnitsChanged,
+            ),
+          ),
+          _SizedInput(
+            child: UnitInput(
+              label: 'Elite max',
+              startPosition: maxEliteUnits,
+              onValueChanged: onMaxEliteUnitsChanged,
+            ),
+          ),
+          _SizedInput(
+            child: UnitInput(
+              label: 'Special max',
+              startPosition: maxSpecialEliteUnits,
+              onValueChanged: onMaxSpecialEliteUnitsChanged,
+            ),
+          ),
         ],
       ),
     );
