@@ -391,6 +391,13 @@ Important performance note:
 - Even with the current optimizations, recommendation search can still be expensive for large constraints.
 - `maxEvaluatedCandidates` should usually be passed explicitly from the UI, likely around `100` to `150` for
   responsiveness.
+- `100` is the current practical default for UI use. `150` can improve difficult defensive recommendations at higher
+  latency. `250` should be treated as a heavier advanced option rather than the default.
+- Use `tool/benchmark_recommendation_ui_scenarios.dart` to re-check this tradeoff after performance or ranking changes:
+
+```powershell
+dart run tool\benchmark_recommendation_ui_scenarios.dart --runs=5 --warmups=1 --candidates=50,100,150,250
+```
 
 ## Freezed Usage
 
